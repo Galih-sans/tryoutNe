@@ -36,6 +36,22 @@ $routes->set404Override();
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
+$routes->group("admin", ["namespace" => "App\Controllers\Admin"], function($routes){
+    // URL - /admin
+    $routes->get("/", "AdminController::index", ['as' => 'admin.dashboard']);
+    // URL - /admin/add-user
+    $routes->group("tryout", ["namespace" => "App\Controllers\Admin"], function($routes){
+        // URL - /admin
+        $routes->get("/", "TryOutController::index", ['as' => 'admin.tryout.index']);
+        $routes->match(["get", "post"], "index", "TryOutController::index");
+    });
+    $routes->group("bank-soal", ["namespace" => "App\Controllers\Admin"], function($routes){
+        // URL - /admin
+        $routes->get("/", "BankSoalController::index", ['as' => 'admin.bank-soal.index']);
+        $routes->match(["get", "post"], "index", "BankSoalController::index");
+    });
+});
+
 
 /*
  * --------------------------------------------------------------------
