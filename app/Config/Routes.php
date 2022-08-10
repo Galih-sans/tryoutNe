@@ -51,6 +51,12 @@ $routes->group("admin", ["namespace" => "App\Controllers\Admin"], function($rout
         $routes->match(["get", "post"], "index", "BankSoalController::index");
     });
 });
+$routes->group("user", ["namespace" => "App\Controllers\user"], function($routes){
+    // URL - /admin
+    $routes->get("/", "usercontroller::index", ['as' => 'user.dashboard']);
+    // URL - /admin/add-user
+    
+});
 
 
 /*
