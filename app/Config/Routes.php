@@ -44,7 +44,7 @@ $routes->get('logout', 'LoginController::logout');
 
 $routes->group("", ["namespace" => "App\Controllers\user"], function($routes){
     // URL - /user
-    $routes->get("/", "usercontroller::index", ['as' => 'user.test']);
+    $routes->get("/", "usercontroller::index", ['as' => 'user.dashboard']);
     // URL - /user/test
     
 });

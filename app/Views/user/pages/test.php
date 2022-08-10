@@ -46,7 +46,8 @@
           <div class="card ">
             <div class="card-header pb-0 p-3">
               <div class="d-flex justify-content-between">
-                <h6 class="mb-2">Best Student of the month</h6>
+                <h6 class="mb-2">Tryout Fisika</h6> 
+                <p class="text-xs font-weight-bold mb-0 text-success">Avaible</p>
               </div>
             </div>
             <div class="table-responsive">
@@ -59,27 +60,14 @@
                           <img src="" alt="">
                         </div>
                         <div class="ms-4">
-                          <p class="text-xs font-weight-bold mb-0">Name:</p>
-                          <h6 class="text-sm mb-0">Mahadma Gandi</h6>
+                          <p class="text-xs font-weight-bold mb-0">time</p>
+                          <h6 class="text-sm mb-0">19 July 2022</h6>
                         </div>
                       </div>
-                    </td>
-                    <td>
-                      <div class="text-center">
-                        <p class="text-xs font-weight-bold mb-0">Rank</p>
-                        <h6 class="text-sm mb-0">1</h6>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="text-center">
-                        <p class="text-xs font-weight-bold mb-0">Nilai</p>
-                        <h6 class="text-sm mb-0">98</h6>
-                      </div>
-                    </td>
-                    <td class="align-middle text-sm">
-                      <div class="col text-center">
-                        <p class="text-xs font-weight-bold mb-0">Sekolah asal</p>
-                        <h6 class="text-sm mb-0">SMKN 1 SURABAYA</h6>
+                    </td>                    
+                    <td class="align-top text-sm ">
+                      <div class="col text-right">
+                        <p class="text-xs font-weight-bold mb-0"></p>
                       </div>
                     </td>
                   </tr>
@@ -92,13 +80,13 @@
           <div class="card ">
             <div class="card-header pb-0 p-3">
               <div class="d-flex justify-content-between">
-                <h6 class="mb-2">Best Student of the month</h6>
+              <h6 class="mb-2">Tryout Fisika</h6> 
+                <p class="text-xs font-weight-bold mb-0 text-success">Avaible</p>
               </div>
             </div>
             <div class="table-responsive">
               <table class="table align-items-center ">
                 <tbody>
-                 
                   <tr>
                     <td class="w-30">
                       <div class="d-flex px-2 py-1 align-items-center">
@@ -106,27 +94,14 @@
                           <img src="" alt="">
                         </div>
                         <div class="ms-4">
-                          <p class="text-xs font-weight-bold mb-0">Name:</p>
-                          <h6 class="text-sm mb-0">Panggah Jegagakan</h6>
+                          <p class="text-xs font-weight-bold mb-0">time</p>
+                          <h6 class="text-sm mb-0">19 July 2022</h6>
                         </div>
                       </div>
-                    </td>
-                    <td>
-                      <div class="text-center">
-                        <p class="text-xs font-weight-bold mb-0">Rank</p>
-                        <h6 class="text-sm mb-0">3</h6>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="text-center">
-                        <p class="text-xs font-weight-bold mb-0">Nilai</p>
-                        <h6 class="text-sm mb-0">88</h6>
-                      </div>
-                    </td>
-                    <td class="align-middle text-sm">
-                      <div class="col text-center">
-                        <p class="text-xs font-weight-bold mb-0">Sekolah asal</p>
-                        <h6 class="text-sm mb-0">SMAN 1 PEKALONGAN</h6>
+                    </td>                    
+                    <td class="align-top text-sm ">
+                      <div class="col text-right">
+                        <p class="text-xs font-weight-bold mb-0"></p>
                       </div>
                     </td>
                   </tr>                 
