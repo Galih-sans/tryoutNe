@@ -12,8 +12,8 @@
   <!--     Fonts and icons     -->
   <link href="<?= base_url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700') ?>" rel="stylesheet" />
   <!-- Icons -->
-  <link href="<?= base_url('assets/images/logo/logo1.png') ?>" rel="stylesheet" />
-  <link href="<?= base_url('assets/images/logo/logo1.png') ?>" rel="stylesheet" />
+  <link href="<?=  base_url('assets-user/css/nucleo-icons.css')?>" rel="stylesheet" />
+  <link href="<?= base_url('assets-user/css/nucleo-svg.css') ?>" rel="stylesheet" />
   <!-- Font Awesome Icons -->
   <script src="'https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
   <link href="<?= base_url('/assets/images/logo/logo1.png') ?>" rel="stylesheet" />
@@ -54,8 +54,8 @@
           <div class="card card-carousel overflow-hidden h-100 p-0">
             <div id="carouselExampleCaptions" class="carousel slide h-100" data-bs-ride="carousel">
               <div class="carousel-inner border-radius-lg h-100">
-                <div class="carousel-item h-100 active" style="background-image: url('../assets/img/carousel-1.jpg');      background-size: cover;">
-                  <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
+              <div class="carousel-item h-100 active" style="background-image: url('<?= base_url('assets-user/img/carousel-1.jpg')?>'); background-size: cover;">
+              <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
                     <div class="icon icon-shape icon-sm bg-white text-center border-radius-md mb-3">
                       <i class="ni ni-camera-compact text-dark opacity-10"></i>
                     </div>
@@ -63,8 +63,8 @@
                     <p>Tidak ada kata gagal dalam berusaha, hanya hasil yang tertunda.</p>
                   </div>
                 </div>
-                <div class="carousel-item h-100" style="background-image: url('../assets/img/carousel-2.jpg');      background-size: cover;">
-                  <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
+                <div class="carousel-item h-100 active" style="background-image: url('<?= base_url('assets-user/img/carousel-1.jpg')?>'); background-size: cover;">
+                <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
                     <div class="icon icon-shape icon-sm bg-white text-center border-radius-md mb-3">
                       <i class="ni ni-bulb-61 text-dark opacity-10"></i>
                     </div>
@@ -72,8 +72,8 @@
                     <p>Tingkatkan belajar mu raih impian mu.</p>
                   </div>
                 </div>
-                <div class="carousel-item h-100" style="background-image: url('../assets/img/carousel-3.jpg');      background-size: cover;">
-                  <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
+                <div class="carousel-item h-100 active" style="background-image: url('<?= base_url('assets-user/img/carousel-1.jpg')?>'); background-size: cover;">
+                <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
                     <div class="icon icon-shape icon-sm bg-white text-center border-radius-md mb-3">
                       <i class="ni ni-trophy text-dark opacity-10"></i>
                     </div>
@@ -362,11 +362,11 @@
         </div>
         
   <!--   Core JS Files   -->
-  <script src="../public/assets-user/js/core/popper.min.js"></script>
-  <script src="../public/assets-user/js/core/bootstrap.min.js"></script>
-  <script src="../public/assets-user/perfect-scrollbar.min.js"></script>
-  <script src="../public/assets-user/smooth-scrollbar.min.js"></script>
-  <script src="../public/assets-user/chartjs.min.js"></script>
+  <script src="<?= base_url('assets-user/js/core/popper.min.js')?>"></script>
+  <script src="<?= base_url('assets-user/js/core/bootstrap.min.js')?>"></script>
+  <script src="<?= base_url('assets-user/js/plugins/perfect-scrollbar.min.js')?>"></script>
+  <script src="<?= base_url('assets-user/js/plugins/smooth-scrollbar.min.js')?>"></script>
+  <script src="<?= base_url('assets-user/js/plugins/chartjs.min.js')?>"></script>
   <script>
     var ctx1 = document.getElementById("chart-line").getContext("2d");
 
@@ -462,7 +462,7 @@
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="../public/assets-user/js/dashboard.min.js?v=2.0.4"></script>
+  <script src="<?= base_url('assets-user/js/dashboard.min.js?v=2.0.4')?>"></script>
 </body>
 
 </html>

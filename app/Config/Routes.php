@@ -42,10 +42,12 @@ $routes->match(['get', 'post'], 'register', 'RegisterController::register', ["fi
 $routes->match(['get', 'post'], 'register2', 'RegisterController::register2', ["filter" => "noauth"], ['as' => 'register2']);
 $routes->get('logout', 'LoginController::logout');
 
-$routes->group("", ["filter" => "auth"], function ($routes) {
-    $routes->get("/", "StudentController::index");
+$routes->group("", ["namespace" => "App\Controllers\user"], function($routes){
+    // URL - /user
+    $routes->get("/", "usercontroller::index", ['as' => 'user.test']);
+    // URL - /user/test
+    
 });
-
 $routes->group("admin",["filter" => "auth", "namespace" => "App\Controllers\Admin"], function($routes){
     // URL - /admin
     $routes->get("/", "AdminController::index",['as' => 'admin.dashboard']);
@@ -64,12 +66,7 @@ $routes->group("admin",["filter" => "auth", "namespace" => "App\Controllers\Admi
         $routes->match(["get", "post"], "insert_question", "BankSoalController::create", ['as' => 'admin.bank-soal.insert-question']);
     });
 });
-$routes->group("user", ["namespace" => "App\Controllers\user"], function($routes){
-    // URL - /admin
-    $routes->get("/", "usercontroller::index", ['as' => 'user.dashboard']);
-    // URL - /admin/add-user
-    
-});
+
 
 
 /*

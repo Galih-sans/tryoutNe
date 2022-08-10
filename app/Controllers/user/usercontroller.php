@@ -6,9 +6,10 @@ use App\Controllers\BaseController;
 
 class usercontroller extends BaseController
 {
+    
     public function index()
     {
-        $data['activeTab'] = "dashboard";
-        return view('user/pages/dashboard', $data);
+        $data['activeTab'] = "test";
+        return view('user/pages/test', $data);
     }
 }
