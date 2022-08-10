@@ -6,9 +6,18 @@ use App\Controllers\BaseController;
 
 class AdminController extends BaseController
 {
+    public $pagedata;
+    public function __construct()
+    {
+        if (session()->get('isAdmin') != true) {
+            echo 'Access denied';
+            exit;
+        }
+        $this->pagedata['activeTab'] = "dashboard";
+        $this->banksoal_model = new \App\Models\Admin\BankSoalModel();
+    }
     public function index()
     {
-        $data['activeTab'] = "dashboard";
-        return view('admin/pages/dashboard/index', $data);
+        return view('admin/pages/dashboard/index', ['pagedata'=> $this->pagedata]);
     }
 }

@@ -24,14 +24,14 @@
     <div class="content-side content-side-full">
         <ul class="nav-main">
             <li class="nav-main-item">
-                <a class="nav-main-link <?= $activeTab=="dashboard"?'active':''; ?> " href="<?= route_to('admin.dashboard') ?>">
+                <a class="nav-main-link <?= $pagedata['activeTab'] =="dashboard"?'active':''; ?> " href="<?= route_to('admin.dashboard') ?>">
                     <i class="nav-main-link-icon fa-brands fa-dashcube"></i>
                     <span class="nav-main-link-name">Dashboard</span>
                 </a>
             </li>
             <li class="nav-main-heading">Menu</li>
             <li class="nav-main-item"> 
-                <a class="nav-main-link <?= $activeTab=="tryout"?'active':''; ?>" href="<?= route_to('admin.tryout.index')?>">
+                <a class="nav-main-link <?= $pagedata['activeTab'] =="tryout"?'active':''; ?>" href="<?= route_to('admin.tryout.index')?>">
                     <i class="nav-main-link-icon fa-solid fa-clipboard-list"></i>
                     <span class="nav-main-link-name">Try Out</span>
                 </a>
@@ -39,7 +39,7 @@
 
             <li
                 class="nav-main-item ">
-                <a class="nav-main-link <?= $activeTab=="bank-soal"?'active':''; ?>" href="<?= route_to('admin.bank-soal.index')?>">
+                <a class="nav-main-link <?= $pagedata['activeTab'] =="bank-soal"?'active':''; ?>" href="<?= route_to('admin.bank-soal.index')?>">
                 <i class="nav-main-link-icon fa-solid fa-file-lines"></i>
                     <span class="nav-main-link-name">Bank Soal</span>
                 </a>

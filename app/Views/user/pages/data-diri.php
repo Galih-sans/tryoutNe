@@ -12,13 +12,13 @@
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
   <!-- Icons -->
-  <link href="../public/assets/images/logo/logo1.png" rel="stylesheet" />
-  <link href="../public/assets/images/logo/logo1.png" rel="stylesheet" />
+  <link href="<?= base_url ('assets/images/logo/logo1.png')?>" rel="stylesheet" />
+  <link href="<?= base_url ('assets/images/logo/logo1.png')?>" rel="stylesheet" />
   <!-- Font Awesome Icons -->
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-  <link href="../public/assets/images/logo/logo1.png" rel="stylesheet" />
+  <link href="<?= base_url ('assets/images/logo/logo1.png')?>" rel="stylesheet" />
   <!-- CSS Files -->
-  <link id="pagestyle" href="../pbulic/assets-user/css/dashboard.css?v=2.0.4" rel="stylesheet" />
+  <link id="pagestyle" href="<?= base_url ('assets-user/css/dashboard.css?v=2.0.4')?>" rel="stylesheet" />
 </head>
 
 <body class="">
@@ -46,8 +46,8 @@
                       <input type="Handphone" class="form-control form-control-lg" placeholder="Nomor Handphone" aria-label="Handphone">
                     </div>                    
                     <div class="text-center">
-                        <a class="nav-link" href="../app/Views/user/pages/data-diri-2.html">
-                      <button type="button"  class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0"  href="../app/Views/user/pages/data-diri-2.html">Lanjut</button>
+                        <a class="nav-link" href="<?=route_to('register2')?>">
+                      <button type="button"  class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0"  href="<?=route_to('register2')?>">Lanjut</button>
                     </a>
                     </div>
                   </form>
@@ -67,10 +67,10 @@
     </section>
   </main>
   <!--   Core JS Files   -->
-  <script src="../public/assets-user/js/core/popper.min.js"></script>
-  <script src="../public/assets-user/js/core/bootstrap.min.js"></script>
-  <script src="../public/assets-user/js/plugins/perfect-scrollbar.min.js"></script>
-  <script src="../public/assets-user/js/plugins/smooth-scrollbar.min.js"></script>
+  <script src="<?= base_url ('assets-user/js/core/popper.min.js')?>"></script>
+  <script src="<?= base_url ('assets-user/js/core/bootstrap.min.js')?>"></script>
+  <script src="<?= base_url ('assets-user/js/plugins/perfect-scrollbar.min.js')?>"></script>
+  <script src="<?= base_url ('assets-user/js/plugins/smooth-scrollbar.min.js')?>"></script>
   <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {
@@ -83,7 +83,7 @@
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="../public/assets-user/js/dashboard.min.js?v=2.0.4"></script>
+  <script src="<?= base_url ('assets-user/js/dashboard.min.js?v=2.0.4')?>"></script>
 </body>
 
 </html>

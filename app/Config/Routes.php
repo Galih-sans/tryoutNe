@@ -35,20 +35,33 @@ $routes->set404Override();
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Home::index');
-$routes->group("admin", ["namespace" => "App\Controllers\Admin"], function($routes){
+
+//login and logout
+$routes->match(['get', 'post'], 'login', 'LoginController::login', ["filter" => "noauth"]);
+$routes->match(['get', 'post'], 'register', 'RegisterController::register', ["filter" => "noauth"], ['as' => 'register']);
+$routes->match(['get', 'post'], 'register2', 'RegisterController::register2', ["filter" => "noauth"], ['as' => 'register2']);
+$routes->get('logout', 'LoginController::logout');
+
+$routes->group("", ["filter" => "auth"], function ($routes) {
+    $routes->get("/", "StudentController::index");
+});
+
+$routes->group("admin",["filter" => "auth", "namespace" => "App\Controllers\Admin"], function($routes){
     // URL - /admin
-    $routes->get("/", "AdminController::index", ['as' => 'admin.dashboard']);
+    $routes->get("/", "AdminController::index",['as' => 'admin.dashboard']);
     // URL - /admin/add-user
-    $routes->group("tryout", ["namespace" => "App\Controllers\Admin"], function($routes){
+    $routes->group("tryout", function($routes){
         // URL - /admin
         $routes->get("/", "TryOutController::index", ['as' => 'admin.tryout.index']);
         $routes->match(["get", "post"], "index", "TryOutController::index");
     });
-    $routes->group("bank-soal", ["namespace" => "App\Controllers\Admin"], function($routes){
+    $routes->group("bank-soal", function($routes){
         // URL - /admin
         $routes->get("/", "BankSoalController::index", ['as' => 'admin.bank-soal.index']);
-        $routes->match(["get", "post"], "index", "BankSoalController::index");
+        $routes->match(["get", "post"], "dt_banksoal", "BankSoalController::dt_bank_soal", ['as' => 'admin.bank-soal.dt_banksoal']);
+        $routes->match(["get", "post"], "get_subject", "BankSoalController::get_subject", ['as' => 'admin.bank-soal.get_subject']);
+        $routes->match(["get", "post"], "delete_question", "BankSoalController::delete", ['as' => 'admin.bank-soal.delete-question']);
+        $routes->match(["get", "post"], "insert_question", "BankSoalController::create", ['as' => 'admin.bank-soal.insert-question']);
     });
 });
 

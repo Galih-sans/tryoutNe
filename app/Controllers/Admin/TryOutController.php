@@ -6,9 +6,13 @@ use App\Controllers\BaseController;
 
 class TryOutController extends BaseController
 {
+    public $pagedata;
+    public function __construct()
+    {
+        $this->pagedata['activeTab'] = "tryout";
+    }
     public function index()
     {
-        $data['activeTab'] = "tryout";
-        return view('admin/pages/tryout/index', $data);
+        return view('admin/pages/tryout/index', ['pagedata'=>$this->pagedata]);
     }
 }
