@@ -64,6 +64,12 @@ $routes->group("admin",["filter" => "auth", "namespace" => "App\Controllers\Admi
         $routes->match(["get", "post"], "insert_question", "BankSoalController::create", ['as' => 'admin.bank-soal.insert-question']);
     });
 });
+$routes->group("user", ["namespace" => "App\Controllers\user"], function($routes){
+    // URL - /admin
+    $routes->get("/", "usercontroller::index", ['as' => 'user.dashboard']);
+    // URL - /admin/add-user
+    
+});
 
 
 /*
