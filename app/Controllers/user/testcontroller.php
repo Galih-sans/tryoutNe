@@ -13,6 +13,6 @@ class testcontroller extends BaseController
     }
     public function index()
     {
-        return view('user/pages/test', ['pagedata'=>$this->pagedata]);
+        return view('user/pages/test/index', ['pagedata'=>$this->pagedata]);
     }
 }

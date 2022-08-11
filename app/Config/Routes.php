@@ -42,10 +42,15 @@ $routes->match(['get', 'post'], 'register', 'RegisterController::register', ["fi
 $routes->match(['get', 'post'], 'register2', 'RegisterController::register2', ["filter" => "noauth"], ['as' => 'register2']);
 $routes->get('logout', 'LoginController::logout');
 
-$routes->group("", ["namespace" => "App\Controllers\user"], function($routes){
+$routes->group("", ["filter" => "auth", "namespace" => "App\Controllers\user"], function($routes){
     // URL - /user
     $routes->get("/", "usercontroller::index", ['as' => 'user.dashboard']);
     // URL - /user/test
+    $routes->group("test", function($routes){
+        // URL - /user
+        $routes->get("/", "testcontroller::index", ['as' => 'user.test.index']);
+        $routes->match(["get", "post"], "index", "testcontroller::index");
+    });
     
 });
 $routes->group("admin",["filter" => "auth", "namespace" => "App\Controllers\Admin"], function($routes){
