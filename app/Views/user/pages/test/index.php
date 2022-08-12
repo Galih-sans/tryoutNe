@@ -19,6 +19,7 @@
   <link href="<?= base_url('assets/images/logo/logo1.png') ?>" rel="stylesheet" />
   <!-- CSS Files -->
   <link id="pagestyle" href="<?= base_url('assets-user/css/dashboard.css?v=2.0.4') ?>" rel="stylesheet" />
+  <link id="pagestyle" href="<?= base_url('assets-user/css/search.css') ?>" rel="stylesheet" />
 </head>
 
 <body class="g-sidenav-show   bg-gray-100">
@@ -33,14 +34,25 @@
 
     <!-- content -->
     
-    <div class="container-fluid py-4">
+    <div class="container">
     <div class="row">
-      <div class="card pb-3 p-3 ms-md-auto mb-3 mt-4 pe-md-3 d-flex justify-content-between">
-        <div class="input-group">           
-          <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-          <input type="text" class="form-control" placeholder="Type here...">
-        </div>
-      </div>
+    <form class="row domain-search bg-pblue">
+        
+            
+                <div class="col-md-3">
+                    <h2 class="form-title">Find Your <strong>Dream Test</strong></h2>
+                    <p>temukan ujian impian mu disini.</p>
+                </div>
+                <div class="col-md-9">
+                    <div class="input-group">
+                        <input type="search" class="form-control">
+                        <span class="input-group-addon"><input type="submit" value="Search" class="btn btn-primary"></span>
+                    </div>
+                    <p>UTBK <strong>UNDIP</strong>TRYOUT <strong>FISIKA</strong>SIMAK <strong>UI</strong>.UTBK <strong>UGM</strong></p>
+                </div>
+            
+       
+    </form>
       <div class="row mt-4 justify-content-center">
         <div class="col-lg-6 mb-lg-0 mb-4">
           <div class="card ">

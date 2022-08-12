@@ -51,6 +51,16 @@ $routes->group("", ["filter" => "auth", "namespace" => "App\Controllers\user"], 
         $routes->get("/", "testcontroller::index", ['as' => 'user.test.index']);
         $routes->match(["get", "post"], "index", "testcontroller::index");
     });
+    $routes->group("profil", function($routes){
+        // URL - /user
+        $routes->get("/", "profilcontroller::index", ['as' => 'user.profil.index']);
+        $routes->match(["get", "post"], "index", "profilcontroller::index");
+    });
+    $routes->group("transaksi", function($routes){
+        // URL - /user
+        $routes->get("/", "transaksicontroller::index", ['as' => 'user.transaksi.index']);
+        $routes->match(["get", "post"], "index", "transaksicontroller::index");
+    });
     
 });
 $routes->group("admin",["filter" => "auth", "namespace" => "App\Controllers\Admin"], function($routes){
