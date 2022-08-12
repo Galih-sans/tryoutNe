@@ -10,7 +10,7 @@
     Neoedukasi
   </title>
   <!--     Fonts and icons     -->
-  <link href="<?= base_url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700') ?>" rel="stylesheet" />
+  <link href="<?= base_url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700')?>" rel="stylesheet" />
   <!-- Icons -->
   <link href="<?=  base_url('assets-user/css/nucleo-icons.css')?>" rel="stylesheet" />
   <link href="<?= base_url('assets-user/css/nucleo-svg.css') ?>" rel="stylesheet" />
