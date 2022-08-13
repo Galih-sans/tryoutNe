@@ -12,9 +12,14 @@
   <!--     Fonts and icons     -->
   <link href="<?= base_url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700') ?>" rel="stylesheet" />
   <!-- Icons -->
+<<<<<<< HEAD:app/Views/user/pages/dashboard.php
   <link href="<?= base_url('assets-user/css/nucleo-icons.css')?>" rel="stylesheet" />
   <link href="<?= base_url('assets-user/css/nucleo-svg.css')?>" rel="stylesheet" />
   <link href="<?= base_url('assets/images/logo/logo1.png') ?>" rel="stylesheet" />
+=======
+  <link href="<?=  base_url('assets-user/css/nucleo-icons.css')?>" rel="stylesheet" />
+  <link href="<?= base_url('assets-user/css/nucleo-svg.css') ?>" rel="stylesheet" />
+>>>>>>> b3965ea3cb8a3191d134bb3bce6a46255ca5ea51:app/Views/user/pages/dashboard/index.php
   <!-- Font Awesome Icons -->
   <script src="'https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
   <link href="<?= base_url('/assets/images/logo/logo1.png') ?>" rel="stylesheet" />
@@ -55,8 +60,13 @@
           <div class="card card-carousel overflow-hidden h-100 p-0">
             <div id="carouselExampleCaptions" class="carousel slide h-100" data-bs-ride="carousel">
               <div class="carousel-inner border-radius-lg h-100">
+<<<<<<< HEAD:app/Views/user/pages/dashboard.php
                 <div class="carousel-item h-100 active" style="background-image: url('<?= base_url('assets-user/img/carousel-1.jpg')?>'); background-size: cover;">
                   <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
+=======
+              <div class="carousel-item h-100 active" style="background-image: url('<?= base_url('assets-user/img/carousel-1.jpg')?>'); background-size: cover;">
+              <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
+>>>>>>> b3965ea3cb8a3191d134bb3bce6a46255ca5ea51:app/Views/user/pages/dashboard/index.php
                     <div class="icon icon-shape icon-sm bg-white text-center border-radius-md mb-3">
                       <i class="ni ni-camera-compact text-dark opacity-10"></i>
                     </div>
@@ -64,8 +74,13 @@
                     <p>Tidak ada kata gagal dalam berusaha, hanya hasil yang tertunda.</p>
                   </div>
                 </div>
+<<<<<<< HEAD:app/Views/user/pages/dashboard.php
                 <div class="carousel-item h-100 active" style="background-image: url('<?= base_url('assets-user/img/carousel-2.jpg')?>');      background-size: cover;">
                   <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
+=======
+                <div class="carousel-item h-100 active" style="background-image: url('<?= base_url('assets-user/img/carousel-1.jpg')?>'); background-size: cover;">
+                <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
+>>>>>>> b3965ea3cb8a3191d134bb3bce6a46255ca5ea51:app/Views/user/pages/dashboard/index.php
                     <div class="icon icon-shape icon-sm bg-white text-center border-radius-md mb-3">
                       <i class="ni ni-bulb-61 text-dark opacity-10"></i>
                     </div>
@@ -73,8 +88,13 @@
                     <p>Tingkatkan belajar mu raih impian mu.</p>
                   </div>
                 </div>
+<<<<<<< HEAD:app/Views/user/pages/dashboard.php
                 <div class="carousel-item h-100 active" style="background-image: url('<?= base_url('assets-user/img/carousel-3.jpg')?>');      background-size: cover;">
                   <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
+=======
+                <div class="carousel-item h-100 active" style="background-image: url('<?= base_url('assets-user/img/carousel-1.jpg')?>'); background-size: cover;">
+                <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
+>>>>>>> b3965ea3cb8a3191d134bb3bce6a46255ca5ea51:app/Views/user/pages/dashboard/index.php
                     <div class="icon icon-shape icon-sm bg-white text-center border-radius-md mb-3">
                       <i class="ni ni-trophy text-dark opacity-10"></i>
                     </div>
@@ -305,69 +325,14 @@
       </div>
     </div>
   </main>
-  <div class="fixed-plugin">
-    <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
-      <i class="fa fa-cog py-2"> </i>
-    </a>
-    <div class="card shadow-lg">
-      <div class="card-header pb-0 pt-3 ">
-        <div class="float-start">
-          <h5 class="mt-3 mb-0">Neo Configurator</h5>
-        </div>
-        <div class="float-end mt-4">
-          <button class="btn btn-link text-dark p-0 fixed-plugin-close-button">
-            <i class="fa fa-close"></i>
-          </button>
-        </div>
-        <!-- End Toggle Button -->
-      </div>
-      <hr class="horizontal dark my-1">
-      <div class="card-body pt-sm-3 pt-0 overflow-auto">
-        <!-- Sidebar Backgrounds -->
-        <div>
-          <h6 class="mb-0">Sidebar Colors</h6>
-        </div>
-        <a href="javascript:void(0)" class="switch-trigger background-color">
-          <div class="badge-colors my-2 text-start">
-            <span class="badge filter bg-gradient-primary active" data-color="primary" onclick="sidebarColor(this)"></span>
-            <span class="badge filter bg-gradient-dark" data-color="dark" onclick="sidebarColor(this)"></span>
-            <span class="badge filter bg-gradient-info" data-color="info" onclick="sidebarColor(this)"></span>
-            <span class="badge filter bg-gradient-success" data-color="success" onclick="sidebarColor(this)"></span>
-            <span class="badge filter bg-gradient-warning" data-color="warning" onclick="sidebarColor(this)"></span>
-            <span class="badge filter bg-gradient-danger" data-color="danger" onclick="sidebarColor(this)"></span>
-          </div>
-        </a>
-        <!-- Sidenav Type -->
-        <div class="mt-3">
-          <h6 class="mb-0">Sidenav Type</h6>
-          <p class="text-sm">Choose between 2 different sidenav types.</p>
-        </div>
-        <div class="d-flex">
-          <button class="btn bg-gradient-primary w-100 px-3 mb-2 active me-2" data-class="bg-white" onclick="sidebarType(this)">White</button>
-          <button class="btn bg-gradient-primary w-100 px-3 mb-2" data-class="bg-default" onclick="sidebarType(this)">Dark</button>
-        </div>
-        <p class="text-sm d-xl-none d-block mt-2">You can change the sidenav type just on desktop view.</p>
-        <!-- Navbar Fixed -->
-        <div class="d-flex my-3">
-          <h6 class="mb-0">Navbar Fixed</h6>
-          <div class="form-check form-switch ps-0 ms-auto my-auto">
-            <input class="form-check-input mt-1 ms-auto" type="checkbox" id="navbarFixed" onclick="navbarFixed(this)">
-          </div>
-        </div>
-        <hr class="horizontal dark my-sm-4">
-        <div class="mt-2 mb-5 d-flex">
-          <h6 class="mb-0">Light / Dark</h6>
-          <div class="form-check form-switch ps-0 ms-auto my-auto">
-            <input class="form-check-input mt-1 ms-auto" type="checkbox" id="dark-version" onclick="darkMode(this)">
-          </div>
-        </div>
+  
         
   <!--   Core JS Files   -->
-  <script src="../public/assets-user/js/core/popper.min.js"></script>
-  <script src="../public/assets-user/js/core/bootstrap.min.js"></script>
-  <script src="../public/assets-user/perfect-scrollbar.min.js"></script>
-  <script src="../public/assets-user/smooth-scrollbar.min.js"></script>
-  <script src="../public/assets-user/chartjs.min.js"></script>
+  <script src="<?= base_url('assets-user/js/core/popper.min.js')?>"></script>
+  <script src="<?= base_url('assets-user/js/core/bootstrap.min.js')?>"></script>
+  <script src="<?= base_url('assets-user/js/plugins/perfect-scrollbar.min.js')?>"></script>
+  <script src="<?= base_url('assets-user/js/plugins/smooth-scrollbar.min.js')?>"></script>
+  <script src="<?= base_url('assets-user/js/plugins/chartjs.min.js')?>"></script>
   <script>
     var ctx1 = document.getElementById("chart-line").getContext("2d");
 
@@ -463,7 +428,7 @@
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="../public/assets-user/js/dashboard.min.js?v=2.0.4"></script>
+  <script src="<?= base_url('assets-user/js/dashboard.min.js?v=2.0.4')?>"></script>
 </body>
 
 </html>
