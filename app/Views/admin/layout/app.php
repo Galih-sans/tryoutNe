@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-
+<title><?= $pagedata['title'] ?></title>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
@@ -10,6 +10,7 @@
     <link rel="icon" type="image/x-icon" href="<?= base_url('assets/favicon/logo-ne.ico') ?>">
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+    <script src="<?= base_url('js/main.js')?>" crossorigin="anonymous"></script>
     <?= $this->renderSection('header') ?>
     <link rel="stylesheet" id="css-main" href="<?= base_url('css/admin_main.css') ?>">
     <link rel="stylesheet" id="css-main" href="<?= base_url('css/themes/modern.css') ?>">

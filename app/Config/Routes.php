@@ -50,6 +50,14 @@ $routes->group("admin",["filter" => "auth", "namespace" => "App\Controllers\Admi
     // URL - /admin
     $routes->get("/", "AdminController::index",['as' => 'admin.dashboard']);
     // URL - /admin/add-user
+    $routes->group("class", function($routes){
+        // URL - /admin
+        $routes->get("/", "ClassController::index", ['as' => 'admin.class.index']);
+        $routes->match(["get", "post"], "dt_class", "ClassController::dt_class",['as' => 'admin.class.dt_class']);
+        $routes->match(["get", "post"], "add_class", "ClassController::create",['as' => 'admin.class.add_class']);
+        $routes->match(["get", "post"], "remove_class", "ClassController::delete",['as' => 'admin.class.remove_class']);
+        $routes->match(["get", "post"], "update_class", "ClassController::update",['as' => 'admin.class.edit_class']);
+    });
     $routes->group("tryout", function($routes){
         // URL - /admin
         $routes->get("/", "TryOutController::index", ['as' => 'admin.tryout.index']);

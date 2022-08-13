@@ -30,6 +30,30 @@
                 </a>
             </li>
             <li class="nav-main-heading">Menu</li>
+            <li
+                class="nav-main-item <?= $pagedata['activeTab'] =="class" || $pagedata['activeTab'] =="subject"?'open':''; ?>">
+                <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true"
+                    aria-expanded="true" href="#">
+                    <i class="nav-main-link-icon fa fa-briefcase"></i>
+                    <span class="nav-main-link-name">Kelas & Mata Pelajaran</span>
+                </a>
+                <ul class="nav-main-submenu">
+                    <li class="nav-main-item">
+                        <a class="nav-main-link <?= $pagedata['activeTab'] =="class"?'color-ne':''; ?>"
+                            href="<?= route_to('admin.class.index') ?>">
+                            <span class="nav-main-link-name">Daftar Kelas</span>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="nav-main-submenu">
+                    <li class="nav-main-item">
+                        <a class="nav-main-link {{ request()->is('admin/vacancy/vacancy-application/*') ? 'active' : '' }}"
+                            href="">
+                            <span class="nav-main-link-name">Mata Pelajaran</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
             <li class="nav-main-item"> 
                 <a class="nav-main-link <?= $pagedata['activeTab'] =="tryout"?'active':''; ?>" href="<?= route_to('admin.tryout.index')?>">
                     <i class="nav-main-link-icon fa-solid fa-clipboard-list"></i>
@@ -50,38 +74,6 @@
                 <i class="nav-main-link-icon fa-solid fa-users"></i>
                     <span class="nav-main-link-name">Siswa</span>
                 </a>
-            </li>
-            <li
-                class="nav-main-item">
-                <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true"
-                    aria-expanded="true" href="#">
-                    <i class="nav-main-link-icon fa fa-briefcase"></i>
-                    <span class="nav-main-link-name">Other Menu</span>
-                </a>
-                <ul class="nav-main-submenu">
-                    <li class="nav-main-item">
-                        <a class="nav-main-link {{ request()->is('admin/vacancy/job-vacancy/*') ? 'active' : '' }}"
-                            href="">
-                            <span class="nav-main-link-name">Menu1</span>
-                        </a>
-                    </li>
-                </ul>
-                <ul class="nav-main-submenu">
-                    <li class="nav-main-item">
-                        <a class="nav-main-link {{ request()->is('admin/vacancy/vacancy-application/*') ? 'active' : '' }}"
-                            href="">
-                            <span class="nav-main-link-name">Menu2</span>
-                        </a>
-                    </li>
-                </ul>
-                <ul class="nav-main-submenu">
-                    <li class="nav-main-item">
-                        <a class="nav-main-link {{ request()->is('admin/vacancy/selected-vacancy-application/*') ? 'active' : '' }}"
-                            href="">
-                            <span class="nav-main-link-name">Menu3</span>
-                        </a>
-                    </li>
-                </ul>
             </li>
         </ul>
     </div>

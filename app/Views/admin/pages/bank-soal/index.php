@@ -6,7 +6,6 @@
 <link href="<?= base_url('assets-user/css/nucleo-icons.css')?>" rel="stylesheet" />
 <?= $this->endSection() ?>
 <?= $this->section('content') ?>
-<title><?= $pagedata['title'] ?></title>
 <div class="content">
     <div class="block block-rounded pb-2 shadow-sm">
         <div class="block-header block-header-ne">
@@ -32,7 +31,7 @@
                     <?php if($data['class']): ?>
                     <?php foreach($data['class'] as $class): ?>
                     <tr>
-                        <option value="<?= $class->id ?>"><?= $class->class.' '.$class->level ?>
+                        <option value="<?= $class->id ?>"><?= '( '.$class->level.' ) '.$class->class ?>
                         </option>
                     </tr>
                     <?php 
@@ -195,6 +194,7 @@
         $('#subject').on('change', function () {
             $('#question-datatables').show();
             $('#level-form').val($('#level').val());
+            $('#subject-form').val($('#sub').val());
             $('#subject-form').val($('#subject').val());
             show_dt_question();
         });

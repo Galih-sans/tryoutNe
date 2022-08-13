@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models\Admin;
-
+use CodeIgniter\I18n\Time;
 use CodeIgniter\Model;
 
 class AnswerModel extends Model
@@ -54,5 +54,28 @@ class AnswerModel extends Model
         parent::__construct();
         $this->db = \Config\Database::connect();
         $this->builder = $this->db->table($this->table);
+    }
+    protected function now(){
+        return Time::now()->getTimestamp();
+    }
+
+    public function add_answer($data,$answer)
+    {
+        $answer_data = [
+            'question_id' => $data['question_id'],
+            'answer' => $answer,
+            'answer_isright' => 0,
+            'created_by'    => $data['created_by'],
+            'created_at'    => $this->now(),
+            'updated_at'    => $this->now()
+        ];
+        return  $this->builder->insert($answer_data);;
+        // return $this->builder->delete();
+    }
+
+    public function get_answer($id)
+    {
+        $query = $this->builder->where('question_id',$id)->get();
+        return $query->getResult();
     }
 }

@@ -25844,7 +25844,7 @@ function () {
           if (jQuery('[data-toggle="block-option"][data-action="state_toggle"][data-action-mode="demo"]', elBlock).length) {
             setTimeout(function () {
               elBlock.removeClass('block-mode-loading');
-            }, 2000);
+            }, 800);
           }
         },
         state_loading: function state_loading() {

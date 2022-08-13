@@ -10,6 +10,7 @@ class TryOutController extends BaseController
     public function __construct()
     {
         $this->pagedata['activeTab'] = "tryout";
+        $this->pagedata['title'] = "Try Out";
     }
     public function index()
     {

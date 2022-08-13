@@ -36,5 +36,22 @@ class ClassModel extends Model
     {
         parent::__construct();
         $this->db = \Config\Database::connect();
+        $this->builder = $this->db->table($this->table);
+    }
+
+    public function get_datatables()
+    {
+        $query = $this->builder->get();
+        return $query->getResult();
+    }
+    public function create($data)
+    {
+        $query = $this->builder->insert($data);
+        return $query;
+    }
+    public function delete_class($id)
+    {
+        $this->builder->where('id', $id);
+        return $this->builder->delete();
     }
 }

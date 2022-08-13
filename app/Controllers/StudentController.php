@@ -13,6 +13,6 @@ class StudentController extends BaseController
     }
     public function index()
     {
-        return view('student/pages/dashboard', ['pagedata'=> $this->pagedata]);
+        return view('user/pages/dashboard', ['pagedata'=> $this->pagedata]);
     }
 }
