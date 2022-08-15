@@ -12,14 +12,8 @@
   <!--     Fonts and icons     -->
   <link href="<?= base_url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700') ?>" rel="stylesheet" />
   <!-- Icons -->
-<<<<<<< HEAD:app/Views/user/pages/dashboard.php
-  <link href="<?= base_url('assets-user/css/nucleo-icons.css')?>" rel="stylesheet" />
-  <link href="<?= base_url('assets-user/css/nucleo-svg.css')?>" rel="stylesheet" />
-  <link href="<?= base_url('assets/images/logo/logo1.png') ?>" rel="stylesheet" />
-=======
   <link href="<?=  base_url('assets-user/css/nucleo-icons.css')?>" rel="stylesheet" />
   <link href="<?= base_url('assets-user/css/nucleo-svg.css') ?>" rel="stylesheet" />
->>>>>>> b3965ea3cb8a3191d134bb3bce6a46255ca5ea51:app/Views/user/pages/dashboard/index.php
   <!-- Font Awesome Icons -->
   <script src="'https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
   <link href="<?= base_url('/assets/images/logo/logo1.png') ?>" rel="stylesheet" />
@@ -60,13 +54,8 @@
           <div class="card card-carousel overflow-hidden h-100 p-0">
             <div id="carouselExampleCaptions" class="carousel slide h-100" data-bs-ride="carousel">
               <div class="carousel-inner border-radius-lg h-100">
-<<<<<<< HEAD:app/Views/user/pages/dashboard.php
-                <div class="carousel-item h-100 active" style="background-image: url('<?= base_url('assets-user/img/carousel-1.jpg')?>'); background-size: cover;">
-                  <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
-=======
               <div class="carousel-item h-100 active" style="background-image: url('<?= base_url('assets-user/img/carousel-1.jpg')?>'); background-size: cover;">
               <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
->>>>>>> b3965ea3cb8a3191d134bb3bce6a46255ca5ea51:app/Views/user/pages/dashboard/index.php
                     <div class="icon icon-shape icon-sm bg-white text-center border-radius-md mb-3">
                       <i class="ni ni-camera-compact text-dark opacity-10"></i>
                     </div>
@@ -74,13 +63,8 @@
                     <p>Tidak ada kata gagal dalam berusaha, hanya hasil yang tertunda.</p>
                   </div>
                 </div>
-<<<<<<< HEAD:app/Views/user/pages/dashboard.php
-                <div class="carousel-item h-100 active" style="background-image: url('<?= base_url('assets-user/img/carousel-2.jpg')?>');      background-size: cover;">
-                  <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
-=======
                 <div class="carousel-item h-100 active" style="background-image: url('<?= base_url('assets-user/img/carousel-1.jpg')?>'); background-size: cover;">
                 <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
->>>>>>> b3965ea3cb8a3191d134bb3bce6a46255ca5ea51:app/Views/user/pages/dashboard/index.php
                     <div class="icon icon-shape icon-sm bg-white text-center border-radius-md mb-3">
                       <i class="ni ni-bulb-61 text-dark opacity-10"></i>
                     </div>
@@ -88,13 +72,8 @@
                     <p>Tingkatkan belajar mu raih impian mu.</p>
                   </div>
                 </div>
-<<<<<<< HEAD:app/Views/user/pages/dashboard.php
-                <div class="carousel-item h-100 active" style="background-image: url('<?= base_url('assets-user/img/carousel-3.jpg')?>');      background-size: cover;">
-                  <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
-=======
                 <div class="carousel-item h-100 active" style="background-image: url('<?= base_url('assets-user/img/carousel-1.jpg')?>'); background-size: cover;">
                 <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
->>>>>>> b3965ea3cb8a3191d134bb3bce6a46255ca5ea51:app/Views/user/pages/dashboard/index.php
                     <div class="icon icon-shape icon-sm bg-white text-center border-radius-md mb-3">
                       <i class="ni ni-trophy text-dark opacity-10"></i>
                     </div>
