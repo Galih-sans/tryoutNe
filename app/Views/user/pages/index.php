@@ -2,14 +2,13 @@
 
 <head>
     <meta charset="utf-8">
-    <title>form-v1 by Colorlib</title>
+    <title>form-regist</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     <link rel="stylesheet" type="text/css" href="css/opensans-font.css">
     <link rel="stylesheet" type="text/css"
         href="fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
-
     <link rel="stylesheet" href="<?=  base_url('assets-user/css/style.css')?>">
     </head>
 
@@ -21,14 +20,14 @@
                     <div id="form-total" role="application" class="wizard clearfix vertical">
                         <div class="steps clearfix">
                             <ul role="tablist">
-                                <li role="tab" aria-disabled="false" class="first done" aria-selected="false"><a
+                                <li role="tab" aria-disabled="true" class="first done" aria-selected="true"><a
                                         id="form-total-t-0" href="#form-total-h-0" aria-controls="form-total-p-0">
                                         <div class="title">
                                             <p class="step-icon"><span>01</span></p>
                                             <span class="step-text">Peronal Infomation</span>
                                         </div>
                                     </a></li>
-                                <li role="tab" aria-disabled="false" class="current" aria-selected="true"><a
+                                <li role="tab" aria-disabled="true" class="current" aria-selected="true"><a
                                         id="form-total-t-1" href="#form-total-h-1" aria-controls="form-total-p-1"><span
                                             class="current-info audible"> </span>
                                         <div class="title">
@@ -36,7 +35,7 @@
                                             <span class="step-text">School Account</span>
                                         </div>
                                     </a></li>
-                                <li role="tab" aria-disabled="false" class="last"><a id="form-total-t-2"
+                                <li role="tab" aria-disabled="true" class="last"><a id="form-total-t-2"
                                         href="#form-total-h-2" aria-controls="form-total-p-2">
                                         <div class="title">
                                             <p class="step-icon"><span>03</span></p>
@@ -49,13 +48,13 @@
 
                             <h2 id="form-total-h-0" tabindex="-1" class="title">
                                 <p class="step-icon"><span>01</span></p>
-                                <span class="step-text">Peronal Infomation</span>
+                                <span class="step-text">Personal Infomation</span>
                             </h2>
                             <section id="form-total-p-0" role="tabpanel" aria-labelledby="form-total-h-0" class="body"
                                 aria-hidden="true" style="display: none;">
                                 <div class="inner">
                                     <div class="wizard-header">
-                                        <h3 class="heading">Peronal Infomation</h3>
+                                        <h3 class="heading">Personal Infomation</h3>
                                         <p>Please enter your infomation and proceed to the next step so we can build
                                             your accounts. </p>
                                     </div>
@@ -145,7 +144,7 @@
                                     <div class="form-row">
                                         <div class="form-holder form-holder-1">
                                             <input type="text" name="find_bank" id="find_bank"
-                                                placeholder="Find Your school" class="form-control" required="">
+                                                placeholder="provinsi" class="form-control" required="">
                                         </div>
                                     </div>
                                     <div class="form-row-total">
@@ -173,7 +172,7 @@
                                                 <input type="radio" class="radio" name="" id="bank-4"
                                                     value="bank-4">
                                                 <label class="bank-images bank-4-label" for="bank-4">
-                                                    <img src="images/form-v1-4.png" alt=">
+                                                    <img src="images/form-v1-4.png" alt="">
                                                 </label>
                                                 <input type="radio" class="radio" name="" id="bank-5"
                                                     value="bank-5">
@@ -253,6 +252,7 @@
             </div>
         </div>
     </div>
+    <script src="<?= base_url('assets-user/js/jquery-3.3.1.js')?>"></script>
     <script src="<?= base_url('assets-user/js/jquery.steps.js')?>"></script>
     <script src="<?= base_url('assets-user/js/main.js')?>"></script>
 
