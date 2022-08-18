@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class CreateAnswerTable extends Migration
+class CreateQuestionCompositionTable extends Migration
 {
     public function up()
     {
@@ -15,38 +15,29 @@ class CreateAnswerTable extends Migration
 				'unsigned'       => true,
 				'auto_increment' => true
 			],
-			'question_id'       => [
+			'test_id'       => [
 				'type'           => 'BIGINT',
 				'constraint'     => 20,
 			],
-			'answer'      => [
-				'type'           => 'TEXT',
+			'subject_id'       => [
+				'type'           => 'BIGINT',
+				'constraint'     => 20,
 			],
-			'answer_isright'      => [
-				'type'           => 'TINYINT',
-				'constraint'     => 1,
-			],
-            'created_by' => [
-				'type'           => 'VARCHAR',
-				'constraint'     => 255,
-			],
-            'created_at' => [
-				'type'           => 'INT',
-				'constraint'     => 11,
-			],
-            'updated_at' => [
+			'number_of_question'      => [
 				'type'           => 'INT',
 				'constraint'     => 11,
 			],
 		]);
+
 		// Primary_Key
 		$this->forge->addKey('id', TRUE);
 		// Create Table
-		$this->forge->createTable('to_answers', TRUE);
+		$this->forge->createTable('to_question_composition', TRUE);
     }
 
     public function down()
     {
-        $this->forge->dropTable('to_answers');
+        //Drop Table
+        $this->forge->dropTable('to_question_composition');
     }
 }

@@ -28,8 +28,9 @@ class CreateAdminTable extends Migration
 				'constraint'     => 255,
 			],
 			'gender'      => [
-				'type'           => 'VARCHAR',
-                'constraint'     => 1,
+				'type' => 'ENUM',
+				'constraint' => array('L','P'),
+				'default'=> "L",
 			],
             'role'       => [
 				'type'           => 'INT',
@@ -40,12 +41,12 @@ class CreateAdminTable extends Migration
 				'constraint'     => 255,
 			],
             'created_at' => [
-				'type'           => 'VARCHAR',
-				'constraint'     => 255,
+				'type'           => 'INT',
+				'constraint'     => 11,
 			],
             'updated_at' => [
-				'type'           => 'VARCHAR',
-				'constraint'     => 255,
+				'type'           => 'INT',
+				'constraint'     => 11,
 			],
 		]);
 

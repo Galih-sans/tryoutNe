@@ -54,4 +54,9 @@ class ClassModel extends Model
         $this->builder->where('id', $id);
         return $this->builder->delete();
     }
+    public function update_class($id,$data)
+    {
+        $this->builder->where('id', $id);
+        return $this->builder->update($data);
+    }
 }

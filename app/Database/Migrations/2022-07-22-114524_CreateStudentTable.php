@@ -20,8 +20,8 @@ class CreateStudentTable extends Migration
 				'constraint'     => '255'
 			],
 			'class_id'      => [
-				'type'           => 'INT',
-				'constraint'     => 11,
+				'type'           => 'BIGINT',
+				'constraint'     => 20,
 			],
 			'POB'      => [
 				'type'           => 'VARCHAR',
@@ -71,7 +71,7 @@ class CreateStudentTable extends Migration
 		// Primary_Key
 		$this->forge->addKey('id', TRUE);
         // Foreign Key
-        $this->forge->addForeignKey('class_id', 'to_class', 'id');
+        // $this->forge->addForeignKey('class_id', 'to_class', 'id');
 		// Create Table
 		$this->forge->createTable('to_students', TRUE);
 	}

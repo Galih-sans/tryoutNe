@@ -18,29 +18,36 @@ class CreateQuestionTable extends Migration
 			'question'       => [
 				'type'           => 'TEXT',
 			],
-			'level'      => [
-				'type'           => 'VARCHAR',
-				'constraint'     => 255,
+			'class_id'      => [
+				'type'           => 'BIGINT',
+				'constraint'     => 20,
 			],
-			'subject'      => [
-				'type'           => 'VARCHAR',
-				'constraint'     => 255,
+			'subject_id'      => [
+				'type'           => 'BIGINT',
+				'constraint'     => 20,
 			],
-			'discussion'      => [
+			'topic_id'      => [
+				'type'           => 'BIGINT',
+				'constraint'     => 20,
+			],
+			'difficulty'      => [
 				'type'           => 'VARCHAR',
                 'constraint'     => 255,
 			],
+			'discussion'      => [
+				'type'           => 'TEXT',
+			],
             'created_by' => [
-				'type'           => 'VARCHAR',
-				'constraint'     => 255,
+				'type'           => 'INT',
+				'constraint'     => 11,
 			],
             'created_at' => [
-				'type'           => 'VARCHAR',
-				'constraint'     => 255,
+				'type'           => 'INT',
+				'constraint'     => 11,
 			],
             'updated_at' => [
-				'type'           => 'VARCHAR',
-				'constraint'     => 255,
+				'type'           => 'INT',
+				'constraint'     => 11,
 			],
 		]);
 		// Primary_Key

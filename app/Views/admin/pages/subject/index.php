@@ -10,7 +10,7 @@
     <div class="block block-rounded pb-2 shadow-sm">
         <div class="block-header block-header-default">
             <h3 class="block-title">
-                Daftar Kelas <small></small>
+                Daftar Mata Pelajaran <small></small>
             </h3>
             <div class="block-options">
                 <button type="button" class="btn-block-option" data-toggle="block-option"
@@ -24,10 +24,35 @@
             </div>
         </div>
         <div class="block-content fs-sm">
+            <div class="block-content fs-sm">
+                <div class="input-group mb-3">
+                    <label class="input-group-text bg-neo text-white" for="inputGroupSelect01"
+                        style="width:80px;">Jenjang</label>
+                    <select name="level" id="level" title="Please select..." class="form-control selectpicker border"
+                        data-live-search="true" data-style="customSelect" data-dropup-auto="false" data-size="4">
+                        <?php if($data['class']): ?>
+                        <?php foreach($data['class'] as $class): ?>
+                        <tr>
+                            <option value="<?= $class->id ?>"><?= '( '.$class->level.' ) '.$class->class ?>
+                            </option>
+                        </tr>
+                        <?php 
+                    endforeach;
+                    endif; ?>
+                    </select>
+                </div>
+                <div class="input-group mb-3">
+                    <label class="input-group-text bg-neo text-white" for="inputGroupSelect01"
+                        style="width:80px;">Mapel</label>
+                    <select name="subject" id="subject" class="form-control selectpicker border" data-live-search="true"
+                        data-style="customSelect" disabled>
+                    </select>
+                </div>
+            </div>
             <div class="row pb-2 mb-3 shadow-sm align-center">
                 <div class="col-12 col-md-12 text-right">
                     <button type="button" class="btn btn-primary btn-sm" onclick="tambah()">
-                        <i class="si si-plus"></i> Tambah Kelas Baru
+                        <i class="si si-plus"></i> Tambah Mata Pelajaran Baru
                     </button>
                 </div>
             </div>
@@ -37,8 +62,8 @@
                 <thead>
                     <tr>
                         <th width="10%" class="fs-sm fw-normal">#</th>
-                        <th width="30%" class="fs-sm fw-normal">Jenjang</th>
-                        <th width="30%" class="fs-sm fw-normal">Kelas</th>
+                        <th width="30%" class="fs-sm fw-normal">Jenjang & Kelas</th>
+                        <th width="30%" class="fs-sm fw-normal">Mata Pelajaran</th>
                         <th width="30%" class="fs-sm fw-normal">Aksi</th>
                     </tr>
                 </thead>
