@@ -27,11 +27,11 @@ class CreateTestTable extends Migration
 			],
             'duration' => [
 				'type'           => 'TINYINT',
-				'constraint'     => 3,
+				'constraint'     => 4,
 			],
             'number_of_question' => [
 				'type'           => 'TINYINT',
-				'constraint'     => 3,
+				'constraint'     => 4,
 			],
             'random_question' => [
 				'type'           => 'TINYINT',
@@ -57,32 +57,29 @@ class CreateTestTable extends Migration
 				'type'           => 'DECIMAL',
 				'constraint'     => 10,
 			],
-            'level' => [
-				'type'           => 'VARCHAR',
-				'constraint'     => 255,
+            'class_id' => [
+				'type'           => 'BIGINT',
+				'constraint'     => 20,
 			],
-            'subject' => [
-				'type'           => 'VARCHAR',
-				'constraint'     => 255,
-			],
-            'question_composition' => [
-				'type'           => 'TEXT',
+            'subject_id' => [
+				'type'           => 'BIGINT',
+				'constraint'     => 20,
 			],
             'status' => [
 				'type'           => 'TINYINT',
 				'constraint'     => 4,
 			],
             'created_by' => [
-				'type'           => 'VARCHAR',
-				'constraint'     => 255,
+				'type'           => 'INT',
+				'constraint'     => 11,
 			],
             'created_at' => [
-				'type'           => 'VARCHAR',
-				'constraint'     => 255,
+				'type'           => 'INT',
+				'constraint'     => 11,
 			],
             'updated_at' => [
-				'type'           => 'VARCHAR',
-				'constraint'     => 255,
+				'type'           => 'INT',
+				'constraint'     => 11,
 			],
 		]);
 		// Primary_Key

@@ -2,20 +2,25 @@
 
 namespace App\Controllers\Admin;
 use App\Controllers\BaseController;
+use App\Models\Admin\ClassModel;
+use App\Models\Admin\SubjectModel;
 
-class ClassController extends BaseController
+class SubjectController extends BaseController
 {
     public $pagedata;
-    public $class_model;
+    public $SubjectModel;
+    public $ClassModel;
+    public $data;
     public function __construct()
     {
         if (session()->get('isAdmin') != true) {
             echo 'Access denied';
             exit;
         }
-        $this->pagedata['activeTab'] = "class";
-        $this->pagedata['title'] = "Daftar Kelas";
-        $this->class_model = new \App\Models\Admin\ClassModel();
+        $this->pagedata['activeTab'] = "subject";
+        $this->pagedata['title'] = "Daftar Mata Pelajaran";
+        $this->SubjectModel = new SubjectModel();
+        $this->ClassModel = new ClassModel();
     }
     /**
      * Return an array of resource objects, themselves in array format
@@ -24,8 +29,8 @@ class ClassController extends BaseController
      */
     public function index()
     {
-
-        return view('admin/pages/class/index', ['pagedata'=> $this->pagedata]);
+        $this->data['class'] = $this->ClassModel->orderBy('id', 'ASC')->findAll();
+        return view('admin/pages/subject/index', ['pagedata'=> $this->pagedata, 'data'=> $this->data]);
     }
     public function dt_class()
     {
