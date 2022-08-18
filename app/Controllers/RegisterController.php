@@ -13,7 +13,7 @@ class RegisterController extends BaseController
     }
     public function register()
     {
-        return view('user/pages/data-diri');
+        return view('user/pages/index');
     }
     public function register2()
     {
