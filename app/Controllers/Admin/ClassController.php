@@ -16,6 +16,7 @@ class ClassController extends BaseController
         $this->pagedata['activeTab'] = "class";
         $this->pagedata['title'] = "Daftar Kelas";
         $this->class_model = new \App\Models\Admin\ClassModel();
+        $this->class_model = new \App\Models\Admin\ClassModel();
     }
     /**
      * Return an array of resource objects, themselves in array format

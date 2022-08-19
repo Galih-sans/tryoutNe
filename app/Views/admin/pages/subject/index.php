@@ -27,25 +27,18 @@
             <div class="block-content fs-sm">
                 <div class="input-group mb-3">
                     <label class="input-group-text bg-neo text-white" for="inputGroupSelect01"
-                        style="width:80px;">Jenjang</label>
+                        style="width:80px;">Kelas</label>
                     <select name="level" id="level" title="Please select..." class="form-control selectpicker border"
                         data-live-search="true" data-style="customSelect" data-dropup-auto="false" data-size="4">
                         <?php if($data['class']): ?>
                         <?php foreach($data['class'] as $class): ?>
                         <tr>
-                            <option value="<?= $class->id ?>"><?= '( '.$class->level.' ) '.$class->class ?>
+                            <option value="<?= $class->id ?>"><?= $class->class.' - '.$class->level ?>
                             </option>
                         </tr>
                         <?php 
                     endforeach;
                     endif; ?>
-                    </select>
-                </div>
-                <div class="input-group mb-3">
-                    <label class="input-group-text bg-neo text-white" for="inputGroupSelect01"
-                        style="width:80px;">Mapel</label>
-                    <select name="subject" id="subject" class="form-control selectpicker border" data-live-search="true"
-                        data-style="customSelect" disabled>
                     </select>
                 </div>
             </div>
@@ -62,7 +55,8 @@
                 <thead>
                     <tr>
                         <th width="10%" class="fs-sm fw-normal">#</th>
-                        <th width="30%" class="fs-sm fw-normal">Jenjang & Kelas</th>
+                        <th width="30%" class="fs-sm fw-normal">Jenjang</th>
+                        <th width="30%" class="fs-sm fw-normal">Kelas</th>
                         <th width="30%" class="fs-sm fw-normal">Mata Pelajaran</th>
                         <th width="30%" class="fs-sm fw-normal">Aksi</th>
                     </tr>
@@ -73,11 +67,11 @@
 </div>
 <div class="modal fade" id="questionModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="block block-rounded block-transparent mb-0">
                 <div class="block-header block-header-ne">
-                    <h3 class="block-title text-white">Tambah Kelas : </h3>
+                    <h3 class="block-title text-white">Tambah Mata Pelajaran : </h3>
                     <div class="block-options">
                         <button type="button" class="btn-block-option-white" data-bs-dismiss="modal" aria-label="Close">
                             <i class="fa fa-fw fa-times"></i>
@@ -85,22 +79,26 @@
                     </div>
                 </div>
                 <div class="block-content fs-sm">
-                    <form id="class_form">
+                    <form id="subject_form">
                         <div class="row">
                             <div class="col-12 col-md-12">
                                 <div class="col-12 col-md-12 mb-2">
                                     <span class="" style="letter-spacing: -em">
                                         <meta charset="utf-8">⋮⋮⋮</span> &nbsp;
-                                    <span class="tittle-neo"> Jenjang</span>
-                                    <select name="level" id="level" title="Please select..."
+                                    <span class="tittle-neo"> Kelas </span>
+                                    <select name="class_id" id="class_id" title="Please select..."
                                         class="form-control selectpicker border" data-live-search="true"
                                         data-style="customSelect" data-dropup-auto="false" data-size="4">
                                         <tr>
-                                            <option value="SD">SD</option>
-                                            <option value="SMP">SMP</option>
-                                            <option value="SMA">SMA</option>
-                                            <option value="Umum">Umum</option>
-                                            <option value="Lainya">Lainya</option>
+                                            <?php if($data['class']): ?>
+                                            <?php foreach($data['class'] as $class): ?>
+                                        <tr>
+                                            <option value="<?= $class->id ?>"><?= $class->class.' - '.$class->level ?>
+                                            </option>
+                                        </tr>
+                                        <?php 
+                                        endforeach;
+                                        endif; ?>
                                         </tr>
                                     </select>
                                 </div>
@@ -109,9 +107,9 @@
                                         <meta charset="utf-8">⋮⋮⋮</span> &nbsp;
                                     <span class="tittle-neo"> Kelas</span>
                                     <div class="form-floating mb-4 pt-2">
-                                        <input type="text" class="form-control" id="class" name="class"
+                                        <input type="text" class="form-control" id="subject" name="subject"
                                             placeholder="John Doe">
-                                        <label for="class">Kelas</label>
+                                        <label for="class">Mata Pelajaran</label>
                                     </div>
                                 </div>
                             </div>
@@ -129,7 +127,7 @@
 </div>
 <div class="modal fade" id="editModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="block block-rounded block-transparent mb-0">
                 <div class="block-header block-header-ne">
@@ -147,16 +145,20 @@
                                 <div class="col-12 col-md-12 mb-2">
                                     <span class="" style="letter-spacing: -em">
                                         <meta charset="utf-8">⋮⋮⋮</span> &nbsp;
-                                    <span class="tittle-neo"> Jenjang</span>
-                                    <select name="level" id="edit-level" title="Please select..."
-                                        class="form-control  border" data-live-search="true" data-style="customSelect"
-                                        data-dropup-auto="false" data-size="4">
+                                    <span class="tittle-neo"> Kelas </span>
+                                    <select name="class_id" id="edit_class_id" title="Please select..."
+                                        class="form-control border" data-live-search="true"
+                                        data-style="customSelect" data-dropup-auto="false" data-size="4" autocomplete="off">
                                         <tr>
-                                            <option value="SD">SD</option>
-                                            <option value="SMP">SMP</option>
-                                            <option value="SMA">SMA</option>
-                                            <option value="Umum">Umum</option>
-                                            <option value="Lainya">Lainya</option>
+                                            <?php if($data['class']): ?>
+                                            <?php foreach($data['class'] as $class): ?>
+                                        <tr>
+                                            <option value="<?= $class->id ?>"><?= $class->class.' - '.$class->level ?>
+                                            </option>
+                                        </tr>
+                                        <?php 
+                                        endforeach;
+                                        endif; ?>
                                         </tr>
                                     </select>
                                 </div>
@@ -165,10 +167,10 @@
                                         <meta charset="utf-8">⋮⋮⋮</span> &nbsp;
                                     <span class="tittle-neo"> Kelas</span>
                                     <div class="form-floating mb-4 pt-2">
-                                        <input type="text" class="form-control" id="edit-class" name="class"
+                                        <input type="text" class="form-control" id="edit_subject" name="subject"
                                             placeholder="John Doe">
-                                        <input type="hidden" id="class_id" name="class_id">
-                                        <label for="class">Kelas</label>
+                                        <label for="class">Mata Pelajaran</label>
+                                        <input type="hidden" id="subject_id" name="subject_id">
                                     </div>
                                 </div>
                             </div>
@@ -203,14 +205,16 @@
         });
         $(document).on('click', '.edit-button', function () {
             let data_id = $(this).data("id");
-            let data_level = $(this).data("level");
             let data_class = $(this).data("class");
-            $('select[name=level]').val(data_level);
-            // $('.selectpicker').selectpicker('refresh');
-            $('#edit-class').val(data_class);
-            $('#class_id').val(data_id);
+            let data_subject = $(this).data("subject");
+            console.log(data_id);
+            console.log(data_class);
+            console.log(data_subject);
+            $('#edit_class_id option[value='+data_class+']').prop('selected', true);
+            // $("#edit_class_id").selectpicker('refresh');
+            $('#edit_subject').val(data_subject);
+            $('#subject_id').val(data_id);
             $('#editModal').modal('show');
-
         });
     });
 
@@ -227,7 +231,7 @@
         }).then((result) => {
             if (result.value) {
                 $.ajax({
-                    url: "<?= route_to('admin.class.remove_class') ?>",
+                    url: "<?= route_to('admin.subject.remove_subject') ?>",
                     type: "POST",
                     data: {
                         id: id,
@@ -258,7 +262,7 @@
     function tambah() {
         $('#questionModal').modal('show');
         // $('.selectpicker').selectpicker('refresh');
-        $('#class_form')[0].reset();
+        $('#subject_form')[0].reset();
     }
 
     function insert_data() {
@@ -268,9 +272,9 @@
         });
         Swal.showLoading();
         $.ajax({
-            url: "<?= route_to('admin.class.add_class') ?>",
+            url: "<?= route_to('admin.subject.add_subject') ?>",
             type: "POST",
-            data: $('#class_form').serialize(),
+            data: $('#subject_form').serialize(),
             success: function (d) {
                 var d = JSON.parse(d);
                 if (d.success == true) {
@@ -307,7 +311,7 @@
         });
         Swal.showLoading();
         $.ajax({
-            url: "<?= route_to('admin.class.edit_class') ?>",
+            url: "<?= route_to('admin.subject.edit_subject') ?>",
             type: "POST",
             data: $('#edit_class_form').serialize(),
             success: function (d) {
@@ -349,7 +353,7 @@
             searching: false,
             bInfo: false,
             ajax: {
-                url: "<?= route_to('admin.class.dt_class') ?>",
+                url: "<?= route_to('admin.subject.dt_subject') ?>",
                 type: "POST",
                 data: {},
             },
@@ -374,6 +378,9 @@
                 },
                 {
                     "data": "class"
+                },
+                {
+                    "data": "subject"
                 },
                 {
                     "data": "action"

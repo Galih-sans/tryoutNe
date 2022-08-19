@@ -78,12 +78,13 @@ $routes->group("admin",["filter" => "auth", "namespace" => "App\Controllers\Admi
         $routes->match(["get", "post"], "dt_class", "ClassController::dt_class",['as' => 'admin.class.dt_class']);
         $routes->match(["get", "post"], "add_class", "ClassController::create",['as' => 'admin.class.add_class']);
         $routes->match(["get", "post"], "remove_class", "ClassController::delete",['as' => 'admin.class.remove_class']);
+        $routes->match(["get", "post"], "get_subject", "SubjectController::get_subject",['as' => 'admin.class.get_subject']);
         $routes->match(["get", "post"], "update_class", "ClassController::update",['as' => 'admin.class.edit_class']);
     });
     $routes->group("subject", function($routes){
         // URL - /admin
         $routes->get("/", "SubjectController::index", ['as' => 'admin.subject.index']);
-        $routes->match(["get", "post"], "dt_subject", "SubjectController::dt_class",['as' => 'admin.subject.dt_subject']);
+        $routes->match(["get", "post"], "dt_subject", "SubjectController::dt_subject",['as' => 'admin.subject.dt_subject']);
         $routes->match(["get", "post"], "add_subject", "SubjectController::create",['as' => 'admin.subject.add_subject']);
         $routes->match(["get", "post"], "remove_subject", "SubjectController::delete",['as' => 'admin.subject.remove_subject']);
         $routes->match(["get", "post"], "update_subject", "SubjectController::update",['as' => 'admin.subject.edit_subject']);

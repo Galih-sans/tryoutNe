@@ -150,7 +150,7 @@
                         </div>
                     </form>
                 </div>
-                <div class="block-content block-content-full text-end bg-body">
+                <div class="block-content block-content-full text-end bg-body" >
                     <button type="button" class="btn btn-sm btn-secondary me-1" data-bs-dismiss="modal">Tutup</button>
                     <button type="button" class="btn btn-sm btn-primary" data-bs-dismiss="modal"
                         onclick="update_data()">Simpan</button>
@@ -190,38 +190,63 @@
     });
 
     function delete_data(id) {
-        Swal.fire({
-            title: 'Yakin Menghapus Data ini?',
-            text: "data akan dihapus dan tidak dapat dikembalikan",
-            icon: 'info',
-            showCloseButton: true,
-            showCancelButton: true,
-            cancelButtonText: 'Batal',
-            confirmButtonText: 'Ya, hapus data ini',
-            confirmButtonColor: "#d26a5c"
-        }).then((result) => {
-            if (result.value) {
-                $.ajax({
-                    url: "<?= route_to('admin.class.remove_class') ?>",
-                    type: "POST",
-                    data: {
-                        id: id,
-                    },
-                    success: function (d) {
-                        var d = JSON.parse(d);
-                        Swal.fire({
-                            title: 'Status :',
-                            text: d.message,
-                            icon: 'success',
-                            showConfirmButton: false,
-                            timer: 3000
+        $.ajax({
+            url: "<?= route_to('admin.class.get_subject') ?>",
+            type: "POST",
+            data: {
+                id: id,
+            },
+            success: function (d) {
+                var d = JSON.parse(d);
+                var data = '';
+                if (d.length != 0) {
+                    data += '<div>Kelas ini sudah memiliki mata pelajaran sebagai berikut :<ul class="tree" style="border-style: hidden;">';
+                    d.forEach(d =>
+                    data += '<li class="parent_li"><span>' + d.subject +
+                    '</span></li>'
+                    );
+                    data += '</ul></div>';
+                }else{
+                    data+='<div class="color-ne">Data yang akan dihapus dan tidak dapat dikembalikan</div>';
+                }
+                Swal.fire({
+                    title: 'Yakin Menghapus Data ini?',
+                    text: "data akan dihapus dan tidak dapat dikembalikan",
+                    icon: 'info',
+                    html: data,
+                    showCloseButton: true,
+                    showCancelButton: true,
+                    cancelButtonText: 'Batal',
+                    confirmButtonText: 'Ya, hapus data ini',
+                    confirmButtonColor: "#d26a5c"
+                }).then((result) => {
+                    if (result.value) {
+                        $.ajax({
+                            url: "<?= route_to('admin.class.remove_class') ?>",
+                            type: "POST",
+                            data: {
+                                id: id,
+                            },
+                            success: function (d) {
+                                var d = JSON.parse(d);
+                                Swal.fire({
+                                    title: 'Status :',
+                                    text: d.message,
+                                    icon: 'success',
+                                    showConfirmButton: false,
+                                    timer: 3000
+                                });
+                                refresh_dt();
+                            },
+                            error: function (error) {
+                                console.log(error);
+                            }
                         });
-                        refresh_dt();
-                    },
-                    error: function (error) {
-                        console.log(error);
                     }
                 });
+            },
+            error: function (error) {
+                console.log(error);
             }
         });
     }

@@ -59,4 +59,9 @@ class ClassModel extends Model
         $this->builder->where('id', $id);
         return $this->builder->update($data);
     }
+    public function get_class($id)
+    {   
+        $query = $this->builder->getWhere(['id' => $id]);
+        return $query->getRow();
+    }
 }
