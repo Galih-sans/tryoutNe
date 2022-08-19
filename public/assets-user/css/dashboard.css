@@ -10580,7 +10580,7 @@ fieldset:disabled .btn {
 }
 
 .bg-primary {
-  background-color: #5e72e4 !important;
+  background-color: #6fa306  !important;
 }
 
 .bg-secondary {
@@ -11041,7 +11041,7 @@ fieldset:disabled .btn {
 }
 
 .min-height-100 {
-  min-height: 100px !important;
+  min-height: 70px !important;
 }
 
 .min-height-150 {
@@ -22282,7 +22282,7 @@ hr.horizontal.gray-light {
 }
 
 .card.card-profile-bottom {
-  margin-top: 2rem;
+  margin-top: 15rem;
 }
 
 .navbar {
