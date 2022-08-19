@@ -36,6 +36,8 @@ class SubjectModel extends Model
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;
     
+
+
     public function __construct()
     {
         parent::__construct();
@@ -43,6 +45,28 @@ class SubjectModel extends Model
         $this->builder = $this->db->table('to_subjects');
     }
 
+    public function create($data)
+    {
+        $query = $this->builder->insert($data);
+        return $query;
+    }
+
+    public function delete_subject($id)
+    {
+        $this->builder->where('id', $id);
+        return $this->builder->delete();
+    }
+
+    public function get_datatables()
+    {
+        $query = $this->builder->get();
+        return $query->getResult();
+    }
+    public function update_subject($id,$data)
+    {
+        $this->builder->where('id', $id);
+        return $this->builder->update($data);
+    }
     public function get_subject($id)
     {   
         $query = $this->builder->getWhere(['class_id' => $id]);

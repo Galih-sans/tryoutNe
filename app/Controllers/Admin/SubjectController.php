@@ -32,24 +32,26 @@ class SubjectController extends BaseController
         $this->data['class'] = $this->ClassModel->orderBy('id', 'ASC')->findAll();
         return view('admin/pages/subject/index', ['pagedata'=> $this->pagedata, 'data'=> $this->data]);
     }
-    public function dt_class()
+    public function dt_subject()
     {
-        if ($this->request->isAJAX()) {
-            $classdata = $this->class_model->get_datatables();
+        // if ($this->request->isAJAX()) {
+            $subjectdata = $this->SubjectModel->get_datatables();
             $data = array();
             $no = 0;
-            foreach ($classdata as $class) {
+            foreach ($subjectdata as $subject) {
                 $no++;
                 $row = array();
+                $classData = $this->ClassModel->get_class($subject->class_id);
                 $row['number']  = $no;
-                $row['level']  = $class->level;
-                $row['class']  = $class->class;
+                $row['level']  = $classData->level ;
+                $row['class']  = $classData->class ;
+                $row['subject']  = $subject->subject;
                 $row['action']  = '
                 <div class="block-options">
-                <button type="button" class="btn-block-option btn btn-light text-primary edit-button" data-id="'.$class->id.'" data-level="'.$class->level.'"'.'" data-class="'.$class->class.'">
+                <button type="button" class="btn-block-option btn btn-light text-primary edit-button" data-id="'.$subject->id.'" data-class="'.$subject->class_id.'"'.'" data-subject="'.$subject->subject.'">
                     <i class="fa-solid fa-pen-to-square"></i>
                 </button>
-                <button type="button" class="btn-block-option btn btn-light text-primary delete-button" data-id="'.$class->id.'">
+                <button type="button" class="btn-block-option btn btn-light text-primary delete-button" data-id="'.$subject->id.'">
                 <i class="fa-solid fa-trash"></i>
                 </button>
                 </div>
@@ -62,7 +64,7 @@ class SubjectController extends BaseController
             );
     
             echo json_encode($output);
-        }
+        // }
     }
 
     /**
@@ -94,10 +96,10 @@ class SubjectController extends BaseController
     {
         if ($this->request->isAJAX()) {
             $data = [
-                'level' => $this->request->getVar('level'),
-                'class' => $this->request->getVar('class')
+                'class_id' => $this->request->getVar('class_id'),
+                'subject' => $this->request->getVar('subject')
             ];
-            $query = $this->class_model->insert($data);
+            $query = $this->SubjectModel->insert($data);
             if($query){
                 $this->output['success'] = true;
                 $this->output['message']  = 'Data Berhasil Ditambahkan';
@@ -118,12 +120,12 @@ class SubjectController extends BaseController
     public function update()
     {
         if ($this->request->isAJAX()) {
-            $id = $this->request->getVar('class_id');
+            $id = $this->request->getVar('subject_id');
             $data = [
-                'level' => $this->request->getVar('level'),
-                'class' => $this->request->getVar('class')
+                'class_id' => $this->request->getVar('class_id'),
+                'subject' => $this->request->getVar('subject')
             ];
-            $query = $this->class_model->update_class($id, $data);
+            $query = $this->SubjectModel->update_subject($id, $data);
             if($query){
                 $this->output['success'] = true;
                 $this->output['message']  = 'Data Berhasil Diupdate';;
@@ -146,7 +148,7 @@ class SubjectController extends BaseController
     {
         if ($this->request->isAJAX()) {
             $id = $this->request->getVar('id');
-            $delete = $this->class_model->delete_class($id);
+            $delete = $this->SubjectModel->delete_subject($id);
             if ($delete) {
                 $this->output['success'] = true;
                 $this->output['message']  = 'Data telah dihapus';
@@ -157,5 +159,20 @@ class SubjectController extends BaseController
 
             echo json_encode($this->output);
         }
+    }
+    
+    public function get_subject()
+    {
+        // if ($this->request->isAJAX()) {
+            $id = $this->request->getVar('id');
+            $subjectdata = $this->SubjectModel->get_subject($id);
+                $response = array();
+                foreach ($subjectdata as $subject) {
+                    $response[] = array(
+                        "subject"=>$subject->subject, PHP_EOL
+                    );
+                }
+            echo json_encode($response);
+        // }
     }
 }
