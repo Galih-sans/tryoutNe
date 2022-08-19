@@ -63,7 +63,7 @@
 
 @font-face {
     font-family: 'Open Sans';
-    src: url('../fonts/Open_Sans/OpenSans-Italic.ttf') format('truetype');
+    src: url('assets-user/fonts/Open_Sans/OpenSans-Italic.ttf') format('truetype');
     font-weight: normal;
     font-style: italic;
 }

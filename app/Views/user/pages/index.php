@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<!-- Font-->
 	<link rel="stylesheet" type="text/css" href="<?= base_url('assets-user/css/opensans-font.css')?>">
-	<link rel="stylesheet" type="text/css" href="<?= base_url('assets-user/fonts/material-design-iconic-font.min.css')?>">
+	<link rel="stylesheet" type="text/css" href="<?= base_url('assets-user/css/material-design-iconic-font.min.css')?>">
 	<!-- Main Style Css -->
     <link rel="stylesheet" href="<?= base_url ('assets-user/css/style.css')?>"/>
 </head>
