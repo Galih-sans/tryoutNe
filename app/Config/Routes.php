@@ -51,6 +51,11 @@ $routes->group("", ["filter" => "auth", "namespace" => "App\Controllers\user"], 
         $routes->get("/", "testcontroller::index", ['as' => 'user.test.index']);
         $routes->match(["get", "post"], "index", "testcontroller::index");
     });
+    $routes->group("dtest", function($routes){
+        // URL - /user
+        $routes->get("/", "dtestcontroller::index", ['as' => 'user.dtest.index']);
+        $routes->match(["get", "post"], "index", "dtestcontroller::index");
+    });
     $routes->group("profil", function($routes){
         // URL - /user
         $routes->get("/", "profilcontroller::index", ['as' => 'user.profil.index']);
