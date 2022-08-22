@@ -15,46 +15,40 @@
 	<div class="page-content">
 		<div class="form-v1-content">
 			<div class="wizard-form">
-		        <form class="form-register" action="#" method="post">
-		        	<div id="form-total">
+		        <form class="form-register" action="#" method="post">					
+		        	<div id="form-total">						
 		        		<!-- SECTION 1 -->
 			            <h2>
 			            	<p class="step-icon"><span>01</span></p>
-			            	<span class="step-text">Personal Infomation</span>
+			            	<span class="step-text">Data Pengguna</span>
 			            </h2>
 			            <section>
 			                <div class="inner">
 			                	<div class="wizard-header">
-									<h3 class="heading">Personal Infomation</h3>
-									<p>Please enter your infomation and proceed to the next step so we can build your accounts.  </p>
+									<h3 class="heading">Data Pengguna</h3>
+									<p>Silahkan lengkapi informasi berikut untuk melanjutkan proses selanjutnya.  </p>
 								</div>
 								<div class="form-row">
-									<div class="form-holder">
+									<div class="form-holder form-holder-2">
 										<fieldset>
-											<legend>First Name</legend>
-											<input type="text" class="form-control" id="first-name" name="first-name" placeholder="First Name" required>
+											<legend>Nama Lengkap</legend>
+											<input type="text" class="form-control" id="Nama Lengkap" name="Nama Lengkap" placeholder="Nama Lengkap" required>
 										</fieldset>
-									</div>
-									<div class="form-holder">
-										<fieldset>
-											<legend>Last Name</legend>
-											<input type="text" class="form-control" id="last-name" name="last-name" placeholder="Last Name" required>
-										</fieldset>
-									</div>
+									</div>									
 								</div>                                
 								<div class="form-row">
 									<div class="form-holder form-holder-2">
 										<fieldset>
-											<legend>Your Email</legend>
-											<input type="text" name="your_email" id="your_email" class="form-control" pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}" placeholder="example@email.com" required>
+											<legend>Email Pengguna</legend>
+											<input type="text" name="Email Pengguna" id="email" class="form-control" pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}" placeholder="example@email.com" required>
 										</fieldset>
 									</div>
 								</div>
 								<div class="form-row">
 									<div class="form-holder form-holder-2">
 										<fieldset>
-											<legend>Phone Number</legend>
-											<input type="text" class="form-control" id="phone" name="phone" placeholder="+1 888-999-7777" required>
+											<legend>Nomor Telepon</legend>
+											<input type="text" class="form-control" id="phone" name="phone" placeholder="+62 888-999-7777" required>
 										</fieldset>
 									</div>
 								</div>
@@ -62,7 +56,7 @@
 									<div class="form-holder form-holder-2">
 										<fieldset>
 											<legend>Password</legend>
-											<input type="text" name="your_email" id="your_email" class="form-control" pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}" placeholder="" required>
+											<input type="text" name="password" id="password" class="form-control" pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}" placeholder="" required>
 										</fieldset>
 									</div>
 								</div>
@@ -70,13 +64,17 @@
 									<div class="form-holder form-holder-2">
 										<fieldset>
 											<legend>Konfirmasi Password</legend>
-											<input type="text" name="your_email" id="your_email" class="form-control" pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}" placeholder="" required>
+											<input type="text" name="password" id="password" class="form-control" pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}" placeholder="" required>
 										</fieldset>
 									</div>
 								</div>
 								<div class="form-row form-row-date">
-									<div class="form-holder form-holder-2">
-										<label class="special-label">Birth Date</label>
+									<div class="form-holder">
+									<fieldset>
+											<legend>Tempat Lahir</legend>
+											<input type="text" name="tempat_lahir" id="tempat_lahir" class="form-control" pattern="text" placeholder="" required>
+										</fieldset>
+										<label class="special-label">Tanggal Lahir</label>
 										<select name="month" id="month">
 											<option value="MM" disabled selected>MM</option>
 											<option value="16">16</option>
@@ -103,16 +101,53 @@
 								</div>								
 							</div>
 			            </section>
-						<!-- SECTION 2 -->
+						<!-- SECTION 1 -->
 			            <h2>
 			            	<p class="step-icon"><span>02</span></p>
-			            	<span class="step-text">School Account</span>
+			            	<span class="step-text">Data Wali</span>
 			            </h2>
+			            <section>
+			                <div class="inner">
+			                	<div class="wizard-header">
+									<h3 class="heading">Data Wali</h3>
+									<p>Silahkan lengkapi informasi berikut untuk melanjutkan proses selanjutnya.  </p>
+								</div>
+								<div class="form-row">
+									<div class="form-holder form-holder-2">
+										<fieldset>
+											<legend>Nama Lengkap</legend>
+											<input type="text" class="form-control" id="nama" name="nama" placeholder="Nama Lengkap" required>
+										</fieldset>
+									</div>									
+								</div>                                
+								<div class="form-row">
+									<div class="form-holder form-holder-2">
+										<fieldset>
+											<legend>Email Wali</legend>
+											<input type="text" name="email_wali" id="email-wali" class="form-control" pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}" placeholder="example@email.com" required>
+										</fieldset>
+									</div>
+								</div>
+								<div class="form-row">
+									<div class="form-holder form-holder-2">
+										<fieldset>
+											<legend>Nomor Telepon</legend>
+											<input type="text" class="form-control" id="phone" name="phone" placeholder="+62 888-999-7777" required>
+										</fieldset>
+									</div>
+								</div>											
+							</div>
+			            </section>
+						<!-- SECTION 2 -->
+			            <h2>
+			            	<p class="step-icon"><span>03</span></p>
+			            	<span class="step-text">Data Sekolah</span>
+			            </h2>						
 			            <section>
 			                 <div class="inner">
 			                	<div class="wizard-header">
-									<h3 class="heading">School Infomation</h3>
-									<p>Please enter your infomation and proceed to the next step so we can build your accounts.  </p>
+									<h3 class="heading">Data Sekolah</h3>
+									<p>Silahkan lengkapi data berikut untuk melanjutkan proses selanjutnya.  </p>
 								</div>								
 								<div class="form-row">
 									<div class="form-holder">
@@ -174,20 +209,14 @@
 											<option value="">11</option>
 											<option value="">12</option>
                                             <option value="">Lainnya</option>
-										</select>																				
+							</select>																	
 									</div>								
-									<div class="form-holder form-holder-2">
-                                        <label class="special-label">Jurusan</label>
-										<fieldset>	                                            									
-											<input type="text" class="form-control" id="nama-sekolah" name="nama-sekolah" placeholder="Jurusan" required>
-										</fieldset>
-									</div>
-                            </div>
+								</div>
 			            </section>
-		        	</div>
-		        </form>
+		        	</div>					
+		        </form>				
 			</div>
-		</div>
+		</div>				
 	</div>
 	<script src="<?= base_url('assets-user/js/jquery-3.3.1.min.js')?>"></script>
 	<script src="<?= base_url('assets-user/js/jquery.steps.js')?>"></script>

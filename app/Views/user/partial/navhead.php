@@ -10,47 +10,44 @@
             
           </div>
           <ul class="navbar-nav  justify-content-end">
-            <li class="nav-item d-flex align-items-center">
-              <a class="nav-link text-white font-weight-bold px-3">
-                <i class="ni ni-money-coins me-sm-1"></i>
-                <span class="d-sm-inline d-none">Neodiamon</span>                
-                <span class="d-sm-inline d-none">100</span>
-              </a>
-            </li>
-            <li class="nav-item d-flex align-items-center">
-            <div class="d-flex align-items-center">
-        <div class="dropdown d-inline-block ms-2">
-            <span class="btn btn-white btn-sm btn-alt-secondary d-flex align-items-center"
-                id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false">
-                <!-- <img class="rounded-circle" src="assets/media/avatars/avatar10.jpg" alt="Header Avatar"
-                    style="width: 21px;"> -->
-                <span class="d-none d-sm-inline-block ms-2">John</span>
-                <i class="fa fa-fw fa-angle-down d-none d-sm-inline-block ms-1 mt-1"></i>
-            </span>
-            <div class="dropdown-menu dropdown-menu-md dropdown-menu-end p-0 border-0"
-                aria-labelledby="page-header-user-dropdown">
-                <div class="p-3 text-center bg-body-light border-bottom rounded-top">
-                    <!-- <img class="img-avatar img-avatar48 img-avatar-thumb"
-                        src="assets/media/avatars/avatar10.jpg" alt=""> -->
-                    <p class="mt-2 mb-0 fw-medium">John Smith</p>
-                    <p class="mb-0 text-muted fs-sm fw-medium">Web Developer</p>
-                </div>
-                <div class="p-2">                   
-                    <a class="dropdown-item d-flex align-items-center justify-content-between"
-                        href="<?= route_to('user.profil.index')?>">
-                        <span class="fs-sm fw-medium">Settings</span>
-                    </a>
+          <div class="dropdown ">
+                <span type="button" id="page-header-user-dropdown" data-bs-toggle="dropdown" class="d-none d-sm-inline-block ms-2 text-white font-weight-light">Neodiamon <a class="text-white font-weight-bold">+125</a> </span>
+                <i class="fa fa-fw fa-angle-down d-none d-sm-inline-block opacity-50 ms-1 mt-1"></i>
+              <div class="dropdown-menu dropdown-menu-md dropdown-menu-end p-0 border-0" aria-labelledby="page-header-user-dropdown">                
+                <div class="p-2">                  
+                  <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0)">
+                    <span class="fs-sm fw-medium">Beli</span>
+                  </a>
                 </div>
                 <div role="separator" class="dropdown-divider m-0"></div>
-                <div class="p-2">
-                    <a class="dropdown-item d-flex align-items-center justify-content-between"
-                        href="<?= base_url('logout')?>">
-                        <span class="fs-sm fw-medium">Log Out</span>
-                    </a>
+                <div class="p-2">                  
+                  <a class="dropdown-item d-flex align-items-center justify-content-between" href="#">
+                    <span class="fs-sm fw-medium">Top Up</span>
+                  </a>
                 </div>
+              </div>
             </div>
-        </div>
+            <li class="nav-item d-flex align-items-center">
+            <div class="dropdown ">
+                <span type="button" id="page-header-user-dropdown" data-bs-toggle="dropdown" class="d-none d-sm-inline-block ms-2 text-white font-weight-light">John</span>
+                <i class="fa fa-fw fa-angle-down d-none d-sm-inline-block opacity-50 ms-1 mt-1"></i>
+              <div class="dropdown-menu dropdown-menu-md dropdown-menu-end p-0 border-0" aria-labelledby="page-header-user-dropdown">
+                <div class="p-3 text-center">                  
+                  <p class="mt-2 mb-0 fw-medium">John Smith</p>                  
+                </div>
+                <div class="p-2">                  
+                  <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0)">
+                    <span class="fs-sm fw-medium">Settings</span>
+                  </a>
+                </div>
+                <div role="separator" class="dropdown-divider m-0"></div>
+                <div class="p-2">                  
+                  <a class="dropdown-item d-flex align-items-center justify-content-between" href="#">
+                    <span class="fs-sm fw-medium">Log Out</span>
+                  </a>
+                </div>
+              </div>
+            </div>
             </li>            
           </ul>            
         </div>
