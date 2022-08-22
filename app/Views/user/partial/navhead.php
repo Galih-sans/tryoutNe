@@ -10,6 +10,15 @@
             
           </div>
           <ul class="navbar-nav  justify-content-end">
+          <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+              <a href="javascript:;" class="nav-link text-white p-0" id="iconNavbarSidenav">
+                <div class="sidenav-toggler-inner">
+                  <i class="sidenav-toggler-line bg-white"></i>
+                  <i class="sidenav-toggler-line bg-white"></i>
+                  <i class="sidenav-toggler-line bg-white"></i>
+                </div>
+              </a>
+            </li>
           <div class="dropdown ">
                 <span type="button" id="page-header-user-dropdown" data-bs-toggle="dropdown" class="d-none d-sm-inline-block ms-2 text-white font-weight-light">Neodiamon <a class="text-white font-weight-bold">+125</a> </span>
                 <i class="fa fa-fw fa-angle-down d-none d-sm-inline-block opacity-50 ms-1 mt-1"></i>

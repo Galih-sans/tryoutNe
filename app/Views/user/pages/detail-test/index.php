@@ -191,9 +191,9 @@
         <!-- Subscribe -->
         <div class="block block-rounded">
           <div class="block-content">
-            <a class="btn btn-primary w-100 mb-2" href="javascript:void(0)">Masuk Ruang Ujian</a>
+            <a class="btn btn-success w-100 mb-2" href="javascript:void(0)">Masuk Ruang Ujian</a>
             <p class="fs-sm text-center">
-              or <a class="link-effect fw-medium" href="javascript:void(0)">Miliki Ujian ini hanya dengan Rp. 280.000</a>
+              or <a class="link-effect text-success fw-medium" href="javascript:void(0)">Miliki Ujian ini hanya dengan Rp. 280.000</a>
             </p>
           </div>
         </div>
@@ -230,9 +230,9 @@
                 <tr>
                   <td>
                     <i class="fa fa-fw fa-tags me-1"></i>
-                    <a class="fw-semibold link-fx text-primary" href="javascript:void(0)">Bahasa</a>,
-                    <a class="fw-semibold link-fx text-primary" href="javascript:void(0)">Sosiografi</a>,
-                    <a class="fw-semibold link-fx text-primary" href="javascript:void(0)">Saintek</a>
+                    <a class="fw-semibold link-fx text-success" href="javascript:void(0)">Bahasa</a>,
+                    <a class="fw-semibold link-fx text-success" href="javascript:void(0)">Sosiografi</a>,
+                    <a class="fw-semibold link-fx text-success" href="javascript:void(0)">Saintek</a>
                   </td>
                 </tr>
               </tbody>
