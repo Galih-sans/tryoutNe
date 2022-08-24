@@ -31,10 +31,10 @@
             </li>
             <li class="nav-main-heading">Menu</li>
             <li
-                class="nav-main-item <?= $pagedata['activeTab'] =="class" || $pagedata['activeTab'] =="subject"?'open':''; ?>">
+                class="nav-main-item <?= $pagedata['activeTab'] =="class" || $pagedata['activeTab'] =="subject" || $pagedata['activeTab'] =="topic"?'open':''; ?>">
                 <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true"
                     aria-expanded="true" href="#">
-                    <i class="nav-main-link-icon fa fa-briefcase"></i>
+                    <i class="nav-main-link-icon fa-solid fa-book-open"></i>
                     <span class="nav-main-link-name">Kelas & Mata Pelajaran</span>
                 </a>
                 <ul class="nav-main-submenu">
@@ -47,9 +47,17 @@
                 </ul>
                 <ul class="nav-main-submenu">
                     <li class="nav-main-item">
-                        <a class="nav-main-link {{ request()->is('admin/vacancy/vacancy-application/*') ? 'active' : '' }}"
+                        <a class="nav-main-link "
                             href="<?= route_to('admin.subject.index') ?>">
                             <span class="nav-main-link-name">Mata Pelajaran</span>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="nav-main-submenu">
+                    <li class="nav-main-item">
+                        <a class="nav-main-link"
+                            href="<?= route_to('admin.topic.index') ?>">
+                            <span class="nav-main-link-name">Topik Mata Pelajaran</span>
                         </a>
                     </li>
                 </ul>

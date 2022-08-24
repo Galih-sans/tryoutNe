@@ -4,17 +4,20 @@ namespace App\Controllers\Admin;
 use App\Controllers\BaseController;
 use App\Models\Admin\ClassModel;
 use App\Models\Admin\SubjectModel;
+use App\Models\Admin\TopicModel;
 
-class SubjectController extends BaseController
+class TopicController extends BaseController
 {
     public $pagedata;
+    public $TopicModel;
     public $SubjectModel;
     public $ClassModel;
     public $data;
     public function __construct()
     {
-        $this->pagedata['activeTab'] = "subject";
-        $this->pagedata['title'] = "Daftar Mata Pelajaran";
+        $this->pagedata['activeTab'] = "topic";
+        $this->pagedata['title'] = "Daftar Topik Mata Pelajaran";
+        $this->TopicModel = new TopicModel();
         $this->SubjectModel = new SubjectModel();
         $this->ClassModel = new ClassModel();
     }
@@ -26,28 +29,31 @@ class SubjectController extends BaseController
     public function index()
     {
         $this->data['class'] = $this->ClassModel->orderBy('id', 'ASC')->findAll();
-        return view('admin/pages/subject/index', ['pagedata'=> $this->pagedata, 'data'=> $this->data]);
+        return view('admin/pages/topic/index', ['pagedata'=> $this->pagedata, 'data'=> $this->data]);
     }
-    public function dt_subject()
+    public function dt_topic()
     {
         if ($this->request->isAJAX()) {
-            $subjectdata = $this->SubjectModel->get_datatables();
+            $subject_id = $this->request->getVar('subject_id');
+            $topicData = $this->TopicModel->get_datatables($subject_id);
             $data = array();
             $no = 0;
-            foreach ($subjectdata as $subject) {
+            foreach ($topicData as $topic) {
                 $no++;
                 $row = array();
-                $classData = $this->ClassModel->get_class($subject->class_id);
+                $subjectData = $this->SubjectModel->get_subject_row($topic->subject_id);
+                $classData = $this->ClassModel->get_class($subjectData->class_id);
                 $row['number']  = $no;
                 $row['level']  = $classData->level ;
                 $row['class']  = $classData->class ;
-                $row['subject']  = $subject->subject;
+                $row['subject']  = $subjectData->subject;
+                $row['topic']  = $topic->topic;
                 $row['action']  = '
                 <div class="block-options">
-                <button type="button" class="btn-block-option btn btn-light text-primary edit-button" data-id="'.$subject->id.'" data-class="'.$subject->class_id.'"'.'" data-subject="'.$subject->subject.'">
+                <button type="button" class="btn-block-option btn btn-light text-primary edit-button" data-id="'.$topic->id.'" data-class="'.$topic->subject_id.'"'.'" data-subject="'.$topic->topic.'">
                     <i class="fa-solid fa-pen-to-square"></i>
                 </button>
-                <button type="button" class="btn-block-option btn btn-light text-primary delete-button" data-id="'.$subject->id.'">
+                <button type="button" class="btn-block-option btn btn-light text-primary delete-button" data-id="'.$topic->id.'">
                 <i class="fa-solid fa-trash"></i>
                 </button>
                 </div>
@@ -92,10 +98,10 @@ class SubjectController extends BaseController
     {
         if ($this->request->isAJAX()) {
             $data = [
-                'class_id' => $this->request->getVar('class_id'),
-                'subject' => $this->request->getVar('subject')
+                'subject_id' => $this->request->getVar('subject_id'),
+                'topic' => $this->request->getVar('topic')
             ];
-            $query = $this->SubjectModel->insert($data);
+            $query = $this->TopicModel->insert($data);
             if($query){
                 $this->output['success'] = true;
                 $this->output['message']  = 'Data Berhasil Ditambahkan';
@@ -116,12 +122,13 @@ class SubjectController extends BaseController
     public function update()
     {
         if ($this->request->isAJAX()) {
-            $id = $this->request->getVar('subject_id');
+            $id = $this->request->getVar('id');
             $data = [
-                'class_id' => $this->request->getVar('class_id'),
-                'subject' => $this->request->getVar('subject')
+                'id' => $this->request->getVar('id'),
+                'subject_id' => $this->request->getVar('subject_id'),
+                'topic' => $this->request->getVar('topic')
             ];
-            $query = $this->SubjectModel->update_subject($id, $data);
+            $query = $this->TopicModel->update_topic($id, $data);
             if($query){
                 $this->output['success'] = true;
                 $this->output['message']  = 'Data Berhasil Diupdate';;
@@ -129,8 +136,6 @@ class SubjectController extends BaseController
                 $this->output['success'] = false;
                 $this->output['message']  = 'Data Gagal Diupdate';
             }
-
-
             echo json_encode($this->output);
         }
     }
@@ -144,7 +149,7 @@ class SubjectController extends BaseController
     {
         if ($this->request->isAJAX()) {
             $id = $this->request->getVar('id');
-            $delete = $this->SubjectModel->delete_subject($id);
+            $delete = $this->TopicModel->delete_topic($id);
             if ($delete) {
                 $this->output['success'] = true;
                 $this->output['message']  = 'Data telah dihapus';

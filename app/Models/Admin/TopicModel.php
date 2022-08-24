@@ -4,10 +4,10 @@ namespace App\Models\Admin;
 
 use CodeIgniter\Model;
 
-class SubjectModel extends Model
+class TopicModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'to_subjects';
+    protected $table            = 'to_topics';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
@@ -15,22 +15,22 @@ class SubjectModel extends Model
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'class_id',
-        'subject'
+        'subject_id',
+        'topic'
     ];
 
     // Validation
     protected $validationRules =
         [
-            'class_id'     => 'required',
-            'subject'        => 'required',
+            'subject_id'     => 'required',
+            'topic'        => 'required',
     ];
     protected $validationMessages   = [
-        'class_id'        => [
-            'required' => 'Kelas Harus Diisi',
-        ],
-        'subject'        => [
+        'subject_id'        => [
             'required' => 'Mata Pelajaran Harus Diisi',
+        ],
+        'topic'        => [
+            'required' => 'Topik Mata Pelajaran Harus Diisi',
         ]
     ];
     protected $skipValidation       = false;
@@ -42,7 +42,7 @@ class SubjectModel extends Model
     {
         parent::__construct();
         $this->db = \Config\Database::connect();
-        $this->builder = $this->db->table('to_subjects');
+        $this->builder = $this->db->table('to_topics');
     }
 
     public function create($data)
@@ -51,18 +51,18 @@ class SubjectModel extends Model
         return $query;
     }
 
-    public function delete_subject($id)
+    public function delete_topic($id)
     {
         $this->builder->where('id', $id);
         return $this->builder->delete();
     }
 
-    public function get_datatables()
+    public function get_datatables($subject_id)
     {
-        $query = $this->builder->get();
+        $query = $this->builder->where('subject_id',$subject_id)->get();
         return $query->getResult();
     }
-    public function update_subject($id,$data)
+    public function update_topic($id,$data)
     {
         $this->builder->where('id', $id);
         return $this->builder->update($data);
@@ -71,10 +71,5 @@ class SubjectModel extends Model
     {   
         $query = $this->builder->getWhere(['class_id' => $id]);
         return $query->getResult();
-    }
-    public function get_subject_row($id)
-    {   
-        $query = $this->builder->getWhere(['id' => $id]);
-        return $query->getRow();
     }
 }

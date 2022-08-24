@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class CreateSubjectTable extends Migration
+class CreateTopicTable extends Migration
 {
     public function up()
     {
@@ -15,26 +15,25 @@ class CreateSubjectTable extends Migration
 				'unsigned'       => true,
 				'auto_increment' => true
 			],
-			'class_id'       => [
+			'subject_id'       => [
 				'type'           => 'BIGINT',
 				'constraint'     => 20,
-				'unsigned'       => true
+                'unsigned'       => true
 			],
-			'subject'       => [
+			'topic'       => [
 				'type'           => 'TEXT',
 			],
 		]);
 
 		// Primary_Key
 		$this->forge->addKey('id', TRUE);
-		$this->forge->addForeignKey('class_id', 'to_class', 'id','CASCADE','CASCADE');
+        $this->forge->addForeignKey('subject_id', 'to_subjects', 'id','CASCADE','CASCADE');
 		// Create Table
-		$this->forge->createTable('to_subjects', TRUE);
+		$this->forge->createTable('to_topics', TRUE);
     }
 
     public function down()
     {
-        //Drop Table
-        $this->forge->dropTable('to_subjects');
+        //
     }
 }
