@@ -18,6 +18,7 @@
 		        <form class="form-register" action="#" method="post">					
 		        	<div id="form-total">						
 		        		<!-- SECTION 1 -->
+						
 			            <h2>
 			            	<p class="step-icon"><span>01</span></p>
 			            	<span class="step-text">Data Pengguna</span>
@@ -98,10 +99,17 @@
 											<option value="2013">2013</option>
 										</select>
 									</div>
-								</div>								
+								</div>
+								<div class=" text-center pt-0 px-lg-2 px-1">
+                                    <p class="mb-4 text-sm mx-auto">
+                                        Don't have an account?
+                                        <a href="<?=route_to('register')?>" class="text-primary text-gradient font-weight-bold">Sign
+                                            up</a>
+                                    </p>
+                                </div>								
 							</div>
 			            </section>
-						<!-- SECTION 1 -->
+						<!-- SECTION 2 -->
 			            <h2>
 			            	<p class="step-icon"><span>02</span></p>
 			            	<span class="step-text">Data Wali</span>
@@ -138,7 +146,7 @@
 								</div>											
 							</div>
 			            </section>
-						<!-- SECTION 2 -->
+						<!-- SECTION 3 -->
 			            <h2>
 			            	<p class="step-icon"><span>03</span></p>
 			            	<span class="step-text">Data Sekolah</span>
@@ -209,15 +217,20 @@
 											<option value="">11</option>
 											<option value="">12</option>
                                             <option value="">Lainnya</option>
-							</select>																	
+									</select>																	
 									</div>								
 								</div>
+								
 			            </section>
-		        	</div>					
-		        </form>				
+									
+		        	</div>
+										
+		        </form>	
+				
 			</div>
 		</div>				
 	</div>
+	
 	<script src="<?= base_url('assets-user/js/jquery-3.3.1.min.js')?>"></script>
 	<script src="<?= base_url('assets-user/js/jquery.steps.js')?>"></script>
 	<script src="<?= base_url('assets-user/js/main.js')?>"></script>
