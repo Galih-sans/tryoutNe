@@ -50,7 +50,7 @@
           <div class="row items-push py-4">
             <!-- Course -->
             <div class="col-md-3 col-lg-2 col-xl-3">
-              <a class="block block-rounded block-link-pop h-100 mb-0" href="<?= route_to('user.dtest.index')?>">
+              <a class="block block-rounded block-link-pop h-100 mb-0" href="#">
                 <div class="block-content block-content-full text-center bg-city">
                   <div class="item item-2x item-circle bg-white-10 py-3 my-3 mx-auto">
                     <i class="fab fa- fa-2x text-white-75"></i>
@@ -72,8 +72,11 @@
 
             <!-- Course -->
             <div class="col-md-3 col-lg-2 col-xl-3">
-              <a class="block block-rounded block-link-pop h-100 mb-0" href="#">
-                <div class="block-content block-content-full text-center bg-flat">
+              <a class="block block-rounded block-link-pop h-100 mb-0" href="<?= route_to('user.dtest.index')?>">
+                <div class="block-content block-content-full ribbon ribbon-success ribbon-left text-center bg-flat">
+                <div class="ribbon-box">
+                    Rp 75.000
+                  </div>
                   <div class="item item-2x item-circle bg-white-10 py-3 my-3 mx-auto">
                     <i class="fab fa- fa-2x text-white-75"></i>
                   </div>
@@ -117,7 +120,7 @@
             <!-- Course -->
             <div class="col-md-6 col-lg-4 col-xl-3">
               <a class="block block-rounded block-link-pop h-100 mb-0" href="#">
-                <div class="block-content block-content-full text-center bg-smooth">
+                <div class="block-content block-content-full text-center bg-gray-dark">
                   <div class="item item-2x item-circle bg-white-10 py-3 my-3 mx-auto">
                     <i class="si si- fa-2x text-white-75"></i>
                   </div>
@@ -125,7 +128,7 @@
                     8 materi &bull; 120 menit
                   </div>
                 </div>
-                <div class="block-content block-content-full">
+                <div class="block-content block-content-full  bg-gray-light">
                   <h4 class="h5 mb-1">
                     UJIAN NASIONAL FISIKA SMA
                   </h4>
@@ -139,7 +142,10 @@
             <!-- Course -->
             <div class="col-md-6 col-lg-4 col-xl-3">
               <a class="block block-rounded block-link-pop h-100 mb-0" href="#">
-                <div class="block-content block-content-full text-center bg-default">
+                <div class="block-content block-content-full ribbon ribbon-success text-center bg-default">
+                <div class="ribbon-box">
+                    Rp 250.000
+                  </div>
                   <div class="item item-2x item-circle bg-white-10 py-3 my-3 mx-auto">
                     <span class=" text-white-75"></span>
                   </div>
@@ -161,7 +167,10 @@
             <!-- Course -->
             <div class="col-md-6 col-lg-4 col-xl-3">
               <a class="block block-rounded block-link-pop h-100 mb-0" href="#">
-                <div class="block-content block-content-full text-center bg-modern">
+                <div class="block-content block-content-full ribbon ribbon-success text-center bg-modern">
+                <div class="ribbon-box">
+                    Rp 250.000
+                  </div>
                   <div class="item item-2x item-circle bg-white-10 py-3 my-3 mx-auto">
                     <i class="si si- fa-2x text-white-75"></i>
                   </div>
@@ -205,7 +214,7 @@
             <!-- Course -->
             <div class="col-md-6 col-lg-4 col-xl-3">
               <a class="block block-rounded block-link-pop h-100 mb-0" href="#">
-                <div class="block-content block-content-full text-center bg-success">
+                <div class="block-content block-content-full text-center bg-gray-dark">
                   <div class="item item-2x item-circle bg-white-10 py-3 my-3 mx-auto">
                     <i class="si si- fa-2x text-white-75"></i>
                   </div>
@@ -213,7 +222,7 @@
                     6 materi &bull; 120 menit
                   </div>
                 </div>
-                <div class="block-content block-content-full">
+                <div class="block-content block-content-full bg-gray-light">
                   <h4 class="h5 mb-1">
                     TRYOUT SBMPTN UNIVERSITAS BRAWIJAYA
                   </h4>
@@ -227,7 +236,7 @@
             <!-- Course -->
             <div class="col-md-6 col-lg-4 col-xl-3">
               <a class="block block-rounded block-link-pop h-100 mb-0" href="#">
-                <div class="block-content block-content-full text-center bg-info">
+                <div class="block-content block-content-full text-center bg-gray-dark">
                   <div class="item item-2x item-circle bg-white-10 py-3 my-3 mx-auto">
                     <i class="si si- fa-2x text-white-75"></i>
                   </div>
@@ -235,7 +244,7 @@
                     7 materi &bull; 120 menit
                   </div>
                 </div>
-                <div class="block-content block-content-full">
+                <div class="block-content block-content-full  bg-gray-light">
                   <h4 class="h5 mb-1">
                     TRYOUT SIMAK UNIVERSITAS INDONESIA
                   </h4>
@@ -249,7 +258,10 @@
             <!-- Course -->
             <div class="col-md-6 col-lg-4 col-xl-3">
               <a class="block block-rounded block-link-pop h-100 mb-0" href="#">
-                <div class="block-content block-content-full text-center bg-danger">
+                <div class="block-content block-content-full ribbon ribbon-success text-center bg-danger">
+                <div class="ribbon-box">
+                    Rp 250.000
+                  </div>
                   <div class="item item-2x item-circle bg-white-10 py-3 my-3 mx-auto">
                     <i class="si si- fa-2x text-white-75"></i>
                   </div>
@@ -271,7 +283,10 @@
             <!-- Course -->
             <div class="col-md-6 col-lg-4 col-xl-3">
               <a class="block block-rounded block-link-pop h-100 mb-0" href="#">
-                <div class="block-content block-content-full text-center bg-gray-dark">
+                <div class="block-content block-content-full ribbon ribbon-success text-center bg-flat">
+                <div class="ribbon-box">
+                    Rp 250.000
+                  </div>
                   <div class="item item-2x item-circle bg-white-10 py-3 my-3 mx-auto">
                     <i class="si si- fa-2x text-white-75"></i>
                   </div>
