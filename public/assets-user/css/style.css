@@ -279,6 +279,9 @@ body {
     -o-border-radius: 4px;
     -ms-border-radius: 4px;
 }
+.input-group-append {
+  cursor: pointer;
+}
 .inner .form-row .form-holder input {
     color: #333;
 }
