@@ -73,7 +73,7 @@ $routes->group("", ["filter" => "auth", "namespace" => "App\Controllers\user"], 
     });
     
 });
-$routes->group("admin",["filter" => "auth", "namespace" => "App\Controllers\Admin"], function($routes){
+$routes->group("admin",["filter" => "isadmin", "namespace" => "App\Controllers\Admin"], function($routes){
     // URL - /admin
     $routes->get("/", "AdminController::index",['as' => 'admin.dashboard']);
     // URL - /admin/add-user
@@ -93,6 +93,14 @@ $routes->group("admin",["filter" => "auth", "namespace" => "App\Controllers\Admi
         $routes->match(["get", "post"], "add_subject", "SubjectController::create",['as' => 'admin.subject.add_subject']);
         $routes->match(["get", "post"], "remove_subject", "SubjectController::delete",['as' => 'admin.subject.remove_subject']);
         $routes->match(["get", "post"], "update_subject", "SubjectController::update",['as' => 'admin.subject.edit_subject']);
+    });
+    $routes->group("topic", function($routes){
+        // URL - /admin
+        $routes->get("/", "TopicController::index", ['as' => 'admin.topic.index']);
+        $routes->match(["get", "post"], "dt_topic", "TopicController::dt_topic",['as' => 'admin.topic.dt_topic']);
+        $routes->match(["get", "post"], "add_topic", "TopicController::create",['as' => 'admin.topic.add_topic']);
+        $routes->match(["get", "post"], "remove_topic", "TopicController::delete",['as' => 'admin.topic.remove_topic']);
+        $routes->match(["get", "post"], "update_topic", "TopicController::update",['as' => 'admin.topic.edit_topic']);
     });
     $routes->group("tryout", function($routes){
         // URL - /admin

@@ -9,10 +9,6 @@ class ClassController extends BaseController
     public $class_model;
     public function __construct()
     {
-        if (session()->get('isAdmin') != true) {
-            echo 'Access denied';
-            exit;
-        }
         $this->pagedata['activeTab'] = "class";
         $this->pagedata['title'] = "Daftar Kelas";
         $this->class_model = new \App\Models\Admin\ClassModel();

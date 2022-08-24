@@ -24502,51 +24502,8 @@
         }
     </style>
     <meta charset="utf-8">
-    <!--
-
-
-
-
-
-
-
-
-
-
-
-    THIS IS THE DEMO VERSION OF OneUI FRAMEWORK!
-    COMMENTS ARE REMOVED, CODE IS COMPRESSED AND CODE STYLE IS ALTERED!
-
-    IN THE FULL VERSION
-        THE CODE IS INDENTED CORRECTLY AND WELL COMMENTED
-        YOU GET AN EXTENSIVE DOCUMENTATION TO GET YOU STARTED
-        YOU GET THE PURE VUE.JS VERSION
-        YOU GET THE PHP VERSION (ALONG WITH THE HTML VERSION) WHICH HAS EXTRA FEATURES
-        YOU GET THE LARAVEL STARTER KIT TO HELP YOU BUILD YOUR WEB APP WITH LARAVEL
-        YOU GET THE ES6 FILES OF THE UI FRAMEWORK
-        YOU GET THE SASS FILES OF THE UI FRAMEWORK
-        YOU GET A GULPFILE WITH LOTS OF AUTOMATIONS
-        YOU GET ACCESS TO FRAMEWORK UPDATES WITH NEW FEATURES AND PLUGIN UPGRADES
-        WE CAN PROVIDE SUPPORT IF YOU NEED IT :-)
-    
-    THANK YOU FOR HAVING A LOOK!
-    
-    ** A LICENSE MUST BE ACQUIRED FOR LEGAL USE -> LINK: https://1.envato.market/AVD6j **
-    ** PLEASE SUPPORT US IF YOU LIKE OUR WORK, IT HELPS US CONTINUE, THANK YOU VERY MUCH! **
-
-
-
-
-
-
-
-
-
-
-
-  -->
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>Halaman Tidak Ditemukan</title>
+    <title>Akses Ditolak</title>
     <link rel="shortcut icon" href="<?= base_url('assets/favicon/logo-ne.ico')?>">
     <link rel="stylesheet" id="css-main" href="<?= base_url('css/admin_main.css') ?>">
     <script>
@@ -24568,18 +24525,18 @@
                     <div class="bg-body-extra-light">
                         <div class="content content-full overflow-hidden">
                             <div class="py-4">
-                                <h1 class="display-1 fw-bolder text-city">
-                                    404
+                                <h1 class="display-1 fw-bolder text-flat">
+                                    403
                                 </h1>
                                 <h2 class="h4 fw-normal text-muted mb-5">
-                                    Maaf halaman yang anda cari tidak ditemukan..
+                                    Maaf, Anda tidak memiliki izin untuk mengakses halaman ini..
                                 </h2>
                             </div>
                         </div>
                     </div>
                     <div class="content content-full text-muted fs-sm fw-medium">
                         <p class="mb-1">
-                            Apakah Anda ingin memberi tahu kami tentang hal itu?
+                        Apakah Anda ingin memberi tahu kami tentang hal itu?
                         </p>
                         <a class="link-fx" href="javascript:void(0)">Laporkan</a> Atau <a class="link-fx"
                             href="#"  onclick="history.back()">Kembali ke Halaman Sebelumnya</a>

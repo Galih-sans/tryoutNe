@@ -24546,7 +24546,7 @@
 
   -->
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>Halaman Tidak Ditemukan</title>
+    <title>Server Mengalami Kesalahan Internal</title>
     <link rel="shortcut icon" href="<?= base_url('assets/favicon/logo-ne.ico')?>">
     <link rel="stylesheet" id="css-main" href="<?= base_url('css/admin_main.css') ?>">
     <script>
@@ -24568,12 +24568,25 @@
                     <div class="bg-body-extra-light">
                         <div class="content content-full overflow-hidden">
                             <div class="py-4">
-                                <h1 class="display-1 fw-bolder text-city">
-                                    404
+                                <h1 class="display-1 fw-bolder text-modern">
+                                    500
                                 </h1>
                                 <h2 class="h4 fw-normal text-muted mb-5">
-                                    Maaf halaman yang anda cari tidak ditemukan..
+                                    Maaf, server kami mengalami kesalahan internal..
                                 </h2>
+                                <form action="be_pages_generic_search.html" method="POST">
+                                    <div class="row justify-content-center mb-4">
+                                        <div class="col-sm-6 col-xl-3">
+                                            <div class="input-group input-group-lg">
+                                                <input class="form-control form-control-alt" type="text"
+                                                    placeholder="Search application..">
+                                                <button type="submit" class="btn btn-dark">
+                                                    <i class="fa fa-search opacity-75"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -24581,14 +24594,14 @@
                         <p class="mb-1">
                             Apakah Anda ingin memberi tahu kami tentang hal itu?
                         </p>
-                        <a class="link-fx" href="javascript:void(0)">Laporkan</a> Atau <a class="link-fx"
-                            href="#"  onclick="history.back()">Kembali ke Halaman Sebelumnya</a>
+                        <a class="link-fx" href="javascript:void(0)">Laporkan</a> Atau <a class="link-fx" href="#"
+                            onclick="history.back()">Kembali ke Halaman Sebelumnya</a>
                     </div>
                 </div>
             </div>
         </main>
     </div>
-    <script src="<?= base_url('js/main.js') ?>"></script>
+    <script src="assets/js/oneui.app.min-5.4.js"></script>
 
 
 </body>

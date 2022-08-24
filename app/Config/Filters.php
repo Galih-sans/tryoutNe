@@ -3,6 +3,7 @@
 namespace Config;
 
 use App\Filters\Auth;
+use App\Filters\isAdmin;
 use App\Filters\Noauth;
 use CodeIgniter\Config\BaseConfig;
 use CodeIgniter\Filters\CSRF;
@@ -27,6 +28,10 @@ class Filters extends BaseConfig
         'secureheaders' => SecureHeaders::class,
         'auth' => Auth::class,
         'noauth' => Noauth::class,
+        'isadmin' => [
+            Auth::class,
+            isAdmin::class,
+        ],
     ];
 
     /**

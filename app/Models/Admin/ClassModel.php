@@ -64,4 +64,5 @@ class ClassModel extends Model
         $query = $this->builder->getWhere(['id' => $id]);
         return $query->getRow();
     }
+
 }

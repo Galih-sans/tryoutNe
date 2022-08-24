@@ -9,10 +9,6 @@ class AdminController extends BaseController
     public $pagedata;
     public function __construct()
     {
-        if (session()->get('isAdmin') != true) {
-            echo 'Access denied';
-            exit;
-        }
         $this->pagedata['activeTab'] = "dashboard";
         $this->pagedata['title'] = "Dashboard Admin";
         $this->banksoal_model = new \App\Models\Admin\BankSoalModel();
