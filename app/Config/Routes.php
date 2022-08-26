@@ -39,7 +39,7 @@ $routes->set404Override();
 //login and logout
 $routes->match(['get', 'post'], 'login', 'LoginController::login', ["filter" => "noauth"]);
 $routes->match(['get', 'post'], 'register', 'RegisterController::register', ["filter" => "noauth"], ['as' => 'register']);
-$routes->match(['get', 'post'], 'register2', 'RegisterController::register2', ["filter" => "noauth"], ['as' => 'register2']);
+$routes->match(['get', 'post'], 'reset', 'RegisterController::reset', ["filter" => "noauth"], ['as' => 'reset']);
 $routes->get('logout', 'LoginController::logout');
 
 $routes->group("", ["filter" => "auth", "namespace" => "App\Controllers\user"], function($routes){

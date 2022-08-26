@@ -368,6 +368,9 @@ License - nucleoapp.com/license/
 .ni-curved-next::before {
   content: "\ea2d";
 }
+.ni-curved-back::before {
+  content: "\ea2d";
+}
 
 .ni-delivery-fast::before {
   content: "\ea2e";

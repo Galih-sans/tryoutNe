@@ -16,7 +16,7 @@
     <link href="<?= base_url('assets-user/css/nucleo-svg.css')?>" rel="stylesheet" />
     <!-- Font Awesome Icons -->
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-    <link href="<?= base_url('assets-user/css/nucleo-svg.css')?> rel=" stylesheet"" />
+    <link href="<?= base_url('assets-user/css/nucleo-svg.css')?>" rel=" stylesheet" />
     <!-- CSS Files -->
     <link id="pagestyle" href="<?= base_url('assets-user/css/dashboard.css?v=2.0.4')?>" rel="stylesheet" />
 </head>
@@ -57,7 +57,7 @@
                                         </div>
                                         <div class="text-center">
                                             <button type="submit"
-                                                class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">Sign in</button>
+                                                class="btn btn-lg bg-gradient-success btn-lg w-100 mt-4 mb-0">Sign in</button>
                                         </div>
                                     </form>
                                 </div>
@@ -73,8 +73,8 @@
                         <div
                             class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 end-0 text-center justify-content-center flex-column">
                             <div
-                                class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center overflow-hidden">
-                                <span class="mask bg-gradient-primary opacity-6"></span>
+                                class="position-relative bg-gradient-success h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center overflow-hidden">
+                                <span class="mask bg-gradient-succes opacity-6"></span>
                                 <h4 class="mt-5 text-white font-weight-bolder position-relative">"Find Your Challange
                                     whit us."</h4>
                                 <p class="text-white position-relative">The more effortless the writing looks, the more

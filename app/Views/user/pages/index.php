@@ -6,13 +6,12 @@
 	<!-- Mobile Specific Metas -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<!-- Font-->
-	<link rel="stylesheet" type="text/css" href="<?= base_url('assets-user/css/opensans-font.css')?>">
-	<link rel="stylesheet" type="text/css" href="<?= base_url('assets-user/css/material-design-iconic-font.min.css')?>">
-	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+	<!--     Fonts and icons     -->
+	<link href="<?= base_url('assets-user/css/nucleo-icons.css')?>" rel="stylesheet" />
 	<!-- Main Style Css -->
 	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css'>
     <link rel="stylesheet" href="<?= base_url ('assets-user/css/style.css')?>"/>
-	<link rel="stylesheet" href="<?= base_url ('css/bootstrap.min.css')?>"/>
+	<link id="pagestyle" href="<?= base_url('/assets-user/css/dashboard.css?v=2.0.4') ?>" rel="stylesheet" />
 </head>
 <body>
 	<div class="page-content">
@@ -30,7 +29,7 @@
 			                <div class="inner">
 			                	<div class="wizard-header">
 									<h3 class="heading">Data Pengguna</h3>
-									<p>Silahkan lengkapi informasi berikut untuk melanjutkan proses selanjutnya.  </p>
+									<p> Silahkan lengkapi informasi berikut untuk melanjutkan proses selanjutnya.  </p>
 								</div>
 								<div class="form-row">
 									<div class="mb-3 col-12">										
@@ -41,9 +40,8 @@
 									<div class="mb-3">										
 											<input type="text" name="Email Pengguna" id="email" class="form-control" pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}" placeholder="Email" required>										
 									</div>								
-									<div class="col-6">
+									<div class="mb-3 col-md-6">
 											<input type="text" class="form-control" id="phone" name="phone" placeholder="No Handphone" required>
-										
 									</div>
 								</div>
                                 <div class="form-row">
@@ -60,11 +58,12 @@
 									<div class="mb-3">
 											<input type="text" name="tempat_lahir" id="tempat_lahir" class="form-control" pattern="text" placeholder="Tempat Lahir" required>										
 									</div>
-									<div class="col-6">
+									<div class="mb-4 col-md-6">
 										<div class="input-group date" id="datepicker">
-											<input type="text" class="form-control" id="date"/>        <span class="input-group-append">
+											<input type="text" class="form-control" id="date" placeholder="Tanggal Lahir"/> 
+											<span class="input-group-append">
 												<span class="input-group-text bg-light d-block">
-													<i class="fa fa-calendar"></i>
+													<i class="ni ni-calendar-grid-58"></i>
 												</span>
 											</span>
 										</div>
@@ -121,7 +120,7 @@
 									<div class="mb-3">
 											<input type="text" class="form-control" id="first-name" name="first-name" placeholder="Provinsi" required>
 									</div>
-									<div class="mb-3">
+									<div class="mb-3 col-md-6">
 											<input type="text" class="form-control" id="last-name" name="last-name" placeholder="Provinsi Bagian" required>
 									</div>
 								</div>

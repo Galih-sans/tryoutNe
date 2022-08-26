@@ -15,8 +15,8 @@ class RegisterController extends BaseController
     {
         return view('user/pages/index');
     }
-    public function register2()
+    public function reset()
     {
-        return view('user/pages/data-diri-2');
+        return view('auth/reset');
     }
 }
