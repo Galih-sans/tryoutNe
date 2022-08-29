@@ -64,5 +64,10 @@ class ClassModel extends Model
         $query = $this->builder->getWhere(['id' => $id]);
         return $query->getRow();
     }
+    public function get_class_by_level($id)
+    {   
+        $query = $this->builder->getWhere(['level' => $id]);
+        return $query->getResult();
+    }
 
 }
