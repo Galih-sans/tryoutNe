@@ -1,8 +1,8 @@
 $(document).ready(function () {
   $('.select2').select2({
     theme: 'bootstrap-5',
-    width: $( this ).data( 'width' ) ? $( this ).data( 'width' ) : $( this ).hasClass( 'w-100' ) ? '100%' : 'style',
-    placeholder: $( this ).data( 'placeholder' ),
+    width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+    placeholder: $(this).data('placeholder'),
   });
 
   $('.datepicker').datepicker({
@@ -77,36 +77,143 @@ $(document).ready(function () {
       },
     }
   });
-
   $('#level').on('change', function () {
     var selected = $('#level').val();
+    if (selected == 'SD' || selected == 'SMP' || selected == 'SMA') {
+      $('.school_from').addClass('d-block').removeClass('d-none');
+      $("#province, #city, #districs, #school").val('').trigger('change')
+    } else {
+      $('.school_from').addClass('d-none').removeClass('d-block');
+    }
+    Swal.showLoading();
     $.ajax({
-        url: 'register/get_class',
-        type: "POST",
-        data: {
-            level: selected,
-        },
-        success: function (response) {
-            response = JSON.parse(response);
-            if (response.length != 0) {
-                $("#class").empty().append(
-                    "<option disabled='disabled' SELECTED>Silahkan Pilih Mata Pelajaran</option>"
-                );
-                $("#class").prop("disabled", false);
-                response.forEach(response =>
-                    $('#class').append('<option value="' + response.id + '">' + response
-                        .text +
-                        '</option>')
-                );
-            } else {
-              $("#class").empty().append(
-                "<option disabled='disabled' SELECTED>Kelas Masih Kosong</option>"
-            );
-            }
-        },
-        error: function (error) {
-            console.log(error);
+      url: 'register/get_class',
+      type: "POST",
+      data: {
+        level: selected,
+      },
+      success: function (response) {
+        response = JSON.parse(response);
+        console.log(response);
+        if (response.length != 0) {
+          $("#class").empty().append(
+            "<option disabled='disabled' SELECTED>Silahkan Pilih Kelas</option>"
+          );
+          $("#class").prop("disabled", false);
+          response.forEach(response =>
+            $('#class').append('<option value="' + response.id + '">' + response
+              .text +
+              '</option>')
+          );
+        } else {
+          $("#class").empty().append(
+            "<option disabled='disabled' SELECTED>Kelas Masih Kosong</option>"
+          );
         }
+        $('.class_form').addClass('d-block').removeClass('d-none');
+        Swal.close();
+      },
+      error: function (error) {
+        console.log(error);
+      }
     });
-});
+  });
+  $('#province').on('change', function () {
+    var selected = $('#province').val();
+    $.ajax({
+      url: 'register/get_city',
+      type: "POST",
+      data: {
+        kode_prop: selected,
+      },
+      success: function (response) {
+        response = JSON.parse(response);
+        console.log(response);
+        if (response.length != 0) {
+          $("#city").empty().append(
+            "<option disabled='disabled' SELECTED>Silahkan Pilih Kota / Kabupaten</option>"
+          );
+          $("#city").prop("disabled", false);
+          response.forEach(response =>
+            $('#city').append('<option value="' + response.id + '">' + response
+              .text +
+              '</option>')
+          );
+        } else {
+          $("#city").empty().append(
+            "<option disabled='disabled' SELECTED>Kota / Kabupaten Masih Kosong</option>"
+          );
+        }
+      },
+      error: function (error) {
+        console.log(error);
+      }
+    });
+  });
+  $('#city').on('change', function () {
+    var selected = $('#city').val();
+    $.ajax({
+      url: 'register/get_districts',
+      type: "POST",
+      data: {
+        kode_kab_kota: selected,
+      },
+      success: function (response) {
+        response = JSON.parse(response);
+        console.log(response);
+        if (response.length != 0) {
+          $("#districts").empty().append(
+            "<option disabled='disabled' SELECTED>Silahkan Pilih Kecamatan</option>"
+          );
+          $("#districts").prop("disabled", false);
+          response.forEach(response =>
+            $('#districts').append('<option value="' + response.id + '">' + response
+              .text +
+              '</option>')
+          );
+        } else {
+          $("#districts").empty().append(
+            "<option disabled='disabled' SELECTED>Kecamatan Masih Kosong</option>"
+          );
+        }
+      },
+      error: function (error) {
+        console.log(error);
+      }
+    });
+  });
+  $('#districts').on('change', function () {
+    var selected = $('#districts').val();
+    var jenjang = $('#level').val();
+    $.ajax({
+      url: 'register/get_school',
+      type: "POST",
+      data: {
+        kode_kec: selected,
+        level: jenjang,
+      },
+      success: function (response) {
+        response = JSON.parse(response);
+        console.log(response);
+        if (response.length != 0) {
+          $("#school").empty().append(
+            "<option disabled='disabled' SELECTED>Silahkan Pilih Sekolah</option>"
+          );
+          $("#school").prop("disabled", false);
+          response.forEach(response =>
+            $('#school').append('<option value="' + response.id + '">' + response
+              .text +
+              '</option>')
+          );
+        } else {
+          $("#school").empty().append(
+            "<option disabled='disabled' SELECTED>Sekolah Masih Kosong</option>"
+          );
+        }
+      },
+      error: function (error) {
+        console.log(error);
+      }
+    });
+  });
 });

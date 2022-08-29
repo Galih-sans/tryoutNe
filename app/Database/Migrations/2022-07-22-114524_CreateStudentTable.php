@@ -38,6 +38,9 @@ class CreateStudentTable extends Migration
 				'type'           => 'BIGINT',
 				'constraint'     => 13,
 			],
+            'school'       => [
+				'type'           => 'TEXT',
+			],
             'password'       => [
 				'type'           => 'VARCHAR',
 				'constraint'     => 255,

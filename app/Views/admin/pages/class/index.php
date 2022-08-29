@@ -75,7 +75,7 @@
                                             <option value="SMP">SMP</option>
                                             <option value="SMA">SMA</option>
                                             <option value="Umum">Umum</option>
-                                            <option value="Lainya">Lainya</option>
+                                            <option value="Lainnya">Lainnya</option>
                                         </tr>
                                     </select>
                                 </div>
@@ -131,7 +131,7 @@
                                             <option value="SMP">SMP</option>
                                             <option value="SMA">SMA</option>
                                             <option value="Umum">Umum</option>
-                                            <option value="Lainya">Lainya</option>
+                                            <option value="Lainnya">Lainnya</option>
                                         </tr>
                                     </select>
                                 </div>

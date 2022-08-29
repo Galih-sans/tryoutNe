@@ -40,6 +40,9 @@ $routes->set404Override();
 $routes->match(['get', 'post'], 'login', 'LoginController::login', ["filter" => "noauth"]);
 $routes->match(['get', 'post'], 'register', 'RegisterController::register', ["filter" => "noauth"], ['as' => 'register']);
 $routes->match(['get', 'post'], 'register/get_class', 'RegisterController::get_class', ["filter" => "noauth"], ['as' => 'register.get_class']);
+$routes->match(['get', 'post'], 'register/get_city', 'RegisterController::get_city', ["filter" => "noauth"], ['as' => 'register.get_city']);
+$routes->match(['get', 'post'], 'register/get_districts', 'RegisterController::get_districts', ["filter" => "noauth"], ['as' => 'register.get_districts']);
+$routes->match(['get', 'post'], 'register/get_school', 'RegisterController::get_school', ["filter" => "noauth"], ['as' => 'register.get_school']);
 $routes->match(['get', 'post'], 'reset', 'RegisterController::reset', ["filter" => "noauth"], ['as' => 'reset']);
 $routes->get('logout', 'LoginController::logout');
 

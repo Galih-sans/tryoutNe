@@ -17,13 +17,14 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" />
 	<link rel="stylesheet"
 		href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
+		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
 	<div class="page-content">
 		<div class="form-v1-content">
 			<div class="wizard-form">
-				<form class="form-register" action="#" method="post">
+				<form class="form-register" action="" method="post">
 					<div id="form-total">
 						<!-- SECTION 1 -->
 
@@ -146,24 +147,6 @@
 									<h3 class="heading">Data Sekolah</h3>
 									<p>Silahkan lengkapi data berikut untuk melanjutkan proses selanjutnya. </p>
 								</div>
-								<div class="form-row justify-content-between">
-									<div class="form-group mb-3 col-12">
-										<input type="text" class="form-control" id="provice" name="province"
-											placeholder="Provinsi" required>
-									</div>
-								</div>
-								<div class="form-row">
-									<div class="mb-3 col-12">
-										<input type="text" class="form-control" id="city" name="city" placeholder="Kota"
-											required>
-									</div>
-								</div>
-								<div class="form-row">
-									<div class="mb-3 col-12">
-										<input type="text" class="form-control" id="nama-sekolah" name="nama-sekolah"
-											placeholder="Nama Sekolah" required>
-									</div>
-								</div>
 								<div class="form-row">
 									<div class="mb-3 col-12">
 										<select class="form-control select2" name="level" id="level">
@@ -176,12 +159,52 @@
 										</select>
 									</div>
 								</div>
-								<div class="form-row">
+								<div class="form-row d-none class_form">
 									<div class="mb-3 col-12">
-										<select title="Silahkan Pilih Jenjang Terlebih Dahulu" class="form-control select2" name="class"
-											id="class">
+										<select title="Silahkan Pilih Jenjang Terlebih Dahulu"
+											class="form-control select2" name="class" id="class">
 										</select>
 									</div>
+								</div>
+								<div class="school_from d-none">
+								<div class="form-row justify-content-between">
+									<div class="form-group mb-3 col-12">
+										<select class="form-control select2" name="province" id="province">
+										<option disabled='disabled' value='' selected>Silahkan Pilih Provinsi</option>
+											<?php if($data['province']): ?>
+											<?php foreach($data['province'] as $propinsi): ?>
+											<tr>
+												<option value="<?= $propinsi->kode_prop ?>">
+													<?= $propinsi->propinsi ?>
+												</option>
+											</tr>
+											<?php 
+											endforeach;
+											endif; ?>
+										</select>
+									</div>
+								</div>
+								<div class="form-row">
+									<div class="mb-3 col-12">
+										<select title="Silahkan Pilih Jenjang Terlebih Dahulu"
+											class="form-control select2" name="city" id="city">
+										</select>
+									</div>
+								</div>
+								<div class="form-row">
+									<div class="mb-3 col-12">
+										<select title="Silahkan Pilih Jenjang Terlebih Dahulu"
+											class="form-control select2" name="districts" id="districts">
+										</select>
+									</div>
+								</div>
+								<div class="form-row">
+									<div class="mb-3 col-12">
+										<select title="Silahkan Pilih Jenjang Terlebih Dahulu"
+											class="form-control select2" name="school" id="school">
+										</select>
+									</div>
+								</div>
 								</div>
 						</section>
 					</div>
