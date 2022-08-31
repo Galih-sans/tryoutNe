@@ -3695,7 +3695,7 @@ fieldset:disabled .btn {
 
 .btn-success {
   --bs-btn-color: #000;
-  --bs-btn-bg: #2dce89;
+  --bs-btn-bg: #65a30d;
   --bs-btn-border-color: #2dce89;
   --bs-btn-hover-color: #000;
   --bs-btn-hover-bg: #4dd59b;
@@ -10516,7 +10516,7 @@ fieldset:disabled .btn {
 }
 
 .text-success {
-  color: #2dce89 !important;
+  color: #65a30d !important;
 }
 
 .text-info {
@@ -21110,7 +21110,7 @@ fieldset:disabled .btn {
   }
 
   .dropdown:not(.dropdown-hover) .dropdown-menu {
-    margin-top: 40px !important;
+    margin-top: 4px !important;
   }
 
   .dropdown .dropdown-menu:before {
