@@ -38,13 +38,17 @@
             <!-- Introduction -->
             <table class="table table-borderless table-vcenter">
               <tbody>
-                <tr class="table-active">
+                <tr class="table">
+                  <th style="width: 50px;"></th>
                   <th>UTBK UNDIP</th>
                   <th class="text-end">
                     <span class="text-muted">0.2 hours</span>
                   </th>
                 </tr>
                 <tr>
+                  <td class="table-success text-center">
+                    <i class="fa fa-fw fa-unlock text-success"></i>
+                  </td>
                   <td>
                     <a class="fw-medium" href="#">Teknik Elektro</a>
                   </td>
@@ -54,7 +58,6 @@
           </div>
         </div>
             <!-- END Introduction -->
-            
             <div class="block block-rounded">
           <div class="block-content fs-sm">
             <!-- Basics -->
@@ -62,19 +65,33 @@
               <tbody>
                 <tr class="table-active">
                   <th style="width: 50px;"></th>
-                  <th>SAINTEK</th>
+                  <th>2. Sosiografi</th>
                   <th class="text-end">
                     <span class="text-muted"></span>
                   </th>
                 </tr>
                 <tr>
-                  <td>
-                    <a class="fw-medium" href="javascript:void(0)">soal</a>
+                  <td class="table-danger text-center">
+                    <i class="fa fa-fw fa-lock text-danger"></i>
                   </td>
-                </tr>                
-                <tr>
                   <td>
-                    <a class="fw-medium" href="javascript:void(0)">jawaban</a>
+                    <a class="fw-medium" href="javascript:void(0)">2.1 Sosial Structure</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="table-danger text-center">
+                    <i class="fa fa-fw fa-lock text-danger"></i>
+                  </td>
+                  <td>
+                    <a class="fw-medium" href="javascript:void(0)">2.1 Basik Geosoial</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="table-danger text-center">
+                    <i class="fa fa-fw fa-lock text-danger"></i>
+                  </td>
+                  <td>
+                    <a class="fw-medium" href="javascript:void(0)">2.2 Economic of Bottom</a>
                   </td>
                 </tr>               
               </tbody>
