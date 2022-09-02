@@ -17,38 +17,9 @@
 		<div class="form-v1-content">
 			<div class="wizard-form">
 		        <form class="form-register" action="#" method="post">					
-		        	<div id="form-total">						
-		        		<!-- SECTION 1 -->
-						
+		        	<div id="form-total">
 			            <h2>
-			            	<p class="step-icon text-white weight-bold"><span>01</span></p>
-			            	<span class="step-text">Data Pengguna</span>
-			            </h2>
-			            <section>
-			                <div class="inner">
-			                	<div class="wizard-header">
-									<h3 class="heading">Data Pengguna</h3>
-									<p> Silahkan lengkapi informasi berikut untuk melanjutkan proses selanjutnya.  </p>
-								</div>
-								<div class="form-row">
-									<div class="mb-3 col-12">										
-											<input type="text" class="form-control" id="Nama Lengkap" name="Nama Lengkap" placeholder="Nama Lengkap" required>
-									</div>										
-								</div>                                
-								<div class="form-row justify-content-between">
-									<div class="mb-3">										
-											<input type="text" name="Email Pengguna" id="email" class="form-control" pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}" placeholder="Email" required>										
-									</div>								
-									<div class="mb-3 col-md-6">
-											<input type="text" class="form-control" id="phone" name="phone" placeholder="No Handphone" required>
-									</div>
-								</div>
-							</div>
-			            </section>
-                        <!-- SECTION 1 -->
-						
-			            <h2>
-			            	<p class="step-icon text-white weight-bold"><span>02</span></p>
+			            	<p class="step-icon text-white weight-bold"><span>00</span></p>
 			            	<span class="step-text">Ubah password</span>
 			            </h2>
 			            <section>
@@ -57,11 +28,6 @@
 									<h3 class="heading">Ubah Password</h3>
 									<p> Silahkan lengkapi informasi berikut untuk melanjutkan proses selanjutnya.  </p>
 								</div>
-								<div class="form-row">
-									<div class="mb-3 col-12">										
-											<input type="text" class="form-control" id="kode" name="kode-Aunthentikasi" placeholder="Kode Authentikasi" required>
-									</div>										
-								</div>                                
 								<div class="form-row">
 								<div class="mb-3 col-12">
 									<input type="text" name="password" id="password" class="form-control" pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}" placeholder="Password" required>
