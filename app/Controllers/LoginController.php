@@ -41,10 +41,15 @@ class LoginController extends BaseController
                 $user = $adminModel->where('email', $this->request->getVar('email'))
                 ->first();
                 if(!$user){
+                
                 $isAdmin = false;
                 $model = new StudentModel();
                 $user = $model->where('email', $this->request->getVar('email'))
                     ->first();
+                if($user['email_verified'] == false){
+                    session()->setFlashData("email_verification",'<div class="alert alert-warning" role="alert">Email Anda Belum Diverifikasi, Silahkan Verifikasi email anda terlebih dahulu, <a href="'.base_url('sendverification/'.$user['token']).'">Kirim email</a></div>');
+                    return redirect()->route('login');
+                }
                 }
                 // Stroing session values
                 $this->setUserSession($user,$isAdmin);

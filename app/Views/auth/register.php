@@ -17,14 +17,15 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" />
 	<link rel="stylesheet"
 		href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
-		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
 	<div class="page-content">
 		<div class="form-v1-content">
 			<div class="wizard-form">
-				<form class="form-register" action="" method="post">
+				<?php $validation = \Config\Services::validation(); ?>
+				<form class="form-register" method="post" action="<?php echo route_to('register'); ?>" >
 					<div id="form-total">
 						<!-- SECTION 1 -->
 
@@ -37,29 +38,41 @@
 								<div class="wizard-header">
 									<h3 class="heading">Data Pengguna</h3>
 									<p> Silahkan lengkapi informasi berikut untuk melanjutkan proses selanjutnya. </p>
+									<?php
+            						// To print error messages
+            						if (!empty($validations)) : ?>
+									<div class="alert alert-danger">
+										<?php foreach ($validations as $field => $validation) : ?>
+										<p><?= $validation ?></p>
+										<?php endforeach ?>
+									</div>
+									<?php endif ?>
 								</div>
 								<div class="form-row">
 									<div class="mb-3 col-12">
-										<input type="text" class="form-control" id="name" name="name"
+										<input type="text" class="form-control" id="name" name="name" value="<?= isset($data['old']['full_name']) ? $data['old']['full_name'] : '' ;?>"
 											placeholder="Nama Lengkap" required>
 									</div>
 								</div>
+								
 								<div class="form-row justify-content-between">
-									<div class="mb-3 col-md-6">
+									<div class="mb-3 col-md-12">
 										<div class="input-group">
 											<span class="input-group-text">
 												+62
 											</span>
-											<input type="text" class="form-control" id="phone_number"
+											<input type="text" class="form-control" id="phone_number" value="<?= isset($data['old']['phone_number']) ? $data['old']['phone_number'] : '' ;?>"
 												name="phone_number" onkeyup="this.value=this.value.replace(/[^\d]/,'')"
 												placeholder="No Handphone" required>
-										</div>
+											</div>
+											<div class="col-12" id="no_error"></div>
 									</div>
-									<div class="mb-3">
-										<input type="text" name="email" id="email" class="form-control"
+								</div>
+								<div class="form-row">
+									<div class="col-12 mb-3">
+										<input type="text" name="email" id="email" class="form-control" value="<?= isset($data['old']['email']) ? $data['old']['email'] : '' ;?>"
 											pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}" placeholder="Email" required>
 									</div>
-
 								</div>
 								<div class="form-row">
 									<div class="mb-3 col-12">
@@ -75,18 +88,21 @@
 									</div>
 								</div>
 								<div class="form-row justify-content-between">
-									<div class="mb-3">
-										<input type="text" name="POB" id="POB" class="form-control" pattern="text"
+									<div class="col-12 mb-3">
+										<input type="text" name="POB" id="POB" class="form-control" pattern="text" value="<?= isset($data['old']['POB']) ? $data['old']['POB'] : '' ;?>"
 											placeholder="Tempat Lahir" required>
 									</div>
-									<div class="mb-4 col-md-6">
+								</div>
+								<div class="form-row justify-content-between">
+								<div class="mb-4 col-12">
 										<div class="input-group">
-											<input type="text" class="form-control datepicker" id="DOB" name="DOB"
+											<input type="text" class="form-control datepicker" id="DOB" name="DOB" value="<?= isset($data['old']['DOB']) ? $data['old']['DOB'] : '' ;?>"
 												readonly>
 											<span class="input-group-text">
 												<i class="ni ni-calendar-grid-58"></i>
 											</span>
 										</div>
+										<div class="col-12" id="date_error"></div>
 									</div>
 								</div>
 								<div class=" text-center pt-0 px-lg-2 px-1">
@@ -111,13 +127,13 @@
 								</div>
 								<div class="form-row">
 									<div class="mb-3 col-12">
-										<input type="text" class="form-control" id="parent_name" name="parent_name"
+										<input type="text" class="form-control" id="parent_name" name="parent_name" value="<?= isset($data['old']['parent_name']) ? $data['old']['parent_name'] : '' ;?>"
 											placeholder="Nama Lengkap Wali Murid" required>
 									</div>
 								</div>
 								<div class="form-row">
 									<div class="mb-3 col-12">
-										<input type="text" name="parent_email" id="parent_email" class="form-control"
+										<input type="text" name="parent_email" id="parent_email" class="form-control" value="<?= isset($data['old']['parent_email']) ? $data['old']['parent_email'] : '' ;?>"
 											pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}" placeholder="Email Wali" required>
 									</div>
 								</div>
@@ -127,11 +143,11 @@
 											<span class="input-group-text">
 												+62
 											</span>
-											<input type="text" class="form-control" id="parent_phone_number"
+											<input type="text" class="form-control" id="parent_phone_number" value="<?= isset($data['old']['parent_phone_number']) ? $data['old']['parent_phone_number'] : '' ;?>"
 												onkeyup="this.value=this.value.replace(/[^\d]/,'')"
 												name="parent_phone_number" placeholder="Nomor Handphone" required>
 										</div>
-
+										<div class="col-12" id="pno_error"></div>
 									</div>
 								</div>
 							</div>
@@ -149,7 +165,7 @@
 								</div>
 								<div class="form-row">
 									<div class="mb-3 col-12">
-										<select class="form-control select2" name="level" id="level">
+										<select class="form-control select2" name="level" id="level"> value="<?= isset($data['old']['level']) ? $data['old']['level'] : '' ;?>"
 											<option value="jenjang" disabled selected>Jenjang</option>
 											<option value="SD">SD</option>
 											<option value="SMP">SMP</option>
@@ -167,44 +183,45 @@
 									</div>
 								</div>
 								<div class="school_from d-none">
-								<div class="form-row justify-content-between">
-									<div class="form-group mb-3 col-12">
-										<select class="form-control select2" name="province" id="province">
-										<option disabled='disabled' value='' selected>Silahkan Pilih Provinsi</option>
-											<?php if($data['province']): ?>
-											<?php foreach($data['province'] as $propinsi): ?>
-											<tr>
-												<option value="<?= $propinsi->kode_prop ?>">
-													<?= $propinsi->propinsi ?>
+									<div class="form-row justify-content-between">
+										<div class="form-group mb-3 col-12">
+											<select class="form-control select2" name="province" id="province">
+												<option disabled='disabled' value='' selected>Silahkan Pilih Provinsi
 												</option>
-											</tr>
-											<?php 
+												<?php if($data['province']): ?>
+												<?php foreach($data['province'] as $propinsi): ?>
+												<tr>
+													<option value="<?= $propinsi->kode_prop ?>">
+														<?= $propinsi->propinsi ?>
+													</option>
+												</tr>
+												<?php 
 											endforeach;
 											endif; ?>
-										</select>
+											</select>
+										</div>
 									</div>
-								</div>
-								<div class="form-row">
-									<div class="mb-3 col-12">
-										<select title="Silahkan Pilih Jenjang Terlebih Dahulu"
-											class="form-control select2" name="city" id="city">
-										</select>
+									<div class="form-row">
+										<div class="mb-3 col-12">
+											<select title="Silahkan Pilih Jenjang Terlebih Dahulu"
+												class="form-control select2" name="city" id="city">
+											</select>
+										</div>
 									</div>
-								</div>
-								<div class="form-row">
-									<div class="mb-3 col-12">
-										<select title="Silahkan Pilih Jenjang Terlebih Dahulu"
-											class="form-control select2" name="districts" id="districts">
-										</select>
+									<div class="form-row">
+										<div class="mb-3 col-12">
+											<select title="Silahkan Pilih Jenjang Terlebih Dahulu"
+												class="form-control select2" name="districts" id="districts">
+											</select>
+										</div>
 									</div>
-								</div>
-								<div class="form-row">
-									<div class="mb-3 col-12">
-										<select title="Silahkan Pilih Jenjang Terlebih Dahulu"
-											class="form-control select2" name="school" id="school">
-										</select>
+									<div class="form-row">
+										<div class="mb-3 col-12">
+											<select title="Silahkan Pilih Jenjang Terlebih Dahulu"
+												class="form-control select2" name="school" id="school">
+											</select>
+										</div>
 									</div>
-								</div>
 								</div>
 						</section>
 					</div>

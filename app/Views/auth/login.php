@@ -35,6 +35,12 @@
                                     <p class="mb-0">Enter your email and password to sign in</p>
                                 </div>
                                 <div class="card-body">
+                                    
+                                    <?php
+                                        if(session()->has('email_verification')){
+                                        echo session()->getFlashdata('email_verification');
+                                        }
+                                        ?>
                                     <?php if (isset($validation)) : ?>
                                     <div class="col-12">
                                         <div class="warning" role="alert">
@@ -44,8 +50,8 @@
                                     <?php endif; ?>
                                     <form role="form" class="" action="<?= base_url('login') ?>" method="post">
                                         <div class="mb-3">
-                                            <input type="email" class="form-control form-control-lg" placeholder="Email" name="email"
-                                                aria-label="Email">
+                                            <input type="email" class="form-control form-control-lg" placeholder="Email"
+                                                name="email" aria-label="Email">
                                         </div>
                                         <div class="mb-3">
                                             <input type="password" class="form-control form-control-lg" name="password"
@@ -57,14 +63,16 @@
                                         </div>
                                         <div class="text-center">
                                             <button type="submit"
-                                                class="btn btn-lg bg-gradient-success btn-lg w-100 mt-4 mb-0">Sign in</button>
+                                                class="btn btn-lg bg-gradient-success btn-lg w-100 mt-4 mb-0">Sign
+                                                in</button>
                                         </div>
                                     </form>
                                 </div>
                                 <div class="card-footer text-center pt-0 px-lg-2 px-1">
                                     <p class="mb-4 text-sm mx-auto">
                                         Don't have an account?
-                                        <a href="<?=route_to('register')?>" class="text-primary text-gradient font-weight-bold">Sign
+                                        <a href="<?=route_to('register')?>"
+                                            class="text-primary text-gradient font-weight-bold">Sign
                                             up</a>
                                     </p>
                                 </div>

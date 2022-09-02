@@ -30,8 +30,27 @@ $(document).ready(function () {
     max: jQuery.validator.format("Please enter a value less than or equal to {0}."),
     min: jQuery.validator.format("Please enter a value greater than or equal to {0}."),
   });
+
+
+
   $(".form-register").validate({
-    errorClass: 'validation-error',
+    errorClass: 'is-invalid text-danger',
+    successClass: 'is-valid',
+    errorsWrapper: '<span class="form-text text-danger"></span>',
+    errorTemplate: '<span></span>',
+    trigger: 'change',
+    errorPlacement: function (error, element) {
+      console.log('dd', element.attr("name"))
+      if (element.attr("name") == "phone_number") {
+        error.appendTo("#no_error");
+      } else if (element.attr("name") == "DOB") {
+        error.appendTo("#date_error");
+      } else if (element.attr("name") == "parent_phone_number") {
+        error.appendTo("#pno_error");
+      }else {
+        error.insertAfter(element)
+      }
+    },
     rules: {
       name: {
         required: true,
@@ -74,6 +93,12 @@ $(document).ready(function () {
         number: true,
         minlength: 11,
         maxlength: 13
+      },
+      level: {
+        required: true,
+      },
+      class: {
+        required: true,
       },
     }
   });
