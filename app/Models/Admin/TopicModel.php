@@ -72,4 +72,9 @@ class TopicModel extends Model
         $query = $this->builder->getWhere(['class_id' => $id]);
         return $query->getResult();
     }
+    public function get_topic($id)
+    {   
+        $query = $this->builder->getWhere(['subject_id' => $id]);
+        return $query->getResult();
+    }
 }

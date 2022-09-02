@@ -25,7 +25,7 @@
         <div class="block-content fs-sm">
             <div class="input-group mb-3">
                 <label class="input-group-text bg-neo text-white" for="inputGroupSelect01"
-                    style="width:80px;">Jenjang</label>
+                    style="width:80px;">Kelas</label>
                 <select name="level" id="level" title="Please select..." class="form-control selectpicker border"
                     data-live-search="true" data-style="customSelect" data-dropup-auto="false" data-size="4">
                     <?php if($data['class']): ?>
@@ -43,6 +43,13 @@
                 <label class="input-group-text bg-neo text-white" for="inputGroupSelect01"
                     style="width:80px;">Mapel</label>
                 <select name="subject" id="subject" class="form-control selectpicker border" data-live-search="true"
+                    data-style="customSelect" disabled>
+                </select>
+            </div>
+            <div class="input-group mb-3">
+                <label class="input-group-text bg-neo text-white" for="inputGroupSelect01"
+                    style="width:80px;">Topik</label>
+                <select name="topic" id="topic" class="form-control selectpicker border" data-live-search="true"
                     data-style="customSelect" disabled>
                 </select>
             </div>
@@ -191,10 +198,9 @@
             $('#question-datatables').hide();
             $('.selectpicker').selectpicker();
         });
-        $('#subject').on('change', function () {
+        $('#topic').on('change', function () {
             $('#question-datatables').show();
             $('#level-form').val($('#level').val());
-            $('#subject-form').val($('#sub').val());
             $('#subject-form').val($('#subject').val());
             show_dt_question();
         });
@@ -466,6 +472,44 @@
                     );
                 } else {
                     $("#subject").prop("disabled", true);
+                }
+                select.selectpicker('refresh');
+                console.log(response);
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    });
+    $('#subject').on('change', function () {
+        $("#topic").val('default');
+        $("#topic").selectpicker("refresh")
+        $('#question-datatables').hide();
+        var selected = $('#subject').val();
+        var select = $('#topic');
+        $.ajax({
+            url: "<?= route_to('admin.bank-soal.get_topic') ?>",
+            type: "POST",
+            data: {
+                subject_id: selected,
+            },
+            success: function (response) {
+                response = JSON.parse(response);
+                select.selectpicker('destroy');
+                select.empty();
+                select.selectpicker();
+                if (response.length != 0) {
+                    $("#topic").empty().append(
+                        "<option disabled='disabled' SELECTED>Silahkan Pilih Topik Mata Pelajaran</option>"
+                    );
+                    $("#topic").prop("disabled", false);
+                    response.forEach(response =>
+                        $('#topic').append('<option value="' + response.id + '">' + response
+                            .text +
+                            '</option>')
+                    );
+                } else {
+                    $("#topic").prop("disabled", true);
                 }
                 select.selectpicker('refresh');
                 console.log(response);

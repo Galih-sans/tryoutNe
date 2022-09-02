@@ -28,7 +28,7 @@
                 <div class="input-group mb-3">
                     <label class="input-group-text bg-neo text-white" for="inputGroupSelect01"
                         style="width:80px;">Kelas</label>
-                    <select name="level" id="level" title="Please select..." class="form-control selectpicker border"
+                    <select name="class" id="class" title="Please select..." class="form-control selectpicker border"
                         data-live-search="true" data-style="customSelect" data-dropup-auto="false" data-size="4">
                         <?php if($data['class']): ?>
                         <?php foreach($data['class'] as $class): ?>
@@ -42,26 +42,30 @@
                     </select>
                 </div>
             </div>
-            <div class="row pb-2 mb-3 shadow-sm align-center">
-                <div class="col-12 col-md-12 text-right">
-                    <button type="button" class="btn btn-primary btn-sm" onclick="tambah()">
-                        <i class="si si-plus"></i> Tambah Mata Pelajaran Baru
-                    </button>
+            <div class="display d-none">
+
+
+                <div class="row pb-2 mb-3 shadow-sm align-center">
+                    <div class="col-12 col-md-12 text-right">
+                        <button type="button" class="btn btn-primary btn-sm" onclick="tambah()">
+                            <i class="si si-plus"></i> Tambah Mata Pelajaran Baru
+                        </button>
+                    </div>
                 </div>
+                <table id="example"
+                    class="table table-bordered table-vcenter js-dataTable-full no-footer dtr-inline collapsed"
+                    style="width:100%">
+                    <thead>
+                        <tr>
+                            <th width="10%" class="fs-sm fw-normal">#</th>
+                            <th width="30%" class="fs-sm fw-normal">Jenjang</th>
+                            <th width="30%" class="fs-sm fw-normal">Kelas</th>
+                            <th width="30%" class="fs-sm fw-normal">Mata Pelajaran</th>
+                            <th width="30%" class="fs-sm fw-normal">Aksi</th>
+                        </tr>
+                    </thead>
+                </table>
             </div>
-            <table id="example"
-                class="table table-bordered table-vcenter js-dataTable-full no-footer dtr-inline collapsed"
-                style="width:100%">
-                <thead>
-                    <tr>
-                        <th width="10%" class="fs-sm fw-normal">#</th>
-                        <th width="30%" class="fs-sm fw-normal">Jenjang</th>
-                        <th width="30%" class="fs-sm fw-normal">Kelas</th>
-                        <th width="30%" class="fs-sm fw-normal">Mata Pelajaran</th>
-                        <th width="30%" class="fs-sm fw-normal">Aksi</th>
-                    </tr>
-                </thead>
-            </table>
         </div>
     </div>
 </div>
@@ -81,38 +85,16 @@
                 <div class="block-content fs-sm">
                     <form id="subject_form">
                         <div class="row">
-                            <div class="col-12 col-md-12">
-                                <div class="col-12 col-md-12 mb-2">
-                                    <span class="" style="letter-spacing: -em">
-                                        <meta charset="utf-8">⋮⋮⋮</span> &nbsp;
-                                    <span class="tittle-neo"> Kelas </span>
-                                    <select name="class_id" id="class_id" title="Please select..."
-                                        class="form-control selectpicker border" data-live-search="true"
-                                        data-style="customSelect" data-dropup-auto="false" data-size="4">
-                                        <tr>
-                                            <?php if($data['class']): ?>
-                                            <?php foreach($data['class'] as $class): ?>
-                                        <tr>
-                                            <option value="<?= $class->id ?>"><?= $class->class.' - '.$class->level ?>
-                                            </option>
-                                        </tr>
-                                        <?php 
-                                        endforeach;
-                                        endif; ?>
-                                        </tr>
-                                    </select>
-                                </div>
                                 <div class="col-12 col-md-12 py-2">
                                     <span class="color-ne" style="letter-spacing: -em">
                                         <meta charset="utf-8">⋮⋮⋮</span> &nbsp;
-                                    <span class="tittle-neo"> Kelas</span>
+                                    <span class="tittle-neo"> Mata Pelajaran</span>
                                     <div class="form-floating mb-4 pt-2">
                                         <input type="text" class="form-control" id="subject" name="subject"
                                             placeholder="John Doe">
                                         <label for="class">Mata Pelajaran</label>
                                     </div>
                                 </div>
-                            </div>
                         </div>
                     </form>
                 </div>
@@ -147,8 +129,8 @@
                                         <meta charset="utf-8">⋮⋮⋮</span> &nbsp;
                                     <span class="tittle-neo"> Kelas </span>
                                     <select name="class_id" id="edit_class_id" title="Please select..."
-                                        class="form-control border" data-live-search="true"
-                                        data-style="customSelect" data-dropup-auto="false" data-size="4" autocomplete="off">
+                                        class="form-control border" data-live-search="true" data-style="customSelect"
+                                        data-dropup-auto="false" data-size="4" autocomplete="off">
                                         <tr>
                                             <?php if($data['class']): ?>
                                             <?php foreach($data['class'] as $class): ?>
@@ -196,7 +178,11 @@
     $(document).ready(function () {
 
         $(function () {
-            show_dt_class();
+            $('#class').on('change', function () {
+                $('.d-none').addClass('d-block').removeClass('d-none');
+                $('#subject-form').val($('#class').val());
+                show_dt_class($('#class').val());
+            });
         });
         $('#refresh').on('click', refresh_dt)
         $(document).on('click', '.delete-button', function () {
@@ -210,7 +196,7 @@
             console.log(data_id);
             console.log(data_class);
             console.log(data_subject);
-            $('#edit_class_id option[value='+data_class+']').prop('selected', true);
+            $('#edit_class_id option[value=' + data_class + ']').prop('selected', true);
             // $("#edit_class_id").selectpicker('refresh');
             $('#edit_subject').val(data_subject);
             $('#subject_id').val(data_id);
@@ -256,9 +242,9 @@
     }
 
     function refresh_dt() {
-        show_dt_class();
+        $(".selectpicker").selectpicker('val','');
+        $('.d-block').addClass('d-none').removeClass('d-block');
     }
-
     function tambah() {
         $('#questionModal').modal('show');
         // $('.selectpicker').selectpicker('refresh');
@@ -274,7 +260,7 @@
         $.ajax({
             url: "<?= route_to('admin.subject.add_subject') ?>",
             type: "POST",
-            data: $('#subject_form').serialize(),
+            data: $('#subject_form').serialize()+ '&class=' + $('#class').val(),
             success: function (d) {
                 var d = JSON.parse(d);
                 if (d.success == true) {
@@ -295,8 +281,7 @@
                     });
                 }
 
-                console.log(d);
-                refresh_dt();
+                show_dt_class($('#class').val());
             },
             error: function (error) {
                 console.log(error);
@@ -344,7 +329,7 @@
     }
 
 
-    function show_dt_class() {
+    function show_dt_class(data) {
         $('#example').DataTable({
             processing: true,
             serverSide: true,
@@ -355,7 +340,9 @@
             ajax: {
                 url: "<?= route_to('admin.subject.dt_subject') ?>",
                 type: "POST",
-                data: {},
+                data: {
+                    class_id: data
+                },
             },
             columnDefs: [{
                     targets: [0, 1, 2, 3],

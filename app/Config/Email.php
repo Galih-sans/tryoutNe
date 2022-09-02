@@ -47,21 +47,21 @@ class Email extends BaseConfig
      *
      * @var string
      */
-    public $SMTPHost = 'smtp.gmail.com';
+    public $SMTPHost = '';
 
     /**
      * SMTP Username
      *
      * @var string
      */
-    public $SMTPUser = 'noreply.neoedukasi@gmail.com';
+    public $SMTPUser = '';
 
     /**
      * SMTP Password
      *
      * @var string
      */
-    public $SMTPPass = 'civlqqmzxcsuahki';
+    public $SMTPPass = '';
 
     /**
      * SMTP Port
@@ -167,4 +167,12 @@ class Email extends BaseConfig
      * @var bool
      */
     public $DSN = false;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->SMTPHost = getenv('SMTPHost');
+        $this->SMTPUser = getenv('SMTPUser');
+        $this->SMTPPass = getenv('SMTPPass');
+    }
 }

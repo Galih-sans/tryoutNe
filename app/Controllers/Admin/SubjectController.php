@@ -31,7 +31,8 @@ class SubjectController extends BaseController
     public function dt_subject()
     {
         if ($this->request->isAJAX()) {
-            $subjectdata = $this->SubjectModel->get_datatables();
+            $class =  $this->request->getVar('class_id'); 
+            $subjectdata = $this->SubjectModel->get_datatables($class);
             $data = array();
             $no = 0;
             foreach ($subjectdata as $subject) {
@@ -92,7 +93,7 @@ class SubjectController extends BaseController
     {
         if ($this->request->isAJAX()) {
             $data = [
-                'class_id' => $this->request->getVar('class_id'),
+                'class_id' => $this->request->getVar('class'),
                 'subject' => $this->request->getVar('subject')
             ];
             $query = $this->SubjectModel->insert($data);

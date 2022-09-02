@@ -7,6 +7,7 @@ use App\Models\Admin\AnswerModel;
 use App\Models\Admin\BankSoalModel;
 use App\Models\Admin\ClassModel;
 use App\Models\Admin\SubjectModel;
+use App\Models\Admin\TopicModel;
 
 class BankSoalController extends BaseController
 {
@@ -14,6 +15,7 @@ class BankSoalController extends BaseController
     public $answer_model;
     public $classModel;
     public $subjectModel;
+    public $TopicModel;
     public $pagedata;
     public $data;
     
@@ -25,6 +27,7 @@ class BankSoalController extends BaseController
         $this->answer_model = new AnswerModel();
         $this->classModel = new ClassModel();
         $this->subjectModel = new SubjectModel();
+        $this->TopicModel = new TopicModel();
     }
     public function index()
     {
@@ -86,6 +89,20 @@ class BankSoalController extends BaseController
                 $response[] = array(
                     "id"=>$data->id,
                     "text"=>$data->subject, PHP_EOL
+                );
+        }    
+        echo json_encode($response);
+    }
+    public function get_topic()
+    {
+        $subject_id = $this->request->getVar('subject_id');
+        $data = $this->TopicModel->get_topic($subject_id);
+        $response = array();
+        foreach($data as $data)
+        { 
+                $response[] = array(
+                    "id"=>$data->id,
+                    "text"=>$data->topic, PHP_EOL
                 );
         }    
         echo json_encode($response);

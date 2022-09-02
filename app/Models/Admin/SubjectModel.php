@@ -57,9 +57,9 @@ class SubjectModel extends Model
         return $this->builder->delete();
     }
 
-    public function get_datatables()
+    public function get_datatables($class_id)
     {
-        $query = $this->builder->get();
+        $query = $this->builder->where('class_id',$class_id)->get();
         return $query->getResult();
     }
     public function update_subject($id,$data)
