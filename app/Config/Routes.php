@@ -118,6 +118,7 @@ $routes->group("admin",["filter" => "isadmin", "namespace" => "App\Controllers\A
         $routes->get("/", "BankSoalController::index", ['as' => 'admin.bank-soal.index']);
         $routes->match(["get", "post"], "dt_banksoal", "BankSoalController::dt_bank_soal", ['as' => 'admin.bank-soal.dt_banksoal']);
         $routes->match(["get", "post"], "get_subject", "BankSoalController::get_subject", ['as' => 'admin.bank-soal.get_subject']);
+        $routes->match(["get", "post"], "get_topic", "BankSoalController::get_topic", ['as' => 'admin.bank-soal.get_topic']);
         $routes->match(["get", "post"], "delete_question", "BankSoalController::delete", ['as' => 'admin.bank-soal.delete-question']);
         $routes->match(["get", "post"], "insert_question", "BankSoalController::create", ['as' => 'admin.bank-soal.insert-question']);
     });
