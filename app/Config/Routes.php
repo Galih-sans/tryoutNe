@@ -36,16 +36,28 @@ $routes->set404Override();
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 
-//login and logout
+//login
 $routes->match(['get', 'post'], 'login', 'LoginController::login', ["filter" => "noauth"],['as' => 'login']);
+
+//Register
 $routes->match(['get', 'post'], 'register', 'RegisterController::register', ["filter" => "noauth"], ['as' => 'register']);
 $routes->match(['get', 'post'], 'register/get_class', 'RegisterController::get_class', ["filter" => "noauth"], ['as' => 'register.get_class']);
 $routes->match(['get', 'post'], 'register/get_city', 'RegisterController::get_city', ["filter" => "noauth"], ['as' => 'register.get_city']);
 $routes->match(['get', 'post'], 'register/get_districts', 'RegisterController::get_districts', ["filter" => "noauth"], ['as' => 'register.get_districts']);
 $routes->match(['get', 'post'], 'register/get_school', 'RegisterController::get_school', ["filter" => "noauth"], ['as' => 'register.get_school']);
+
+//Email Verification
 $routes->get('/verify-email/(:any)', 'RegisterController::email_verif', ["filter" => "noauth"]);
 $routes->get('/sendverification/(:any)', 'RegisterController::send_verif', ["filter" => "noauth"]);
+
+//Reset Password
 $routes->match(['get', 'post'], 'reset', 'RegisterController::reset', ["filter" => "noauth"], ['as' => 'reset']);
+
+//Forget Password
+$routes->match(['get', 'post'], 'forgetpassword', 'RegisterController::forgetPassword', ["filter" => "noauth"], ['as' => 'forgetpassword']);
+$routes->match(['get', 'post'], 'resetpassword/(:any)', 'RegisterController::resetpassword', ["filter" => "noauth"], ['as' => 'resetpassword']);
+
+//Logout
 $routes->get('logout', 'LoginController::logout');
 
 $routes->group("", ["filter" => "auth", "namespace" => "App\Controllers\user"], function($routes){

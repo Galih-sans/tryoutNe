@@ -14,6 +14,7 @@ class RegisterController extends BaseController
     public $SchoolModel;
     public $StudentModel;
     public $email;
+    protected $emailController;
 
     public function __construct()
     {
@@ -22,6 +23,7 @@ class RegisterController extends BaseController
         $this->SchoolModel = new ModelSekolah();
         $this->StudentModel = new StudentModel();
         $this->email = \Config\Services::email();
+        $this->emailController =  new EmailController();
     }
     public function register()
     {
@@ -48,7 +50,7 @@ class RegisterController extends BaseController
                 $this->data['old'] = $data; 
                 return view('auth/register', ['data'=>$this->data,'validations'=>$this->StudentModel->errors()]);
             }else{
-                $this->sendEmail($data['email'], 'Verifikasi Akun Tryout Neo Edukasi',$data);
+                $this->emailController->sendEmailVerification($data['email'], 'Verifikasi Akun Tryout Neo Edukasi',$data);
                 session()->setFlashData("email_verification",'<div class="alert alert-success" role="alert">Selamat Akun Anda Berhasil Dibuat, Silahkan Cek Email Anda Untuk Verifikasi Akun Anda.</div>');
                 return redirect()->to('/login');
             }
@@ -151,7 +153,7 @@ class RegisterController extends BaseController
         $token=$uri->getSegment(2);
         if($this->StudentModel->where('token',$token)->first()){
             $data = $this->StudentModel->where('token',$token)->first();
-            $this->sendEmail($data['email'], 'Verifikasi Akun Tryout Neo Edukasi',$data);
+            $this->emailController->sendEmailVerification($data['email'], 'Verifikasi Akun Tryout Neo Edukasi',$data);
             session()->setFlashData("email_verification",'<div class="alert alert-success" role="alert">Verifikasi Email Berhasil Dikirim Silahkan Buka Email Anda</div>');
             return redirect()->route('login');
         }else{
@@ -160,22 +162,47 @@ class RegisterController extends BaseController
         }
     }
 
-
-
-    private function sendEmail($to, $title,$data){
-
-		$this->email->setFrom('noreply.neoedukasi@gmail.com@gmail.com','Neo Edukasi');
-		$this->email->setTo($to);
-
-		$this->email->setSubject($title);
-
-        $template = view("email-template/verification-email", ['data'=>$data]);
-		$this->email->setMessage($template);
-
-		if(! $this->email->send()){
-			return false;
-		}else{
-			return true;
-		}
-	}
+    public function forgetPassword()
+    {
+        $pagedata['tittle'] = "Neo Edukasi - Masuk Atau Daftar";
+        if ($this->request->getMethod() == 'post') {
+            $data = [
+                'email'    => $this->request->getVar('email'),
+            ];
+            if(!$this->StudentModel->where('email',$data['email'])->first()){
+                session()->setFlashData("email_verification",'<div class="alert alert-warning" role="alert">Maaf Email anda belum terdaftar. Silahkan mendaftar terlebih dahulu</a></div>');
+                return view('auth/forget2', ['pagedata'=>$pagedata]);
+            }else{
+                $user = $this->StudentModel->where('email',$data['email'])->first();
+                $this->emailController->sendForgotPass($data['email'], 'Konfirmasi Email untuk Mengatur Ulang Kata Sandi.',$user);
+                session()->setFlashData("email_verification",'<div class="alert alert-success" role="alert">Email Untuk Mengatur Ulang Password Berhasil Dikirim. Silahkan Cek Email Anda.</div>');
+                return view('auth/forget2', ['pagedata'=>$pagedata]);
+            }
+        }
+        return view('auth/forget',['pagedata'=>$pagedata]);
+    }
+    
+    public function resetpassword()
+    {
+        $pagedata['tittle'] = "Atur Ulang Kata Sandi - Neo Edukasi";
+        $uri = service('uri');
+        $token=$uri->getSegment(3);
+        if($this->StudentModel->where('token',$token)->first()){
+            if ($this->request->getMethod() == 'post') {
+                $data = [
+                    'password'    => $this->request->getVar('password'),
+                ];
+                if(!$this->StudentModel->reset_password($token,$data)){
+                    session()->setFlashData("email_verification",'<div class="alert alert-success" role="alert">Kata Sandi Gagal Diubah Silahkan Coba Lagi.</div>');
+                    return redirect()->route('auth/reset');
+                }else{
+                    session()->setFlashData("email_verification",'<div class="alert alert-success" role="alert">Kata Sandi Berhasil Diubah Silahkan Masuk dengan Kata Sandi Baru.</div>');
+                    return redirect()->route('login');
+                }
+            }
+            return view('auth/reset',['pagedata'=>$pagedata]);
+        }else{
+            return view('errors/html/error_403',['pagedata'=>$pagedata]);
+        }
+    }
 }

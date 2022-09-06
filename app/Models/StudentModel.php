@@ -109,4 +109,12 @@ class StudentModel extends Model
         ->where('token', $token)
         ->update();
     }
+
+    public function reset_password($token,$data)
+    {
+        $newtoken = random_string ('md5',16);
+        return   $this->builder->set('email_verified', 1)->set('token',$newtoken)->set('password',password_hash($data['password'], PASSWORD_DEFAULT))
+        ->where('token', $token)
+        ->update();
+    }
 }
