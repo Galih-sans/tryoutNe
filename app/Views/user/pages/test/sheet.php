@@ -11,8 +11,8 @@
                             <h3 class="block-title text-white">Halaman Test #Nama Test</h3>
                             <div class="text-right">
                                 <div class="ribbon-box">
-                                    <span class="badge bg-red">Sisa Waktu - 1 Jam<span class="sisawaktu"
-                                            data-time=""></span></span> 
+                                    <span class="badge bg-red">Sisa Waktu - #Sisa Waktu<span class="sisawaktu"
+                                            data-time=""></span></span>
                                 </div>
                             </div>
                         </div>
@@ -33,7 +33,7 @@
                                         onclick="return tidak_jawab();">Ragu-ragu</a>
                                     <a class="action next btn btn-info" rel="2" onclick="return next();"><i
                                             class="glyphicon glyphicon-chevron-right"></i> Next</a>
-                                    <a class="selesai action submit btn btn-danger" onclick="return simpan_akhir();"><i
+                                    <a class="selesai action submit btn btn-danger" onclick=" return simpan_akhir();"><i
                                             class="glyphicon glyphicon-stop"></i> Selesai</a>
                                     <input type="hidden" name="jml_soal" id="jml_soal" value="">
                                 </div>
