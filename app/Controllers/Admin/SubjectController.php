@@ -28,41 +28,87 @@ class SubjectController extends BaseController
         $this->data['class'] = $this->ClassModel->orderBy('id', 'ASC')->findAll();
         return view('admin/pages/subject/index', ['pagedata'=> $this->pagedata, 'data'=> $this->data]);
     }
+
     public function dt_subject()
     {
         if ($this->request->isAJAX()) {
-            $class =  $this->request->getVar('class_id'); 
-            $subjectdata = $this->SubjectModel->get_datatables($class);
+            $request = \Config\Services::request();
+            $list_data = $this->SubjectModel;
+            $class = $request->getPost("class_id");
+            $where = ['to_subjects.id !=' => 0];
+                    //Column Order Harus Sesuai Urutan Kolom Pada Header Tabel di bagian View
+                    //Awali nama kolom tabel dengan nama tabel->tanda titik->nama kolom seperti pengguna.nama
+            $column_order = array('to_subjects.id','to_class.level','to_class.class', 'to_subjects.subject');
+            $column_search = array('to_class.level','to_class.class', 'to_subjects.subject');
+            $order = array('to_subjects.id' => 'asc');
+            $list = $list_data->get_datatables($class, $column_order, $column_search, $order, $where);
             $data = array();
-            $no = 0;
-            foreach ($subjectdata as $subject) {
+            $no = $request->getPost("start");
+            foreach ($list as $lists) {
                 $no++;
-                $row = array();
-                $classData = $this->ClassModel->get_class($subject->class_id);
-                $row['number']  = $no;
-                $row['level']  = $classData->level ;
-                $row['class']  = $classData->class ;
-                $row['subject']  = $subject->subject;
-                $row['action']  = '
-                <div class="block-options">
-                <button type="button" class="btn-block-option btn btn-light text-primary edit-button" data-id="'.$subject->id.'" data-class="'.$subject->class_id.'"'.'" data-subject="'.$subject->subject.'">
-                    <i class="fa-solid fa-pen-to-square"></i>
-                </button>
-                <button type="button" class="btn-block-option btn btn-light text-primary delete-button" data-id="'.$subject->id.'">
-                <i class="fa-solid fa-trash"></i>
-                </button>
-                </div>
-                ';
+                $row    = array();
+                $row[] = $no;
+                $row[] = $lists->level;
+                $row[] = $lists->class;
+                $row[] = $lists->subject;
+                $row[]  = '
+                    <div class="block-options text-center">
+                    <button type="button" class="btn btn-sm btn-warning  edit-button" data-id="'.$lists->id.'" data-level="'.$lists->level.'"'.'" data-class="'.$lists->class.'">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </button>
+                    <button type="button" class="btn btn-sm btn-danger  delete-button" data-id="'.$lists->id.'">
+                    <i class="fa-solid fa-trash"></i>
+                    </button>
+                    </div>
+                    ';
                 $data[] = $row;
             }
             $output = array(
-                "draw" => true,
+                "draw" => $request->getPost("draw"),
+                "recordsTotal" => count($data),
+                "recordsFiltered" => count($data),
                 "data" => $data,
+                
             );
-    
-            echo json_encode($output);
+            return json_encode($output);
         }
     }
+
+    // public function dt_subject()
+    // {
+    //     if ($this->request->isAJAX()) {
+    //         $class =  $this->request->getVar('class_id'); 
+    //         $subjectdata = $this->SubjectModel->get_datatables($class);
+    //         $data = array();
+    //         $no = 0;
+    //         foreach ($subjectdata as $subject) {
+    //             $no++;
+    //             $row = array();
+    //             $classData = $this->ClassModel->get_class($subject->class_id);
+    //             $row['number']  = $no;
+    //             $row['level']  = $classData->level ;
+    //             $row['class']  = $classData->class ;
+    //             $row['subject']  = $subject->subject;
+    //             $row['action']  = '
+    //             <div class="block-options">
+    //             <button type="button" class="btn-block-option btn btn-light text-primary edit-button" data-id="'.$subject->id.'" data-class="'.$subject->class_id.'"'.'" data-subject="'.$subject->subject.'">
+    //                 <i class="fa-solid fa-pen-to-square"></i>
+    //             </button>
+    //             <button type="button" class="btn-block-option btn btn-light text-primary delete-button" data-id="'.$subject->id.'">
+    //             <i class="fa-solid fa-trash"></i>
+    //             </button>
+    //             </div>
+    //             ';
+    //             $data[] = $row;
+    //         }
+    //         $output = array(
+    //             "draw" => true,
+    //             "data" => $data,
+    //         );
+    
+    //         echo json_encode($output);
+    //     }
+    // }
 
     /**
      * Return the properties of a resource object

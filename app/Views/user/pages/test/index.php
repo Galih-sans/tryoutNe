@@ -1,44 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
+<?= $this->extend('user/layout/app') ?>
 
-  <!--     Fonts and icons     -->
-  <link href="<?= base_url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700') ?>" rel="stylesheet" />
-  <!-- Icons -->
-  <link href="<?=  base_url('assets-user/css/nucleo-icons.css')?>" rel="stylesheet" />
-  <link href="<?= base_url('assets-user/css/nucleo-svg.css') ?>" rel="stylesheet" />
-  <!-- Font Awesome Icons -->
-  <script src="'https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-  <link href="<?= base_url('assets/images/logo/logo1.png') ?>" rel="stylesheet" />
-  <!-- CSS Files -->
-  <link id="pagestyle" href="<?= base_url('assets-user/css/test-style.min.css') ?>" rel="stylesheet" />
-
-
-<body class="g-sidenav-show   bg-gray-100">
-  <div class="min-height-100 bg-primary position-absolute w-100"></div>
-
-  <?= $this->include('user/partial/navbar') ?>
- 
-  <main class="main-content position-relative border-radius-lg ">
-    <!-- Navhead -->
-    <?= $this->include('user/partial/navhead') ?>
-    <!-- End Navhead -->
-
-    <!-- content -->
-    
-    <div class="container">
-    <div class="row">
-    <div class="bg-success">
+<?= $this->section('content') ?>
+<div class="container-fluid">
+      <div class="row items-push mt-4">
+        <div class="block block-rounded shadow-sm bg-success">
           <div class="content content-full text-center pt-7 pb-5">
             <h1 class="h2 text-white mb-2">
               Raih Mimpimu Bersama Neoedukasi.
             </h1>
             <h2 class="h4 fw-normal text-white-75">
               kami menyediakan lebih dari 1000+ tryout untuk perkembangan kamu.
-            </h2>           
+            </h2>
           </div>
         </div>
         <div class="content content-boxed">
-          <div class="row items-push py-4">
+          <div class="row items-push">
             <!-- Course -->
             <div class="col-md-3 col-lg-2 col-xl-3">
               <a class="block block-rounded block-link-pop h-100 mb-0" href="#">
@@ -63,9 +39,9 @@
 
             <!-- Course -->
             <div class="col-md-3 col-lg-2 col-xl-3">
-              <a class="block block-rounded block-link-pop h-100 mb-0" href="<?= route_to('user.dtest.index')?>">
+              <a class="block block-rounded block-link-pop h-100 mb-0" href="<?= route_to('user.test.view')?>">
                 <div class="block-content block-content-full ribbon ribbon-success ribbon-left text-center bg-flat">
-                <div class="ribbon-box">
+                  <div class="ribbon-box">
                     Rp 75.000
                   </div>
                   <div class="item item-2x item-circle bg-white-10 py-3 my-3 mx-auto">
@@ -134,7 +110,7 @@
             <div class="col-md-6 col-lg-4 col-xl-3">
               <a class="block block-rounded block-link-pop h-100 mb-0" href="#">
                 <div class="block-content block-content-full ribbon ribbon-success text-center bg-default">
-                <div class="ribbon-box">
+                  <div class="ribbon-box">
                     Rp 250.000
                   </div>
                   <div class="item item-2x item-circle bg-white-10 py-3 my-3 mx-auto">
@@ -159,7 +135,7 @@
             <div class="col-md-6 col-lg-4 col-xl-3">
               <a class="block block-rounded block-link-pop h-100 mb-0" href="#">
                 <div class="block-content block-content-full ribbon ribbon-success text-center bg-modern">
-                <div class="ribbon-box">
+                  <div class="ribbon-box">
                     Rp 250.000
                   </div>
                   <div class="item item-2x item-circle bg-white-10 py-3 my-3 mx-auto">
@@ -250,7 +226,7 @@
             <div class="col-md-6 col-lg-4 col-xl-3">
               <a class="block block-rounded block-link-pop h-100 mb-0" href="#">
                 <div class="block-content block-content-full ribbon ribbon-success text-center bg-danger">
-                <div class="ribbon-box">
+                  <div class="ribbon-box">
                     Rp 250.000
                   </div>
                   <div class="item item-2x item-circle bg-white-10 py-3 my-3 mx-auto">
@@ -275,7 +251,7 @@
             <div class="col-md-6 col-lg-4 col-xl-3">
               <a class="block block-rounded block-link-pop h-100 mb-0" href="#">
                 <div class="block-content block-content-full ribbon ribbon-success text-center bg-flat">
-                <div class="ribbon-box">
+                  <div class="ribbon-box">
                     Rp 250.000
                   </div>
                   <div class="item item-2x item-circle bg-white-10 py-3 my-3 mx-auto">
@@ -321,29 +297,6 @@
         </div>
         <!-- END Page Content -->
 
-   </div>
- </div>
-  </main>
-  
-  <!--   Core JS Files   -->
-  <script src="<?= base_url('assets-user/js/core/popper.min.js')?>"></script>
-  <script src="<?= base_url('assets-user/js/core/bootstrap.min.js')?>"></script>
-  <script src="<?= base_url('assets-user/js/plugins/perfect-scrollbar.min.js')?>"></script>
-  <script src="<?= base_url('assets-user/js/plugins/smooth-scrollbar.min.js')?>"></script>
-  <script src="<?= base_url('assets-user/js/plugins/chartjs.min.js')?>"></script>
-  <script>
-    var win = navigator.platform.indexOf('Win') > -1;
-    if (win && document.querySelector('#sidenav-scrollbar')) {
-      var options = {
-        damping: '0.5'
-      }
-      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-    }
-  </script>
-  <!-- Github buttons -->
-  <script async defer src="https://buttons.github.io/buttons.js"></script>
-  <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="<?= base_url('assets-user/js/dashboard.min.js?v=2.0.4')?>"></script>
-</body>
-
-</html>
+      </div>
+    </div>
+<?= $this->endSection() ?>

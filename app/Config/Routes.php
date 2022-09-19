@@ -68,11 +68,8 @@ $routes->group("", ["filter" => "auth", "namespace" => "App\Controllers\user"], 
         // URL - /user
         $routes->get("/", "testcontroller::index", ['as' => 'user.test.index']);
         $routes->match(["get", "post"], "index", "testcontroller::index");
-    });
-    $routes->group("dtest", function($routes){
-        // URL - /user
-        $routes->get("/", "dtestcontroller::index", ['as' => 'user.dtest.index']);
-        $routes->match(["get", "post"], "index", "dtestcontroller::index");
+        $routes->match(["get", "post"], "detail", "testcontroller::detail", ['as' => 'user.test.view']);;
+        $routes->match(["get", "post"], "sheet", "testcontroller::sheet", ['as' => 'user.test.sheet']);;
     });
     $routes->group("profil", function($routes){
         // URL - /user
@@ -120,10 +117,11 @@ $routes->group("admin",["filter" => "isadmin", "namespace" => "App\Controllers\A
         $routes->match(["get", "post"], "remove_topic", "TopicController::delete",['as' => 'admin.topic.remove_topic']);
         $routes->match(["get", "post"], "update_topic", "TopicController::update",['as' => 'admin.topic.edit_topic']);
     });
-    $routes->group("tryout", function($routes){
+    $routes->group("test", function($routes){
         // URL - /admin
-        $routes->get("/", "TryOutController::index", ['as' => 'admin.tryout.index']);
-        $routes->match(["get", "post"], "index", "TryOutController::index");
+        $routes->get("/", "TestController::index", ['as' => 'admin.test.index']);
+        $routes->match(["get", "post"], "index", "TestController::index");
+        $routes->match(["get", "post"], "dt_test", "TestController::listdata", ['as' => 'admin.test.dt_test']);
     });
     $routes->group("bank-soal", function($routes){
         // URL - /admin

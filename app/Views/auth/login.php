@@ -12,13 +12,13 @@
   <!--     Fonts and icons     -->
   <link href=" https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
     <!-- Nucleo Icons -->
-    <link href="<?= base_url('assets-user/css/nucleo-icons.css')?>" rel="stylesheet" />
-    <link href="<?= base_url('assets-user/css/nucleo-svg.css')?>" rel="stylesheet" />
+    <link href="<?= base_url('assets-front/css/nucleo-icons.css')?>" rel="stylesheet" />
+    <link href="<?= base_url('assets-front/css/nucleo-svg.css')?>" rel="stylesheet" />
     <!-- Font Awesome Icons -->
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-    <link href="<?= base_url('assets-user/css/nucleo-svg.css')?>" rel=" stylesheet" />
+    <link href="<?= base_url('assets-front/css/nucleo-svg.css')?>" rel=" stylesheet" />
     <!-- CSS Files -->
-    <link id="pagestyle" href="<?= base_url('assets-user/css/dashboard.css?v=2.0.4')?>" rel="stylesheet" />
+    <link id="pagestyle" href="<?= base_url('assets-front/css/auth.css?v=2.0.4')?>" rel="stylesheet" />
 </head>
 
 <body class="">
@@ -31,8 +31,8 @@
                         <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column mx-lg-0 mx-auto">
                             <div class="card card-plain">
                                 <div class="card-header pb-0 text-start">
-                                    <h4 class="font-weight-bolder">Sign In</h4>
-                                    <p class="mb-0">Enter your email and password to sign in</p>
+                                    <h4 class="font-weight-bolder">Halaman Login</h4>
+                                    <p class="mb-0">Silahkan Masukkan Email dan Kata Sandi Anda Untuk Masuk</p>
                                 </div>
                                 <div class="card-body">
 
@@ -50,7 +50,7 @@
                                     <?php endif; ?>
                                     <form role="form" class="" action="<?= base_url('login') ?>" method="post">
                                         <div class="mb-3">
-                                            <input type="email" class="form-control form-control-lg" placeholder="Email"
+                                            <input type="email" class="form-control" placeholder="Email"
                                                 name="email" aria-label="Email">
                                         </div>
                                         <div class="mb-3">
@@ -59,25 +59,23 @@
                                         </div>
                                         <div class="form-check form-switch">
                                             <input class="form-check-input" type="checkbox" id="rememberMe">
-                                            <label class="form-check-label" for="rememberMe">Remember me</label>
+                                            <label class="form-check-label" for="rememberMe">Ingat Saya</label>
                                         </div>
                                         <div class="text-center">
                                             <button type="submit"
-                                                class="btn btn-lg bg-gradient-success btn-lg w-100 mt-4 mb-0">Sign
-                                                in</button>
+                                                class="btn btn-lg bg-gradient-success btn-lg w-100 mt-4 mb-0">Masuk</button>
                                         </div>
                                     </form>
                                 </div>
                                 <div class="card-footer text-center pt-0 px-lg-2 px-1">
                                     <p class="mb-4 text-sm mx-auto">
-                                        Don't have an account?
-                                        <a href="<?=route_to('register')?>"
-                                            class="text-primary text-gradient font-weight-bold">Sign
-                                            up</a>
+                                        Tidak Punya Akun?
+                                        <a href="<?=route_to('register')?>" class="text-primary font-weight-bold">Daftar
+                                            Sekarang!</a>
                                     </p>
                                     <p class="mb-4 text-sm mx-auto">
                                         <a href="<?=route_to('forgetpassword')?>"
-                                            class="text-primary text-gradient font-weight-bold">Lupa Kata Sandi?</a>
+                                            class="text-primary font-weight-bold">Lupa Kata Sandi?</a>
                                     </p>
                                 </div>
                             </div>
@@ -99,10 +97,10 @@
         </section>
     </main>
     <!--   Core JS Files   -->
-    <script src="<?= base_url('assets-user/js/core/popper.min.js')?>"></script>
-    <script src="<?= base_url('assets-user/js/core/bootstrap.min.js')?>"></script>
-    <script src="<?= base_url('assets-user/js/plugins/perfect-scrollbar.min.js')?>"></script>
-    <script src="<?= base_url('assets-user/js/plugins/smooth-scrollbar.min.js')?>"></script>
+    <script src="<?= base_url('assets-front/js/core/popper.min.js')?>"></script>
+    <script src="<?= base_url('assets-front/js/core/bootstrap.min.js')?>"></script>
+    <script src="<?= base_url('assets-front/js/plugins/perfect-scrollbar.min.js')?>"></script>
+    <script src="<?= base_url('assets-front/js/plugins/smooth-scrollbar.min.js')?>"></script>
     <script>
         var win = navigator.platform.indexOf('Win') > -1;
         if (win && document.querySelector('#sidenav-scrollbar')) {
@@ -114,8 +112,8 @@
     </script>
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <script src="<?= base_url('assets-front/js/core/bootstrap.bundle.min.js') ?>"></script>
     <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-    <script src="<?= base_url('assets-user/js/dashboard.min.js?v=2.0.4') ?>"></script>
 </body>
 
 </html>

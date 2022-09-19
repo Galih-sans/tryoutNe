@@ -10,8 +10,7 @@ class AdminController extends BaseController
     public function __construct()
     {
         $this->pagedata['activeTab'] = "dashboard";
-        $this->pagedata['title'] = "Dashboard Admin";
-        $this->banksoal_model = new \App\Models\Admin\BankSoalModel();
+        $this->pagedata['title'] = "Dashboard Admin - Neo Edukasi";
     }
     public function index()
     {

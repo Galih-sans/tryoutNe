@@ -5,13 +5,13 @@
   <!--     Fonts and icons     -->
   <link href="<?= base_url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700') ?>" rel="stylesheet" />
   <!-- Icons -->
-  <link href="<?=  base_url('assets-user/css/nucleo-icons.css')?>" rel="stylesheet" />
-  <link href="<?= base_url('assets-user/css/nucleo-svg.css') ?>" rel="stylesheet" />
+  <link href="<?=  base_url('assets-front/css/nucleo-icons.css')?>" rel="stylesheet" />
+  <link href="<?= base_url('assets-front/css/nucleo-svg.css') ?>" rel="stylesheet" />
   <!-- Font Awesome Icons -->
   <script src="'https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
   <link href="<?= base_url('assets/images/logo/logo1.png') ?>" rel="stylesheet" />
   <!-- CSS Files -->
-  <link id="pagestyle" href="<?= base_url('assets-user/css/test-style.min.css') ?>" rel="stylesheet" />
+  <link id="pagestyle" href="<?= base_url('assets-front/css/test-style.min.css') ?>" rel="stylesheet" />
 </head>
 
 <body class="g-sidenav-show   bg-gray-100">
@@ -154,11 +154,11 @@
   </main>
   
   <!--   Core JS Files   -->
-  <script src="<?= base_url('assets-user/js/core/popper.min.js')?>"></script>
-  <script src="<?= base_url('assets-user/js/core/bootstrap.min.js')?>"></script>
-  <script src="<?= base_url('assets-user/js/plugins/perfect-scrollbar.min.js')?>"></script>
-  <script src="<?= base_url('assets-user/js/plugins/smooth-scrollbar.min.js')?>"></script>
-  <script src="<?= base_url('assets-user/js/plugins/chartjs.min.js')?>"></script>
+  <script src="<?= base_url('assets-front/js/core/popper.min.js')?>"></script>
+  <script src="<?= base_url('assets-front/js/core/bootstrap.min.js')?>"></script>
+  <script src="<?= base_url('assets-front/js/plugins/perfect-scrollbar.min.js')?>"></script>
+  <script src="<?= base_url('assets-front/js/plugins/smooth-scrollbar.min.js')?>"></script>
+  <script src="<?= base_url('assets-front/js/plugins/chartjs.min.js')?>"></script>
   <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {
@@ -171,7 +171,7 @@
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="<?= base_url('assets-user/js/dashboard.min.js?v=2.0.4')?>"></script>
+  <script src="<?= base_url('assets-front/js/dashboard.min.js?v=2.0.4')?>"></script>
 </body>
 
 </html>

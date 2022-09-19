@@ -1,9 +1,8 @@
 <?= $this->extend('admin/layout/app') ?>
 <?= $this->section('header') ?>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.css" />
-<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-<link href="<?= base_url('assets-user/css/nucleo-icons.css')?>" rel="stylesheet" />
+<link rel="stylesheet" href="<?= base_url('css/datatables/dataTables.bootstrap4.css') ?>">
+<link rel="stylesheet" href="<?= base_url('css/datatables/buttons-bs4/buttons.bootstrap4.min.css') ?>">
 <?= $this->endSection() ?>
 <?= $this->section('content') ?>
 <div class="content">
@@ -19,8 +18,6 @@
                     data-action="state_toggle" data-action-mode="demo">
                     <i class="si si-refresh"></i>
                 </button>
-                <button type="button" class="btn-block-option" data-toggle="block-option"
-                    data-action="content_toggle"></button>
             </div>
         </div>
         <div class="block-content fs-sm">
@@ -42,9 +39,7 @@
                     </select>
                 </div>
             </div>
-            <div class="display d-none">
-
-
+            <div class="d-none">
                 <div class="row pb-2 mb-3 shadow-sm align-center">
                     <div class="col-12 col-md-12 text-right">
                         <button type="button" class="btn btn-primary btn-sm" onclick="tambah()">
@@ -57,11 +52,11 @@
                     style="width:100%">
                     <thead>
                         <tr>
-                            <th width="10%" class="fs-sm fw-normal">#</th>
-                            <th width="30%" class="fs-sm fw-normal">Jenjang</th>
-                            <th width="30%" class="fs-sm fw-normal">Kelas</th>
-                            <th width="30%" class="fs-sm fw-normal">Mata Pelajaran</th>
-                            <th width="30%" class="fs-sm fw-normal">Aksi</th>
+                            <th width="5%" class="fs-sm fw-normal">#</th>
+                            <th width="10%" class="fs-sm fw-normal">Jenjang</th>
+                            <th width="10%" class="fs-sm fw-normal">Kelas</th>
+                            <th width="20%" class="fs-sm fw-normal">Mata Pelajaran</th>
+                            <th width="10%" class="fs-sm fw-normal">Aksi</th>
                         </tr>
                     </thead>
                 </table>
@@ -71,7 +66,7 @@
 </div>
 <div class="modal fade" id="questionModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="block block-rounded block-transparent mb-0">
                 <div class="block-header block-header-ne">
@@ -85,20 +80,20 @@
                 <div class="block-content fs-sm">
                     <form id="subject_form">
                         <div class="row">
-                                <div class="col-12 col-md-12 py-2">
-                                    <span class="color-ne" style="letter-spacing: -em">
-                                        <meta charset="utf-8">⋮⋮⋮</span> &nbsp;
-                                    <span class="tittle-neo"> Mata Pelajaran</span>
-                                    <div class="form-floating mb-4 pt-2">
-                                        <input type="text" class="form-control" id="subject" name="subject"
-                                            placeholder="John Doe">
-                                        <label for="class">Mata Pelajaran</label>
-                                    </div>
+                            <div class="col-12 col-md-12 py-2">
+                                <span class="color-ne" style="letter-spacing: -em">
+                                    <meta charset="utf-8">⋮⋮⋮</span> &nbsp;
+                                <span class="tittle-neo"> Mata Pelajaran</span>
+                                <div class="form-floating mb-4 pt-2">
+                                    <input type="text" class="form-control" id="subject" name="subject"
+                                        placeholder="John Doe">
+                                    <label for="class">Mata Pelajaran</label>
                                 </div>
+                            </div>
                         </div>
                     </form>
                 </div>
-                <div class="block-content block-content-full text-end bg-body">
+                <div class="block-content block-content-full text-end bg-body text-center">
                     <button type="button" class="btn btn-sm btn-secondary me-1" data-bs-dismiss="modal">Tutup</button>
                     <button type="button" class="btn btn-sm btn-primary" data-bs-dismiss="modal"
                         onclick="insert_data()">Simpan</button>
@@ -168,15 +163,34 @@
         </div>
     </div>
 </div>
-<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/js/bootstrap-select.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
     integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
 </script>
-<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.js"></script>
+<script src="<?= base_url('css/datatables/jquery.dataTables.min.js') ?>"></script>
+<script src="<?= base_url('css/datatables/dataTables.bootstrap4.min.js') ?>"></script>
+<script src="<?= base_url('css/datatables/buttons/dataTables.buttons.min.js') ?>"></script>
+<script src="<?= base_url('css/datatables/buttons/buttons.print.min.js') ?>"></script>
+<script src="<?= base_url('css/datatables/buttons/buttons.html5.min.js') ?>"></script>
+<script src="<?= base_url('css/datatables/buttons/buttons.flash.min.js') ?>"></script>
+<script src="<?= base_url('css/datatables/buttons/buttons.colVis.min.js') ?>"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+
+<!-- Page JS Code -->
+<script src="<?= base_url('js/pages/tables_datatables.js') ?>"></script>
 <script>
     $(document).ready(function () {
-
+        $("#questionModal").keyup(function (event) {
+            if (event.keyCode == 13) {
+                insert_data();
+                $("#questionModal").modal('hide');
+            } else if (event.keyCode == 27) {
+                $("#questionModal").modal('hide');
+            }
+        });
         $(function () {
             $('#class').on('change', function () {
                 $('.d-none').addClass('d-block').removeClass('d-none');
@@ -187,8 +201,10 @@
         $('#refresh').on('click', refresh_dt)
         $(document).on('click', '.delete-button', function () {
             let id = $(this).data("id");
+            console.log();
             delete_data(id);
         });
+
         $(document).on('click', '.edit-button', function () {
             let data_id = $(this).data("id");
             let data_class = $(this).data("class");
@@ -197,7 +213,6 @@
             console.log(data_class);
             console.log(data_subject);
             $('#edit_class_id option[value=' + data_class + ']').prop('selected', true);
-            // $("#edit_class_id").selectpicker('refresh');
             $('#edit_subject').val(data_subject);
             $('#subject_id').val(data_id);
             $('#editModal').modal('show');
@@ -241,10 +256,15 @@
         });
     }
 
-    function refresh_dt() {
-        $(".selectpicker").selectpicker('val','');
+    function reset_dt() {
+        $(".selectpicker").selectpicker('val', '');
         $('.d-block').addClass('d-none').removeClass('d-block');
     }
+
+    function refresh_dt() {
+        show_dt_class($('#class').val());
+    }
+
     function tambah() {
         $('#questionModal').modal('show');
         // $('.selectpicker').selectpicker('refresh');
@@ -260,7 +280,7 @@
         $.ajax({
             url: "<?= route_to('admin.subject.add_subject') ?>",
             type: "POST",
-            data: $('#subject_form').serialize()+ '&class=' + $('#class').val(),
+            data: $('#subject_form').serialize() + '&class=' + $('#class').val(),
             success: function (d) {
                 var d = JSON.parse(d);
                 if (d.success == true) {
@@ -280,8 +300,7 @@
                         showConfirmButton: false
                     });
                 }
-
-                show_dt_class($('#class').val());
+                refresh_dt();
             },
             error: function (error) {
                 console.log(error);
@@ -331,50 +350,106 @@
 
     function show_dt_class(data) {
         $('#example').DataTable({
-            processing: true,
+            oLanguage: {
+                sProcessing: '<div class="spinner-border neo" role="status"><span class="sr-only"></span></div>'
+            },
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center mx-0 yx-0'B><'col-sm-4'f>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-6'i><'col-sm-6'p>>",
+            buttons: [{
+                    extend: 'copy',
+                    exportOptions: {
+                        columns: [0, 1, 2, 3]
+                    },
+                    className: 'fs-sm btn btn-sm btn-outline-secondary glyphicon glyphicon-duplicate',
+                    text: '<i class="fa-sharp fa-solid fa-copy "></i>',
+                    titleAttr: 'Copy'
+                },
+                {
+                    extend: 'excel',
+                    exportOptions: {
+                        columns: [0, 1, 2, 3]
+                    },
+                    className: 'fs-sm btn btn-sm btn-outline-success glyphicon glyphicon-list-alt',
+                    text: '<i class="fa-sharp fa-solid fa-file-excel "></i>',
+                    titleAttr: 'Excel'
+                },
+
+                {
+                    extend: 'print',
+                    exportOptions: {
+                        columns: [0, 1, 2, 3]
+                    },
+                    className: 'fs-sm btn btn-sm btn-outline-primary glyphicon glyphicon-print',
+                    text: '<i class="fa-sharp fa-solid fa-print "></i>',
+                    titleAttr: 'PRINT'
+                },
+                {
+                    extend: 'pdf',
+                    exportOptions: {
+                        columns: [0, 1, 2, 3]
+                    },
+                    className: 'fs-sm btn btn-sm btn-outline-danger glyphicon glyphicon-file',
+                    text: '<i class="fa-sharp fa-solid fa-file-pdf "></i>',
+                    titleAttr: 'PDF',
+                    customize: function (doc) {
+                        var colCount = new Array();
+                        $('#example').find('tbody tr:first-child td').each(function () {
+                            if ($(this).attr('colspan')) {
+                                for (var i = 1; i <= $(this).attr('colspan'); $i++) {
+                                    colCount.push('*');
+                                }
+                            } else {
+                                colCount.push('*');
+                            }
+                        });
+                        colCount.pop();
+                        doc.content[1].table.widths = colCount;
+                    }
+                },
+            ],
             serverSide: true,
+            processing: true,
             bDestroy: true,
-            bPaginate: false,
-            searching: false,
-            bInfo: false,
+            bPaginate: true,
+            pagination: true,
+            searching: true,
+            bInfo: true,
+            tInfo: true,
+            autoWidth: false,
+            responsive: true,
+            pagingType: "full_numbers",
+            paging: true,
+            lengthMenu: [
+                [5, 10, 25, 50, 100, -1],
+                [5, 10, 25, 50, 100, 'All'],
+            ],
+            columnDefs: [{
+                targets: [0, 3],
+                orderable: false,
+                className: "text-center",
+            }],
             ajax: {
                 url: "<?= route_to('admin.subject.dt_subject') ?>",
                 type: "POST",
                 data: {
-                    class_id: data
+                    class_id: data,
                 },
-            },
-            columnDefs: [{
-                    targets: [0, 1, 2, 3],
-                    orderable: true,
-                },
-                {
-                    width: "1%",
-                    targets: [0, -1],
-                },
-                {
-                    className: "dt-nowrap",
-                    targets: [-1],
+
+                error: function () { // error handling
+                    $(".tabel_serverside-error").html("");
+                    $("#tabel_serverside").append(
+                        '<tbody class="tabel_serverside-error"><tr><th colspan="3">Data Tidak Ditemukan di Server</th></tr></tbody>'
+                    );
+                    $("#tabel_serverside_processing").css("display", "none");
                 }
-            ],
-            columns: [{
-                    "data": "number"
-                },
-                {
-                    "data": "level"
-                },
-                {
-                    "data": "class"
-                },
-                {
-                    "data": "subject"
-                },
-                {
-                    "data": "action"
-                },
-            ],
-        });
-    }
+            },
+            initComplete: function (settings, json) {
+                $('div.dataTables_length select').addClass('selectpicker border');
+                $('.selectpicker').selectpicker();
+            }
+        })
+    };
 </script>
 
 <?= $this->endSection() ?>

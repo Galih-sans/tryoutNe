@@ -10,9 +10,10 @@ class dtestcontroller extends BaseController
     public function __construct()
     {
         $this->pagedata['activeTab'] = "dtest";
+        $this->pagedata['title'] = "Detail Test - Neo Edukasi";
     }
     public function index()
     {
-        return view('user/pages/detail-test/index', ['pagedata'=>$this->pagedata]);
+        return view('user/pages/detail-test/index', ['data'=>$this->pagedata]);
     }
 }

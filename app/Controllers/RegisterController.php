@@ -18,7 +18,7 @@ class RegisterController extends BaseController
 
     public function __construct()
     {
-        $this->data['title'] = "Neo Edukasi - Masuk Atau Daftar";
+        $this->data['title'] = "Masuk Atau Daftar - Neo Edukasi";
         $this->ClassModel = new ClassModel();
         $this->SchoolModel = new ModelSekolah();
         $this->StudentModel = new StudentModel();
@@ -164,19 +164,19 @@ class RegisterController extends BaseController
 
     public function forgetPassword()
     {
-        $pagedata['tittle'] = "Neo Edukasi - Masuk Atau Daftar";
+        $pagedata['tittle'] = "Masuk Atau Daftar - Neo Edukasi";
         if ($this->request->getMethod() == 'post') {
             $data = [
                 'email'    => $this->request->getVar('email'),
             ];
             if(!$this->StudentModel->where('email',$data['email'])->first()){
                 session()->setFlashData("email_verification",'<div class="alert alert-warning" role="alert">Maaf Email anda belum terdaftar. Silahkan mendaftar terlebih dahulu</a></div>');
-                return view('auth/forget2', ['pagedata'=>$pagedata]);
+                return view('auth/forget', ['pagedata'=>$pagedata]);
             }else{
                 $user = $this->StudentModel->where('email',$data['email'])->first();
                 $this->emailController->sendForgotPass($data['email'], 'Konfirmasi Email untuk Mengatur Ulang Kata Sandi.',$user);
                 session()->setFlashData("email_verification",'<div class="alert alert-success" role="alert">Email Untuk Mengatur Ulang Password Berhasil Dikirim. Silahkan Cek Email Anda.</div>');
-                return view('auth/forget2', ['pagedata'=>$pagedata]);
+                return view('auth/forget', ['pagedata'=>$pagedata]);
             }
         }
         return view('auth/forget',['pagedata'=>$pagedata]);

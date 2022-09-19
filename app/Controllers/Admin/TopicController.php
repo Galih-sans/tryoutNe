@@ -34,38 +34,46 @@ class TopicController extends BaseController
     public function dt_topic()
     {
         if ($this->request->isAJAX()) {
-            $subject_id = $this->request->getVar('subject_id');
-            $topicData = $this->TopicModel->get_datatables($subject_id);
+            $request = \Config\Services::request();
+            $list_data = $this->TopicModel;
+            $subject = $request->getPost("subject_id");
+            $where = ['to_subjects.id !=' => 0];
+                    //Column Order Harus Sesuai Urutan Kolom Pada Header Tabel di bagian View
+                    //Awali nama kolom tabel dengan nama tabel->tanda titik->nama kolom seperti pengguna.nama
+            $column_order = array('','to_class.level','to_class.class', 'to_subjects.subject','to_topics.topic');
+            $column_search = array('to_class.level','to_class.class', 'to_subjects.subject','to_topics.topic');
+            $order = array('to_topics.id' => 'asc');
+            $list = $list_data->get_datatables($subject, $column_order, $column_search, $order, $where);
             $data = array();
-            $no = 0;
-            foreach ($topicData as $topic) {
+            $no = $request->getPost("start");
+            foreach ($list as $lists) {
                 $no++;
-                $row = array();
-                $subjectData = $this->SubjectModel->get_subject_row($topic->subject_id);
-                $classData = $this->ClassModel->get_class($subjectData->class_id);
-                $row['number']  = $no;
-                $row['level']  = $classData->level ;
-                $row['class']  = $classData->class ;
-                $row['subject']  = $subjectData->subject;
-                $row['topic']  = $topic->topic;
-                $row['action']  = '
-                <div class="block-options">
-                <button type="button" class="btn-block-option btn btn-light text-primary edit-button" data-id="'.$topic->id.'" data-class="'.$topic->subject_id.'"'.'" data-subject="'.$topic->topic.'">
-                    <i class="fa-solid fa-pen-to-square"></i>
-                </button>
-                <button type="button" class="btn-block-option btn btn-light text-primary delete-button" data-id="'.$topic->id.'">
-                <i class="fa-solid fa-trash"></i>
-                </button>
-                </div>
-                ';
+                $row    = array();
+                $row[] = $no;
+                $row[] = $lists->level;
+                $row[] = $lists->class;
+                $row[] = $lists->subject;
+                $row[] = $lists->topic;
+                $row[]  = '
+                    <div class="block-options text-center">
+                    <button type="button" class="btn btn-sm btn-warning  edit-button" data-id="'.$lists->id.'" data-level="'.$lists->level.'"'.'" data-class="'.$lists->class.'">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </button>
+                    <button type="button" class="btn btn-sm btn-danger  delete-button" data-id="'.$lists->id.'">
+                    <i class="fa-solid fa-trash"></i>
+                    </button>
+                    </div>
+                    ';
                 $data[] = $row;
             }
             $output = array(
-                "draw" => true,
+                "draw" => $request->getPost("draw"),
+                "recordsTotal" => count($data),
+                "recordsFiltered" => count($data),
                 "data" => $data,
+                
             );
-    
-            echo json_encode($output);
+            return json_encode($output);
         }
     }
 
@@ -109,8 +117,6 @@ class TopicController extends BaseController
                 $this->output['success'] = false;
                 $this->output['message']  = 'Data Berhasil Ditambahkan';
             }
-
-
             echo json_encode($this->output);
         }
     }

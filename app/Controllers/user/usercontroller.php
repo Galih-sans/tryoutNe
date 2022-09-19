@@ -9,7 +9,8 @@ class usercontroller extends BaseController
     
     public function index()
     {
+        $data['title'] = "Dashboard - Neo Edukasi";
         $data['activeTab'] = "dashboard";
-        return view('user/pages/dashboard/index', $data);
+        return view('user/pages/dashboard/index', ['data'=>$data]);
     }
 }

@@ -11,7 +11,7 @@ class LoginController extends BaseController
     public $pagedata;
     public function __construct()
     {
-        $this->pagedata['tittle'] = "Neo Edukasi - Masuk Atau Daftar";
+        $this->pagedata['tittle'] = "Masuk Atau Daftar - Neo Edukasi";
     }
     public function login()
     {

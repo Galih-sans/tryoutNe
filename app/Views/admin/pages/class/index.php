@@ -1,9 +1,8 @@
 <?= $this->extend('admin/layout/app') ?>
 <?= $this->section('header') ?>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.css" />
-<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-<link href="<?= base_url('assets-user/css/nucleo-icons.css')?>" rel="stylesheet" />
+<link rel="stylesheet" href="<?= base_url('css/datatables/dataTables.bootstrap4.css') ?>">
+<link rel="stylesheet" href="<?= base_url('css/datatables/buttons-bs4/buttons.bootstrap4.min.css') ?>">
 <?= $this->endSection() ?>
 <?= $this->section('content') ?>
 <div class="content">
@@ -19,8 +18,6 @@
                     data-action="state_toggle" data-action-mode="demo">
                     <i class="si si-refresh"></i>
                 </button>
-                <button type="button" class="btn-block-option" data-toggle="block-option"
-                    data-action="content_toggle"></button>
             </div>
         </div>
         <div class="block-content fs-sm">
@@ -159,18 +156,28 @@
         </div>
     </div>
 </div>
-<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/js/bootstrap-select.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
     integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
 </script>
-<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.js"></script>
+<script src="<?= base_url('css/datatables/jquery.dataTables.min.js') ?>"></script>
+<script src="<?= base_url('css/datatables/dataTables.bootstrap4.min.js') ?>"></script>
+<script src="<?= base_url('css/datatables/buttons/dataTables.buttons.min.js') ?>"></script>
+<script src="<?= base_url('css/datatables/buttons/buttons.print.min.js') ?>"></script>
+<script src="<?= base_url('css/datatables/buttons/buttons.html5.min.js') ?>"></script>
+<script src="<?= base_url('css/datatables/buttons/buttons.flash.min.js') ?>"></script>
+<script src="<?= base_url('css/datatables/buttons/buttons.colVis.min.js') ?>"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+
+<!-- Page JS Code -->
+<script src="<?= base_url('js/pages/tables_datatables.js') ?>"></script>
 <script>
     $(document).ready(function () {
-
-        $(function () {
-            show_dt_class();
-        });
+        show_dt_class();
         $('#refresh').on('click', refresh_dt)
         $(document).on('click', '.delete-button', function () {
             let id = $(this).data("id");
@@ -342,45 +349,89 @@
 
     function show_dt_class() {
         $('#example').DataTable({
-            processing: true,
+            oLanguage: {sProcessing: '<div class="spinner-border neo" role="status"><span class="sr-only"></span></div>'},
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center mx-0 yx-0'B><'col-sm-4'f>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-6'i><'col-sm-6'p>>",
+            buttons: [{
+                    extend: 'copy',
+                    exportOptions: {
+                        columns: [0, 1, 2]
+                    },
+                    className: 'fs-sm btn btn-sm btn-outline-secondary glyphicon glyphicon-duplicate',
+                    text: '<i class="fa-sharp fa-solid fa-copy "></i>',
+                    titleAttr: 'Copy'
+                },
+                {
+                    extend: 'excel',
+                    exportOptions: {
+                        columns: [0, 1, 2]
+                    },
+                    className: 'fs-sm btn btn-sm btn-outline-success glyphicon glyphicon-list-alt',
+                    text: '<i class="fa-sharp fa-solid fa-file-excel "></i>',
+                    titleAttr: 'Excel'
+                },
+
+                {
+                    extend: 'print',
+                    exportOptions: {
+                        columns: [0, 1, 2]
+                    },
+                    className: 'fs-sm btn btn-sm btn-outline-primary glyphicon glyphicon-print',
+                    text: '<i class="fa-sharp fa-solid fa-print "></i>',
+                    titleAttr: 'PRINT'
+                },
+                {
+                    extend: 'pdf',
+                    exportOptions: {
+                        columns: [0, 1, 2]
+                    },
+                    className: 'fs-sm btn btn-sm btn-outline-danger glyphicon glyphicon-file',
+                    text: '<i class="fa-sharp fa-solid fa-file-pdf "></i>',
+                    titleAttr: 'PDF'
+                },
+            ],
             serverSide: true,
+            processing: true,
             bDestroy: true,
-            bPaginate: false,
-            searching: false,
-            bInfo: false,
+            bPaginate: true,
+            pagination: true,
+            searching: true,
+            bInfo: true,
+            tInfo: true,
+            pagingType: "full_numbers",
+            paging: true,
+            lengthMenu: [
+                [5, 10, 25, 50, 100, -1],
+                [5, 10, 25, 50, 100, 'All'],
+            ],
+            columnDefs: [{
+                targets: [0, 3],
+                orderable: false,
+                className: "text-center",
+            }, {
+                width: "15%",
+                targets: [3],
+            }, ],
             ajax: {
                 url: "<?= route_to('admin.class.dt_class') ?>",
                 type: "POST",
                 data: {},
-            },
-            columnDefs: [{
-                    targets: [0, 1, 2, 3],
-                    orderable: true,
-                },
-                {
-                    width: "1%",
-                    targets: [0, -1],
-                },
-                {
-                    className: "dt-nowrap",
-                    targets: [-1],
+                error: function () { // error handling
+                    $(".tabel_serverside-error").html("");
+                    $("#tabel_serverside").append(
+                        '<tbody class="tabel_serverside-error"><tr><th colspan="3">Data Tidak Ditemukan di Server</th></tr></tbody>'
+                    );
+                    $("#tabel_serverside_processing").css("display", "none");
                 }
-            ],
-            columns: [{
-                    "data": "number"
-                },
-                {
-                    "data": "level"
-                },
-                {
-                    "data": "class"
-                },
-                {
-                    "data": "action"
-                },
-            ],
-        });
-    }
+            },
+            initComplete: function (settings, json) {
+                $('div.dataTables_length select').addClass('selectpicker border');
+                $('.selectpicker').selectpicker();
+            }
+
+        })
+    };
 </script>
 
 <?= $this->endSection() ?>

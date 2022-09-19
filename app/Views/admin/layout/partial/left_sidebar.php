@@ -63,9 +63,9 @@
                 </ul>
             </li>
             <li class="nav-main-item"> 
-                <a class="nav-main-link <?= $pagedata['activeTab'] =="tryout"?'active':''; ?>" href="<?= route_to('admin.tryout.index')?>">
+                <a class="nav-main-link <?= $pagedata['activeTab'] =="test"?'active':''; ?>" href="<?= route_to('admin.test.index')?>">
                     <i class="nav-main-link-icon fa-solid fa-clipboard-list"></i>
-                    <span class="nav-main-link-name">Try Out</span>
+                    <span class="nav-main-link-name">Daftar Test</span>
                 </a>
             </li>
 

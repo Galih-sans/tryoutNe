@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.css" />
 <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-<link href="<?= base_url('assets-user/css/nucleo-icons.css')?>" rel="stylesheet" />
+<link href="<?= base_url('assets-front/css/nucleo-icons.css')?>" rel="stylesheet" />
 <?= $this->endSection() ?>
 <?= $this->section('content') ?>
 <div class="content">
