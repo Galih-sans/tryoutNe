@@ -1,19 +1,17 @@
-<div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="block block-rounded mb-0">
                 <div class="block-header block-header-ne">
-                    <h3 class="block-title text-white">Tambah Test Baru : </h3>
+                    <h3 class="block-title text-white">Ubah Test  </h3>
                     <div class="block-options">
                         <button type="button" class="btn-block-option-white" data-dismiss="modal" aria-label="Close"> <i
                                 class="fa fa-fw fa-times"></i></button>
                     </div>
                 </div>
                 <div class="modal-body">
-                    <!-- <form id="myForm" action="" method="post" > -->
-
-                    <div id="smartwizard">
+                    <div id="smartwizard-edit">
                         <ul class="nav">
                             <li class="nav-item">
                                 <a class="nav-link" href="#step-1">
@@ -31,14 +29,15 @@
 
                         <div class="tab-content">
                             <div id="step-1" class="tab-pane" role="tabpanel" aria-labelledby="step-1">
-                                <form id="form-1" class="needs-validation" novalidate>
+                                <form id="edit-form-1" class="needs-validation" novalidate>
+                                <input type="hidden" id="test_id" name="test_id">
                                     <div class="row">
                                         <div class="col-12 col-md-12 py-1">
                                             <span class="fw-bolder text-neo">
                                                 <meta charset="utf-8">⋮⋮</span>
                                             <label class="fw-normal fs-6 text-black-50"> Nama Test</label>
-                                            <input type="text" class="form-control form-rounded" id="test_name"
-                                                name="test_name" placeholder="Nama Test" required>
+                                            <input type="text" class="form-control form-rounded" id="edit_test_name"
+                                                name="edit_test_name" placeholder="Nama Test" required>
                                             <div class="valid-feedback">
 
                                             </div>
@@ -51,13 +50,13 @@
                                                 <div class="col-12 col-md-6">
                                                     <span class="fw-bolder text-neo">
                                                         <meta charset="utf-8">⋮⋮</span>
-                                                    <label class="fw-normal text-black-50"> Tanggal Mulai</label>
+                                                    <label class="fw-normal text-black-50"> `Tanggal Mulai`</label>
                                                     <div class="form-group">
-                                                        <div class="input-group date datetimepicker" id="datetimepicker"
+                                                        <div class="input-group date datetimepicker" id="datetimepicker3"
                                                             data-target-input="nearest">
                                                             <input type="text"
-                                                                class="form-control input-group-addon datetimepicker-input "
-                                                                data-target="#datetimepicker1" name="start_date"
+                                                                class="form-control input-group-addon datetimepicker-input edit_start_date"
+                                                                data-target="#datetimepicker1" name="edit_start_date"
                                                                 data-toggle="datetimepicker" onkeypress="return false;"
                                                                 required />
                                                             <span class="input-group-text"><i
@@ -75,10 +74,10 @@
                                                     <span class="fw-bolder text-neo">
                                                         <meta charset="utf-8">⋮⋮</span>
                                                     <label class="fw-normal text-black-50"> Tanggal Selesai</label>
-                                                    <div class="input-group date datetimepicker" id="datetimepicker2"
+                                                    <div class="input-group date datetimepicker" id="datetimepicker4"
                                                         data-target-input="nearest">
-                                                        <input type="text" name="end_date"
-                                                            class="form-control input-group-addon datetimepicker-input"
+                                                        <input type="text" name="edit_end_date"
+                                                            class="form-control input-group-addon datetimepicker-input edit_end_date"
                                                             data-target="#datetimepicker2" data-toggle="datetimepicker"
                                                             onkeypress="return false;" required />
                                                         <span class="input-group-text"><i
@@ -97,8 +96,8 @@
                                             <span class="fw-bolder text-neo">
                                                 <meta charset="utf-8">⋮⋮</span>
                                             <label class="fw-normal text-black-50"> Durasi ( Menit )</label>
-                                            <input type="number" class="form-control form-rounded" id="duration"
-                                                name="duration" placeholder="Durasi Test" required>
+                                            <input type="number" class="form-control form-rounded" id="edit_duration"
+                                                name="edit_duration" placeholder="Durasi Test" required>
                                             <div class="valid-feedback">
 
                                             </div>
@@ -111,7 +110,7 @@
                                                 <meta charset="utf-8">⋮⋮</span>
                                             <label class="fw-normal text-black-50"> Jumlah Soal</label>
                                             <input type="number" class="form-control form-rounded"
-                                                id="number_of_questions" name="number_of_questions"
+                                                id="edit_number_of_questions" name="edit_number_of_questions"
                                                 placeholder="Jumlah Soal" required>
                                             <div class="valid-feedback">
 
@@ -124,8 +123,8 @@
                                             <span class="fw-bolder text-neo">
                                                 <meta charset="utf-8">⋮⋮</span>
                                             <label class="fw-normal text-black-50"> Kelas</label>
-                                            <select name="class" id="class" title="Please select..."
-                                                class="form-control selectpicker border" data-live-search="true"
+                                            <select name="edit_class" id="edit_class" title="Please select..."
+                                                class="form-control selectpicker border edit_class" data-live-search="true"
                                                 data-style="customSelect" data-dropup-auto="false" data-size="5"
                                                 required>
                                                 <?php if($data['class']): ?>
@@ -150,8 +149,8 @@
                                             <span class="fw-bolder text-neo">
                                                 <meta charset="utf-8">⋮⋮</span>
                                             <label class="fw-normal text-black-50"> Jenis ( Gratis / Berbayar )</label>
-                                            <select name="type" title="Please select..."
-                                                class="form-control selectpicker border" id="type"
+                                            <select name="edit_type" title="Please select..."
+                                                class="form-control selectpicker border edit_type" id="type"
                                                 data-live-search="true" data-style="customSelect"
                                                 data-dropup-auto="false" data-size="6" required>
                                                 <option value="free">Gratis</option>
@@ -165,12 +164,12 @@
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6 py-1">
-                                            <div id="price-div" class="d-none">
+                                            <div id="edit-price-div" class="d-none">
                                                 <span class="fw-bolder text-neo">
                                                     <meta charset="utf-8">⋮⋮</span>
                                                 <label class="fw-normal text-black-50"> Harga</label>
-                                                <input type="text" class="form-control form-rounded" id="price"
-                                                    name="price" placeholder="Harga">
+                                                <input type="text" class="form-control form-rounded" id="edit_price"
+                                                    name="edit_price" placeholder="Harga">
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6 py-1">
@@ -180,21 +179,21 @@
                                             <div class="space-y-4 mx-4">
                                                 <div class="form-check form-switch">
                                                     <input class="form-check-input" type="checkbox" value="1"
-                                                        id="random_question" name="random_question">
+                                                        id="edit_random_question" name="edit_random_question">
                                                     <label class="form-check-label fst-normal text-black-75"
-                                                        for="random_question">Soal Acak</label>
+                                                        for="edit_random_question">Soal Acak</label>
                                                 </div>
                                                 <div class="form-check form-switch">
                                                     <input class="form-check-input" type="checkbox" value="1"
-                                                        id="random_answer" name="random_answer" >
+                                                        id="edit_random_answer" name="edit_random_answer" >
                                                     <label class="form-check-label fst-normal text-black-75"
-                                                        for="random_answer">Jawaban Acak</label>
+                                                        for="edit_random_answer">Jawaban Acak</label>
                                                 </div>
                                                 <div class="form-check form-switch">
                                                     <input class="form-check-input" type="checkbox" value="1"
-                                                        id="show_result" name="show_result">
+                                                        id="edit_show_result" name="edit_show_result">
                                                     <label class="form-check-label fst-normal text-black-75"
-                                                        for="show_result">Tunjukan Hasil Test</label>
+                                                        for="edit_show_result">Tunjukan Hasil Test</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -202,7 +201,7 @@
                                 </form>
                             </div>
                             <div id="step-2" class="tab-pane " role="tabpanel" aria-labelledby="step-2">
-                                <form id="form-2" class="needs-validation" novalidate>
+                                <form id="edit-form-2" class="needs-validation" novalidate>
                                     <div class="row">
                                         <div class="col-12 col-md-12 py-1">
                                             <span class="fw-bolder text-neo">
@@ -213,19 +212,19 @@
                                                     <div class="input-group mb-3">
                                                         <div class="col-12 col-md-9">
                                                             <input type="text" class="form-control form-rounded "
-                                                                id="subject_name" placeholder="Kelas" disabled>
+                                                                id="edit_subject_name" placeholder="Kelas" disabled>
                                                         </div>
                                                         <div class="col-12 col-md-2">
                                                             <input type="number" class="form-control form-rounded "
-                                                                id="total_questipon" placeholder="Jumlah Soal" disabled>
+                                                                id="edit_total_questipon" placeholder="Jumlah Soal" disabled>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-12" id="dynamicAddRemove">
+                                                <div class="col-12" id="edit-dynamicAddRemove">
                                                     <div class="input-group mb-3 addnew">
                                                         <div class="col-12 col-md-5">
                                                             <select class="form-control form-select subject-form"
-                                                                name="subject[0]" id="subject"
+                                                                name="composition[0][subject]" id="edit_subject"
                                                                 data-placeholder="Silahkan Pilih Mata Pelajaran"
                                                                 disabled required>
                                                                 <option disabled='disabled' SELECTED>Silahkan Pilih Mata
@@ -233,8 +232,8 @@
                                                             </select>
                                                         </div>
                                                         <div class="col-12 col-md-4 topic-div" id="topic-div">
-                                                            <select class="form-control form-select topic" id="topic"
-                                                                name="topic[0]"
+                                                            <select class="form-control form-select topic" id="edit_topic"
+                                                                name="composition[0][topic]"
                                                                 data-placeholder="Silahkan Pilih Topik Mata Pelajaran"
                                                                 disabled required>
                                                                 <option disabled='disabled' SELECTED>Silahkan Pilih
@@ -242,12 +241,12 @@
                                                             </select>
                                                         </div>
                                                         <div class="col-12 col-md-2">
-                                                            <input type="number" class="form-control form-rounded number-of-question"
-                                                                id="number_question" name="number_question[0]"
+                                                            <input type="number" class="form-control form-rounded edit-number-of-question"
+                                                                id="edit_number_question" name="composition[0][number_question]"
                                                                 placeholder="Jumlah Soal">
                                                         </div>
                                                         <div class="col-12 col-md-1">
-                                                            <button type="button" name="add" id="dynamic-ar"
+                                                            <button type="button" name="add" id="edit-dynamic-ar"
                                                                 class="btn btn-primary" type="button"><i
                                                                     class="fa-solid fa-plus"></i></button>
                                                         </div>

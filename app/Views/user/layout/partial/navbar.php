@@ -23,7 +23,7 @@
         <div role="separator" class="dropdown-divider m-0"></div>
         <a class="nav-link text-dark" href="<?= route_to('user.test.index')?>">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-chart-bar-32 text-primary text-sm opacity-10"></i>
+              <i class="ni ni-chart-bar-32 text-danger text-sm opacity-10"></i>
             </div>
             <span class="nav-link-text ms-1">Daftar Test</span>
           </a>
@@ -36,10 +36,10 @@
             <span class="nav-link-text ms-1">Riwayat Test</span>
           </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item"> 
           <a class="nav-link text-dark" href="<?= route_to('user.transaksi.index')?>">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-credit-card text-success text-sm opacity-10"></i>
+              <i class="ni ni-credit-card text-info text-sm opacity-10"></i>
             </div>
             <span class="nav-link-text ms-1">Riwayat Transaksi</span>
           </a>

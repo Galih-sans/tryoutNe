@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
 <title><?= $pagedata['title'] ?></title>
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
@@ -23,6 +24,7 @@
         <?= $this->include('admin/layout/partial/left_sidebar') ?>
         <?= $this->include('admin/layout/partial/header') ?>
         <main id="main-container">
+            <?= $this->renderSection('aside') ?>
             <?= $this->renderSection('content') ?>
         </main>
         <?= $this->include('admin/layout/partial/footer') ?>

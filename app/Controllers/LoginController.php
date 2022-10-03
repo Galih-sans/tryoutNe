@@ -67,6 +67,11 @@ class LoginController extends BaseController
 
     private function setUserSession($user,$isAdmin)
     {
+        $encrypter = \Config\Services::encrypter();
+       
+        // decrypt the message 
+        // $txt = $encrypter->decrypt(base64_decode($encodedMsg));
+        //                'id' => base64_encode($encrypter->encrypt($user['id'])),
         if($isAdmin == true){
             $data = [
                 'id' => $user['id'],
@@ -78,11 +83,10 @@ class LoginController extends BaseController
             ];
         }else{
             $data = [
-                'id' => $user['id'],
+                'id' => base64_encode($encrypter->encrypt($user['id'])),
                 'name' => $user['full_name'],
-                'phone_number' => $user['phone_number'],
-                'email' => $user['email'],
                 'isLoggedIn' => true,
+                'isUser' => true,
             ];
         }
         session()->set($data);

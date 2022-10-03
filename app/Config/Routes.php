@@ -60,7 +60,7 @@ $routes->match(['get', 'post'], 'resetpassword/(:any)', 'RegisterController::res
 //Logout
 $routes->get('logout', 'LoginController::logout');
 
-$routes->group("", ["filter" => "auth", "namespace" => "App\Controllers\user"], function($routes){
+$routes->group("", ["filter" => "isuser", "namespace" => "App\Controllers\user"], function($routes){
     // URL - /user
     $routes->get("/", "usercontroller::index", ['as' => 'user.dashboard']);
     // URL - /user/test
@@ -121,7 +121,12 @@ $routes->group("admin",["filter" => "isadmin", "namespace" => "App\Controllers\A
         // URL - /admin
         $routes->get("/", "TestController::index", ['as' => 'admin.test.index']);
         $routes->match(["get", "post"], "index", "TestController::index");
-        $routes->match(["get", "post"], "dt_test", "TestController::listdata", ['as' => 'admin.test.dt_test']);
+        $routes->match(["get", "post"], "dt_test", "TestController::dt_test", ['as' => 'admin.test.dt_test']);
+        $routes->match(["get", "post"], "add_test", "TestController::create",['as' => 'admin.test.add_test']);
+        $routes->match(["get", "post"], "edit_test", "TestController::update",['as' => 'admin.test.edit_test']);
+        $routes->match(["get", "post"], "remove_test", "TestController::delete",['as' => 'admin.test.remove_test']);
+        $routes->match(["get", "post"], "get_test", "TestController::detail",['as' => 'admin.test.get_test']);
+        $routes->match(["get", "post"], "get_edit_test", "TestController::get_detail",['as' => 'admin.test.get_edit']);
     });
     $routes->group("bank-soal", function($routes){
         // URL - /admin
