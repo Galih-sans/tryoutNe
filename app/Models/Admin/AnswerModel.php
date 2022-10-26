@@ -78,4 +78,26 @@ class AnswerModel extends Model
         $query = $this->builder->where('question_id',$id)->get();
         return $query->getResult();
     }
+    public function get_answer1($id)
+    {
+        $query = $this->builder->select('id,answer')->where('question_id',$id)->get()->getResult();
+
+        $data = array();
+        foreach($query as $item){
+            $data[] = array(
+                "id"=>$item->id,
+                "answer"=>$item->answer,
+            );
+        }
+        return $data;
+    }
+
+    public function checkanswer($id)
+    {
+        $query = $this->builder->select('answer_isright')->where('id',$id)->get()->getFirstRow();
+        foreach($query as $item){
+            $data = $item;
+        }
+        return $data;
+    }
 }

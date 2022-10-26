@@ -13,13 +13,16 @@
         href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
     <!-- Nucleo Icons -->
     <link href="<?= base_url('assets-front/css/nucleo-icons.css') ?>" rel="stylesheet" />
+    <script src="<?= base_url('js/main.js')?>" crossorigin="anonymous"></script>
     <!-- Font Awesome Icons -->
     <script src="https://kit.fontawesome.com/b2509b26f8.js" crossorigin="anonymous"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Material Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
     <link id="pagestyle" href="<?= base_url('css/admin_main.css') ?>" rel="stylesheet" />
     <!-- CSS Files -->
     <link id="pagestyle" href="<?= base_url('assets-front/css/material-dashboard.css?v=3.0.4')?>" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 
 <body class="g-sidenav-show fixed-top bg-gray-200">

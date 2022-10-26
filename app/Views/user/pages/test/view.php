@@ -9,10 +9,10 @@
                     <!-- Lessons -->
                     <div class="block block-rounded">
                         <div class="block-header block-content-full bg-neo-dark ribbon ribbon-modern ribbon-glass">
-                            <h3 class="block-title text-white">SIMAK UI</h3>
+                            <h3 class="block-title text-white"><?= $data['testData']->test_name ?></h3>
                             <div class="text-right">
                                 <div class="ribbon-box">
-                                    Gratis
+                                    <?= ucfirst($data['testData']->type) ?>
                                 </div>
                             </div>
                         </div>
@@ -20,19 +20,19 @@
                             <div class="co-12 col-md-5">
                                 <div class="border-right">
                                     <p class="fw-bold">Tanggal Mulai</p>
-                                    <p class="text-neo">09 Juni 2022, 10:00 WIB</p>
+                                    <p class="text-neo"><?= date("d M Y H:i", $data['testData']->begin_time) ?></p>
                                 </div>
                             </div>
                             <div class="co-12 col-md-5">
                                 <div class="border-right">
                                     <p class="fw-bold">Tanggal Tutup</p>
-                                    <p class="text-neo">01 Juli 2022, 10:00 WIB</p>
+                                    <p class="text-neo"><?= date("d M Y H:i", $data['testData']->end_time) ?></p>
                                 </div>
                             </div>
                             <div class="co-12 col-md-2">
                                 <div class="border-right">
                                     <p class="fw-bold">Durasi</p>
-                                    <p class="text-neo">90 Menit</p>
+                                    <p class="text-neo"><?= $data['testData']->duration ?> Menit</p>
                                 </div>
                             </div>
                         </div>
@@ -43,56 +43,30 @@
                         </div>
                         <div class="block-content fs-sm">
                             <table class="table table-borderless table-vcenter">
+                                <?php $i=0;?>
+                                <?php foreach ( $data['testData']->question_compositon as $item):?>
+                                <?php $i++;?>
                                 <thead>
                                     <tr class="table-active bg-neo text-white ">
-                                        <th style="width: 50px;">1</th>
-                                        <th class="fw-medium fs-lg">Mata Pelajaran 1</th>
+                                        <th style="width: 50px;"><?= $i ?></th>
+                                        <th class="fw-medium fs-lg"><?= $item['subject'] ?></th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <?php $j=0;?>
+                                    <?php foreach ( $item['topic'] as $topic):?>
+                                    <?php $j++;?>
                                     <tr>
                                         <td class="table-info text-center">
                                             <i class="fa-solid fa-bookmark"></i>
                                         </td>
                                         <td>
-                                            <a class="fw-medium" href="javascript:void(0)">1.1 Topik 1</a>
+                                            <a class="fw-medium" href="javascript:void(0)"><?= $i.'.'.$j.' '.$topic->topic ?></a>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td class="table-info text-center">
-                                            <i class="fa-solid fa-bookmark"></i>
-                                        </td>
-                                        <td>
-                                            <a class="fw-medium" href="javascript:void(0)">1.2 Topik 2</a>
-                                        </td>
-                                    </tr>
+                                    <?php endforeach;?>
                                 </tbody>
-                            </table>
-                            <table class="table table-borderless table-vcenter">
-                                <thead>
-                                    <tr class="table-active bg-neo text-white ">
-                                        <th style="width: 50px;">1</th>
-                                        <th class="fw-medium fs-lg">Mata Pelajaran 2</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="table-info text-center">
-                                            <i class="fa-solid fa-bookmark"></i>
-                                        </td>
-                                        <td>
-                                            <a class="fw-medium" href="javascript:void(0)">2.1 Topik 1</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="table-info text-center">
-                                            <i class="fa-solid fa-bookmark"></i>
-                                        </td>
-                                        <td>
-                                            <a class="fw-medium" href="javascript:void(0)">2.2 Topik 2</a>
-                                        </td>
-                                    </tr>
-                                </tbody>
+                                <?php endforeach;?>
                             </table>
                         </div>
                     </div>
@@ -119,7 +93,8 @@
                                             href="<?= route_to('user.test.index') ?>">Kembali</a>
                                     </div>
                                     <div class="col-12 col-md-6 text-center">
-                                        <a class="btn btn-success btn-block w-100 mb-2" href="<?= route_to('user.test.sheet') ?>">Mulai
+                                        <a class="btn btn-success btn-block w-100 mb-2"
+                                            href="<?= route_to('user.test.sheet', strtr(base64_encode($data['encrypter']->encrypt($data['testData']->id)),array('+' => '.', '=' => '-', '/' => '~')))?>">Mulai
                                             Test</a>
                                     </div>
                                 </div>
@@ -138,30 +113,34 @@
                                 <tbody>
                                     <tr>
                                         <td>
-                                            <i class="fa fa-fw fa-book me-1"></i> 10 materi
+                                            <i class="fa fa-fw fa-book me-1"></i> <?= $data['testData']->composition ?>
+                                            Materi
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <i class="fa fa-fw fa-clock me-1"></i> 180 menit
+                                            <i class="fa fa-fw fa-clock me-1"></i> <?= $data['testData']->duration ?>
+                                            Menit
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <i class="fa fa-fw fa-heart me-1"></i> 16850 peserta
+                                            <i class="fa fa-fw fa-heart me-1"></i> 16850 Peserta
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <i class="fa fa-fw fa-calendar me-1"></i> 2 - 4 November 2021
+                                            <i class="fa fa-fw fa-calendar me-1"></i>
+                                            <?= date("d M Y", $data['testData']->begin_time) ?> -
+                                            <?= date("d M Y", $data['testData']->end_time) ?>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
                                             <i class="fa fa-fw fa-tags me-1"></i>
-                                            <a class="fw-semibold link-fx text-success">Bahasa</a>,
-                                            <a class="fw-semibold link-fx text-success">Sosiografi</a>,
-                                            <a class="fw-semibold link-fx text-success">Saintek</a>
+                                            <?php foreach ( $data['testData']->subject as $item):?>
+                                            <a class="fw-semibold link-fx text-success"><?= $item->subject ?></a>,
+                                            <?php endforeach;?>
                                         </td>
                                     </tr>
                                 </tbody>

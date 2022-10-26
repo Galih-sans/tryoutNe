@@ -15,6 +15,7 @@
     <link href="<?= base_url('assets-front/css/nucleo-icons.css') ?>" rel="stylesheet" />
     <!-- Font Awesome Icons -->
     <script src="https://kit.fontawesome.com/b2509b26f8.js" crossorigin="anonymous"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Material Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
     <link id="pagestyle" href="<?= base_url('css/admin_main.css') ?>" rel="stylesheet" />
@@ -35,6 +36,7 @@
         <?= $this->include('user/layout/partial/footer') ?>
     </main>
     <!--   Core JS Files   -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="<?= base_url('assets-front/js/core/popper.min.js')?>"></script>
     <script src="<?= base_url('assets-front/js/core/bootstrap.min.js')?>"></script>
     <script src="<?= base_url('assets-front/js/plugins/perfect-scrollbar.min.js')?>"></script>

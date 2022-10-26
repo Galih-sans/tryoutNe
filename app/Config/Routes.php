@@ -68,8 +68,10 @@ $routes->group("", ["filter" => "isuser", "namespace" => "App\Controllers\user"]
         // URL - /user
         $routes->get("/", "testcontroller::index", ['as' => 'user.test.index']);
         $routes->match(["get", "post"], "index", "testcontroller::index");
-        $routes->match(["get", "post"], "detail", "testcontroller::detail", ['as' => 'user.test.view']);;
-        $routes->match(["get", "post"], "sheet", "testcontroller::sheet", ['as' => 'user.test.sheet']);;
+        $routes->match(["get", "post"], "detail/(:any)", "testcontroller::detail/$1", ['as' => 'user.test.view']);;
+        $routes->match(["get", "post"], "sheet/(:any)", "testcontroller::sheet/$1", ['as' => 'user.test.sheet']);;
+        $routes->match(["get", "post"], "get_test", "testcontroller::get_test", ['as' => 'user.test.get_test']);;
+        $routes->match(["get", "post"], "submit_test", "testcontroller::submit", ['as' => 'user.test.submit']);;
     });
     $routes->group("profil", function($routes){
         // URL - /user

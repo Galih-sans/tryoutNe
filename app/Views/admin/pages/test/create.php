@@ -164,7 +164,7 @@
                                                 Silahkan Jenis Test
                                             </div>
                                         </div>
-                                        <div class="col-12 col-md-6 py-1">
+                                        <div class="col-12 col-md-12 py-1" >
                                             <div id="price-div" class="d-none">
                                                 <span class="fw-bolder text-neo">
                                                     <meta charset="utf-8">⋮⋮</span>
@@ -173,6 +173,7 @@
                                                     name="price" placeholder="Harga">
                                             </div>
                                         </div>
+
                                         <div class="col-12 col-md-6 py-1">
                                             <span class="fw-bolder text-neo">
                                                 <meta charset="utf-8">⋮⋮</span>
@@ -186,7 +187,7 @@
                                                 </div>
                                                 <div class="form-check form-switch">
                                                     <input class="form-check-input" type="checkbox" value="1"
-                                                        id="random_answer" name="random_answer" >
+                                                        id="random_answer" name="random_answer">
                                                     <label class="form-check-label fst-normal text-black-75"
                                                         for="random_answer">Jawaban Acak</label>
                                                 </div>
@@ -196,6 +197,29 @@
                                                     <label class="form-check-label fst-normal text-black-75"
                                                         for="show_result">Tunjukan Hasil Test</label>
                                                 </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 py-1">
+                                            <div>
+                                                <span class="fw-bolder text-neo">
+                                                    <meta charset="utf-8">⋮⋮</span>
+                                                <label class="fw-normal text-black-50"> Nilai Jika Benar</label>
+                                                <input type="text" class="form-control form-rounded" id="true_value"
+                                                    name="true_value" placeholder="Nilai Jika Benar">
+                                            </div>
+                                            <div>
+                                                <span class="fw-bolder text-neo">
+                                                    <meta charset="utf-8">⋮⋮</span>
+                                                <label class="fw-normal text-black-50"> Nilai Jika Salah</label>
+                                                <input type="text" class="form-control form-rounded" id="false_value"
+                                                    name="false_value" placeholder="Nilai Jika Salah">
+                                            </div>
+                                            <div>
+                                                <span class="fw-bolder text-neo">
+                                                    <meta charset="utf-8">⋮⋮</span>
+                                                <label class="fw-normal text-black-50"> Nilai Jika Kosong</label>
+                                                <input type="text" class="form-control form-rounded" id="null_value"
+                                                    name="null_value" placeholder="Nilai Jika Kosong">
                                             </div>
                                         </div>
                                     </div>
@@ -242,7 +266,8 @@
                                                             </select>
                                                         </div>
                                                         <div class="col-12 col-md-2">
-                                                            <input type="number" class="form-control form-rounded number-of-question"
+                                                            <input type="number"
+                                                                class="form-control form-rounded number-of-question"
                                                                 id="number_question" name="number_question[0]"
                                                                 placeholder="Jumlah Soal">
                                                         </div>

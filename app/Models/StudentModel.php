@@ -117,4 +117,10 @@ class StudentModel extends Model
         ->where('token', $token)
         ->update();
     }
+    public function getClass($id)
+    {
+        $query = $this->builder->select('class_id')->where(['id' => $id])->get()->getRow();
+        $class_id = $query->class_id;
+        return $class_id;
+    }
 }

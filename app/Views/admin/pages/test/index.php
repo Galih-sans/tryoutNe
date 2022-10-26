@@ -361,9 +361,11 @@
         if ($('#type').find(":selected").val() == 'free') {
             $('#price-div').addClass('d-none').removeClass('d-block');
             $('#price').prop('required', false);
+            $('#smartwizard').smartWizard("fixHeight");
         } else {
             $('#price-div').addClass('d-block').removeClass('d-none');
             $('#price').prop('required', true);
+            $('#smartwizard').smartWizard("fixHeight");
         }
     });
     $(document).on('change', '.subject-form', function () {

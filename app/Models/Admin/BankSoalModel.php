@@ -117,4 +117,10 @@ class BankSoalModel extends Model
     protected function now(){
         return Time::now()->getTimestamp();
     }
+
+    public function get_test_question($data)
+    {   
+        $query = $this->builder->select('id,question')->orderBy('rand()')->limit($data['number_of_question'])->getWhere(['to_questions.subject_id' => $data['subject_id'],'to_questions.topic_id' => $data['topic_id']]);
+        return $query->getResult();
+    }
 }

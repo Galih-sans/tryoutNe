@@ -58,4 +58,28 @@ class QuestionCompotionModel extends Model
         $query = $this->builder->select('subject_id, topic_id, number_of_question')->getWhere(['test_id' => $id]);
         return $query->getResultArray();
     }
+    public function get_composition_subject($id)
+    {   
+        $query = $this->builder->select('to_subjects.subject')->join('to_subjects','to_subjects.id = to_question_composition.subject_id','left')->join('to_topics','to_topics.id = to_question_composition.topic_id','left')->groupBy('to_subjects.subject')->getWhere(['test_id' => $id]);
+        return $query->getResult();
+    }
+    public function user_get_composition($id)
+    {   
+        $query = $this->builder->select('to_question_composition.subject_id,to_subjects.subject')->join('to_subjects','to_subjects.id = to_question_composition.subject_id','left')->join('to_topics','to_topics.id = to_question_composition.topic_id','left')->groupBy('to_subjects.subject')->getWhere(['test_id' => $id])->getResultObject();
+        if($query != null){
+            $data = array();
+            foreach($query as $item){
+                $data[] = array(
+                    "subject"=>$item->subject,
+                    "topic"=> $this->user_get_composition_topic($id,$item->subject_id)
+                );
+            }
+        }
+        return $data;
+    }
+    public function user_get_composition_topic($id,$subject_id)
+    {   
+        $query = $this->builder->select('to_topics.topic')->join('to_topics','to_topics.id = to_question_composition.topic_id','left')->orderBy('to_topics.id','ASC')->getWhere(['to_question_composition.test_id' => $id,'to_question_composition.subject_id' => $subject_id]);
+        return $query->getResult();
+    }
 }
