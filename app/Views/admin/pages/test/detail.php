@@ -102,6 +102,17 @@
                                                 <p><small class="text-muted" id="v-price"></small></p>
                                             </div>
                                         </div>
+                                        <div class="text-dark d-flex py-2">
+                                            <div class="flex-shrink-0 me-3 ms-2">
+                                                <i class="fa-solid fa-chevron-right text-neo"></i>
+                                            </div>
+                                            <div class="flex-grow-1 fs-sm">
+                                                <div class="fw-semibold">Perhitungan Jawaban</div>
+                                                <p><small class="text-muted text-capitalize"><i class="fa-solid fa-greater-than-equal"></i></i> Nilai Jika Jawaban Benar : <small id="v-correct-value">5</small></small></p>
+                                                <p><small class="text-muted text-capitalize"><i class="fa-solid fa-greater-than-equal"></i></i> Nilai Jika Jawaban Salah : <small id="v-wrong-value">5</small></small></p>
+                                                <p><small class="text-muted text-capitalize"><i class="fa-solid fa-greater-than-equal"></i></i> Nilai Jika Jawaban Kosong : <small id="v-empty-value">5</small></small></p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="block block-transparent mb-0">

@@ -27,6 +27,9 @@ class TestModel extends Model
         'report_to_student',
         'type',
         'price',
+        'correct_answer_value',
+        'wrong_answer_value',
+        'empty_answer_value',
         'class_id',
         'subject_id',
         'status',
@@ -51,6 +54,9 @@ class TestModel extends Model
         'duration'=> 'required',
         'number_of_question'=> 'required',
         'type'=> 'required',
+        'correct_answer_value'=> 'required',
+        'wrong_answer_value'=> 'required',
+        'empty_answer_value'=> 'required',
         'class_id'=> 'required',
     ];
     protected $validationMessages   = 
@@ -72,6 +78,15 @@ class TestModel extends Model
         ],
         'type'=> [
             'required' => 'Kategori Test Harus Diisi',
+        ],
+        'correct_answer_value'=> [
+            'required' => 'Nilai Jika Benar Harus Diisi',
+        ],
+        'wrong_answer_value'=> [
+            'required' => 'Nilai Jika Salah Harus Diisi',
+        ],
+        'empty_answer_value'=> [
+            'required' => 'Nilai Jika Kosong Harus Diisi',
         ],
         'class_id'=> [
             'required' => 'Kelas Test Harus Diisi',
@@ -153,12 +168,12 @@ class TestModel extends Model
     }
     public function get_test($id)
     {   
-        $query = $this->builder->select('to_tests.id,to_class.level, to_class.class,to_tests.test_name, begin_time, end_time, duration,random_question, random_answer, result_to_student, to_tests.number_of_question, type, price, status')->join('to_class','to_class.id = to_tests.class_id','left')->where('to_tests.id',$id)->get();
+        $query = $this->builder->select('to_tests.id,to_class.level, to_class.class,to_tests.test_name, begin_time, end_time, duration,random_question, random_answer, result_to_student, to_tests.number_of_question, type,correct_answer_value,wrong_answer_value,empty_answer_value, price, status')->join('to_class','to_class.id = to_tests.class_id','left')->where('to_tests.id',$id)->get();
         return $query->getRow();
     }
     public function get_edit_test($id)
     {   
-        $query = $this->builder->select('to_tests.id,to_class.level, class_id,to_tests.test_name, begin_time, end_time, duration,random_question, random_answer, result_to_student, to_tests.number_of_question, type, price, status')->join('to_class','to_class.id = to_tests.class_id','left')->where('to_tests.id',$id)->get();
+        $query = $this->builder->select('to_tests.id,to_class.level, class_id,to_tests.test_name, begin_time, end_time, duration,random_question, random_answer, result_to_student, to_tests.number_of_question,correct_answer_value,wrong_answer_value,empty_answer_value, type, price, status')->join('to_class','to_class.id = to_tests.class_id','left')->where('to_tests.id',$id)->get();
         return $query->getRow();
     }
     public function getInsertID()

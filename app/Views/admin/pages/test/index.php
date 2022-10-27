@@ -682,7 +682,9 @@
                 console.log(d);
                 $("#v-test-name , #v-b-test-name").text(d.testData.test_name);
                 $("#v-date").text(d.testData.begin_time + " - " + d.testData.end_time);
-                $("#v-date").text(d.testData.begin_time + " - " + d.testData.end_time);
+                $("#v-correct-value").text(d.testData.correct_answer_value);
+                $("#v-wrong-value").text(d.testData.wrong_answer_value);
+                $("#v-empty-value").text(d.testData.empty_answer_value);
                 $("#v-duration").text(d.testData.duration + " Menit");
                 if (d.testData.random_question == 1) {
                     $("#v-i-random_question").removeClass().addClass(
@@ -893,7 +895,9 @@
                 $('.edit_start_date').val(d.testData.begin_time);
                 $('.edit_end_date').val(d.testData.end_time);
                 $('#edit_duration').val(d.testData.duration);
-                $('#edit_duration').val(d.testData.duration);
+                $('#edit_true_value').val(d.testData.correct_answer_value);
+                $('#edit_false_value').val(d.testData.wrong_answer_value);
+                $('#edit_null_value').val(d.testData.empty_answer_value);
                 $('#edit_number_of_questions').val(d.testData.number_of_question);
                 $('#edit_number_of_questions').val(d.testData.number_of_question);
                 $('.edit_class').selectpicker('val', d.testData.class_id).trigger('change');

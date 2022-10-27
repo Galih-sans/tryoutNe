@@ -161,10 +161,10 @@
 
                                             </div>
                                             <div class="invalid-feedback">
-                                                Silahkan Jenis Test
+                                                Silahkan Pilih Jenis Test
                                             </div>
                                         </div>
-                                        <div class="col-12 col-md-12 py-1" >
+                                        <div class="col-12 col-md-12 py-1">
                                             <div id="price-div" class="d-none">
                                                 <span class="fw-bolder text-neo">
                                                     <meta charset="utf-8">⋮⋮</span>
@@ -203,23 +203,33 @@
                                             <div>
                                                 <span class="fw-bolder text-neo">
                                                     <meta charset="utf-8">⋮⋮</span>
-                                                <label class="fw-normal text-black-50"> Nilai Jika Benar</label>
-                                                <input type="text" class="form-control form-rounded" id="true_value"
-                                                    name="true_value" placeholder="Nilai Jika Benar">
+                                                <label class="fw-normal text-black-50"> Nilai Jika Jawaban Benar</label>
+                                                <input type="number" class="form-control form-rounded" id="true_value"
+                                                    name="true_value" placeholder="Nilai Jika Benar" required>
+                                                <div class="invalid-feedback">
+                                                    Silahkan Masukkan Nilai Jika Jawaban Benar
+                                                </div>
                                             </div>
                                             <div>
                                                 <span class="fw-bolder text-neo">
                                                     <meta charset="utf-8">⋮⋮</span>
-                                                <label class="fw-normal text-black-50"> Nilai Jika Salah</label>
-                                                <input type="text" class="form-control form-rounded" id="false_value"
-                                                    name="false_value" placeholder="Nilai Jika Salah">
+                                                <label class="fw-normal text-black-50"> Nilai Jika Jawaban Salah</label>
+                                                <input type="number" class="form-control form-rounded" id="false_value"
+                                                    name="false_value" placeholder="Nilai Jika Salah" required>
+                                                <div class="invalid-feedback">
+                                                    Silahkan Masukkan Nilai Jika Jawaban Salah
+                                                </div>
                                             </div>
                                             <div>
                                                 <span class="fw-bolder text-neo">
                                                     <meta charset="utf-8">⋮⋮</span>
-                                                <label class="fw-normal text-black-50"> Nilai Jika Kosong</label>
-                                                <input type="text" class="form-control form-rounded" id="null_value"
-                                                    name="null_value" placeholder="Nilai Jika Kosong">
+                                                <label class="fw-normal text-black-50"> Nilai Jika Jawaban
+                                                    Kosong</label>
+                                                <input type="number" class="form-control form-rounded" id="null_value"
+                                                    name="null_value" placeholder="Nilai Jika Kosong" required>
+                                                <div class="invalid-feedback">
+                                                    Silahkan Masukkan Nilai Jika Jawaban Kosong
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

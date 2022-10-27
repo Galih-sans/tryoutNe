@@ -265,19 +265,19 @@ function simpan_sementara() {
         if (jawab != undefined) {
             if (ragu == "Y") {
                 if (jawab == "-") {
-                    hasil_jawaban += '<div class="col-4 col-lg-4 text-center py-0 px-1"><a id="btn_soal_' + (i) + '" class="btn btn-sm btn-block bg-warning text-white d-flex flex-wrap justify-content-center align-items-center fs-sm" onclick="return buka(' + (i) + ');">' + (i) + ". " + opsi + "</a></div>";
+                    hasil_jawaban += '<div class="col-4 col-lg-4 text-center py-0 px-1"><a id="btn_soal_' + (i) + '" class="btn btn-sm btn-block bg-city text-white d-flex flex-wrap justify-content-center align-items-center fs-sm" onclick="return buka(' + (i) + ');">' + (i) + ". " + opsi + "</a></div>";
                 } else {
-                    hasil_jawaban += '<div class="col-4 col-lg-4 text-center py-0 px-2"><a id="btn_soal_' + (i) + '" class="btn btn-sm btn-block bg-warning text-white d-flex flex-wrap justify-content-center align-items-center fs-sm" onclick="return buka(' + (i) + ');">' + (i) + ". " + opsi + "</a></div>";
+                    hasil_jawaban += '<div class="col-4 col-lg-4 text-center py-0 px-2"><a id="btn_soal_' + (i) + '" class="btn btn-sm btn-block bg-city text-white d-flex flex-wrap justify-content-center align-items-center fs-sm" onclick="return buka(' + (i) + ');">' + (i) + ". " + opsi + "</a></div>";
                 }
             } else {
                 if (jawab == "-") {
-                    hasil_jawaban += '<div class="col-4 col-lg-4 text-center py-0 px-1"><a id="btn_soal_' + (i) + '" class="btn btn-sm btn-block bg-neo-dark text-white d-flex flex-wrap justify-content-center align-items-center fs-sm" onclick="return buka(' + (i) + ');">' + (i) + ". " + opsi + "</a></div>";
+                    hasil_jawaban += '<div class="col-4 col-lg-4 text-center py-0 px-1"><a id="btn_soal_' + (i) + '" class="btn btn-sm btn-block bg-dark text-white d-flex flex-wrap justify-content-center align-items-center fs-sm" onclick="return buka(' + (i) + ');">' + (i) + ". " + opsi + "</a></div>";
                 } else {
-                    hasil_jawaban += '<div class="col-4 col-lg-4 text-center py-0 px-1"><a id="btn_soal_' + (i) + '" class="btn btn-sm btn-block bg-neo-dark text-white d-flex flex-wrap justify-content-center align-items-center fs-sm" onclick="return buka(' + (i) + ');">' + (i) + ". " + opsi + "</a></div>";
+                    hasil_jawaban += '<div class="col-4 col-lg-4 text-center py-0 px-1"><a id="btn_soal_' + (i) + '" class="btn btn-sm btn-block bg-dark text-white d-flex flex-wrap justify-content-center align-items-center fs-sm" onclick="return buka(' + (i) + ');">' + (i) + ". " + opsi + "</a></div>";
                 }
             }
         } else {
-            hasil_jawaban += '<div class="col-4 col-lg-4 text-center py-0 px-1"><a id="btn_soal_' + (i) + '" class="btn btn-sm btn-block bg-neo text-white d-flex flex-wrap justify-content-center align-items-center fs-sm" onclick="return buka(' + (i) + ');">' + (i) + ". -</a></div>";
+            hasil_jawaban += '<div class="col-4 col-lg-4 text-center py-0 px-1"><a id="btn_soal_' + (i) + '" class="btn btn-sm btn-block bg-success text-white d-flex flex-wrap justify-content-center align-items-center fs-sm" onclick="return buka(' + (i) + ');">' + (i) + ". -</a></div>";
         }
     }
     $("#tampil_jawaban").html(hasil_jawaban);
@@ -292,7 +292,7 @@ function simpan() {
 }
 
 function selesai() {
-    localStorage.clear();
+    // localStorage.clear();
     var form = $("#ujian");
     form.submit();
     // simpan();

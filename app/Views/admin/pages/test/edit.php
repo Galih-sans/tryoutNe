@@ -163,7 +163,7 @@
                                                 Silahkan Jenis Test
                                             </div>
                                         </div>
-                                        <div class="col-12 col-md-6 py-1">
+                                        <div class="col-12 col-md-12 py-1">
                                             <div id="edit-price-div" class="d-none">
                                                 <span class="fw-bolder text-neo">
                                                     <meta charset="utf-8">⋮⋮</span>
@@ -194,6 +194,39 @@
                                                         id="edit_show_result" name="edit_show_result">
                                                     <label class="form-check-label fst-normal text-black-75"
                                                         for="edit_show_result">Tunjukan Hasil Test</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 py-1">
+                                            <div>
+                                                <span class="fw-bolder text-neo">
+                                                    <meta charset="utf-8">⋮⋮</span>
+                                                <label class="fw-normal text-black-50"> Nilai Jika Jawaban Benar</label>
+                                                <input type="number" class="form-control form-rounded" id="edit_true_value"
+                                                    name="edit_true_value" placeholder="Nilai Jika Benar" required>
+                                                <div class="invalid-feedback">
+                                                    Silahkan Masukkan Nilai Jika Jawaban Benar
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <span class="fw-bolder text-neo">
+                                                    <meta charset="utf-8">⋮⋮</span>
+                                                <label class="fw-normal text-black-50"> Nilai Jika Jawaban Salah</label>
+                                                <input type="number" class="form-control form-rounded" id="edit_false_value"
+                                                    name="edit_false_value" placeholder="Nilai Jika Salah" required>
+                                                <div class="invalid-feedback">
+                                                    Silahkan Masukkan Nilai Jika Jawaban Salah
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <span class="fw-bolder text-neo">
+                                                    <meta charset="utf-8">⋮⋮</span>
+                                                <label class="fw-normal text-black-50"> Nilai Jika Jawaban
+                                                    Kosong</label>
+                                                <input type="number" class="form-control form-rounded" id="edit_null_value"
+                                                    name="edit_null_value" placeholder="Nilai Jika Kosong" required>
+                                                <div class="invalid-feedback">
+                                                    Silahkan Masukkan Nilai Jika Jawaban Kosong
                                                 </div>
                                             </div>
                                         </div>
