@@ -139,6 +139,11 @@ class TestModel extends Model
         $query = $AnswerModel->checkanswer($id);
         return $query;
     }
+    public function test_answer_value($id)
+    {
+        $query = $this->builder->select('correct_answer_value as true,wrong_answer_value as false,empty_answer_value as null')->where('to_tests.id',$id)->get();
+        return $query->getFirstRow();
+    }
 
 
 }

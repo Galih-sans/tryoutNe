@@ -231,6 +231,15 @@
             confirmButtonColor: "#d26a5c"
         }).then((result) => {
             if (result.value) {
+                Swal.fire({
+                    showCloseButton: false,
+                    showCancelButton: false,
+                    showConfirmButton: false,
+                    allowOutsideClick: false,
+                    customClass: 'col-5 col-md-3',
+                    imageUrl: 'https://udindym.site/loader-c.gif',
+                    text: 'Silahkan Tunggu...',
+                })
                 $.ajax({
                     url: "<?= route_to('admin.subject.remove_subject') ?>",
                     type: "POST",
@@ -246,10 +255,14 @@
                             showConfirmButton: false,
                             timer: 3000
                         });
+
+                        Swal.close();
                         refresh_dt();
                     },
                     error: function (error) {
                         console.log(error);
+
+                        Swal.close();
                     }
                 });
             }
@@ -273,10 +286,14 @@
 
     function insert_data() {
         Swal.fire({
-            text: "Sedang Memproses Data",
+            showCloseButton: false,
+            showCancelButton: false,
+            showConfirmButton: false,
             allowOutsideClick: false,
-        });
-        Swal.showLoading();
+            customClass: 'col-5 col-md-3',
+            imageUrl: 'https://udindym.site/loader-c.gif',
+            text: 'Silahkan Tunggu...',
+        })
         $.ajax({
             url: "<?= route_to('admin.subject.add_subject') ?>",
             type: "POST",
@@ -300,20 +317,26 @@
                         showConfirmButton: false
                     });
                 }
+                Swal.close();
                 refresh_dt();
             },
             error: function (error) {
                 console.log(error);
+                Swal.close();
             }
         });
     }
 
     function update_data() {
         Swal.fire({
-            text: "Sedang Memproses Data",
+            showCloseButton: false,
+            showCancelButton: false,
+            showConfirmButton: false,
             allowOutsideClick: false,
-        });
-        Swal.showLoading();
+            customClass: 'col-5 col-md-3',
+            imageUrl: 'https://udindym.site/loader-c.gif',
+            text: 'Silahkan Tunggu...',
+        })
         $.ajax({
             url: "<?= route_to('admin.subject.edit_subject') ?>",
             type: "POST",
@@ -337,12 +360,12 @@
                         showConfirmButton: false
                     });
                 }
-
-                console.log(d);
+                Swal.close();
                 refresh_dt();
             },
             error: function (error) {
                 console.log(error);
+                Swal.close();
             }
         });
     }

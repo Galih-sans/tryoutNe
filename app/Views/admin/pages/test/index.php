@@ -444,7 +444,8 @@
                 }
             }
         });
-        $("#smartwizard, #smartwizard-edit").on("showStep", function (e, anchorObject, stepIndex, stepDirection, stepPosition) {
+        $("#smartwizard, #smartwizard-edit").on("showStep", function (e, anchorObject, stepIndex, stepDirection,
+            stepPosition) {
             $("#prev-btn").removeClass('disabled').prop('disabled', false);
             $("#next-btn").removeClass('disabled').prop('disabled', false);
             if (stepPosition === 'first') {
@@ -461,26 +462,28 @@
             let stepInfo
             if (this.id == "smartwizard") {
                 stepInfo = $('#smartwizard').smartWizard("getStepInfo");
-            }else{
+            } else {
                 stepInfo = $('#smartwizard-edit').smartWizard("getStepInfo");
             }
-           
+
             $("#sw-current-step").text(stepInfo.currentStep + 1);
             $("#sw-total-step").text(stepInfo.totalSteps);
             if (this.id == "smartwizard") {
                 if (stepPosition == 'last') {
-                $("#btnFinish").prop('disabled', true).addClass('d-inline').removeClass('d-none');
-            } else {
-                $("#btnFinish").prop('disabled', true).addClass('d-none').removeClass('d-inline');
-            }
-            }else{
-                if (stepPosition == 'last') {
-                $("#edit-btnFinish").prop('disabled', false).addClass('d-inline').removeClass('d-none');
-            } else {
-                $("#edit-btnFinish").prop('disabled', true).addClass('d-none').removeClass('d-inline');
-            }
+                    $("#btnFinish").prop('disabled', true).addClass('d-inline').removeClass('d-none');
+                } else {
+                    $("#btnFinish").prop('disabled', true).addClass('d-none').removeClass('d-inline');
                 }
-            
+            } else {
+                if (stepPosition == 'last') {
+                    $("#edit-btnFinish").prop('disabled', false).addClass('d-inline').removeClass(
+                        'd-none');
+                } else {
+                    $("#edit-btnFinish").prop('disabled', true).addClass('d-none').removeClass(
+                        'd-inline');
+                }
+            }
+
 
             // Focus first name
             if (stepIndex == 1) {
@@ -494,10 +497,14 @@
 
     function onFinishCallback() {
         Swal.fire({
-            text: "Sedang Memproses Data",
+            showCloseButton: false,
+            showCancelButton: false,
+            showConfirmButton: false,
             allowOutsideClick: false,
-        });
-        Swal.showLoading();
+            customClass: 'col-5 col-md-3',
+            imageUrl: 'https://udindym.site/loader-c.gif',
+            text: 'Silahkan Tunggu...',
+        })
         $.ajax({
             url: "<?= route_to('admin.test.add_test') ?>",
             type: "POST",
@@ -527,6 +534,7 @@
                     });
                 }
                 refresh_dt();
+                Swal.close();
             },
             error: function (error) {
                 console.log(error);
@@ -534,12 +542,17 @@
             }
         });
     }
+
     function onFinishEdit() {
         Swal.fire({
-            text: "Sedang Memproses Data",
+            showCloseButton: false,
+            showCancelButton: false,
+            showConfirmButton: false,
             allowOutsideClick: false,
-        });
-        Swal.showLoading();
+            customClass: 'col-5 col-md-3',
+            imageUrl: 'https://udindym.site/loader-c.gif',
+            text: 'Silahkan Tunggu...',
+        })
         $.ajax({
             url: "<?= route_to('admin.test.edit_test') ?>",
             type: "POST",
@@ -548,6 +561,7 @@
                 var d = JSON.parse(d);
                 console.log(d);
                 if (d.success == true) {
+                    Swal.close();
                     $('#createModal').hide();
                     $(document.body).removeClass('modal-open');
                     $('.modal-backdrop').remove();
@@ -559,6 +573,7 @@
                         timer: 1500
                     });
                 } else {
+                    Swal.close();
                     Swal.fire({
                         title: 'Status :',
                         html: d.message +
@@ -666,9 +681,8 @@
 </script>
 <script>
     $('#table').on('click', 'tbody .click', function () {
-
-        $("#page-container").addClass('side-overlay-o');
         One.loader('show');
+        $("#page-container").addClass('side-overlay-o');
         $('#div-composition-delete').remove();
         $('#div-composition').append('<div id="div-composition-delete"></div>');
         $.ajax({
@@ -716,14 +730,14 @@
                         .number_of_question + '</small></div></div>'
                     )
                 });
+                One.loader('hide');
             },
             error: function (error) {
                 alert(error);
+                One.loader('hide');
             }
         });
-        setTimeout(function () {
-            One.loader('hide');
-        }, 1000)
+
     })
 
     $(document).on('click', '.delete-button', function () {
@@ -744,6 +758,15 @@
             confirmButtonColor: "#d26a5c"
         }).then((result) => {
             if (result.value) {
+                Swal.fire({
+                    showCloseButton: false,
+                    showCancelButton: false,
+                    showConfirmButton: false,
+                    allowOutsideClick: false,
+                    customClass: 'col-5 col-md-3',
+                    imageUrl: 'https://udindym.site/loader-c.gif',
+                    text: 'Silahkan Tunggu...',
+                })
                 $.ajax({
                     url: "<?= route_to('admin.test.remove_test') ?>",
                     type: "POST",
@@ -760,9 +783,11 @@
                             timer: 3000
                         });
                         refresh_dt();
+                        Swal.close();
                     },
                     error: function (error) {
                         console.log(error);
+                        Swal.close();
                     }
                 });
             }
@@ -876,13 +901,21 @@
 <script>
     $(document).on('click', '.edit-button', function () {
         let id = $(this).data("id");
-        console.log(id);
         get_test(id);
         $('#editModal').modal('show');
     });
     var compositon = '';
 
     function get_test(id) {
+        Swal.fire({
+            showCloseButton: false,
+            showCancelButton: false,
+            showConfirmButton: false,
+            allowOutsideClick: false,
+            customClass: 'col-5 col-md-3',
+            imageUrl: 'https://udindym.site/loader-c.gif',
+            text: 'Silahkan Tunggu...',
+        })
         $.ajax({
             url: "<?= route_to('admin.test.get_edit') ?>",
             type: "POST",
@@ -922,11 +955,12 @@
                 $('#test_id').val(id);
                 $('#edit_number_question').val(d.compositonData[0].number_of_question);
                 compositon = d.compositonData;
-                j=d.compositonData.length;
-                console.log(d);
+                j = d.compositonData.length;
+                Swal.close();
             },
             error: function (error) {
                 alert(error);
+                Swal.close();
             }
         });
     }
@@ -965,9 +999,13 @@
                     $.each(compositon, function (i, v) {
                         if (i === 0) return true;
                         $("#edit-dynamicAddRemove").append(
-                            '<div id="edit-removeit" class="input-group mb-3 removeit addnew"><div class="col-12 col-md-5"><select class="form-control form-select subject-form" name="composition['+i+'][subject]" id="edit_subject' + i +
-                            '" data-placeholder="Silahkan Pilih Mata Pelajaran"></select></div><div class="col-12 col-md-4"><select class="form-control form-select topic" name="composition['+i+'][topic]" data-placeholder="Silahkan Pilih Topik Mata Pelajaran" disabled></select></div><div class="col-12 col-md-2"><input type="number" class="form-control form-rounded edit-number-of-question" id="edit_number_question' +
-                            i + '" name="composition['+i+'][number_question]" placeholder="Jumlah Soal"></div><div class="col-12 col-md-1"><button type="button" class="btn btn-danger edit-remove-input-field"><i class="fa-solid fa-minus"></i></button></div></div>'
+                            '<div id="edit-removeit" class="input-group mb-3 removeit addnew"><div class="col-12 col-md-5"><select class="form-control form-select subject-form" name="composition[' +
+                            i + '][subject]" id="edit_subject' + i +
+                            '" data-placeholder="Silahkan Pilih Mata Pelajaran"></select></div><div class="col-12 col-md-4"><select class="form-control form-select topic" name="composition[' +
+                            i +
+                            '][topic]" data-placeholder="Silahkan Pilih Topik Mata Pelajaran" disabled></select></div><div class="col-12 col-md-2"><input type="number" class="form-control form-rounded edit-number-of-question" id="edit_number_question' +
+                            i + '" name="composition[' + i +
+                            '][number_question]" placeholder="Jumlah Soal"></div><div class="col-12 col-md-1"><button type="button" class="btn btn-danger edit-remove-input-field"><i class="fa-solid fa-minus"></i></button></div></div>'
                         );
                         $('#edit_subject' + i).select2({
                             theme: "bootstrap-5",
@@ -1003,16 +1041,21 @@
         }
     });
 
-    
+
     var j;
     $("#edit-dynamic-ar").click(function () {
         ++j;
         console.log(j);
         console.log(compositon.length);
-        
+
         $("#edit-dynamicAddRemove").append(
-            '<div id="edit-removeit" class="input-group mb-3 removeit addnew"><div class="col-12 col-md-5"><select class="form-control form-select subject-form" name="composition['+j+'][subject]" id="edit_subject' + j +
-            '" data-placeholder="Silahkan Pilih Mata Pelajaran" disabled></select></div><div class="col-12 col-md-4"><select class="form-control form-select topic" name="composition['+j+'][topic]" data-placeholder="Silahkan Pilih Topik Mata Pelajaran" disabled></select></div><div class="col-12 col-md-2"><input type="number" class="form-control form-rounded edit-number-of-question" id="number_question" name="composition['+j+'][number_question]" placeholder="Jumlah Soal"></div><div class="col-12 col-md-1"><button type="button" class="btn btn-danger edit-remove-input-field"><i class="fa-solid fa-minus"></i></button></div></div>'
+            '<div id="edit-removeit" class="input-group mb-3 removeit addnew"><div class="col-12 col-md-5"><select class="form-control form-select subject-form" name="composition[' +
+            j + '][subject]" id="edit_subject' + j +
+            '" data-placeholder="Silahkan Pilih Mata Pelajaran" disabled></select></div><div class="col-12 col-md-4"><select class="form-control form-select topic" name="composition[' +
+            j +
+            '][topic]" data-placeholder="Silahkan Pilih Topik Mata Pelajaran" disabled></select></div><div class="col-12 col-md-2"><input type="number" class="form-control form-rounded edit-number-of-question" id="number_question" name="composition[' +
+            j +
+            '][number_question]" placeholder="Jumlah Soal"></div><div class="col-12 col-md-1"><button type="button" class="btn btn-danger edit-remove-input-field"><i class="fa-solid fa-minus"></i></button></div></div>'
         );
         $('#smartwizard-edit').smartWizard("fixHeight");
         var select = $('#edit_subject' + j);

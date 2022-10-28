@@ -143,24 +143,32 @@ class testcontroller extends BaseController
 
     public function submit()
     {
+        $this->pagedata['title'] = "Hasil Test - Neo Edukasi";
         $data = $this->request->getVar('answer[][]');
-        $data1 = array();
+        $id = $this->request->getVar('id');
+        $perhitungan = $this->TestModel->test_answer_value($id);
+        $result = 0;
+        $answer[] = array();
         foreach($data as $item){
             if(isset($item['answer'])){
-                $data1[] = array(
+                $answer[] = array(
                     "question_id"=>$item['question'],
                     "answer_id"=>$item['answer'],
                     "answer_isright"=>$this->TestModel->checkanswer($item['answer']),
                 );
+                if($this->TestModel->checkanswer($item['answer'])){
+                    $result+= $perhitungan->true;
+                }else{
+                    $result-= $perhitungan->false;
+                }
             }
         }
-        $output = [
-            'user-answer' => $data1,
-            'test-detail' => $data,
+
+        $this->pagedata['output'] = [
+            'test_result' => $result." &frasl; ".(count($data)*$perhitungan->true),
+            'user-answer' => $answer,
         ];
-        echo '<pre>';
-        echo json_encode($output, JSON_PRETTY_PRINT);
-        echo '</pre>';
+        return view('user/pages/test/result', ['data'=>$this->pagedata]);
     }
     
 }

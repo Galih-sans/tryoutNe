@@ -77,7 +77,7 @@
                         <div class="block-content">
                             <div class="row">
                                 <div class="col-12 col-md-12 py-3 border-bottom">
-                                    <div class="row text-left bg-body-light  rounded-top">
+                                    <div class="row text-left rounded-top">
                                         <div class="col-4 col-md-3">
                                             <img class="avatar avatar-xl"
                                                 src="<?= base_url('assets-front/img/avatar.png')?>" alt="">

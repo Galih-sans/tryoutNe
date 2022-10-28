@@ -210,6 +210,15 @@
             confirmButtonColor: "#d26a5c"
         }).then((result) => {
             if (result.value) {
+                Swal.fire({
+                    showCloseButton: false,
+                    showCancelButton: false,
+                    showConfirmButton: false,
+                    allowOutsideClick: false,
+                    customClass: 'col-5 col-md-3',
+                    imageUrl: 'https://udindym.site/loader-c.gif',
+                    text: 'Silahkan Tunggu...',
+                })
                 $.ajax({
                     url: "<?= route_to('admin.topic.remove_topic') ?>",
                     type: "POST",
@@ -225,10 +234,12 @@
                             showConfirmButton: false,
                             timer: 3000
                         });
+                        Swal.close();
                         refresh_dt();
                     },
                     error: function (error) {
                         console.log(error);
+                        Swal.close();
                     }
                 });
             }
@@ -247,15 +258,19 @@
 
     function insert_data() {
         Swal.fire({
-            text: "Sedang Memproses Data",
+            showCloseButton: false,
+            showCancelButton: false,
+            showConfirmButton: false,
             allowOutsideClick: false,
-        });
+            customClass: 'col-5 col-md-3',
+            imageUrl: 'https://udindym.site/loader-c.gif',
+            text: 'Silahkan Tunggu...',
+        })
         var data = $('#topic_form').serializeArray();
         data.push({
             name: 'subject_id',
             value: $('#subject').val()
         });
-        Swal.showLoading();
         $.ajax({
             url: "<?= route_to('admin.topic.add_topic') ?>",
             type: "POST",
@@ -279,22 +294,26 @@
                         showConfirmButton: false
                     });
                 }
-
-                console.log(d);
+                Swal.close();
                 refresh_dt();
             },
             error: function (error) {
                 console.log(error);
+                Swal.close();
             }
         });
     }
 
     function update_data() {
         Swal.fire({
-            text: "Sedang Memproses Data",
+            showCloseButton: false,
+            showCancelButton: false,
+            showConfirmButton: false,
             allowOutsideClick: false,
-        });
-        Swal.showLoading();
+            customClass: 'col-5 col-md-3',
+            imageUrl: 'https://udindym.site/loader-c.gif',
+            text: 'Silahkan Tunggu...',
+        })
         var data = $('#edit_topic_form').serializeArray();
         data.push({
             name: 'subject_id',
@@ -323,12 +342,12 @@
                         showConfirmButton: false
                     });
                 }
-
-                console.log(d);
+                Swal.close();
                 refresh_dt();
             },
             error: function (error) {
                 console.log(error);
+                Swal.close();
             }
         });
     }
@@ -340,6 +359,15 @@
         $('#question-datatables').hide();
         var selected = $('#level').val();
         var select = $('#subject');
+        Swal.fire({
+            showCloseButton: false,
+            showCancelButton: false,
+            showConfirmButton: false,
+            allowOutsideClick: false,
+            customClass: 'col-5 col-md-3',
+            imageUrl: 'https://udindym.site/loader-c.gif',
+            text: 'Silahkan Tunggu...',
+        })
         $.ajax({
             url: "<?= route_to('admin.bank-soal.get_subject') ?>",
             type: "POST",
@@ -366,9 +394,11 @@
                     $("#subject").prop("disabled", true);
                 }
                 select.selectpicker('refresh');
+                Swal.close();
             },
             error: function (error) {
                 console.log(error);
+                Swal.close();
             }
         });
     });
@@ -384,7 +414,7 @@
             buttons: [{
                     extend: 'copy',
                     exportOptions: {
-                        columns: [0, 1, 2, 3,4]
+                        columns: [0, 1, 2, 3, 4]
                     },
                     className: 'fs-sm btn btn-sm btn-outline-secondary glyphicon glyphicon-duplicate',
                     text: '<i class="fa-sharp fa-solid fa-copy "></i>',
@@ -393,7 +423,7 @@
                 {
                     extend: 'excel',
                     exportOptions: {
-                        columns: [0, 1, 2, 3,4]
+                        columns: [0, 1, 2, 3, 4]
                     },
                     className: 'fs-sm btn btn-sm btn-outline-success glyphicon glyphicon-list-alt',
                     text: '<i class="fa-sharp fa-solid fa-file-excel "></i>',
@@ -403,7 +433,7 @@
                 {
                     extend: 'print',
                     exportOptions: {
-                        columns: [0, 1, 2, 3,4]
+                        columns: [0, 1, 2, 3, 4]
                     },
                     className: 'fs-sm btn btn-sm btn-outline-primary glyphicon glyphicon-print',
                     text: '<i class="fa-sharp fa-solid fa-print "></i>',
@@ -412,7 +442,7 @@
                 {
                     extend: 'pdf',
                     exportOptions: {
-                        columns: [0, 1, 2, 3,4]
+                        columns: [0, 1, 2, 3, 4]
                     },
                     className: 'fs-sm btn btn-sm btn-outline-danger glyphicon glyphicon-file',
                     text: '<i class="fa-sharp fa-solid fa-file-pdf "></i>',
@@ -450,7 +480,7 @@
                 [5, 10, 25, 50, 100, 'All'],
             ],
             columnDefs: [{
-                targets: [0,1,2],
+                targets: [0, 1, 2],
                 orderable: false,
                 className: "text-center",
             }],

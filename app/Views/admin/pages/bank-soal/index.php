@@ -359,10 +359,14 @@
 
     function insert_data() {
         Swal.fire({
-            text: "Sedang Memproses Data",
+            showCloseButton: false,
+            showCancelButton: false,
+            showConfirmButton: false,
             allowOutsideClick: false,
-        });
-        Swal.showLoading();
+            customClass: 'col-5 col-md-3',
+            imageUrl: 'https://udindym.site/loader-c.gif',
+            text: 'Silahkan Tunggu...',
+        })
         $.ajax({
             url: "<?= route_to('admin.bank-soal.insert-question') ?>",
             type: "POST",
@@ -386,12 +390,12 @@
                         showConfirmButton: false
                     });
                 }
-
-                console.log(d);
+                Swal.close();
                 refresh_dt();
             },
             error: function (error) {
                 console.log(error);
+                Swal.close();
             }
         });
     }
@@ -408,6 +412,15 @@
             confirmButtonColor: "#d26a5c"
         }).then((result) => {
             if (result.value) {
+                Swal.fire({
+                    showCloseButton: false,
+                    showCancelButton: false,
+                    showConfirmButton: false,
+                    allowOutsideClick: false,
+                    customClass: 'col-5 col-md-3',
+                    imageUrl: 'https://udindym.site/loader-c.gif',
+                    text: 'Silahkan Tunggu...',
+                })
                 $.ajax({
                     url: "<?= route_to('admin.bank-soal.delete-question') ?>",
                     type: "POST",
@@ -415,6 +428,7 @@
                         id: id,
                     },
                     success: function (d) {
+                        Swal.close();
                         var d = JSON.parse(d);
                         Swal.fire({
                             title: 'Status :',
@@ -426,9 +440,11 @@
                         refresh_dt();
                     },
                     error: function (error) {
+                        Swal.close();
                         console.log(error);
                     }
                 });
+
             }
         });
     }
@@ -448,6 +464,15 @@
         $('#question-datatables').hide();
         var selected = $('#level').val();
         var select = $('#subject');
+        Swal.fire({
+            showCloseButton: false,
+            showCancelButton: false,
+            showConfirmButton: false,
+            allowOutsideClick: false,
+            customClass: 'col-5 col-md-3',
+            imageUrl: 'https://udindym.site/loader-c.gif',
+            text: 'Silahkan Tunggu...',
+        })
         $.ajax({
             url: "<?= route_to('admin.bank-soal.get_subject') ?>",
             type: "POST",
@@ -455,6 +480,7 @@
                 class_id: selected,
             },
             success: function (response) {
+
                 response = JSON.parse(response);
                 select.selectpicker('destroy');
                 select.empty();
@@ -473,8 +499,10 @@
                 } else {
                     $("#subject").prop("disabled", true);
                 }
+                Swal.close();
                 select.selectpicker('refresh');
                 console.log(response);
+                Swal.close();
             },
             error: function (error) {
                 console.log(error);
@@ -487,6 +515,15 @@
         $('#question-datatables').hide();
         var selected = $('#subject').val();
         var select = $('#topic');
+        Swal.fire({
+            showCloseButton: false,
+            showCancelButton: false,
+            showConfirmButton: false,
+            allowOutsideClick: false,
+            customClass: 'col-5 col-md-3',
+            imageUrl: 'https://udindym.site/loader-c.gif',
+            text: 'Silahkan Tunggu...',
+        })
         $.ajax({
             url: "<?= route_to('admin.bank-soal.get_topic') ?>",
             type: "POST",
@@ -512,10 +549,11 @@
                     $("#topic").prop("disabled", true);
                 }
                 select.selectpicker('refresh');
-                console.log(response);
+                Swal.close();
             },
             error: function (error) {
                 console.log(error);
+                Swal.close();
             }
         });
     });

@@ -5,7 +5,6 @@ $(document).ready(function () {
         $('.data').html(loc_data.data.html);
         $('#jml_soal').val(loc_data.data.number);
         for (const [key, value] of Object.entries(loc_data.jawaban)) {
-            console.log(key,value)
             for (var p = 1; p < loc_data.data.number; p++) {
                 if (key === "answer[" + p + "][answer]") {
                     $("input[name='" + key + "'][value='" + value + "']").prop('checked', true);
@@ -37,7 +36,6 @@ $(document).ready(function () {
             },
             success: function (d) {
                 var d = JSON.parse(d);
-                console.log(d);
                 $('.data').html(d.html);
                 var data = {
                     'data': d,
@@ -65,7 +63,7 @@ $(document).ready(function () {
     }
     setTimeout(function () {
         One.loader('hide');
-    }, 1000)
+    }, 4000)
 });
 
 function countdown(minutes, seconds) {
@@ -146,7 +144,6 @@ function buka(id_widget) {
 function next() {
 
     var berikutnya = $(".next").attr('rel');
-    console.log(berikutnya)
     berikutnya = parseInt(berikutnya);
     berikutnya = berikutnya > total_widget ? total_widget : berikutnya;
 
@@ -292,7 +289,7 @@ function simpan() {
 }
 
 function selesai() {
-    // localStorage.clear();
+    localStorage.clear();
     var form = $("#ujian");
     form.submit();
     // simpan();
