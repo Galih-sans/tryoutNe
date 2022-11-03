@@ -54,14 +54,14 @@
                                 </thead>
                                 <tbody>
                                     <?php $j=0;?>
-                                    <?php foreach ( $item['topic'] as $topic):?>
+                                    <?php foreach ( $item['topic'] as $topica):?>
                                     <?php $j++;?>
                                     <tr>
                                         <td class="table-info text-center">
                                             <i class="fa-solid fa-bookmark"></i>
                                         </td>
                                         <td>
-                                            <a class="fw-medium" href="javascript:void(0)"><?= $i.'.'.$j.' '.$topic->topic ?></a>
+                                            <a class="fw-medium" href="javascript:void(0)"><?= $i.'.'.$j.' '.$topica ?></a>
                                         </td>
                                     </tr>
                                     <?php endforeach;?>
@@ -138,8 +138,8 @@
                                     <tr>
                                         <td>
                                             <i class="fa fa-fw fa-tags me-1"></i>
-                                            <?php foreach ( $data['testData']->subject as $item):?>
-                                            <a class="fw-semibold link-fx text-success"><?= $item->subject ?></a>,
+                                            <?php foreach ( $data['testData']->question_compositon as $item):?>
+                                            <a class="fw-semibold link-fx text-success"><?= $item['subject'] ?></a>,
                                             <?php endforeach;?>
                                         </td>
                                     </tr>

@@ -12,7 +12,7 @@ class BankSoalModel extends Model
     protected $insertID         = 0;
     protected $returnType       = 'object';
     protected $protectFields    = true;
-    protected $allowedFields    = ['question','level','subject','discussion','difficulty','created_at','updated_at','created_by'];
+    protected $allowedFields    = ['question','class_id','subject_id','topic_id','discussion','difficulty','created_at','updated_at','created_by'];
     protected $useSoftDeletes = true;
     // Dates
     protected $dateFormat    = 'datetime';
@@ -34,6 +34,9 @@ class BankSoalModel extends Model
         'class_id'        => [
             'required' => 'Kelas Harus Diisi',
         ],
+        'topic_id'        => [
+            'required' => 'Topik Mata Pelajaran Harus Diisi',
+        ],
         'subject_id'        => [
             'required' => 'Mata Pelajaran Harus Diisi',
         ],
@@ -51,44 +54,109 @@ class BankSoalModel extends Model
         $this->builder = $this->db->table($this->table);
     }
 
+    // protected function _get_datatables_query($table, $column_order, $column_search, $order)
+    // {
+    //     $this->builder = $this->db->table($table);
+    //     $i = 0;
+    //     foreach ($column_search as $item) {
+    //         if (isset($_POST['search']['value'])) {
+    //             if ($i === 0) {
+    //                 $this->builder->groupStart();
+    //                 $this->builder->like($item, $_POST['search']['value']);
+    //             } else {
+    //                 $this->builder->orLike($item, $_POST['search']['value']);
+    //             }
+
+    //             if (count($column_search) - 1 == $i)
+    //                 $this->builder->groupEnd();
+    //         }
+    //         $i++;
+    //     }
+
+    //     if (isset($_POST['order'])) {
+    //         $this->builder->orderBy($column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
+    //     } else if (isset($order)) {
+    //         $order = $order;
+    //         $this->builder->orderBy(key($order), $order[key($order)]);
+    //     }
+    // }
+
+    // public function get_datatables($table, $column_order, $column_search, $order,$level,$subject,$data = '')
+    // {
+    //     $this->_get_datatables_query($table, $column_order, $column_search, $order);
+    //     // if ($_POST['length'] != -1){
+    //     //     $this->builder->limit($_POST['length'], $_POST['start']);
+    //     // }
+    //     if ($data) {
+    //         $this->builder->where($data);
+    //     }
+    //     $query = $this->builder->where('class_id',$level)->where('subject_id',$subject)->get();
+    //     return $query->getResult();
+    // }
+
     protected function _get_datatables_query($table, $column_order, $column_search, $order)
-    {
-        $this->builder = $this->db->table($table);
+ {
+     $this->builder = $this->db->table($table);
         $i = 0;
+    
         foreach ($column_search as $item) {
-            if (isset($_POST['search']['value'])) {
+            if ($_POST['search']['value']) {
+    
                 if ($i === 0) {
                     $this->builder->groupStart();
                     $this->builder->like($item, $_POST['search']['value']);
                 } else {
                     $this->builder->orLike($item, $_POST['search']['value']);
                 }
-
+    
                 if (count($column_search) - 1 == $i)
                     $this->builder->groupEnd();
             }
             $i++;
         }
-
+    
         if (isset($_POST['order'])) {
             $this->builder->orderBy($column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
         } else if (isset($order)) {
             $order = $order;
             $this->builder->orderBy(key($order), $order[key($order)]);
         }
+    
     }
-
-    public function get_datatables($table, $column_order, $column_search, $order,$level,$subject,$data = '')
+    
+    public function get_datatables($table, $column_order, $column_search, $order, $data = '')
     {
         $this->_get_datatables_query($table, $column_order, $column_search, $order);
-        // if ($_POST['length'] != -1){
-        //     $this->builder->limit($_POST['length'], $_POST['start']);
-        // }
+        if ($_POST['length'] != -1)
+            $this->builder->limit($_POST['length'], $_POST['start']);
         if ($data) {
             $this->builder->where($data);
         }
-        $query = $this->builder->where('class_id',$level)->where('subject_id',$subject)->get();
+    
+        $query = $this->builder->get();
         return $query->getResult();
+    }
+    
+    public function count_filtered($table, $column_order, $column_search, $order, $data = '')
+    {
+        $this->_get_datatables_query($table, $column_order, $column_search, $order);
+        if ($data) {
+            $this->builder->where($data);
+        }else{
+        $this->builder->from($table);
+        }
+        return $this->builder->countAllResults();
+    }
+    
+    public function count_all($table, $data = '')
+    {
+        if ($data) {
+            $this->builder->where($data);
+        }else{
+            $this->builder->from($table);
+        }
+    
+        return $this->builder->countAllResults();
     }
 
     public function delete_question($id)
@@ -100,10 +168,11 @@ class BankSoalModel extends Model
     {
         $question_data = [
             'subject_id' => $data['subject'],
+            'topic_id' => $data['topic'],
             'class_id' => $data['level'],
             'question' => $data['question'],
             'discussion'    => $data['discussion'],
-            'difficulty'    => 'susah',
+            'difficulty'    => '',
             'created_by'    => $data['created_by'],
             'created_at'    => $this->now(),
             'updated_at'    => $this->now()

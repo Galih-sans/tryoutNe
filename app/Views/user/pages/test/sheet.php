@@ -34,6 +34,7 @@
                                     <a class="action next btn btn-sm btn-flat" rel="1" onclick="next(); return false">
                                         Selanjutnya <i class="fa-solid fa-angle-right"></i></a>
                                     <input type="hidden" name="jml_soal" id="jml_soal" value="">
+                                    <input type="hidden" name="begin_time" id="begin_time" value="">
                                 </div>
                             </div>
                         </div>

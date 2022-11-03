@@ -36,17 +36,19 @@ class BankSoalController extends BaseController
     }
     public function dt_bank_soal()
     {   
+        $request = \Config\Services::request();
         $level = $this->request->getVar('level');
         $subject = $this->request->getVar('subject');
-        $where = ['id !=' => 0];
+        $topic = $this->request->getVar('topic');
+        $where = ['class_id'=>$level, 'subject_id'=>$subject,'topic_id='=>$topic];
         $column_order   = array('', 'question', 'discussion');
         $column_search  = array('question', 'discussion');
-        $order = array('question' => 'ASC');
-        $list = $this->banksoal_model->get_datatables('to_questions', $column_order, $column_search, $order,$level,$subject,$where);
+        $order = array('id' => 'ASC');
+        $list = $this->banksoal_model->get_datatables('to_questions', $column_order, $column_search, $order,$where);
         $data1 = array();
         $no = 0;
         foreach ($list as $lists) {
-            $alpha ="A";
+            $alpha ="A";   
             $answerlist = '';
             $no++;
             $answers = $this->answer_model->get_answer($lists->id);
@@ -73,7 +75,9 @@ class BankSoalController extends BaseController
             $data1[] = $row;
         }
         $output = array(
-            "draw" => true,
+            "draw" => $request->getPost("draw"),
+            "recordsTotal" => $this->banksoal_model->count_all('to_questions', $where),
+            "recordsFiltered" => $this->banksoal_model->count_filtered('to_questions', $column_order, $column_search, $order, $where),
             "data" => $data1,
         );
 
@@ -155,6 +159,7 @@ class BankSoalController extends BaseController
             } else {
                 $question_data = [
                     'subject' => $this->request->getVar('subject'),
+                    'topic' => $this->request->getVar('topic'),
                     'level' => $this->request->getVar('level'),
                     'question' => $this->request->getVar('question'),
                     'discussion'    => $this->request->getVar('discussion'),

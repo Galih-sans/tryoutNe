@@ -25,7 +25,7 @@ $routes->set404Override();
 // where controller filters or CSRF protection are bypassed.
 // If you don't want to define all routes, please use the Auto Routing (Improved).
 // Set `$autoRoutesImproved` to true in `app/Config/Feature.php` and set the following to true.
-//$routes->setAutoRoute(false);
+$routes->setAutoRoute(true);
 
 /*
  * --------------------------------------------------------------------
@@ -72,6 +72,7 @@ $routes->group("", ["filter" => "isuser", "namespace" => "App\Controllers\user"]
         $routes->match(["get", "post"], "sheet/(:any)", "testcontroller::sheet/$1", ['as' => 'user.test.sheet']);;
         $routes->match(["get", "post"], "get_test", "testcontroller::get_test", ['as' => 'user.test.get_test']);;
         $routes->match(["get", "post"], "submit_test", "testcontroller::submit", ['as' => 'user.test.submit']);;
+        $routes->match(["get", "post"], "result(:any)", "testcontroller::result/$1", ['as' => 'user.test.result']);;
     });
     $routes->group("profil", function($routes){
         // URL - /user

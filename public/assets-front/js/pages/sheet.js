@@ -4,6 +4,7 @@ $(document).ready(function () {
         var loc_data = JSON.parse(localStorage.getItem("data"));
         $('.data').html(loc_data.data.html);
         $('#jml_soal').val(loc_data.data.number);
+        $('#begin_time').val(loc_data.begin_time);
         for (const [key, value] of Object.entries(loc_data.jawaban)) {
             for (var p = 1; p < loc_data.data.number; p++) {
                 if (key === "answer[" + p + "][answer]") {
@@ -16,16 +17,17 @@ $(document).ready(function () {
                 }
             }
         }
+        var counter = new Date(loc_data.duration);
         buka(1);
         simpan_sementara();
-        countdown(durasi, 00);
+        countdown(counter);
         widget = $(".step");
         total_widget = widget.length;
         widget = $(".step");
         btnnext = $(".next");
         btnback = $(".back");
         btnsubmit = $(".submit");
-        $(".step, .back , .selesai").hide();
+        $(".step, .back ").hide();
         $("#widget_1").show();
     } else {
         $.ajax({
@@ -37,15 +39,21 @@ $(document).ready(function () {
             success: function (d) {
                 var d = JSON.parse(d);
                 $('.data').html(d.html);
+                var counter = new Date();
+                counter.setTime(counter.getTime() + durasi*60*1000)
                 var data = {
                     'data': d,
+                    'duration' : counter,
+                    'begin_time' : Math.floor(Date.now()/1000),
                     'jawaban': getFormData($("#ujian")),
                 };
                 localStorage.setItem("data", JSON.stringify(data));
+
                 $('#jml_soal').val(d.number);
+                $('#begin_time').val(Math.floor(Date.now()/1000));
                 buka(1);
                 simpan_sementara();
-                countdown(durasi, 00);
+                countdown(counter);
                 widget = $(".step");
                 total_widget = widget.length;
                 widget = $(".step");
@@ -53,7 +61,7 @@ $(document).ready(function () {
                 btnback = $(".back");
                 btnsubmit = $(".submit");
 
-                $(".step, .back , .selesai").hide();
+                $(".step, .back").hide();
                 $("#widget_1").show();
             },
             error: function (error) {
@@ -63,48 +71,48 @@ $(document).ready(function () {
     }
     setTimeout(function () {
         One.loader('hide');
-    }, 4000)
+    }, 3000)
 });
 
-function countdown(minutes, seconds) {
-    function tick() {
-        var counter = document.getElementById("timer");
+// function countdown(minutes, seconds) {
+//     function tick() {
+//         var counter = document.getElementById("timer");
 
-        if (localStorage.getItem("counter")) {
-            minutes = JSON.parse(localStorage.getItem("counter")).min;
-            seconds = JSON.parse(localStorage.getItem("counter")).sec;
-        }
+//         if (localStorage.getItem("counter")) {
+//             minutes = JSON.parse(localStorage.getItem("counter")).min;
+//             seconds = JSON.parse(localStorage.getItem("counter")).sec;
+//         }
 
-        counter.innerHTML =
-            minutes.toString() + ":" + (seconds < 10 ? "0" : "") + String(seconds);
-        seconds--;
+//         counter.innerHTML =
+//             minutes.toString() + ":" + (seconds < 10 ? "0" : "") + String(seconds);
+//         seconds--;
 
-        if (seconds >= 0) {
-            timeoutHandle = setTimeout(tick, 1000);
-            var con = {
-                'min': minutes,
-                'sec': seconds,
-            };
-            localStorage.setItem("counter", JSON.stringify(con));
-        } else {
-            if (minutes >= 1) {
-                // countdown(mins-1);   never reach “00″ issue solved:Contributed by Victor Streithorst
-                setTimeout(function () {
-                    countdown(minutes - 1, 59);
-                    var con = {
-                        'min': minutes - 1,
-                        'sec': 59,
-                    };
-                    localStorage.setItem("counter", JSON.stringify(con));
-                }, 1000);
-            } else {
-                localStorage.removeItem("counter");
-                alert('entek');
-            }
-        }
-    }
-    tick();
-}
+//         if (seconds >= 0) {
+//             timeoutHandle = setTimeout(tick, 1000);
+//             var con = {
+//                 'min': minutes,
+//                 'sec': seconds,
+//             };
+//             localStorage.setItem("counter", JSON.stringify(con));
+//         } else {
+//             if (minutes >= 1) {
+//                 // countdown(mins-1);   never reach “00″ issue solved:Contributed by Victor Streithorst
+//                 setTimeout(function () {
+//                     countdown(minutes - 1, 59);
+//                     var con = {
+//                         'min': minutes - 1,
+//                         'sec': 59,
+//                     };
+//                     localStorage.setItem("counter", JSON.stringify(con));
+//                 }, 1000);
+//             } else {
+//                 localStorage.removeItem("counter");
+//                 alert('entek');
+//             }
+//         }
+//     }
+//     tick();
+// }
 
 function getFormData($form) {
     var unindexed_array = $form.serializeArray();
@@ -233,16 +241,16 @@ function cek_status_ragu(id_soal) {
 }
 
 function cek_terakhir(id_soal) {
-    var jml_soal = $("#jml_soal").val();
-    jml_soal = (parseInt(jml_soal) - 1);
+    // var jml_soal = $("#jml_soal").val();
+    // jml_soal = (parseInt(jml_soal) - 1);
 
-    if (jml_soal === id_soal) {
-        $('.next').hide();
-        $(".selesai, .back").show();
-    } else {
-        $('.next').show();
-        $(".selesai").hide();
-    }
+    // if (jml_soal === id_soal) {
+    //     $('.next').hide();
+    //     $(".selesai, .back").show();
+    // } else {
+    //     $('.next').show();
+    //     $(".selesai").hide();
+    // }
 }
 
 function simpan_sementara() {
@@ -353,4 +361,28 @@ function simpan_akhir() {
             Swal.Close();
         }
     });
+}
+
+
+
+function countdown(time) {
+    console.log(time)
+    var n = new Date();
+    var x = setInterval(function() {
+        var now = new Date().getTime();
+        var dis = time.getTime() - now;
+        var d = Math.floor(dis / (1000 * 60 * 60 * 24));
+        var h = Math.floor((dis % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var m = Math.floor((dis % (1000 * 60 * 60)) / (1000 * 60));
+        var s = Math.floor((dis % (1000 * 60)) / (1000));
+        d = ("0" + d).slice(-2);
+        h = ("0" + h).slice(-2);
+        m = ("0" + m).slice(-2);
+        s = ("0" + s).slice(-2);
+        var cd =h + " : " + m + " : " + s;
+        $('#timer').html(cd);
+        setTimeout(function() {
+            waktuHabis();
+        }, dis);
+    }, 1000);
 }

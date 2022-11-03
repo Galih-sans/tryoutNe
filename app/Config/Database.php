@@ -30,12 +30,25 @@ class Database extends Config
      *
      * @var array
      */
-    public $default = [
-        'DSN'      => '',
+
+     /*
+        'hostname' => 'localhost',
+        'username' => 'root',
+        'password' => '',
+        'database' => 'db_to_neo_edukasi',
+
+
         'hostname' => 'neodevtes.cmdox2lntu7b.us-east-1.rds.amazonaws.com',
         'username' => 'admin',
         'password' => 'm0213022',
         'database' => 'tryoutNe',
+     */
+    public $default = [
+        'DSN'      => '',
+        'hostname' => 'localhost',
+        'username' => 'root',
+        'password' => '',
+        'database' => 'db_to_neo_edukasi',
         'DBDriver' => 'MySQLi',
         'DBPrefix' => '',
         'pConnect' => false,

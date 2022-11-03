@@ -40,7 +40,7 @@
         <li class="nav-item dropdown pe-2 px-2 d-flex align-items-center">
           <a href="javascript:;" class="nav-link text-light font-weight-bold px-0" id="dropdownMenuButton"
             data-bs-toggle="dropdown" aria-expanded="false">
-            <span class="d-none px-2 d-sm-inline-block ms-2"><?= session('name'); ?></span>
+            <span class="d-none px-2 d-sm-inline-block ms-2"><?= ucwords(session('name')); ?></span>
             <i class="fa fa-user cursor-pointer"></i>
           </a>
           <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
