@@ -16,7 +16,6 @@
     <div class="content content-boxed">
       <div class="row items-push">
         <?php foreach ( $data['testData'] as $item):?>
-        <!-- Course -->
         <div class="col-12 col-md-4 col-lg-3 col-xl-3">
           <a class="block block-rounded block-link-pop h-100 mb-0" href="<?= route_to('user.test.view', strtr(base64_encode($data['encrypter']->encrypt($item->id)),array('+' => '.', '=' => '-', '/' => '~')))?>">
             <div class="block-content block-content-full ribbon ribbon-danger ribbon-left text-center bg-flat">

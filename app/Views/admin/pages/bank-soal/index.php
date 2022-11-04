@@ -58,6 +58,11 @@
     </div>
     <div class="block block-rounded pb-2 shadow-sm d-none" id="question-datatables">
         <div class="block-content">
+        <div class="col-12 col-md-12 text-right">
+                    <button type="button" class="btn btn-primary btn-sm" onclick="tambah()">
+                        <i class="si si-plus"></i> Tambah Soal
+                    </button>
+                </div>
             <table id="example"
                 class="table table-bordered table-vcenter js-dataTable-full no-footer dtr-inline collapsed"
                 style="width:100%">
@@ -232,7 +237,7 @@
 
     function create_quilljs(id) {
         var Image = Quill.import('formats/image');
-        Image.className = 'img-responsive img-fluid';
+        Image.className = 'img-responsive';
         Quill.register(Image, true);
         quill[id] = new Quill('#' + id, {
             theme: 'snow',
