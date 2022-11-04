@@ -61,7 +61,7 @@
                                             <i class="fa-solid fa-bookmark"></i>
                                         </td>
                                         <td>
-                                            <a class="fw-medium" href="javascript:void(0)"><?= $i.'.'.$j.' '.$topica ?></a>
+                                            <a class="fw-semibold link-fx text-secondary"><?= $i.'.'.$j.' '.$topica ?></a>
                                         </td>
                                     </tr>
                                     <?php endforeach;?>
