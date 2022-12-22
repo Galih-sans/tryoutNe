@@ -16,6 +16,7 @@
     <link rel="stylesheet" id="css-main" href="<?= base_url('css/admin_main.css') ?>">
     <link rel="stylesheet" id="css-main" href="<?= base_url('css/themes/modern.css') ?>">
     <script src="<?= base_url('js/bootstrap.bundle.js')?>"></script>
+    <script src="https://kit.fontawesome.com/b2509b26f8.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -29,7 +30,6 @@
         </main>
         <?= $this->include('admin/layout/partial/footer') ?>
     </div>
-    <script src="https://kit.fontawesome.com/b2509b26f8.js" crossorigin="anonymous"></script>
 </body>
 
 </html>

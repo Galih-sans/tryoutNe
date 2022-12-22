@@ -25,16 +25,19 @@
 
 <body class="g-sidenav-show fixed-top bg-gray-200">
     <div class="min-height-60 bg-neo-dark position-absolute w-100"></div>
+    <div id="page-container"
+    class="sidebar-o sidebar-light enable-page-overlay side-scroll page-header-fixed main-content-narrow">
     <?= $this->include('user/layout/partial/navbar') ?>
-    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
-        <?= $this->include('user/layout/partial/navhead') ?>
-        <!-- Navbar -->
+        <main class="main-content max-height-vh-100 border-radius-lg ">
+            <?= $this->include('user/layout/partial/navhead') ?>
+            <!-- Navbar -->
 
-        <!-- End Navbar -->
-        <!-- Container -->
-        <?= $this->renderSection('content') ?>
+            <!-- End Navbar -->
+            <!-- Container -->
+            <?= $this->renderSection('content') ?>
+        </main>
         <?= $this->include('user/layout/partial/footer') ?>
-    </main>
+    </div>
     <!--   Core JS Files   -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="<?= base_url('assets-front/js/core/popper.min.js')?>"></script>
