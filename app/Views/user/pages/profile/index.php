@@ -1,44 +1,57 @@
 <?= $this->extend('user/layout/app') ?>
 
 <?= $this->section('content') ?>
+
 <div class="card shadow-lg mx-4 card-profile-bottom mt-4">
     <div class="card-body p-3">
         <div class="card-header pb-0">
             <div class="d-flex align-items-center">
-                <p class="mb-0">Edit Profile</p>
-                <button class="btn btn-primary btn-sm ms-auto">Simpan</button>
+                <h3 class="mb-0">Edit Profil</h3>
+                <button class="btn btn-info btn-sm ms-auto">Simpan</button>
             </div>
         </div>
         <div class="card-body">
-            <p class="text-uppercase text-sm">User Information</p>
+            <h4 class="text-uppercase text-sm">Profil User</h4>
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group bmd-form-group">
-                        <label for="exampleEmail" class="bmd-label-floating">Email Address</label>
-                        <input type="email" class="form-control" id="exampleEmail">
+                        <label for="exampleEmail" class="bmd-label-floating">Nama Lengkap</label>
+                        <input type="text" class="form-control" value="<?= $userData->full_name ?>">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="example-text-input" class="form-control-label">Email address</label>
-                        <input class="form-control" type="email" value="jesse@example.com">
+                        <label for="example-text-input" class="form-control-label">Alamat E-mail</label>
+                        <input class="form-control" type="email" value="<?= $userData->email ?>">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="example-text-input" class="form-control-label">Nama Depan</label>
-                        <input class="form-control" type="text" value="Jesse">
+                        <label for="example-text-input" class="form-control-label">Nomor Telepon</label>
+                        <input class="form-control" type="text" value="<?= $userData->phone_number ?>">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="example-text-input" class="form-control-label">Nama Belakang</label>
-                        <input class="form-control" type="text" value="Lucky">
+                        <label for="example-text-input" class="form-control-label">Jenis Kelamin</label>
+                        <input class="form-control" type="text" value="<?= $userData->gender ?>">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="example-text-input" class="form-control-label">Tempat Lahir</label>
+                        <input class="form-control" type="text" value="<?= $userData->POB ?>">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="example-text-input" class="form-control-label">Tanggal Lahir</label>
+                        <input class="form-control" type="text" value="<?= $userData->DOB ?>">
                     </div>
                 </div>
             </div>
             <hr class="horizontal dark">
-            <p class="text-uppercase text-sm">School Information</p>
+            <h4 class="text-uppercase text-sm">Data Sekolah</h4>
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group">
@@ -80,16 +93,6 @@
                     <div class="form-group">
                         <label for="example-text-input" class="form-control-label">Jurusan</label>
                         <input class="form-control" type="text" value="Ilmu Komunikasi Dasar">
-                    </div>
-                </div>
-            </div>
-            <hr class="horizontal dark">
-            <p class="text-uppercase text-sm">About me</p>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="example-text-input" class="form-control-label">About me</label>
-                        <input class="form-control" type="text" value="tahuu..bulaat....digoreng..dadakan..gak enak....">
                     </div>
                 </div>
             </div>
