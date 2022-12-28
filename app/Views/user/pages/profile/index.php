@@ -7,7 +7,7 @@
         <div class="card-header pb-0">
             <div class="d-flex align-items-center">
                 <h3 class="mb-0">Edit Profil</h3>
-                <button class="btn btn-info btn-sm ms-auto">Simpan</button>
+                <button class="btn btn-info btn-sm ms-auto">Simpan Profil</button>
             </div>
         </div>
         <div class="card-body">
@@ -15,13 +15,13 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group bmd-form-group">
-                        <label for="exampleEmail" class="bmd-label-floating">Nama Lengkap</label>
+                        <label for="example-text-input" class="bmd-label-floating">Nama Lengkap</label>
                         <input type="text" class="form-control" value="<?= $userData->full_name ?>">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="example-text-input" class="form-control-label">Alamat E-mail</label>
+                        <label for="exampleEmail" class="form-control-label">Alamat E-mail</label>
                         <input class="form-control" type="email" value="<?= $userData->email ?>">
                     </div>
                 </div>
@@ -32,10 +32,12 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="example-text-input" class="form-control-label">Jenis Kelamin</label>
-                        <input class="form-control" type="text" value="<?= $userData->gender ?>">
-                    </div>
+                    <label for="">Jenis Kelamin :</label>
+                    <select class="form-control select2" name="gender" id="gender">
+                        <option value="jenjang" disabled selected>-pilih jenis kelamin-</option>
+                        <option value="laki">Laki-Laki</option>
+                        <option value="perempuan">Perempuan</option>
+                    </select>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
@@ -46,7 +48,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="example-text-input" class="form-control-label">Tanggal Lahir</label>
-                        <input class="form-control" type="text" value="<?= $userData->DOB ?>">
+                        <input class="form-control" type="date" value="<?= $userData->DOB ?>">
                     </div>
                 </div>
             </div>
