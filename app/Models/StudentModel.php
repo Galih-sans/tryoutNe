@@ -37,16 +37,16 @@ class StudentModel extends Model
 
     // Validation
     protected $validationRules =
-        [
-            'full_name'     => 'required|min_length[5]|max_length[50]',
-            'class_id'     => 'required',
-            'POB'     => 'required|min_length[5]',
-            'DOB'     => 'required',
-            'email'        => 'required|min_length[4]|max_length[100]|valid_email|is_unique[to_students.email]',
-            'password'        => 'required|min_length[4]',
-            'phone_number'        => 'required|min_length[10]',
-            'parent_name'        => 'required|min_length[5]',
-            'parent_phone_number'        => 'required|min_length[10]',            
+    [
+        'full_name'     => 'required|min_length[5]|max_length[50]',
+        'class_id'     => 'required',
+        'POB'     => 'required|min_length[5]',
+        'DOB'     => 'required',
+        'email'        => 'required|min_length[4]|max_length[100]|valid_email|is_unique[to_students.email]',
+        'password'        => 'required|min_length[4]',
+        'phone_number'        => 'required|min_length[10]',
+        'parent_name'        => 'required|min_length[5]',
+        'parent_phone_number'        => 'required|min_length[10]',
     ];
     protected $validationMessages   = [
         'full_name'        => [
@@ -63,7 +63,7 @@ class StudentModel extends Model
         ],
         'email'        => [
             'required' => 'Email Harus Diisi',
-            'is_unique' =>'Alamat Email Sudah Terdaftar',
+            'is_unique' => 'Alamat Email Sudah Terdaftar',
         ],
         'password'        => [
             'required' => 'Password Harus Diisi',
@@ -104,23 +104,28 @@ class StudentModel extends Model
     }
     public function verify_email($token)
     {
-        $newtoken = random_string ('md5',16);
-        return   $this->builder->set('email_verified', 1)->set('token',$newtoken)
-        ->where('token', $token)
-        ->update();
+        $newtoken = random_string('md5', 16);
+        return   $this->builder->set('email_verified', 1)->set('token', $newtoken)
+            ->where('token', $token)
+            ->update();
     }
 
-    public function reset_password($token,$data)
+    public function reset_password($token, $data)
     {
-        $newtoken = random_string ('md5',16);
-        return   $this->builder->set('email_verified', 1)->set('token',$newtoken)->set('password',password_hash($data['password'], PASSWORD_DEFAULT))
-        ->where('token', $token)
-        ->update();
+        $newtoken = random_string('md5', 16);
+        return   $this->builder->set('email_verified', 1)->set('token', $newtoken)->set('password', password_hash($data['password'], PASSWORD_DEFAULT))
+            ->where('token', $token)
+            ->update();
     }
     public function getClass($id)
     {
         $query = $this->builder->select('class_id')->where(['id' => $id])->get()->getRow();
         $class_id = $query->class_id;
         return $class_id;
+    }
+    public function profile($id)
+    {
+        $query = $this->builder->select('*')->where(['id' => $id])->get()->getRow();
+        return $query;
     }
 }
