@@ -35,6 +35,7 @@
                     <label for="">Jenis Kelamin :</label>
                     <select class="form-control select2" name="gender" id="gender">
                         <option value="jenjang" disabled selected>-pilih jenis kelamin-</option>
+                        <option value=""></option>
                         <option value="laki">Laki-Laki</option>
                         <option value="perempuan">Perempuan</option>
                     </select>
@@ -46,9 +47,10 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="example-text-input" class="form-control-label">Tanggal Lahir</label>
-                        <input class="form-control" type="date" value="<?= $userData->DOB ?>">
+                    <label>Tanggal Lahir</label>
+                    <div class="input-group date" data-provide="datepicker">
+                        <input type="text" class="form-control" value="<?= $userData->DOB ?>">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
                     </div>
                 </div>
             </div>
@@ -101,4 +103,7 @@
         </div>
     </div>
 </div>
+<!-- datepicker -->
+<script defer src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js'></script>
+<script defer src="<?= base_url('assets-front/js/script.js') ?>"></script>
 <?= $this->endSection() ?>
