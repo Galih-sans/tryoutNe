@@ -125,7 +125,7 @@ class StudentModel extends Model
     }
     public function profile($id)
     {
-        $query = $this->builder->select('*')->where(['id' => $id])->get()->getRow();
+        $query = $this->builder->join('to_class', 'to_class.id=to_students.class_id')->where(['to_students.id' => $id])->get()->getRow();
         return $query;
     }
 }
