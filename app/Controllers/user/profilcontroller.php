@@ -22,4 +22,39 @@ class profilcontroller extends BaseController
         $data = $this->StudentModel->profile($this->encrypter->decrypt(base64_decode(session()->get('id'))));
         return view('user/pages/profile/index', ['data' => $this->pagedata, 'userData' => $data]);
     }
+    // update
+    public function update()
+    {
+        $this->StudentModel = new StudentModel();
+        if ($this->request->isAJAX()) {
+            $id = $this->request->getVar('id');
+            $data = [
+                'full_name' => $this->request->getVar('full_name'),
+                'email' => $this->request->getVar('email')
+            ];
+            $query = $this->StudentModel->update($id, $data);
+            if ($query) {
+                $this->output['success'] = true;
+                $this->output['message']  = 'Data Berhasil Diupdate';;
+            } else {
+                $this->output['success'] = false;
+                $this->output['message']  = 'Data Gagal Diupdate';
+            }
+
+
+            echo json_encode($this->output);
+        }
+        // $this->StudentModel = new StudentModel();
+        // $id =
+        //     $this->request->getVar('id');;
+        // $full_name = $this->request->getVar('full_name');
+        // $email = $this->request->getVar('email');
+
+        // $data = [
+        //     'full_name' => $full_name,
+        //     'email' => $email
+        // ];
+
+        // $this->StudentModel->update($id, $data);
+    }
 }

@@ -37,7 +37,7 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 
 //login
-$routes->match(['get', 'post'], 'login', 'LoginController::login', ["filter" => "noauth"],['as' => 'login']);
+$routes->match(['get', 'post'], 'login', 'LoginController::login', ["filter" => "noauth"], ['as' => 'login']);
 
 //Register
 $routes->match(['get', 'post'], 'register', 'RegisterController::register', ["filter" => "noauth"], ['as' => 'register']);
@@ -60,11 +60,11 @@ $routes->match(['get', 'post'], 'resetpassword/(:any)', 'RegisterController::res
 //Logout
 $routes->get('logout', 'LoginController::logout');
 
-$routes->group("", ["filter" => "isuser", "namespace" => "App\Controllers\user"], function($routes){
+$routes->group("", ["filter" => "isuser", "namespace" => "App\Controllers\user"], function ($routes) {
     // URL - /user
     $routes->get("/", "usercontroller::index", ['as' => 'user.dashboard']);
     // URL - /user/test
-    $routes->group("test", function($routes){
+    $routes->group("test", function ($routes) {
         // URL - /user
         $routes->get("/", "testcontroller::index", ['as' => 'user.test.index']);
         $routes->match(["get", "post"], "index", "testcontroller::index");
@@ -74,64 +74,64 @@ $routes->group("", ["filter" => "isuser", "namespace" => "App\Controllers\user"]
         $routes->match(["get", "post"], "submit_test", "testcontroller::submit", ['as' => 'user.test.submit']);;
         $routes->match(["get", "post"], "result(:any)", "testcontroller::result/$1", ['as' => 'user.test.result']);;
     });
-    $routes->group("profil", function($routes){
+    $routes->group("profil", function ($routes) {
         // URL - /user
         $routes->get("/", "profilcontroller::index", ['as' => 'user.profil.index']);
         $routes->match(["get", "post"], "index", "profilcontroller::index");
+        $routes->post("/profil/update_profil", "profilcontroller::update");
     });
-    $routes->group("performance", function($routes){
+    $routes->group("performance", function ($routes) {
         // URL - /user
         $routes->get("/", "performancecontroller::index", ['as' => 'user.performance.index']);
         $routes->match(["get", "post"], "index", "performancecontroller::index");
     });
-    $routes->group("transaksi", function($routes){
+    $routes->group("transaksi", function ($routes) {
         // URL - /user
         $routes->get("/", "transaksicontroller::index", ['as' => 'user.transaksi.index']);
         $routes->match(["get", "post"], "index", "transaksicontroller::index");
     });
-    
 });
-$routes->group("admin",["filter" => "isadmin", "namespace" => "App\Controllers\Admin"], function($routes){
+$routes->group("admin", ["filter" => "isadmin", "namespace" => "App\Controllers\Admin"], function ($routes) {
     // URL - /admin
-    $routes->get("/", "AdminController::index",['as' => 'admin.dashboard']);
+    $routes->get("/", "AdminController::index", ['as' => 'admin.dashboard']);
     // URL - /admin/add-user
-    $routes->group("class", function($routes){
+    $routes->group("class", function ($routes) {
         // URL - /admin
         $routes->get("/", "ClassController::index", ['as' => 'admin.class.index']);
-        $routes->match(["get", "post"], "dt_class", "ClassController::dt_class",['as' => 'admin.class.dt_class']);
-        $routes->match(["get", "post"], "add_class", "ClassController::create",['as' => 'admin.class.add_class']);
-        $routes->match(["get", "post"], "remove_class", "ClassController::delete",['as' => 'admin.class.remove_class']);
-        $routes->match(["get", "post"], "get_subject", "SubjectController::get_subject",['as' => 'admin.class.get_subject']);
-        $routes->match(["get", "post"], "update_class", "ClassController::update",['as' => 'admin.class.edit_class']);
+        $routes->match(["get", "post"], "dt_class", "ClassController::dt_class", ['as' => 'admin.class.dt_class']);
+        $routes->match(["get", "post"], "add_class", "ClassController::create", ['as' => 'admin.class.add_class']);
+        $routes->match(["get", "post"], "remove_class", "ClassController::delete", ['as' => 'admin.class.remove_class']);
+        $routes->match(["get", "post"], "get_subject", "SubjectController::get_subject", ['as' => 'admin.class.get_subject']);
+        $routes->match(["get", "post"], "update_class", "ClassController::update", ['as' => 'admin.class.edit_class']);
     });
-    $routes->group("subject", function($routes){
+    $routes->group("subject", function ($routes) {
         // URL - /admin
         $routes->get("/", "SubjectController::index", ['as' => 'admin.subject.index']);
-        $routes->match(["get", "post"], "dt_subject", "SubjectController::dt_subject",['as' => 'admin.subject.dt_subject']);
-        $routes->match(["get", "post"], "add_subject", "SubjectController::create",['as' => 'admin.subject.add_subject']);
-        $routes->match(["get", "post"], "remove_subject", "SubjectController::delete",['as' => 'admin.subject.remove_subject']);
-        $routes->match(["get", "post"], "update_subject", "SubjectController::update",['as' => 'admin.subject.edit_subject']);
+        $routes->match(["get", "post"], "dt_subject", "SubjectController::dt_subject", ['as' => 'admin.subject.dt_subject']);
+        $routes->match(["get", "post"], "add_subject", "SubjectController::create", ['as' => 'admin.subject.add_subject']);
+        $routes->match(["get", "post"], "remove_subject", "SubjectController::delete", ['as' => 'admin.subject.remove_subject']);
+        $routes->match(["get", "post"], "update_subject", "SubjectController::update", ['as' => 'admin.subject.edit_subject']);
     });
-    $routes->group("topic", function($routes){
+    $routes->group("topic", function ($routes) {
         // URL - /admin
         $routes->get("/", "TopicController::index", ['as' => 'admin.topic.index']);
-        $routes->match(["get", "post"], "dt_topic", "TopicController::dt_topic",['as' => 'admin.topic.dt_topic']);
-        $routes->match(["get", "post"], "add_topic", "TopicController::create",['as' => 'admin.topic.add_topic']);
-        $routes->match(["get", "post"], "remove_topic", "TopicController::delete",['as' => 'admin.topic.remove_topic']);
-        $routes->match(["get", "post"], "update_topic", "TopicController::update",['as' => 'admin.topic.edit_topic']);
+        $routes->match(["get", "post"], "dt_topic", "TopicController::dt_topic", ['as' => 'admin.topic.dt_topic']);
+        $routes->match(["get", "post"], "add_topic", "TopicController::create", ['as' => 'admin.topic.add_topic']);
+        $routes->match(["get", "post"], "remove_topic", "TopicController::delete", ['as' => 'admin.topic.remove_topic']);
+        $routes->match(["get", "post"], "update_topic", "TopicController::update", ['as' => 'admin.topic.edit_topic']);
     });
-    $routes->group("test", function($routes){
+    $routes->group("test", function ($routes) {
         // URL - /admin
         $routes->get("/", "TestController::index", ['as' => 'admin.test.index']);
         $routes->match(["get", "post"], "index", "TestController::index");
         $routes->match(["get", "post"], "dt_test", "TestController::dt_test", ['as' => 'admin.test.dt_test']);
-        $routes->match(["get", "post"], "add_test", "TestController::create",['as' => 'admin.test.add_test']);
-        $routes->match(["get", "post"], "edit_test", "TestController::update",['as' => 'admin.test.edit_test']);
-        $routes->match(["get", "post"], "remove_test", "TestController::delete",['as' => 'admin.test.remove_test']);
-        $routes->match(["get", "post"], "get_test", "TestController::detail",['as' => 'admin.test.get_test']);
-        $routes->match(["get", "post"], "get_edit_test", "TestController::get_detail",['as' => 'admin.test.get_edit']);
+        $routes->match(["get", "post"], "add_test", "TestController::create", ['as' => 'admin.test.add_test']);
+        $routes->match(["get", "post"], "edit_test", "TestController::update", ['as' => 'admin.test.edit_test']);
+        $routes->match(["get", "post"], "remove_test", "TestController::delete", ['as' => 'admin.test.remove_test']);
+        $routes->match(["get", "post"], "get_test", "TestController::detail", ['as' => 'admin.test.get_test']);
+        $routes->match(["get", "post"], "get_edit_test", "TestController::get_detail", ['as' => 'admin.test.get_edit']);
     });
-    $routes->group("bank-soal", function($routes){
+    $routes->group("bank-soal", function ($routes) {
         // URL - /admin
         $routes->get("/", "BankSoalController::index", ['as' => 'admin.bank-soal.index']);
         $routes->match(["get", "post"], "dt_banksoal", "BankSoalController::dt_bank_soal", ['as' => 'admin.bank-soal.dt_banksoal']);
