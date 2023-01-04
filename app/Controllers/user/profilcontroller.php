@@ -27,7 +27,7 @@ class profilcontroller extends BaseController
     {
         $this->StudentModel = new StudentModel();
         if ($this->request->isAJAX()) {
-            $id = $this->request->getVar('id');
+            $id = $this->encrypter->decrypt(base64_decode(session()->get('id')));
             $data = [
                 'full_name' => $this->request->getVar('full_name'),
                 'email' => $this->request->getVar('email')
@@ -35,14 +35,14 @@ class profilcontroller extends BaseController
             $query = $this->StudentModel->update($id, $data);
             if ($query) {
                 $this->output['success'] = true;
-                $this->output['message']  = 'Data Berhasil Diupdate';;
+                $this->output['message']  = 'Data Berhasil Diupdate';
             } else {
                 $this->output['success'] = false;
                 $this->output['message']  = 'Data Gagal Diupdate';
+                $this->output['detail']  = $this->StudentModel->errors();
             }
 
-
-            echo json_encode($this->output);
+            return json_encode($this->output);
         }
         // $this->StudentModel = new StudentModel();
         // $id =

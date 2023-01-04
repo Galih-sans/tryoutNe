@@ -13,25 +13,27 @@
         <form id="edit_user_form">
             <div class="card-body">
                 <h4 class="text-uppercase text-sm">Profil User</h4>
-                <button type="button" class="btn btn-sm btn-primary" data-bs-dismiss="modal" onclick="update_dataprofil()">Simpan</button>
+                <button type="button" class="btn btn-sm btn-primary"
+                    onclick="update_dataprofil()">Simpan</button>
 
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group bmd-form-group">
                             <label for="example-text-input" class="bmd-label-floating">Nama Lengkap</label>
-                            <input type="text" class="form-control" id="mame" value="<?= $userData->full_name ?>">
+                            <input type="text" class="form-control" name="full_name" id="name" value="<?= $userData->full_name ?>">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="exampleEmail" class="form-control-label">Alamat E-mail</label>
-                            <input class="form-control" type="email" id="email" value="<?= $userData->email ?>">
+                            <input class="form-control" type="email" name="email" id="email" value="<?= $userData->email ?>">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="example-text-input" class="form-control-label">Nomor Telepon</label>
-                            <input class="form-control" type="text" id="phone_number" value="<?= $userData->phone_number ?>">
+                            <input class="form-control" type="text" id="phone_number"
+                                value="<?= $userData->phone_number ?>">
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -39,8 +41,10 @@
                         <select class="form-control select2" name="gender" id="gender">
                             <option value="" disabled selected>-pilih jenis kelamin-</option>
                             <option value=""></option>
-                            <option value="L" <?php if ($userData->gender == "L") { ?> selected="selected" <?php } ?>>Laki-Laki</option>
-                            <option value="P" <?php if ($userData->gender == "P") { ?> selected="selected" <?php } ?>>Perempuan</option>
+                            <option value="L" <?php if ($userData->gender == "L") { ?> selected="selected" <?php } ?>>
+                                Laki-Laki</option>
+                            <option value="P" <?php if ($userData->gender == "P") { ?> selected="selected" <?php } ?>>
+                                Perempuan</option>
                         </select>
                     </div>
                     <div class="col-md-6">
@@ -64,13 +68,15 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="example-text-input" class="form-control-label">Nama</label>
-                            <input class="form-control" type="text" id="parent_name" value="<?= $userData->parent_name ?>">
+                            <input class="form-control" type="text" id="parent_name"
+                                value="<?= $userData->parent_name ?>">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="example-text-input" class="form-control-label">Nomer Telepon</label>
-                            <input class="form-control" type="text" id="parent_number" value="<?= $userData->parent_phone_number ?>">
+                            <input class="form-control" type="text" id="parent_number"
+                                value="<?= $userData->parent_phone_number ?>">
                         </div>
                     </div>
                 </div>
@@ -102,11 +108,19 @@
                             <select class="form-control select2" name="level" id="userLevel">
                                 <option value="" disabled selected>-pilih jenjang-</option>
                                 <option value=""></option>
-                                <option value="" <?php if ($userData->level == "SD") { ?> selected="selected" <?php } ?>>SD</option>
-                                <option value="" <?php if ($userData->level == "SMP") { ?> selected="selected" <?php } ?>>SMP</option>
-                                <option value="" <?php if ($userData->level == "Umum") { ?> selected="selected" <?php } ?>>Umum</option>
-                                <option value="" <?php if ($userData->level == "Lainnya") { ?> selected="selected" <?php } ?>>Lainnya</option>
-                                <option value="" <?php if ($userData->level == "SMA") { ?> selected="selected" <?php } ?>>SMA</option>
+                                <option value="" <?php if ($userData->level == "SD") { ?> selected="selected"
+                                    <?php } ?>>
+                                    SD</option>
+                                <option value="" <?php if ($userData->level == "SMP") { ?> selected="selected"
+                                    <?php } ?>>
+                                    SMP</option>
+                                <option value="" <?php if ($userData->level == "Umum") { ?> selected="selected"
+                                    <?php } ?>>Umum</option>
+                                <option value="" <?php if ($userData->level == "Lainnya") { ?> selected="selected"
+                                    <?php } ?>>Lainnya</option>
+                                <option value="" <?php if ($userData->level == "SMA") { ?> selected="selected"
+                                    <?php } ?>>
+                                    SMA</option>
                             </select>
                         </div>
                     </div>
@@ -115,11 +129,18 @@
                         <select class="form-control select2" name="class" id="userClass">
                             <option value="" disabled selected>-pilih kelas-</option>
                             <option value=""></option>
-                            <option value="" <?php if ($userData->class == "I") { ?> selected="selected" <?php } ?>>Kelas I</option>
-                            <option value="" <?php if ($userData->class == "II") { ?> selected="selected" <?php } ?>>Kelas II</option>
-                            <option value="" <?php if ($userData->class == "Kursus B. Inggris") { ?> selected="selected" <?php } ?>>Kelas Kursus B. Inggris</option>
-                            <option value="" <?php if ($userData->class == "Kursus CPNS") { ?> selected="selected" <?php } ?>>Kelas Kursus CPNS</option>
-                            <option value="" <?php if ($userData->class == "XII") { ?> selected="selected" <?php } ?>>Kelas XII</option>
+                            <option value="" <?php if ($userData->class == "I") { ?> selected="selected" <?php } ?>>
+                                Kelas
+                                I</option>
+                            <option value="" <?php if ($userData->class == "II") { ?> selected="selected" <?php } ?>>
+                                Kelas
+                                II</option>
+                            <option value="" <?php if ($userData->class == "Kursus B. Inggris") { ?> selected="selected"
+                                <?php } ?>>Kelas Kursus B. Inggris</option>
+                            <option value="" <?php if ($userData->class == "Kursus CPNS") { ?> selected="selected"
+                                <?php } ?>>Kelas Kursus CPNS</option>
+                            <option value="" <?php if ($userData->class == "XII") { ?> selected="selected" <?php } ?>>
+                                Kelas XII</option>
                         </select>
                     </div>
                 </div>
@@ -139,7 +160,7 @@
             url: "<?php echo base_url(); ?>/profil/update_profil",
             type: "POST",
             data: $('#edit_user_form').serialize(),
-            success: function(d) {
+            success: function (d) {
                 var d = JSON.parse(d);
                 if (d.success == true) {
                     Swal.fire({
@@ -153,16 +174,14 @@
                     Swal.fire({
                         title: 'Status :',
                         html: d.message +
-                            '<br>' + JSON.stringify(d.validation),
+                            '<br>' + JSON.stringify(d.detail),
                         icon: 'error',
                         showConfirmButton: false
                     });
                 }
-
                 console.log(d);
-                refresh_dt();
             },
-            error: function(error) {
+            error: function (error) {
                 console.log(error);
             }
         });

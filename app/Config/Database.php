@@ -35,7 +35,7 @@ class Database extends Config
         'hostname' => 'localhost',
         'username' => 'root',
         'password' => '',
-        'database' => 'db_to_neo_edukasi',
+        'database' => 'tryoutNe',
 
 
         'hostname' => 'neodevtes.cmdox2lntu7b.us-east-1.rds.amazonaws.com',
@@ -45,9 +45,9 @@ class Database extends Config
      */
     public $default = [
         'DSN'      => '',
-        'hostname' => 'neodevtes.cmdox2lntu7b.us-east-1.rds.amazonaws.com',
-        'username' => 'admin',
-        'password' => 'm0213022',
+        'hostname' => 'localhost',
+        'username' => 'root',
+        'password' => '',
         'database' => 'tryoutNe',
         'DBDriver' => 'MySQLi',
         'DBPrefix' => '',
