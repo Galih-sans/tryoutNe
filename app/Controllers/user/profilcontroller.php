@@ -27,34 +27,30 @@ class profilcontroller extends BaseController
     {
         $this->StudentModel = new StudentModel();
         if ($this->request->isAJAX()) {
-            $id = $this->request->getVar('id');
+            $id = $this->encrypter->decrypt(base64_decode(session()->get('id')));
             $data = [
                 'full_name' => $this->request->getVar('full_name'),
-                'email' => $this->request->getVar('email')
+                'email' => $this->request->getVar('email'),
+                'phone_number' => $this->request->getVar('phone_number'),
+                'gender' => $this->request->getVar('gender'),
+                'POB' => $this->request->getVar('POB'),
+                'DOB' => $this->request->getVar('DOB'),
+
+                'parent_name' => $this->request->getVar('parent_name'),
+                'parent_phone' => $this->request->getVar('parent_phone'),
+
+                'class_id' => $this->request->getVar('class_id')
             ];
             $query = $this->StudentModel->update($id, $data);
             if ($query) {
                 $this->output['success'] = true;
-                $this->output['message']  = 'Data Berhasil Diupdate';;
+                $this->output['message']  = 'Data Berhasil Diupdate';
             } else {
                 $this->output['success'] = false;
                 $this->output['message']  = 'Data Gagal Diupdate';
+                $this->output['detail']  = $this->StudentModel->errors();
             }
-
-
-            echo json_encode($this->output);
+            return json_encode($this->output);
         }
-        // $this->StudentModel = new StudentModel();
-        // $id =
-        //     $this->request->getVar('id');;
-        // $full_name = $this->request->getVar('full_name');
-        // $email = $this->request->getVar('email');
-
-        // $data = [
-        //     'full_name' => $full_name,
-        //     'email' => $email
-        // ];
-
-        // $this->StudentModel->update($id, $data);
     }
 }
