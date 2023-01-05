@@ -44,13 +44,13 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="example-text-input" class="form-control-label">Tempat Lahir</label>
-                            <input name="POB" class="form-control" type="text" id="pob" value="<?= $userData->POB ?>">
+                            <input name="POB" class="form-control" type="text" id="POB" value="<?= $userData->POB ?>">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <label>Tanggal Lahir</label>
-                        <div class="input-group date" data-provide="datepicker">
-                            <input name="DOB" type="text" class="form-control" id="dob" value="<?= $userData->DOB ?>">
+                        <div class="form-group date" data-provide="datepicker">
+                            <input name="DOB" type="text" class="form-control" value="<?= date("d-m-Y", strtotime($userData->DOB)) ?>">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
                         </div>
                     </div>
@@ -97,17 +97,23 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="example-text-input" class="form-control-label">Jenjang</label>
-                            <select name="level" class="form-control select2" id="userLevel">
+                            <select name="level" class="form-control select2" id="level">
                                 <option value="" disabled selected>-pilih jenjang-</option>
                                 <option value=""></option>
-                                <option value="" <?php if ($userData->level == "SD") { ?> selected="selected" <?php } ?>>SD</option>
-                                <option value="" <?php if ($userData->level == "SMP") { ?> selected="selected" <?php } ?>>SMP</option>
-                                <option value="" <?php if ($userData->level == "Umum") { ?> selected="selected" <?php } ?>>Umum</option>
-                                <option value="" <?php if ($userData->level == "Lainnya") { ?> selected="selected" <?php } ?>>Lainnya</option>
-                                <option value="" <?php if ($userData->level == "SMA") { ?> selected="selected" <?php } ?>>SMA</option>
+                                <option value="SD" <?php if ($userData->level == "SD") { ?> selected="selected" <?php } ?>>SD</option>
+                                <option value="SMP" <?php if ($userData->level == "SMP") { ?> selected="selected" <?php } ?>>SMP</option>
+                                <option value="SMA" <?php if ($userData->level == "SMA") { ?> selected="selected" <?php } ?>>SMA</option>
+                                <option value="Umum" <?php if ($userData->level == "Umum") { ?> selected="selected" <?php } ?>>Umum</option>
+                                <option value="Lainnya" <?php if ($userData->level == "Lainnya") { ?> selected="selected" <?php } ?>>Lainnya</option>
                             </select>
                         </div>
                     </div>
+                    <!-- <div class="class_form">
+                        <div class="mb-3 col-12">
+                            <select title="Silahkan Pilih Jenjang Terlebih Dahulu" class="form-control select2" name="class" id="class">
+                            </select>
+                        </div>
+                    </div> -->
                     <div class="col-md-4">
                         <label>Kelas</label>
                         <select name="class_id" id="class_id" class="form-control select2" id="userClass">
@@ -165,6 +171,12 @@
             }
         });
     }
+    // $(".date").datepicker({
+    //     dateFormat: 'dd-mm-YYYY',
+    //     maxDate: -0,
+    //     changeMonth: true,
+    //     changeYear: true,
+    // });
 </script>
 <script defer src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js'></script>
 <?= $this->endSection() ?>

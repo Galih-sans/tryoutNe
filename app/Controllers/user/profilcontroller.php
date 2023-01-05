@@ -28,13 +28,15 @@ class profilcontroller extends BaseController
         $this->StudentModel = new StudentModel();
         if ($this->request->isAJAX()) {
             $id = $this->encrypter->decrypt(base64_decode(session()->get('id')));
+            $newDateFormat = $this->request->getVar('DOB');
+            $newDate = date("Y-m-d", strtotime($newDateFormat));
             $data = [
                 'full_name' => $this->request->getVar('full_name'),
                 'email' => $this->request->getVar('email'),
                 'phone_number' => $this->request->getVar('phone_number'),
                 'gender' => $this->request->getVar('gender'),
                 'POB' => $this->request->getVar('POB'),
-                'DOB' => $this->request->getVar('DOB'),
+                'DOB' => $newDate,
 
                 'parent_name' => $this->request->getVar('parent_name'),
                 'parent_phone' => $this->request->getVar('parent_phone'),
@@ -53,4 +55,21 @@ class profilcontroller extends BaseController
             return json_encode($this->output);
         }
     }
+    // mendapatkan jenjang dan kelasnya
+
+    // public function get_kelas()
+    // {
+    //     if ($this->request->isAJAX()) {
+    //         $level = $this->request->getVar('level');
+    //         $data = $this->StudentModel->get_class_by_level($level);
+    //         $response = array();
+    //         foreach ($data as $data) {
+    //             $response[] = array(
+    //                 "id" => $data->id,
+    //                 "text" => $data->class, PHP_EOL
+    //             );
+    //         }
+    //         echo json_encode($response);
+    //     }
+    // }
 }
