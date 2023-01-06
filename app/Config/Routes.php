@@ -78,7 +78,8 @@ $routes->group("", ["filter" => "isuser", "namespace" => "App\Controllers\user"]
         // URL - /user
         $routes->get("/", "profilcontroller::index", ['as' => 'user.profil.index']);
         $routes->match(["get", "post"], "index", "profilcontroller::index");
-        $routes->post("/profil/update_profil", "profilcontroller::update");
+        $routes->post("update_profil", "profilcontroller::update");
+        $routes->post("get_kelas", "profilcontroller::get_kelas");
     });
     $routes->group("performance", function ($routes) {
         // URL - /user

@@ -4,14 +4,17 @@ namespace App\Controllers\user;
 
 use App\Controllers\BaseController;
 use App\Models\StudentModel;
+use App\Models\Admin\ClassModel;
 
 class profilcontroller extends BaseController
 {
+    public $ClassModel;
     public $encrypter;
     public $StudentModel;
     public $pagedata;
     public function __construct()
     {
+        $this->ClassModel = new ClassModel();
         $this->pagedata['activeTab'] = "profil";
         $this->pagedata['title'] = "Menu Profile - Neo Edukasi";
         $this->encrypter = \Config\Services::encrypter();
@@ -41,7 +44,7 @@ class profilcontroller extends BaseController
                 'parent_name' => $this->request->getVar('parent_name'),
                 'parent_phone' => $this->request->getVar('parent_phone'),
 
-                'class_id' => $this->request->getVar('class_id')
+                'class_id' => $this->request->getVar('class')
             ];
             $query = $this->StudentModel->update($id, $data);
             if ($query) {
@@ -56,20 +59,20 @@ class profilcontroller extends BaseController
         }
     }
     // mendapatkan jenjang dan kelasnya
-
-    // public function get_kelas()
-    // {
-    //     if ($this->request->isAJAX()) {
-    //         $level = $this->request->getVar('level');
-    //         $data = $this->StudentModel->get_class_by_level($level);
-    //         $response = array();
-    //         foreach ($data as $data) {
-    //             $response[] = array(
-    //                 "id" => $data->id,
-    //                 "text" => $data->class, PHP_EOL
-    //             );
-    //         }
-    //         echo json_encode($response);
-    //     }
-    // }
+    public function get_kelas()
+    {
+        // $this->StudentModel = new StudentModel();
+        if ($this->request->isAJAX()) {
+            $level = $this->request->getVar('level');
+            $data = $this->ClassModel->get_class_by_level($level);
+            $response = array();
+            foreach ($data as $data) {
+                $response[] = array(
+                    "id" => $data->id,
+                    "text" => $data->class, PHP_EOL
+                );
+            }
+            echo json_encode($response);
+        }
+    }
 }

@@ -6,35 +6,41 @@
     <div class="card-body p-3">
         <div class="card-header pb-0">
             <div class="d-flex align-items-center">
-                <h3 class="mb-0">Edit Profil</h3>
-                <button type="button" class="btn btn-info btn-sm ms-auto" onclick="update_dataprofil()">Simpan</button>
+                <h3 class="mb-0">Profil User</h3>
+                <!-- Checkbox -->
+                <div class="form-check form-switch ms-auto">
+                    <input class="form-check-input" type="checkbox" id="yourSwitch">
+                    <label class="form-check-label" for="yourSwitch" style="font-weight: bold">Edit Form</label>
+                </div>
+                <!-- akhir checkbox -->
+                <button type="button" id="tombolSimpan" class="btn btn-info btn-sm ms-auto" onclick="update_dataprofil()" disabled>Simpan</button>
             </div>
         </div>
         <form id="edit_user_form">
             <div class="card-body">
-                <h4 class="text-uppercase text-sm">Profil User</h4>
+                <!-- <h4 class="text-uppercase text-sm">Profil </h4> -->
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group bmd-form-group">
                             <label for="example-text-input" class="bmd-label-floating">Nama Lengkap</label>
-                            <input name="full_name" type="text" class="form-control" id="mame" value="<?= $userData->full_name ?>">
+                            <input name="full_name" type="text" class="form-control" id="name" value="<?= $userData->full_name ?>" disabled>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="exampleEmail" class="form-control-label">Alamat E-mail</label>
-                            <input name="email" class="form-control" type="email" id="email" value="<?= $userData->email ?>">
+                            <input name="email" class="form-control" type="email" id="email" value="<?= $userData->email ?>" disabled>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="example-text-input" class="form-control-label">Nomor Telepon</label>
-                            <input name="phone_number" class="form-control" type="text" id="phone_number" value="<?= $userData->phone_number ?>">
+                            <input name="phone_number" class="form-control" type="text" id="phone_number" value="<?= $userData->phone_number ?>" disabled>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <label for="">Jenis Kelamin :</label>
-                        <select name="gender" class="form-control select2" id="gender">
+                        <select name="gender" class="form-control select2" id="gender" disabled>
                             <option value="" disabled selected>-pilih jenis kelamin-</option>
                             <option value=""></option>
                             <option value="L" <?php if ($userData->gender == "L") { ?> selected="selected" <?php } ?>>Laki-Laki</option>
@@ -44,13 +50,13 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="example-text-input" class="form-control-label">Tempat Lahir</label>
-                            <input name="POB" class="form-control" type="text" id="POB" value="<?= $userData->POB ?>">
+                            <input name="POB" class="form-control" type="text" id="POB" value="<?= $userData->POB ?>" disabled>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <label>Tanggal Lahir</label>
                         <div class="form-group date" data-provide="datepicker">
-                            <input name="DOB" type="text" class="form-control" value="<?= date("d-m-Y", strtotime($userData->DOB)) ?>">
+                            <input name="DOB" id="DOB" type="text" class="form-control" value="<?= date("d-m-Y", strtotime($userData->DOB)) ?>" disabled>
                             <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
                         </div>
                     </div>
@@ -62,13 +68,13 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="example-text-input" class="form-control-label">Nama Wali</label>
-                            <input name="parent_name" class="form-control" type="text" id="parent_name" value="<?= $userData->parent_name ?>">
+                            <input name="parent_name" class="form-control" type="text" id="parent_name" value="<?= $userData->parent_name ?>" disabled>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="example-text-input" class="form-control-label">Nomer Telepon Wali</label>
-                            <input name="parent_phone" class="form-control" type="text" id="parent_number" value="<?= $userData->parent_phone_number ?>">
+                            <input name="parent_phone" class="form-control" type="text" id="parent_phone" value="<?= $userData->parent_phone_number ?>" disabled>
                         </div>
                     </div>
                 </div>
@@ -97,9 +103,8 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="example-text-input" class="form-control-label">Jenjang</label>
-                            <select name="level" class="form-control select2" id="level">
-                                <option value="" disabled selected>-pilih jenjang-</option>
-                                <option value=""></option>
+                            <select name="level" id="level" class="form-control select2" onchange="ambil_kelas()" disabled>
+                                <option value="jenjang" disabled selected>-pilih jenjang-</option>
                                 <option value="SD" <?php if ($userData->level == "SD") { ?> selected="selected" <?php } ?>>SD</option>
                                 <option value="SMP" <?php if ($userData->level == "SMP") { ?> selected="selected" <?php } ?>>SMP</option>
                                 <option value="SMA" <?php if ($userData->level == "SMA") { ?> selected="selected" <?php } ?>>SMA</option>
@@ -108,23 +113,14 @@
                             </select>
                         </div>
                     </div>
-                    <!-- <div class="class_form">
-                        <div class="mb-3 col-12">
+                    <div class=" col-md-4">
+                        <div class="form-group class_form">
+                            <label for="example-text-input" class="form-control-label">Kelas</label>
                             <select title="Silahkan Pilih Jenjang Terlebih Dahulu" class="form-control select2" name="class" id="class">
+                                <option value="jenjang" disabled selected><?= $userData->class ?></option>
+                                <option value="" disabled>Silahkan Pilih Jenjang Terlebih Dahulu</option>
                             </select>
                         </div>
-                    </div> -->
-                    <div class="col-md-4">
-                        <label>Kelas</label>
-                        <select name="class_id" id="class_id" class="form-control select2" id="userClass">
-                            <option value="" disabled selected>-pilih kelas-</option>
-                            <option value="" disabled selected></option>
-                            <option value="2" <?php if ($userData->class == "I") { ?> selected="selected" <?php } ?>>Kelas I</option>
-                            <option value="3" <?php if ($userData->class == "II") { ?> selected="selected" <?php } ?>>Kelas II</option>
-                            <option value="5" <?php if ($userData->class == "Kursus B. Inggris") { ?> selected="selected" <?php } ?>>Kelas Kursus B. Inggris</option>
-                            <option value="6" <?php if ($userData->class == "Kursus CPNS") { ?> selected="selected" <?php } ?>>Kelas Kursus CPNS</option>
-                            <option value="7" <?php if ($userData->class == "XII") { ?> selected="selected" <?php } ?>>Kelas XII</option>
-                        </select>
                     </div>
                 </div>
             </div>
@@ -133,6 +129,22 @@
 </div>
 
 <script>
+    document.getElementById('yourSwitch').onchange = function() {
+        // document.querySelectorAll(".form-group") = !this.checked;
+        document.getElementById("tombolSimpan").disabled = !this.checked;
+
+        document.getElementById("name").disabled = !this.checked;
+        document.getElementById("email").disabled = !this.checked;
+        document.getElementById("phone_number").disabled = !this.checked;
+        document.getElementById("gender").disabled = !this.checked;
+        document.getElementById("POB").disabled = !this.checked;
+        document.getElementById("DOB").disabled = !this.checked;
+        document.getElementById("parent_name").disabled = !this.checked;
+        document.getElementById("parent_phone").disabled = !this.checked;
+        document.getElementById("level").disabled = !this.checked;
+        document.getElementById("class").disabled = !this.checked;
+    };
+
     function update_dataprofil() {
         Swal.fire({
             text: "Sedang Memproses Data",
@@ -171,12 +183,38 @@
             }
         });
     }
-    // $(".date").datepicker({
-    //     dateFormat: 'dd-mm-YYYY',
-    //     maxDate: -0,
-    //     changeMonth: true,
-    //     changeYear: true,
-    // });
+
+    function ambil_kelas() {
+        var selected = $('#level').val();
+        Swal.showLoading();
+        $.ajax({
+            url: "<?php echo base_url(); ?>/profil/get_kelas",
+            type: "POST",
+            data: {
+                level: selected,
+            },
+            success: function(response) {
+                response = JSON.parse(response);
+                console.log(response);
+                if (response.length != 0) {
+                    $("#class").empty().append(
+                        "<option disabled='disabled' SELECTED>Silahkan Pilih Kelas</option>"
+                    );
+                    $("#class").prop("disabled", false);
+                    response.forEach(response => $('#class').append('<option value="' + response.id + '">' + response.text + '</option>'));
+                } else {
+                    $("#class").empty().append(
+                        "<option disabled='disabled' SELECTED>Kelas Masih Kosong</option>"
+                    );
+                }
+                $('.class_form').addClass('d-block').removeClass('d-none');
+                Swal.close();
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    }
 </script>
 <script defer src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js'></script>
 <?= $this->endSection() ?>
