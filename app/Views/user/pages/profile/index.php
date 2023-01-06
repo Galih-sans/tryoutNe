@@ -43,8 +43,10 @@
                         <select name="gender" class="form-control select2" id="gender" disabled>
                             <option value="" disabled selected>-pilih jenis kelamin-</option>
                             <option value=""></option>
-                            <option value="L" <?php if ($userData->gender == "L") { ?> selected="selected" <?php } ?>>Laki-Laki</option>
-                            <option value="P" <?php if ($userData->gender == "P") { ?> selected="selected" <?php } ?>>Perempuan</option>
+                            <option value="L" <?php if ($userData->gender == "L") { ?> selected="selected" <?php } ?>>
+                                Laki-Laki</option>
+                            <option value="P" <?php if ($userData->gender == "P") { ?> selected="selected" <?php } ?>>
+                                Perempuan</option>
                         </select>
                     </div>
                     <div class="col-md-6">
@@ -155,7 +157,7 @@
             url: "<?php echo base_url(); ?>/profil/update_profil",
             type: "POST",
             data: $('#edit_user_form').serialize(),
-            success: function(d) {
+            success: function (d) {
                 var d = JSON.parse(d);
                 if (d.success == true) {
                     Swal.fire({
@@ -174,11 +176,9 @@
                         showConfirmButton: false
                     });
                 }
-
                 console.log(d);
-                refresh_dt();
             },
-            error: function(error) {
+            error: function (error) {
                 console.log(error);
             }
         });

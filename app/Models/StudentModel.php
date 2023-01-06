@@ -38,11 +38,11 @@ class StudentModel extends Model
     // Validation
     protected $validationRules =
     [
-        'full_name'     => 'required|min_length[5]|max_length[50]',
+        'full_name'     => 'required|min_length[5]',
         'class_id'     => 'required',
         'POB'     => 'required|min_length[5]',
         'DOB'     => 'required',
-        'email'        => 'required|min_length[4]|max_length[100]|valid_email|is_unique[to_students.email]',
+        'email'        => 'required|min_length[4]',
         'password'        => 'required|min_length[4]',
         'phone_number'        => 'required|min_length[10]',
         'parent_name'        => 'required|min_length[5]',
@@ -51,6 +51,7 @@ class StudentModel extends Model
     protected $validationMessages   = [
         'full_name'        => [
             'required' => 'Nama Lengkap Harus Diisi',
+            'min_length' => 'Nama Lengkap Minimal 5 Karakter',
         ],
         'class_id'        => [
             'required' => 'Kelas Harus Diisi',
@@ -67,19 +68,19 @@ class StudentModel extends Model
         ],
         'password'        => [
             'required' => 'Password Harus Diisi',
-            'min_length' => 'Password Minimal [0] Karakter',
+            'min_length' => 'Password Minimal 5 Karakter',
         ],
         'phone_number'        => [
             'required' => 'Nomor Telepon Harus Diisi',
-            'min_length' => 'Nomor Telepon Minimal [0] Karakter',
+            'min_length' => 'Nomor Telepon Minimal 10 Karakter',
         ],
         'parent_name'        => [
             'required' => 'Nama Wali Harus Diisi',
-            'min_length' => 'Nama Wali Minimal [0] Karakter',
+            'min_length' => 'Nama Wali Minimal 5 Karakter',
         ],
         'parent_phone_number'        => [
             'required' => 'Nomor Wali Harus Diisi',
-            'min_length' => 'Nomor Wali Minimal [0] Karakter',
+            'min_length' => 'Nomor Wali Minimal 10 Karakter',
         ],
     ];
     protected $skipValidation       = false;
