@@ -28,9 +28,20 @@ class profilcontroller extends BaseController
         $this->StudentModel = new StudentModel();
         if ($this->request->isAJAX()) {
             $id = $this->encrypter->decrypt(base64_decode(session()->get('id')));
+            $newDateFormat = $this->request->getVar('DOB');
+            $newDate = date("Y-m-d", strtotime($newDateFormat));
             $data = [
                 'full_name' => $this->request->getVar('full_name'),
-                'email' => $this->request->getVar('email')
+                'email' => $this->request->getVar('email'),
+                'phone_number' => $this->request->getVar('phone_number'),
+                'gender' => $this->request->getVar('gender'),
+                'POB' => $this->request->getVar('POB'),
+                'DOB' => $newDate,
+
+                'parent_name' => $this->request->getVar('parent_name'),
+                'parent_phone' => $this->request->getVar('parent_phone'),
+
+                'class_id' => $this->request->getVar('class_id')
             ];
             $query = $this->StudentModel->update($id, $data);
             if ($query) {
@@ -41,20 +52,24 @@ class profilcontroller extends BaseController
                 $this->output['message']  = 'Data Gagal Diupdate';
                 $this->output['detail']  = $this->StudentModel->errors();
             }
-
             return json_encode($this->output);
         }
-        // $this->StudentModel = new StudentModel();
-        // $id =
-        //     $this->request->getVar('id');;
-        // $full_name = $this->request->getVar('full_name');
-        // $email = $this->request->getVar('email');
-
-        // $data = [
-        //     'full_name' => $full_name,
-        //     'email' => $email
-        // ];
-
-        // $this->StudentModel->update($id, $data);
     }
+    // mendapatkan jenjang dan kelasnya
+
+    // public function get_kelas()
+    // {
+    //     if ($this->request->isAJAX()) {
+    //         $level = $this->request->getVar('level');
+    //         $data = $this->StudentModel->get_class_by_level($level);
+    //         $response = array();
+    //         foreach ($data as $data) {
+    //             $response[] = array(
+    //                 "id" => $data->id,
+    //                 "text" => $data->class, PHP_EOL
+    //             );
+    //         }
+    //         echo json_encode($response);
+    //     }
+    // }
 }
