@@ -119,7 +119,7 @@
                         <div class="form-group class_form">
                             <label for="example-text-input" class="form-control-label">Kelas</label>
                             <select title="Silahkan Pilih Jenjang Terlebih Dahulu" class="form-control select2" name="class" id="class">
-                                <option value="jenjang" disabled selected><?= $userData->class ?></option>
+                                <option value="<?= $userData->class_id ?>" selected><?= $userData->class ?></option>
                                 <option value="" disabled>Silahkan Pilih Jenjang Terlebih Dahulu</option>
                             </select>
                         </div>
@@ -157,7 +157,7 @@
             url: "<?php echo base_url(); ?>/profil/update_profil",
             type: "POST",
             data: $('#edit_user_form').serialize(),
-            success: function (d) {
+            success: function(d) {
                 var d = JSON.parse(d);
                 if (d.success == true) {
                     Swal.fire({
@@ -176,9 +176,10 @@
                         showConfirmButton: false
                     });
                 }
+                window.location.reload();
                 console.log(d);
             },
-            error: function (error) {
+            error: function(error) {
                 console.log(error);
             }
         });

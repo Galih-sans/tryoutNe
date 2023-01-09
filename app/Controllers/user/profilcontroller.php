@@ -44,12 +44,13 @@ class profilcontroller extends BaseController
                 'parent_name' => $this->request->getVar('parent_name'),
                 'parent_phone' => $this->request->getVar('parent_phone'),
 
-                'class_id' => $this->request->getVar('class')
+                'class_id' => $this->request->getVar('class'),
             ];
             $query = $this->StudentModel->update($id, $data);
             if ($query) {
                 $this->output['success'] = true;
                 $this->output['message']  = 'Data Berhasil Diupdate';
+                session()->set('name', $data['full_name']);
             } else {
                 $this->output['success'] = false;
                 $this->output['message']  = 'Data Gagal Diupdate';
