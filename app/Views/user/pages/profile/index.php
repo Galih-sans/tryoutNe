@@ -10,10 +10,10 @@
                 <!-- Checkbox -->
                 <div class="form-check form-switch ms-auto">
                     <input class="form-check-input" type="checkbox" id="yourSwitch">
-                    <label class="form-check-label" for="yourSwitch" style="font-weight: bold">Edit Form</label>
+                    <label class="form-check-label" for="yourSwitch" style="font-weight: bold">Edit Profil</label>
                 </div>
                 <!-- akhir checkbox -->
-                <button type="button" id="tombolSimpan" class="btn btn-info btn-sm ms-auto" onclick="update_dataprofil()" disabled>Simpan</button>
+                <button type="button" id="tombolSimpan" class="btn btn-info btn-sm ms-auto" onclick="update_dataprofil()">Simpan</button>
             </div>
         </div>
         <form id="edit_user_form">
@@ -91,6 +91,27 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
+                            <label class="form-control-label">Jenjang</label>
+                            <select name="level" id="level" class="form-control select" onchange="ambil_kelas()" disabled>
+                                <option value="jenjang" disabled selected>-pilih jenjang-</option>
+                                <option value="SD" <?php if ($userData->level == "SD") { ?> selected="selected" <?php } ?>>SD</option>
+                                <option value="SMP" <?php if ($userData->level == "SMP") { ?> selected="selected" <?php } ?>>SMP</option>
+                                <option value="SMA" <?php if ($userData->level == "SMA") { ?> selected="selected" <?php } ?>>SMA</option>
+                                <option value="Umum" <?php if ($userData->level == "Umum") { ?> selected="selected" <?php } ?>>Umum</option>
+                                <option value="Lainnya" <?php if ($userData->level == "Lainnya") { ?> selected="selected" <?php } ?>>Lainnya</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class=" col-md-4">
+                        <div class="form-group class_form">
+                            <label class="form-control-label">Kelas</label>
+                            <select title="Silahkan Pilih Jenjang Terlebih Dahulu" class="form-control select2" name="class" id="class" disabled>
+                                <option value="<?= $userData->class_id ?>" selected><?= $userData->class ?></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
                             <label class="form-control-label">Provinsi</label>
                             <select class="form-control select2" name="province" id="province" onchange="ambil_kota()" disabled>
                                 <option value="<?= $userData->kode_prop ?>" selected disabled><?= $userData->propinsi ?></option>
@@ -128,27 +149,6 @@
                             <label class="form-control-label">Sekolah</label>
                             <select class="form-control select2" name="school" id="school" disabled>
                                 <option value="<?= $userData->school ?>" selected><?= $userData->sekolah ?></option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label class="form-control-label">Jenjang</label>
-                            <select name="level" id="level" class="form-control select2" onchange="ambil_kelas()" disabled>
-                                <option value="jenjang" disabled selected>-pilih jenjang-</option>
-                                <option value="SD" <?php if ($userData->level == "SD") { ?> selected="selected" <?php } ?>>SD</option>
-                                <option value="SMP" <?php if ($userData->level == "SMP") { ?> selected="selected" <?php } ?>>SMP</option>
-                                <option value="SMA" <?php if ($userData->level == "SMA") { ?> selected="selected" <?php } ?>>SMA</option>
-                                <option value="Umum" <?php if ($userData->level == "Umum") { ?> selected="selected" <?php } ?>>Umum</option>
-                                <option value="Lainnya" <?php if ($userData->level == "Lainnya") { ?> selected="selected" <?php } ?>>Lainnya</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class=" col-md-4">
-                        <div class="form-group class_form">
-                            <label class="form-control-label">Kelas</label>
-                            <select title="Silahkan Pilih Jenjang Terlebih Dahulu" class="form-control select2" name="class" id="class" disabled>
-                                <option value="<?= $userData->class_id ?>" selected><?= $userData->class ?></option>
                             </select>
                         </div>
                     </div>
