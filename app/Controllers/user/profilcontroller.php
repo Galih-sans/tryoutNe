@@ -5,15 +5,18 @@ namespace App\Controllers\user;
 use App\Controllers\BaseController;
 use App\Models\StudentModel;
 use App\Models\Admin\ClassModel;
+use App\Models\ModelSekolah;
 
 class profilcontroller extends BaseController
 {
+    public $SchoolModel;
     public $ClassModel;
     public $encrypter;
     public $StudentModel;
     public $pagedata;
     public function __construct()
     {
+        $this->SchoolModel = new ModelSekolah();
         $this->ClassModel = new ClassModel();
         $this->pagedata['activeTab'] = "profil";
         $this->pagedata['title'] = "Menu Profile - Neo Edukasi";
@@ -21,9 +24,10 @@ class profilcontroller extends BaseController
     }
     public function index()
     {
+        $this->pagedata['province'] = $this->SchoolModel->get_province();
         $this->StudentModel = new StudentModel();
         $data = $this->StudentModel->profile($this->encrypter->decrypt(base64_decode(session()->get('id'))));
-        return view('user/pages/profile/index', ['data' => $this->pagedata, 'userData' => $data]);
+        return view('user/pages/profile/index', ['data' => $this->pagedata, 'userData' => $data]); // return this data as
     }
     // update
     public function update()
@@ -43,7 +47,9 @@ class profilcontroller extends BaseController
 
                 'parent_name' => $this->request->getVar('parent_name'),
                 'parent_phone' => $this->request->getVar('parent_phone'),
+                'parent_email' => $this->request->getVar('parent_email'),
 
+                'school' => $this->request->getVar('school'),
                 'class_id' => $this->request->getVar('class'),
             ];
             $query = $this->StudentModel->update($id, $data);
@@ -59,10 +65,62 @@ class profilcontroller extends BaseController
             return json_encode($this->output);
         }
     }
+    // get city
+    public function get_city()
+    {
+        if ($this->request->isAJAX()) {
+            $kode_prop = $this->request->getVar('kode_prop');
+            $data = $this->SchoolModel->get_city($kode_prop);
+            $response = array();
+            foreach ($data as $data) {
+                $response[] = array(
+                    "id" => $data->kode_kab_kota,
+                    "text" => $data->kabupaten_kota, PHP_EOL
+                );
+            }
+            echo json_encode($response);
+        }
+    }
+
+    // get district
+    public function get_districts()
+    {
+        if ($this->request->isAJAX()) {
+            $kode_kab_kota = $this->request->getVar('kode_kab_kota');
+            $data = $this->SchoolModel->get_districts($kode_kab_kota);
+            $response = array();
+            foreach ($data as $data) {
+                $response[] = array(
+                    "id" => $data->kode_kec,
+                    "text" => $data->kecamatan, PHP_EOL
+                );
+            }
+            echo json_encode($response);
+        }
+    }
+
+    // get shcool
+    public function get_school()
+    {
+        if ($this->request->isAJAX()) {
+            $kode_kec = $this->request->getVar('kode_kec');
+            $level = $this->request->getVar('level');
+            $data = $this->SchoolModel->get_school($kode_kec, $level);
+            $response = array();
+            foreach ($data as $data) {
+                $response[] = array(
+                    "id" => $data->id,
+                    "text" => $data->sekolah, PHP_EOL
+                );
+            }
+            echo json_encode($response);
+        }
+    }
+
+
     // mendapatkan jenjang dan kelasnya
     public function get_kelas()
     {
-        // $this->StudentModel = new StudentModel();
         if ($this->request->isAJAX()) {
             $level = $this->request->getVar('level');
             $data = $this->ClassModel->get_class_by_level($level);
