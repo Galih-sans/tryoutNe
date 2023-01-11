@@ -21,11 +21,14 @@ class StudentModel extends Model
         'DOB',
         'email',
         'password',
+        'gender',
         'phone_number',
         'parent_name',
         'parent_phone_number',
+        'parent_email',
         'email_verified',
         'token',
+        'school',
     ];
 
     // Dates
@@ -47,6 +50,8 @@ class StudentModel extends Model
         'phone_number'        => 'required|min_length[10]',
         'parent_name'        => 'required|min_length[5]',
         'parent_phone_number'        => 'required|min_length[10]',
+        'parent_email'        => 'required|min_length[4]',
+        'school'     => 'required',
     ];
     protected $validationMessages   = [
         'full_name'        => [
@@ -81,6 +86,13 @@ class StudentModel extends Model
         'parent_phone_number'        => [
             'required' => 'Nomor Wali Harus Diisi',
             'min_length' => 'Nomor Wali Minimal 10 Karakter',
+        ],
+        'parent_email'        => [
+            'required' => 'Email Wali Harus Diisi',
+            'min_length' => 'Email Wali Minimal 10 Karakter',
+        ],
+        'school'        => [
+            'required' => 'Sekolah Harus Diisi',
         ],
     ];
     protected $skipValidation       = false;
@@ -126,7 +138,7 @@ class StudentModel extends Model
     }
     public function profile($id)
     {
-        $query = $this->builder->join('to_class', 'to_class.id=to_students.class_id')->where(['to_students.id' => $id])->get()->getRow();
+        $query = $this->builder->join('to_class', 'to_class.id=to_students.class_id')->join('sekolah', 'sekolah.id=to_students.school')->where(['to_students.id' => $id])->get()->getRow();
         return $query;
     }
 }
