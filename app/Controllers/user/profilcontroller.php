@@ -36,7 +36,7 @@ class profilcontroller extends BaseController
         if ($this->request->isAJAX()) {
             $id = $this->encrypter->decrypt(base64_decode(session()->get('id')));
             $newDateFormat = $this->request->getVar('DOB');
-            $newDate = date("Y-m-d", strtotime($newDateFormat));
+            $newDate = date("Y-m-d", strtotime(str_replace('/', '-', $newDateFormat)));
             $data = [
                 'full_name' => $this->request->getVar('full_name'),
                 'email' => $this->request->getVar('email'),
@@ -44,9 +44,8 @@ class profilcontroller extends BaseController
                 'gender' => $this->request->getVar('gender'),
                 'POB' => $this->request->getVar('POB'),
                 'DOB' => $newDate,
-
                 'parent_name' => $this->request->getVar('parent_name'),
-                'parent_phone' => $this->request->getVar('parent_phone'),
+                'parent_phone_number' => $this->request->getVar('parent_phone'),
                 'parent_email' => $this->request->getVar('parent_email'),
 
                 'school' => $this->request->getVar('school'),
