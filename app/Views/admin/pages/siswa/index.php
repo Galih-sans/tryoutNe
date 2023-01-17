@@ -103,20 +103,6 @@
                                 <td><input type="text" class="form-control" id="school" name="school" disabled></td>
                             </tr>
                         </table>
-                        <!-- <div class="row">
-                            <div class="col-12 col-md-12">
-                                <span class="tittle-neo"> Nama</span>
-                                <input type="text" class="form-control" id="full_name" name="name" placeholder="John Doe" disabled>
-                            </div>
-                            <div class="col-12 col-md-12">
-                                <span class="tittle-neo"> Email</span>
-                                <input type="email" class="form-control" id="email" name="email" disabled>
-                            </div>
-                            <div class="col-12 col-md-12">
-                                <span class="tittle-neo"> Kelas</span>
-                                <input type="text" class="form-control" id="class_id" name="kelas" disabled>
-                            </div>
-                        </div> -->
                     </form>
                 </div>
                 <div class="block-content block-content-full text-end bg-body">
@@ -149,18 +135,18 @@
         dt_siswa();
         $('#refresh').on('click', refresh_dt)
         $(document).on('click', '.detail-button', function() {
-            let data_id = $(this).data("id");
-            let data_full_name = $(this).data("full_name");
-            let data_class_id = $(this).data("class_id");
-            let data_email = $(this).data("email");
-            let data_POB = $(this).data("POB");
-            let data_DOB = $(this).data("DOB");
-            let data_phone_number = $(this).data("phone_number");
-            let data_gender = $(this).data("gender");
-            let data_parent_name = $(this).data("parent_name");
-            let data_parent_phone_number = $(this).data("parent_phone_number");
-            let data_parent_email = $(this).data("parent_email");
-            let data_school = $(this).data("school");
+            let data_id = $(this).attr("id");
+            let data_full_name = $(this).attr("full_name");
+            let data_class_id = $(this).attr("class_id");
+            let data_email = $(this).attr("email");
+            let data_POB = $(this).attr("POB");
+            let data_DOB = $(this).attr("DOB");
+            let data_phone_number = $(this).attr("phone_number");
+            let data_gender = $(this).attr("gender");
+            let data_parent_name = $(this).attr("parent_name");
+            let data_parent_phone_number = $(this).attr("parent_phone_number");
+            let data_parent_email = $(this).attr("parent_email");
+            let data_school = $(this).attr("school");
 
             $('#full_name').val(data_full_name);
             $('#class_id').val(data_class_id);
@@ -255,7 +241,7 @@
                 url: "<?= route_to('admin.siswa.dt_siswa') ?>",
                 type: "POST",
                 data: {},
-                error: function() { // error handling
+                error: function() {
                     $(".tabel_serverside-error").html("");
                     $("#tabel_serverside").append(
                         '<tbody class="tabel_serverside-error"><tr><th colspan="3">Data Tidak Ditemukan di Server</th></tr></tbody>'

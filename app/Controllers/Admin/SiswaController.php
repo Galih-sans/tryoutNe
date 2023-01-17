@@ -49,18 +49,18 @@ class SiswaController extends BaseController
                 $row[]  = '
                     <div class="block-options">
                     <button type="button" class="btn btn-sm btn-warning detail-button"
-                    data-id="' . $lists->id . '"
-                    data-full_name="' . $lists->full_name . '"
-                    data-class_id="' . $lists->class_id . '"
-                    data-email="' . $lists->email . '"
-                    data-POB="' . $lists->POB . '"
-                    data-DOB="' . $lists->DOB . '"
-                    data-phone_number="' . $lists->phone_number . '"
-                    data-gender="' . $lists->gender . '"
-                    data-parent_name="' . $lists->parent_name . '"
-                    data-parent_phone_number="' . $lists->parent_phone_number . '"
-                    data-parent_email="' . $lists->parent_email . '"
-                    data-school="' . $lists->school . '"
+                    id="' . $lists->id . '"
+                    POB="' . $lists->POB . '"
+                    DOB="' . $lists->DOB . '"
+                    full_name="' . $lists->full_name . '"
+                    class_id="' . $lists->class_id . '"
+                    email="' . $lists->email . '"
+                    phone_number="' . $lists->phone_number . '"
+                    gender="' . $lists->gender . '"
+                    parent_name="' . $lists->parent_name . '"
+                    parent_phone_number="' . $lists->parent_phone_number . '"
+                    parent_email="' . $lists->parent_email . '"
+                    school="' . $lists->school . '"
                     >
                         <i class="fa fa-info"></i>
                     </button>
