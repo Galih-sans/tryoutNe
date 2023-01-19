@@ -92,11 +92,11 @@
                             </tr>
                             <tr>
                                 <th>Kelas</th>
-                                <td><input type="text" class="form-control" class="form-control" id="class_id" name="kelas" disabled></td>
+                                <td><input type="text" class="form-control" class="form-control" id="kelas" name="kelas" disabled></td>
                             </tr>
                             <tr>
                                 <th>Jenjang</th>
-                                <td><input type="text" class="form-control" disabled></td>
+                                <td><input type="text" class="form-control" id="level" name="level" disabled></td>
                             </tr>
                             <tr>
                                 <th>Sekolah</th>
@@ -137,7 +137,8 @@
         $(document).on('click', '.detail-button', function() {
             let data_id = $(this).attr("id");
             let data_full_name = $(this).attr("full_name");
-            let data_class_id = $(this).attr("class_id");
+            let data_class = $(this).attr("class_id");
+            let data_level = $(this).attr("level");
             let data_email = $(this).attr("email");
             let data_POB = $(this).attr("POB");
             let data_DOB = $(this).attr("DOB");
@@ -149,7 +150,8 @@
             let data_school = $(this).attr("school");
 
             $('#full_name').val(data_full_name);
-            $('#class_id').val(data_class_id);
+            $('#kelas').val(data_class);
+            $('#level').val(data_level);
             $('#email').val(data_email);
             $('#POB').val(data_POB);
             $('#DOB').val(data_DOB);
