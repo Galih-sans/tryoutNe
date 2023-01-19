@@ -13,7 +13,6 @@ class SiswaController extends BaseController
         $this->pagedata['activeTab'] = "siswa";
         $this->pagedata['title'] = "Daftar Siswa";
         $this->siswa_model = new \App\Models\Admin\SiswaModel();
-        $this->siswa_model = new \App\Models\Admin\SiswaModel();
     }
     /**
      * Return an array of resource objects, themselves in array format
@@ -30,37 +29,40 @@ class SiswaController extends BaseController
         if ($this->request->isAJAX()) {
             $request = \Config\Services::request();
             $list_data = $this->siswa_model;
-            $where = ['id !=' => 0];
+            $where = ['to_students.id !=' => 0];
             //Column Order Harus Sesuai Urutan Kolom Pada Header Tabel di bagian View
             //Awali nama kolom tabel dengan nama tabel->tanda titik->nama kolom seperti pengguna.nama
-            $column_order = array('id', 'to_students.full_name', 'to_students.email', 'to_students.class_id');
-            $column_search = array('to_students.full_name', 'to_students.email', 'to_students.class_id');
+            $column_order = array('to_students.id', 'to_students.full_name', 'to_students.email', 'to_class.class');
+            $column_search = array('to_students.full_name', 'to_students.email', 'to_class.class', 'sekolah.sekolah');
             $order = array('to_students.id' => 'asc');
-            $list = $list_data->get_datatables('to_students', $column_order, $column_search, $order, $where);
+            $list = $list_data->get_datatables('to_students', $column_order, $column_search, $order);
             $data = array();
             $no = $request->getPost("start");
             foreach ($list as $lists) {
+                $newDateFormat = $lists->DOB;
+                $newDate = date("d-m-Y", strtotime(str_replace('/', '-', $newDateFormat)));
                 $no++;
                 $row    = array();
                 $row[] = $no;
                 $row[] = $lists->full_name;
                 $row[] = $lists->email;
-                $row[] = $lists->class_id;
+                $row[] = $lists->class;
                 $row[]  = '
                     <div class="block-options">
                     <button type="button" class="btn btn-sm btn-warning detail-button"
-                    data-id="' . $lists->id . '"
-                    data-full_name="' . $lists->full_name . '"
-                    data-class_id="' . $lists->class_id . '"
-                    data-email="' . $lists->email . '"
-                    data-POB="' . $lists->POB . '"
-                    data-DOB="' . $lists->DOB . '"
-                    data-phone_number="' . $lists->phone_number . '"
-                    data-gender="' . $lists->gender . '"
-                    data-parent_name="' . $lists->parent_name . '"
-                    data-parent_phone_number="' . $lists->parent_phone_number . '"
-                    data-parent_email="' . $lists->parent_email . '"
-                    data-school="' . $lists->school . '"
+                    id="' . $lists->id . '"
+                    POB="' . $lists->POB . '"
+                    DOB="' . $newDate . '"
+                    full_name="' . $lists->full_name . '"
+                    class_id="' . $lists->class . '"
+                    level="' . $lists->level . '"
+                    email="' . $lists->email . '"
+                    phone_number="' . $lists->phone_number . '"
+                    gender="' . $lists->gender . '"
+                    parent_name="' . $lists->parent_name . '"
+                    parent_phone_number="' . $lists->parent_phone_number . '"
+                    parent_email="' . $lists->parent_email . '"
+                    school="' . $lists->sekolah . '"
                     >
                         <i class="fa fa-info"></i>
                     </button>

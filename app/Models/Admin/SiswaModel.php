@@ -102,16 +102,16 @@ class SiswaModel extends Model
     //     $this->builder->where('id', $id);
     //     return $this->builder->delete();
     // }
-    public function update_siswa($id, $data)
-    {
-        $this->builder->where('id', $id);
-        return $this->builder->update($data);
-    }
-    public function get_siswa($id)
-    {
-        $query = $this->builder->getWhere(['id' => $id]);
-        return $query->getRow();
-    }
+    // public function update_siswa($id, $data)
+    // {
+    //     $this->builder->where('id', $id);
+    //     return $this->builder->update($data);
+    // }
+    // public function get_siswa($id)
+    // {
+    //     $query = $this->builder->getWhere(['id' => $id]);
+    //     return $query->getRow();
+    // }
     // public function get_class_by_level($id)
     // {
     //     $query = $this->builder->getWhere(['level' => $id]);
@@ -121,11 +121,24 @@ class SiswaModel extends Model
 
     protected function _get_datatables_query($table, $column_order, $column_search, $order)
     {
-        $this->builder = $this->db->table($table);
-        // $this->builder->join('to_class', 'to_class.id = to_students.class_id', 'left');
-        //jika ingin join formatnya adalah sebagai berikut :
-        //$this->builder->join('tabel_lain','tabel_lain.kolom_yang_sama = pengguna.kolom_yang_sama','left');
-        //end Join
+        // $this->builder = $this->db->table($table);
+        $this->builder->select('to_students.id, 
+        to_students.full_name,
+        to_students.email,
+        to_students.class_id,
+        to_students.POB,
+        to_students.DOB,
+        to_students.phone_number,
+        to_students.gender,
+        to_students.parent_name,
+        to_students.parent_phone_number,
+        to_students.parent_email,
+        to_class.level, to_class.class,
+        sekolah.sekolah')->join('to_class', 'to_class.id=to_students.class_id', 'left')->join('sekolah', 'sekolah.id=to_students.school', 'left');
+        // //jika ingin join formatnya adalah sebagai berikut :
+        // //$this->builder->join('tabel_lain','tabel_lain.kolom_yang_sama = pengguna.kolom_yang_sama','left');
+        // //end Join
+        // $this->builder->join('to_class', 'to_class.id=to_students.class_id');
         $i = 0;
 
         foreach ($column_search as $item) {
