@@ -4,6 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
+
 class TestAnswerModel extends Model
 {
     protected $DBGroup          = 'default';
@@ -43,4 +44,26 @@ class TestAnswerModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->db = \Config\Database::connect();
+        $this->builder = $this->db->table('to_test_answer');
+    }
+
+    public function get_test_asnwer($student_id)
+    {
+        // select to_test_answer join tabel to_questions dan to_answersselect( 'to_test_answer.test_id, to_test_answer.student_id,to_test_answer.question_id,to_test_answer.answer_id')->
+        $query = $this->builder->join(
+            'to_questions',
+            'to_questions.id = to_test_answer.question_id'
+        )->join(
+            'to_answers',
+            'to_answers.id = to_test_answer.answer_id'
+        )
+            ->groupBy('to_test_answer.test_id')
+            ->where(['to_test_answer.student_id' => $student_id])->get()->getResult();
+        return $query;
+    }
 }

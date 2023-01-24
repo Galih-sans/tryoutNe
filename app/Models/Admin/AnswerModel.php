@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models\Admin;
+
 use CodeIgniter\I18n\Time;
 use CodeIgniter\Model;
 
@@ -30,10 +31,10 @@ class AnswerModel extends Model
 
     // Validation
     protected $validationRules =
-        [
-            'question_id'     => 'required',
-            'answer'        => 'required',
-            'answer_isright'        => 'required',
+    [
+        'question_id'     => 'required',
+        'answer'        => 'required',
+        'answer_isright'        => 'required',
     ];
     protected $validationMessages   = [
         'question_id'        => [
@@ -55,11 +56,12 @@ class AnswerModel extends Model
         $this->db = \Config\Database::connect();
         $this->builder = $this->db->table($this->table);
     }
-    protected function now(){
+    protected function now()
+    {
         return Time::now()->getTimestamp();
     }
 
-    public function add_answer($data,$answer)
+    public function add_answer($data, $answer)
     {
         $answer_data = [
             'question_id' => $data['question_id'],
@@ -75,18 +77,18 @@ class AnswerModel extends Model
 
     public function get_answer($id)
     {
-        $query = $this->builder->where('question_id',$id)->get();
+        $query = $this->builder->where('question_id', $id)->get();
         return $query->getResult();
     }
     public function get_answer1($id)
     {
-        $query = $this->builder->select('id,answer')->where('question_id',$id)->get()->getResult();
+        $query = $this->builder->select('id,answer')->where('question_id', $id)->get()->getResult();
 
         $data = array();
-        foreach($query as $item){
+        foreach ($query as $item) {
             $data[] = array(
-                "id"=>$item->id,
-                "answer"=>$item->answer,
+                "id" => $item->id,
+                "answer" => $item->answer,
             );
         }
         return $data;
@@ -94,10 +96,16 @@ class AnswerModel extends Model
 
     public function checkanswer($id)
     {
-        $query = $this->builder->select('answer_isright')->where('id',$id)->get()->getFirstRow();
-        foreach($query as $item){
+        $query = $this->builder->select('answer_isright')->where('id', $id)->get()->getFirstRow();
+        foreach ($query as $item) {
             $data = $item;
         }
         return $data;
+    }
+
+    public function right_answer($question_id)
+    {
+        $query = $this->builder->where(['question_id' => $question_id, 'answer_isright' => 1])->get()->getResult();
+        return $query;
     }
 }
