@@ -224,17 +224,23 @@ class testcontroller extends BaseController
         $data = $TestResultModel->where(['student_id' => $this->encrypter->decrypt(base64_decode(session()->get('id'))), 'test_id' => $id])->orderBy('id', 'DESC')->first();
         $data1 = $TestResultModel->testResult($id, $this->encrypter->decrypt(base64_decode(session()->get('id'))));
 
-        $data_answer = $TestAnswerModel->get_test_asnwer($this->encrypter->decrypt(base64_decode(session()->get('id'))));
+        $soal_test = $TestAnswerModel->get_test_asnwer($id, $this->encrypter->decrypt(base64_decode(session()->get('id'))));
 
-        $question_id = $this->request->getVar('question_id');
+        $question_id = $TestAnswerModel->get_question_id($id, $this->encrypter->decrypt(base64_decode(session()->get('id'))));
+        // get question answer
+        // $question_answer = $AnswerModel->get_answer_by_question($question_id);
 
-        $right_answer = $AnswerModel->right_answer($question_id);
+        // $right_answer = $AnswerModel->right_answer($question_id);
+
+        // $data_question = $this->TestModel->get_test_composition($id);
 
         $this->pagedata['data'] = [
             'test_result' => $data['score'],
             'test_result1' => $data1,
+            // 'pilihan_soal' => $question_answer,
+            'question_id' => $question_id,
         ];
 
-        return view('user/pages/test/result', ['data' => $this->pagedata, 'answerData' => $data_answer, 'rightAnswer' => $right_answer]);
+        return view('user/pages/test/result', ['data' => $this->pagedata, 'dataHasil' => $soal_test]);
     }
 }

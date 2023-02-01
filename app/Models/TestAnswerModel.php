@@ -52,7 +52,7 @@ class TestAnswerModel extends Model
         $this->builder = $this->db->table('to_test_answer');
     }
 
-    public function get_test_asnwer($student_id)
+    public function get_test_asnwer($test_id, $student_id)
     {
         // select to_test_answer join tabel to_questions dan to_answersselect( 'to_test_answer.test_id, to_test_answer.student_id,to_test_answer.question_id,to_test_answer.answer_id')->
         $query = $this->builder->join(
@@ -60,10 +60,17 @@ class TestAnswerModel extends Model
             'to_questions.id = to_test_answer.question_id'
         )->join(
             'to_answers',
-            'to_answers.id = to_test_answer.answer_id'
+            'to_answers.id = to_test_answer.answer_id',
+            'left'
         )
-            ->groupBy('to_test_answer.test_id')
-            ->where(['to_test_answer.student_id' => $student_id])->get()->getResult();
+            ->where(['to_test_answer.test_id' => $test_id, 'to_test_answer.student_id' => $student_id])
+            ->get()->getResult();
         return $query;
+    }
+
+    public function get_question_id($test_id, $student_id)
+    {
+        $query = $this->builder->select('question_id')->where(['test_id' => $test_id, 'to_test_answer.student_id' => $student_id]);
+        return $query->get()->getResultArray();
     }
 }
