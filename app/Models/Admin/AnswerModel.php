@@ -103,9 +103,19 @@ class AnswerModel extends Model
         return $data;
     }
 
-    public function right_answer($question_id)
+    public function get_answer_by_question($id)
     {
-        $query = $this->builder->where(['question_id' => $question_id, 'answer_isright' => 1])->get()->getResult();
-        return $query;
+        $array_question = array_column($id, 'question_id');
+        $query = $this->builder->select('answer')->where('question_id', $array_question);
+
+        // $data = array();
+        // foreach ($query as $item) {
+        //     $data[] = array(
+        //         "answer" => $item->answer,
+        //     );
+        // }
+        return $query->get()->getResult();
     }
+
+    // select answer where question_id in ( $question_id )
 }
