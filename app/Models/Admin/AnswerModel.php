@@ -110,15 +110,16 @@ class AnswerModel extends Model
         $array_question = array_column($id, 'question_id');
         $query = $this->builder
             ->select(
-                'question_id, question, discussion,
+                'to_questions.id, question, discussion, answer_isright,
                 answer'
             )
             // ->whereIn('question_id', $array_question)
             ->join(
                 'to_questions',
-                'to_questions.id = to_answers.question_id'
+                'to_questions.id = to_answers.question_id',
+                'right'
             )
-            ->whereIn('question_id', $array_question)
+            ->whereIn('to_questions.id', $array_question)
             // ->where('to_questions.id', $array_question)
             ->get()->getResultArray();
 
