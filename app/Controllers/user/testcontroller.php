@@ -261,6 +261,7 @@ class testcontroller extends BaseController
             // 'soalPembahasan' => $soal_pembahasan,
         ];
 
+        // dd($questionAnswer);
         return view('user/pages/test/result', ['data' => $this->pagedata]);
     }
 }
