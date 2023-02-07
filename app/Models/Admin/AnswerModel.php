@@ -44,7 +44,7 @@ class AnswerModel extends Model
             'required' => 'Jawaban Harus Diisi',
         ],
         'answer_isright'        => [
-            'required' => 'Pilihan jawaban Benar Harus Diisi Harus Diisi',
+            'required' => 'Pilihan jawaban Benar Harus Diisi',
         ]
     ];
     protected $skipValidation       = false;
@@ -103,18 +103,37 @@ class AnswerModel extends Model
         return $data;
     }
 
+    // mungkin sekalian join ke to_question agar mendapatkan question
+    // dikirim ke view array question id, question, answer, dikelompokan dengan question_id
     public function get_answer_by_question($id)
     {
         $array_question = array_column($id, 'question_id');
-        $query = $this->builder->select('answer')->where('question_id', $array_question);
+        $query = $this->builder
+            ->select(
+                'question_id, question, discussion,
+                answer'
+            )
+            // ->whereIn('question_id', $array_question)
+            ->join(
+                'to_questions',
+                'to_questions.id = to_answers.question_id'
+            )
+            ->whereIn('question_id', $array_question)
+            // ->where('to_questions.id', $array_question)
+            ->get()->getResultArray();
 
-        // $data = array();
-        // foreach ($query as $item) {
-        //     $data[] = array(
-        //         "answer" => $item->answer,
-        //     );
-        // }
-        return $query->get()->getResult();
+        return $query;
+    }
+
+    function array_group_by($key, $data)
+    {
+        $result = array();
+
+        foreach ($data as $val) {
+            $result[$val[$key]][] = $val;
+        }
+
+        return $result;
     }
 
     // select answer where question_id in ( $question_id )

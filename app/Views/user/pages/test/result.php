@@ -44,6 +44,9 @@
                                             </tr>
                                             <tbody>
                                                 <?php
+
+                                                use function PHPUnit\Framework\once;
+
                                                 $numItems = count($data['data']['test_result1']);
                                                 $i = 0;
                                                 ?>
@@ -73,40 +76,43 @@
                                         </table>
                                     </div>
                                     <div class="block-content tab-pane" id="btabs-vertical-profile" role="tabpanel" aria-labelledby="btabs-vertical-profile-tab" tabindex="0">
-                                        <h5 class="fw-semibold">Jawaban</h5>
+                                        <h5 class="fw-semibold">Jawaban Siswa</h5>
                                         <table class="table table-striped   table-vcenter table-hover">
-                                            <tr class="bg-neo">
-                                                <th class="text-center text-white fs-sm" style="width: 50px;">#</th>
-                                                <th class="text-center text-white fs-sm" style="width: 100px;">Soal</th>
-                                                <th class="text-center text-white fs-sm" style="width: 100px;">Jawaban</th>
-                                                <th class=" text-center text-white fs-sm" style="width: 100px;">Jawaban Siswa</th>
-                                            </tr>
                                             <tbody>
                                                 <?php
-                                                $numItems = count($answerData);
+                                                // $numItems = count($soalTest);
                                                 $i = 0;
                                                 $no = 1;
                                                 ?>
-                                                <?php foreach ($answerData as $row => $value) : ?>
-                                                    <?php
-                                                    if ($i++ > 2) { ?>
+                                                <?php foreach ($data['data']['grouped_pilihan'] as $row) : ?>
+                                                    <!-- Soal -->
+                                                    <tr class="bg-neo">
+                                                        <th class="text-white fs-sm" style="width: 100px;">Soal . <?= $no ?></th>
+                                                        <th></th>
+                                                    </tr>
+                                                    <?php foreach ($row as $soal) : ?>
                                                         <tr>
-                                                            <th class="text-center" scope="row">...</th>
-                                                            <td class="fw-semibold fs-sm">...</td>
-                                                            <td class="fw-semibold fs-sm">...</td>
-                                                            <td class="fw-semibold fs-sm">...</td>
-                                                            <!-- <td class="text-c-+-enter">...</td> -->
+                                                            <td scope="row"><?= $soal['question'] ?></td>
                                                         </tr>
+                                                        <?php break; ?>
                                                     <?php
-                                                    }
+                                                    endforeach;
                                                     ?>
+                                                    <tr class="bg-neo">
+                                                        <th class="text-white fs-sm" style="width: 100px;">Pilihan Jawaban</th>
+                                                        <th></th>
+                                                    </tr>
+                                                    <!-- Pilihan Jawaban -->
+                                                    <?php foreach ($row as $option) : ?>
+                                                        <tr>
+                                                            <td scope="row"><?= $option['answer'] ?></td>
+                                                        </tr>
+                                                    <?php endforeach; ?>
                                                     <tr>
-                                                        <th class="text-center" scope="row"><?= $no ?></th>
-                                                        <td class="text-center" scope="row"><?= $value->question ?></td>
-                                                        <td class="text-center" scope="row"></td>
-                                                        <td class="text-center" scope="row"><?= $value->answer ?></td>
+                                                        <td><br></td>
                                                     </tr>
                                                 <?php $no++;
+                                                    $i++;
                                                 endforeach; ?>
                                             </tbody>
                                         </table>
@@ -114,39 +120,49 @@
                                     <div class="block-content tab-pane" id="btabs-vertical-settings" role="tabpanel" aria-labelledby="btabs-vertical-settings-tab" tabindex="0">
                                         <h5 class="fw-semibold">Pembahasan</h5>
                                         <table class="table table-striped   table-vcenter table-hover">
-                                            <tr class="bg-neo">
-                                                <th class="text-center text-white fs-sm" style="width: 50px;">#</th>
-                                                <th class="text-center text-white fs-sm" style="width: 100px;">Soal dan Pembahasan</th>
-                                                <th class="text-center text-white fs-sm" style="width: 100px;">Jawaban</th>
-                                                <th class=" text-center text-white fs-sm" style="width: 100px;">Jawaban Siswa</th>
-                                            </tr>
                                             <tbody>
                                                 <?php
-                                                $numItems = count($answerData);
+                                                // $numItems = count($soalTest);
                                                 $i = 0;
                                                 $no = 1;
                                                 ?>
-                                                <?php foreach ($answerData as $row => $value) : ?>
-                                                    <?php
-                                                    if ($i++ > 2) { ?>
+                                                <?php foreach ($data['data']['grouped_pilihan'] as $row) : ?>
+                                                    <!-- Soal -->
+                                                    <tr class="bg-neo">
+                                                        <th class="text-white fs-sm" style="width: 100px;">Soal . <?= $no ?></th>
+                                                        <th></th>
+                                                    </tr>
+                                                    <?php foreach ($row as $soal) : ?>
                                                         <tr>
-                                                            <th class="text-center" scope="row" rowspan="2">...</th>
-                                                            <td class="fw-semibold fs-sm">...</td>
-                                                            <td class="fw-semibold fs-sm">...</td>
-                                                            <td class="fw-semibold fs-sm" rowspan="2">...</td>
-                                                            <!-- <td class="text-c-+-enter">...</td> -->
+                                                            <td scope="row"><?= $soal['question'] ?></td>
                                                         </tr>
-                                                    <?php
-                                                    }
-                                                    ?>
+                                                        <?php break; ?>
+                                                    <?php endforeach; ?>
+                                                    <tr class="bg-neo">
+                                                        <th class="text-white fs-sm" style="width: 100px;">Pilihan Jawaban</th>
+                                                        <th></th>
+                                                    </tr>
+                                                    <!-- Pilihan Jawaban -->
+                                                    <?php foreach ($row as $pilihan) : ?>
+                                                        <tr>
+                                                            <td scope="row"><?= $pilihan['answer'] ?></td>
+                                                        </tr>
+                                                    <?php endforeach; ?>
+                                                    <!-- Jawaban Siswa -->
+                                                    <tr class="bg-neo">
+                                                        <th class="text-white fs-sm" style="width: 100px;">Pembahasan</th>
+                                                    </tr>
+                                                    <?php foreach ($row as $pembahasan) : ?>
+                                                        <tr>
+                                                            <td scope="row"><?= $pembahasan['discussion'] ?></td>
+                                                        </tr>
+                                                        <?php break; ?>
+                                                    <?php endforeach; ?>
                                                     <tr>
-                                                        <th class="text-center" scope="row" rowspan="2"><?= $no ?></th>
-                                                        <td class="text-center" scope="row"><?= $value->question ?></td>
-                                                        <td class="text-center" scope="row"><?= $value->discussion ?></td>
-                                                        <td class="text-center" scope="row" rowspan="2">><?= $value->answer ?></td>
-                                                        <td class="text-center" scope="row" rowspan="2">></td>
+                                                        <td><br></td>
                                                     </tr>
                                                 <?php $no++;
+                                                    $i++;
                                                 endforeach; ?>
                                             </tbody>
                                         </table>
