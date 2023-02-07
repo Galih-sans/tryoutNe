@@ -245,11 +245,10 @@ class testcontroller extends BaseController
                 $questionAnswer[$key]['answer'] = [];
             }
             if (!in_array($item['answer'], $questionAnswer[$key]['answer'])) {
-                $questionAnswer[$key]['answer'][] = array ('answer'=>$item['answer'],'answer_isright'=>$item['answer_isright']);
+                $questionAnswer[$key]['answer'][] = array('answer' => $item['answer'], 'answer_isright' => $item['answer_isright']);
             }
             unset($questionAnswer[$key]['answer_isright']);
         }
-       
 
         $this->pagedata['data'] = [
             'test_result' => $data['score'],

@@ -89,7 +89,7 @@
                                     <div class="block-content tab-pane" id="btabs-vertical-profile" role="tabpanel"
                                         aria-labelledby="btabs-vertical-profile-tab" tabindex="0">
                                         <h5 class="fw-semibold">Jawaban Siswa</h5>
-                                        <table class="table table-striped   table-vcenter table-hover">
+                                        <table class="table table-striped table-vcenter table-hover">
                                             <tbody>
                                                 <?php
                                                 // $numItems = count($soalTest);
@@ -97,31 +97,37 @@
                                                 $no = 1;
                                                 ?>
                                                 <?php foreach ($data['data']['grouped_pilihan'] as $row) : ?>
-                                                <!-- Soal -->
-                                                <tr class="bg-neo">
-                                                    <th class="text-white fs-sm" style="width: 100px;">Soal . <?= $no ?>
-                                                    </th>
-                                                    <th></th>
-                                                </tr>
-                                                <tr>
-                                                    <td scope="row"><?= $row['question'] ?></td>
-                                                </tr>
-                                                <tr class="bg-neo">
-                                                    <th class="text-white fs-sm" style="width: 100px;">Pilihan Jawaban
-                                                    </th>
-                                                    <th></th>
-                                                </tr>
-                                                <!-- Pilihan Jawaban -->
-                                                <?php foreach ($row['answer'] as $option) : ?>
-                                                <tr>
-                                                    <td scope="row"><span
-                                                            class="<?= ($option['answer_isright'] == 1) ? 'text-success' : ''; ?>"><?= $option['answer'] ?>
-                                                        </span></td>
-                                                </tr>
-                                                <?php endforeach; ?>
-                                                <tr>
-                                                    <td><br></td>
-                                                </tr>
+                                                    <!-- Soal -->
+                                                    <tr class="bg-neo">
+                                                        <th class="text-white fs-sm" style="width: 100px;">Soal . <?= $no ?>
+                                                        </th>
+                                                        <th></th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td scope="row"><?= $row['question'] ?></td>
+                                                    </tr>
+                                                    <tr class="bg-neo">
+                                                        <th class="text-white fs-sm" style="width: 100px;">Pilihan Jawaban
+                                                        </th>
+                                                        <th></th>
+                                                    </tr>
+                                                    <!-- Pilihan Jawaban -->
+                                                    <?php foreach ($row['answer'] as $option) : ?>
+                                                        <tr>
+                                                            <td scope="row"><span class="<?= ($option['answer_isright'] == 1) ? 'text-success' : ''; ?>"><?= $option['answer'] ?>
+                                                                </span></td>
+                                                        </tr>
+                                                    <?php endforeach; ?>
+                                                    <tr class="bg-neo">
+                                                        <th class="text-white fs-sm" style="width: 100px;">Jawaban Siswa
+                                                        </th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td scope="row" class="text-success"><span class="<?= ($option['answer_isright'] == 0) ? 'text-danger' : ''; ?>"><?= $option['answer'] ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><br></td>
+                                                    </tr>
                                                 <?php $no++;
                                                     $i++;
                                                 endforeach; ?>
@@ -139,37 +145,42 @@
                                                 $no = 1;
                                                 ?>
                                                 <?php foreach ($data['data']['grouped_pilihan'] as $row) : ?>
-                                                <!-- Soal -->
-                                                <tr class="bg-neo">
-                                                    <th class="text-white fs-sm" style="width: 100px;">Soal . <?= $no ?>
-                                                    </th>
-                                                    <th></th>
-                                                </tr>
-                                                <tr>
-                                                    <td scope="row"><?= $row['question'] ?></td>
-                                                </tr>
-                                                <tr class="bg-neo">
-                                                    <th class="text-white fs-sm" style="width: 100px;">Pilihan Jawaban
-                                                    </th>
-                                                    <th></th>
-                                                </tr>
-                                                <!-- Pilihan Jawaban -->
-                                                <?php foreach ($row['answer'] as $option) : ?>
-                                                <tr>
-                                                    <td scope="row"> <span class=""><?= $option['answer'] ?> </span>
-                                                    </td>
-                                                </tr>
-                                                <?php endforeach; ?>
-                                                <!-- Jawaban Siswa -->
-                                                <tr class="bg-neo">
-                                                    <th class="text-white fs-sm" style="width: 100px;">Pembahasan</th>
-                                                </tr>
-                                                <tr>
-                                                    <td scope="row"><?= $row['discussion'] ?></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><br></td>
-                                                </tr>
+                                                    <!-- Soal -->
+                                                    <tr class="bg-neo">
+                                                        <th class="text-white fs-sm" style="width: 100px;">Soal . <?= $no ?>
+                                                        </th>
+                                                        <th></th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td scope="row"><?= $row['question'] ?></td>
+                                                    </tr>
+                                                    <tr class="bg-neo">
+                                                        <th class="text-white fs-sm" style="width: 100px;">Jawaban
+                                                        </th>
+                                                        <th></th>
+                                                    </tr>
+                                                    <?php foreach ($row['answer'] as $option) : ?>
+                                                        <?php
+                                                        if ($option['answer_isright'] == 1) { ?>
+                                                            <tr>
+                                                                <td scope="row"><span class="<?= ($option['answer_isright'] == 1) ? 'text-success' : ''; ?>"><?= $option['answer'] ?>
+                                                                    </span></td>
+                                                            </tr>
+                                                        <?php
+                                                        }
+                                                        ?>
+                                                    <?php endforeach; ?>
+                                                    <tr class="bg-neo">
+                                                        <th class="text-white fs-sm" style="width: 100px;">Pembahasan
+                                                        </th>
+                                                        <th></th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td scope="row"><?= $row['discussion'] ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><br></td>
+                                                    </tr>
                                                 <?php $no++;
                                                     $i++;
                                                 endforeach; ?>
