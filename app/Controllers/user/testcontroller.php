@@ -232,24 +232,37 @@ class testcontroller extends BaseController
 
         $question_answer = $AnswerModel->get_answer_by_question($question_id);
 
-        $grouped_jawaban =  $AnswerModel->array_group_by("question_id", $question_answer);
+        // $grouped_jawaban =  $AnswerModel->array_group_by("question_id", $question_answer);
 
         // $grouped_soaltest = $AnswerModel->array_group_by("question_id", $question_answer);
 
         // $soal_pembahasan = $QuestionModel->get_question_by_id($question_id);
-
+        $questionAnswer = [];
+        foreach ($question_answer as $item) {
+            $key = "{$item['id']}";
+            if (!array_key_exists($key, $questionAnswer)) {
+                $questionAnswer[$key] = $item;
+                $questionAnswer[$key]['answer'] = [];
+            }
+            if (!in_array($item['answer'], $questionAnswer[$key]['answer'])) {
+                $questionAnswer[$key]['answer'][] = array ('answer'=>$item['answer'],'answer_isright'=>$item['answer_isright']);
+            }
+            unset($questionAnswer[$key]['answer_isright']);
+        }
+       
 
         $this->pagedata['data'] = [
             'test_result' => $data['score'],
             'test_result1' => $data1,
             // 'pilihan_soal' => $question_answer,
             // 'jawaban_soal' => $pilihanJawaban,
-            'grouped_pilihan' => $grouped_jawaban,
+            'grouped_pilihan' => $questionAnswer,
             'question_id' => $question_id,
-            'soalTest' => $soal_test,
+            'soalTest' => $question_answer,
             // 'soalPembahasan' => $soal_pembahasan,
         ];
 
+        // dd($questionAnswer);
         return view('user/pages/test/result', ['data' => $this->pagedata]);
     }
 }
