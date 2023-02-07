@@ -10,6 +10,7 @@ use App\Models\StudentModel;
 use App\Models\TestAnswerModel;
 use App\Models\TestResultModel;
 use CodeIgniter\I18n\Time;
+// use App\Models\QuestionModel;
 
 class testcontroller extends BaseController
 {
@@ -219,6 +220,9 @@ class testcontroller extends BaseController
         $TestResultModel = new TestResultModel();
         $TestAnswerModel = new TestAnswerModel();
         $AnswerModel = new AnswerModel();
+        // $QuestionModel = new QuestionModel();
+
+        $question_id = $TestAnswerModel->get_question_id($id, $this->encrypter->decrypt(base64_decode(session()->get('id'))));
 
 
         $data = $TestResultModel->where(['student_id' => $this->encrypter->decrypt(base64_decode(session()->get('id'))), 'test_id' => $id])->orderBy('id', 'DESC')->first();
@@ -226,21 +230,26 @@ class testcontroller extends BaseController
 
         $soal_test = $TestAnswerModel->get_test_asnwer($id, $this->encrypter->decrypt(base64_decode(session()->get('id'))));
 
-        $question_id = $TestAnswerModel->get_question_id($id, $this->encrypter->decrypt(base64_decode(session()->get('id'))));
-        // get question answer
-        // $question_answer = $AnswerModel->get_answer_by_question($question_id);
+        $question_answer = $AnswerModel->get_answer_by_question($question_id);
 
-        // $right_answer = $AnswerModel->right_answer($question_id);
+        $grouped_jawaban =  $AnswerModel->array_group_by("question_id", $question_answer);
 
-        // $data_question = $this->TestModel->get_test_composition($id);
+        // $grouped_soaltest = $AnswerModel->array_group_by("question_id", $question_answer);
+
+        // $soal_pembahasan = $QuestionModel->get_question_by_id($question_id);
+
 
         $this->pagedata['data'] = [
             'test_result' => $data['score'],
             'test_result1' => $data1,
             // 'pilihan_soal' => $question_answer,
+            // 'jawaban_soal' => $pilihanJawaban,
+            'grouped_pilihan' => $grouped_jawaban,
             'question_id' => $question_id,
+            'soalTest' => $soal_test,
+            // 'soalPembahasan' => $soal_pembahasan,
         ];
 
-        return view('user/pages/test/result', ['data' => $this->pagedata, 'dataHasil' => $soal_test]);
+        return view('user/pages/test/result', ['data' => $this->pagedata]);
     }
 }

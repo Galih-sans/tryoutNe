@@ -55,22 +55,37 @@ class TestAnswerModel extends Model
     public function get_test_asnwer($test_id, $student_id)
     {
         // select to_test_answer join tabel to_questions dan to_answersselect( 'to_test_answer.test_id, to_test_answer.student_id,to_test_answer.question_id,to_test_answer.answer_id')->
-        $query = $this->builder->join(
-            'to_questions',
-            'to_questions.id = to_test_answer.question_id'
-        )->join(
-            'to_answers',
-            'to_answers.id = to_test_answer.answer_id',
-            'left'
-        )
-            ->where(['to_test_answer.test_id' => $test_id, 'to_test_answer.student_id' => $student_id])
-            ->get()->getResult();
+        $query = $this->builder
+            ->select(
+                'to_answers.answer, 
+            to_questions.question, 
+            to_test_answer.test_id'
+            )
+            ->join(
+                'to_answers',
+                'to_answers.id = to_test_answer.answer_id',
+                'left',
+            )
+            ->join(
+                'to_questions',
+                'to_questions.id = to_test_answer.question_id',
+            )
+            ->where(
+                [
+                    'to_test_answer.test_id' => $test_id,
+                    'to_test_answer.student_id' => $student_id
+                ]
+            )
+            ->get()->getResultArray();
         return $query;
     }
 
     public function get_question_id($test_id, $student_id)
     {
-        $query = $this->builder->select('question_id')->where(['test_id' => $test_id, 'to_test_answer.student_id' => $student_id]);
-        return $query->get()->getResultArray();
+        $query = $this->builder
+            ->select('question_id')
+            ->where(['to_test_answer.test_id' => $test_id, 'to_test_answer.student_id' => $student_id])->orderBy('to_test_answer.id')
+            ->get()->getResultArray();
+        return $query;
     }
 }
