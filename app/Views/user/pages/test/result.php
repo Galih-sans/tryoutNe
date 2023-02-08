@@ -44,9 +44,6 @@
                                             </tr>
                                             <tbody>
                                                 <?php
-
-                                                use function PHPUnit\Framework\once;
-
                                                 $numItems = count($data['data']['test_result1']);
                                                 $i = 0;
                                                 ?>
@@ -65,7 +62,8 @@
                                                     ?>
                                                     <tr>
                                                         <th class="text-center" scope="row"><?= $item['Rank'] ?></th>
-                                                        <td class="fw-semibold fs-sm"><?= ucwords($item['full_name']) ?></td>
+                                                        <td class="fw-semibold fs-sm"><?= ucwords($item['full_name']) ?>
+                                                        </td>
                                                         <td class="text-center">
                                                             <span><?= $item['score'] ?></Span>
 
