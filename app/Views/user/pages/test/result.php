@@ -13,7 +13,7 @@
                         </div>
                         <div class="block-content fs-sm row py-4">
                             <div class="block block-rounded row g-0">
-                                <ul class="nav nav-tabs nav-tabs-block flex-md-column col-md-4" role="tablist">
+                                <ul class="nav nav-tabs nav-tabs-block flex-md-column col-md-3" role="tablist">
                                     <li class="nav-item d-md-flex flex-md-column" role="presentation">
                                         <button class="nav-link text-md-start active btn-block" id="btabs-vertical-home-tab" data-bs-toggle="tab" data-bs-target="#btabs-vertical-home" role="tab" aria-controls="btabs-vertical-home" aria-selected="false" tabindex="-1">
                                             <i class="fa-solid fa-chart-simple opacity-50 me-1 d-none d-sm-inline-block"></i>
@@ -76,103 +76,101 @@
                                         </table>
                                     </div>
                                     <div class="block-content tab-pane" id="btabs-vertical-profile" role="tabpanel" aria-labelledby="btabs-vertical-profile-tab" tabindex="0">
-                                        <h5 class="fw-semibold">Jawaban Siswa</h5>
-                                        <table class="table table-striped table-vcenter table-hover">
-                                            <tbody>
-                                                <?php
-                                                // $numItems = count($soalTest);
-                                                $i = 0;
-                                                $no = 1;
-                                                ?>
-                                                <?php foreach ($data['data']['grouped_pilihan'] as $row) : ?>
-                                                    <!-- Soal -->
-                                                    <tr class="bg-neo">
-                                                        <th class="text-white fs-sm" style="width: 100px;">Soal . <?= $no ?>
-                                                        </th>
-                                                        <th></th>
-                                                    </tr>
-                                                    <tr>
-                                                        <td scope="row"><?= $row['question'] ?></td>
-                                                    </tr>
-                                                    <tr class="bg-neo">
-                                                        <th class="text-white fs-sm" style="width: 100px;">Pilihan Jawaban
-                                                        </th>
-                                                        <th></th>
-                                                    </tr>
-                                                    <!-- Pilihan Jawaban -->
-                                                    <?php foreach ($row['answer'] as $option) : ?>
+                                        <h5 class="fw-semibold">Soal dan Jawaban</h5>
+                                        <?php
+                                        // $numItems = count($soalTest);
+                                        $i = 0;
+                                        $no = 1;
+                                        ?>
+                                        <?php foreach ($data['data']['grouped_pilihan'] as $row) : ?>
+                                            <div class="mb-5">
+                                                <table class="table table-borderles">
+                                                    <tbody>
+                                                        <!-- Soal -->
                                                         <tr>
-                                                            <td scope="row"><span class="<?= ($option['answer_isright'] == 1) ? 'text-success' : ''; ?>"><?= $option['answer'] ?>
-                                                                </span></td>
+                                                            <th class="fs-sm" style="width: 100px;">Soal . <?= $no ?>
+                                                            </th>
+                                                            <th></th>
                                                         </tr>
-                                                    <?php endforeach; ?>
-                                                    <tr class="bg-neo">
-                                                        <th class="text-white fs-sm" style="width: 100px;">Jawaban Siswa
-                                                        </th>
-                                                    </tr>
-                                                    <tr>
-                                                        <td scope="row" class="text-success"><span class="<?= ($option['answer_isright'] == 0) ? 'text-danger' : ''; ?>"><?= $option['answer'] ?></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><br></td>
-                                                    </tr>
-                                                <?php $no++;
-                                                    $i++;
-                                                endforeach; ?>
-                                            </tbody>
-                                        </table>
+                                                        <tr>
+                                                            <td><?= $row['question'] ?></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th class="fs-sm" style="width: 100px;">Daftar Jawaban
+                                                            </th>
+                                                            <th></th>
+                                                        </tr>
+                                                        <!-- Pilihan Jawaban -->
+                                                        <?php foreach ($row['answer'] as $option) : ?>
+                                                            <tr>
+                                                                <td><span class="<?= ($option['answer_isright'] == 1) ? 'text-success' : ''; ?>"><?= $option['answer'] ?>
+                                                                    </span></td>
+                                                            </tr>
+                                                        <?php endforeach; ?>
+                                                        <tr>
+                                                            <th class="fs-sm" style="width: 100px;">Jawaban Anda
+                                                            </th>
+                                                        </tr>
+                                                        <tr>
+                                                            <td scope="row" class="text-success"><span class="<?= ($option['answer_isright'] == 0) ? 'text-danger' : ''; ?>"><?= $option['answer'] ?></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        <?php $no++;
+                                            $i++;
+                                        endforeach; ?>
                                     </div>
                                     <div class="block-content tab-pane" id="btabs-vertical-settings" role="tabpanel" aria-labelledby="btabs-vertical-settings-tab" tabindex="0">
                                         <h5 class="fw-semibold">Pembahasan</h5>
-                                        <table class="table table-striped   table-vcenter table-hover">
-                                            <tbody>
-                                                <?php
-                                                // $numItems = count($soalTest);
-                                                $i = 0;
-                                                $no = 1;
-                                                ?>
-                                                <?php foreach ($data['data']['grouped_pilihan'] as $row) : ?>
-                                                    <!-- Soal -->
-                                                    <tr class="bg-neo">
-                                                        <th class="text-white fs-sm" style="width: 100px;">Soal . <?= $no ?>
-                                                        </th>
-                                                        <th></th>
-                                                    </tr>
-                                                    <tr>
-                                                        <td scope="row"><?= $row['question'] ?></td>
-                                                    </tr>
-                                                    <tr class="bg-neo">
-                                                        <th class="text-white fs-sm" style="width: 100px;">Jawaban
-                                                        </th>
-                                                        <th></th>
-                                                    </tr>
-                                                    <?php foreach ($row['answer'] as $option) : ?>
-                                                        <?php
-                                                        if ($option['answer_isright'] == 1) { ?>
-                                                            <tr>
-                                                                <td scope="row"><span class="<?= ($option['answer_isright'] == 1) ? 'text-success' : ''; ?>"><?= $option['answer'] ?>
-                                                                    </span></td>
-                                                            </tr>
-                                                        <?php
-                                                        }
-                                                        ?>
-                                                    <?php endforeach; ?>
-                                                    <tr class="bg-neo">
-                                                        <th class="text-white fs-sm" style="width: 100px;">Pembahasan
-                                                        </th>
-                                                        <th></th>
-                                                    </tr>
-                                                    <tr>
-                                                        <td scope="row"><?= $row['discussion'] ?></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><br></td>
-                                                    </tr>
-                                                <?php $no++;
-                                                    $i++;
-                                                endforeach; ?>
-                                            </tbody>
-                                        </table>
+                                        <?php
+                                        // $numItems = count($soalTest);
+                                        $i = 0;
+                                        $no = 1;
+                                        ?>
+                                        <?php foreach ($data['data']['grouped_pilihan'] as $row) : ?>
+                                            <div class="mb-5">
+                                                <table class="table table-borderles">
+                                                    <tbody>
+                                                        <!-- Soal -->
+                                                        <tr class="bg-body-light">
+                                                            <th class="fs-sm" style="width: 100px;">Soal . <?= $no ?>
+                                                            </th>
+                                                            <th></th>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><?= $row['question'] ?></td>
+                                                        </tr>
+                                                        <tr bgcolor="">
+                                                            <th class="fs-sm" style="width: 100px;">Jawaban
+                                                            </th>
+                                                            <th></th>
+                                                        </tr>
+                                                        <?php foreach ($row['answer'] as $option) : ?>
+                                                            <?php
+                                                            if ($option['answer_isright'] == 1) { ?>
+                                                                <tr>
+                                                                    <td><span class="<?= ($option['answer_isright'] == 1) ? 'text-success' : ''; ?>"><?= $option['answer'] ?>
+                                                                        </span></td>
+                                                                </tr>
+                                                            <?php
+                                                            }
+                                                            ?>
+                                                        <?php endforeach; ?>
+                                                        <tr>
+                                                            <th class="fs-sm" style="width: 100px;">Pembahasan
+                                                            </th>
+                                                            <th></th>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><?= $row['discussion'] ?></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        <?php $no++;
+                                            $i++;
+                                        endforeach; ?>
                                     </div>
                                 </div>
                             </div>
