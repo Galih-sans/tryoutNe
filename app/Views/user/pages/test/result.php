@@ -83,7 +83,7 @@
                                                 <tbody>
                                                     <!-- Soal -->
                                                     <tr>
-                                                        <th class="fs-sm" style="width: 100px;">Soal . <?= $no ?>
+                                                        <th class="fs-sm">Soal . <?= $no ?>
                                                         </th>
                                                         <th></th>
                                                     </tr>
@@ -91,7 +91,7 @@
                                                         <td><?= $row['question'] ?></td>
                                                     </tr>
                                                     <tr>
-                                                        <th class="fs-sm" style="width: 100px;">Daftar Jawaban
+                                                        <th class="fs-sm">Daftar Jawaban
                                                         </th>
                                                         <th></th>
                                                     </tr>
@@ -103,7 +103,7 @@
                                                         </tr>
                                                     <?php endforeach; ?>
                                                     <tr>
-                                                        <th class="fs-sm" style="width: 100px;">Jawaban Anda
+                                                        <th class="fs-sm">Jawaban Anda
                                                         </th>
                                                     </tr>
                                                     <tr>
@@ -125,7 +125,7 @@
                                                 <tbody>
                                                     <!-- Soal -->
                                                     <tr class=" bg-body-light">
-                                                <th class="fs-sm" style="width: 100px;">Soal . <?= $no ?>
+                                                <th class="fs-sm">Soal . <?= $no ?>
                                                 </th>
                                                 <th></th>
                                                 </tr>
@@ -133,7 +133,7 @@
                                                     <td><?= $row['question'] ?></td>
                                                 </tr>
                                                 <tr bgcolor="">
-                                                    <th class="fs-sm" style="width: 100px;">Jawaban
+                                                    <th class="fs-sm">Jawaban
                                                     </th>
                                                     <th></th>
                                                 </tr>
@@ -149,7 +149,7 @@
                                                     ?>
                                                 <?php endforeach; ?>
                                                 <tr>
-                                                    <th class="fs-sm" style="width: 100px;">Pembahasan
+                                                    <th class="fs-sm">Pembahasan
                                                     </th>
                                                     <th></th>
                                                 </tr>
