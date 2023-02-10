@@ -82,18 +82,16 @@
                                             <table class="table table-borderles mb-5">
                                                 <tbody>
                                                     <!-- Soal -->
-                                                    <tr>
-                                                        <th class="fs-sm">Soal . <?= $no ?>
-                                                        </th>
-                                                        <th></th>
+                                                    <tr class=" bg-body-light">
+                                                        <td class="fw-bold">Soal . <?= $no ?>
+                                                        </td>
                                                     </tr>
                                                     <tr>
                                                         <td><?= $row['question'] ?></td>
                                                     </tr>
                                                     <tr>
-                                                        <th class="fs-sm">Daftar Jawaban
-                                                        </th>
-                                                        <th></th>
+                                                        <td class="fw-bold">Daftar Jawaban
+                                                        </td>
                                                     </tr>
                                                     <!-- Pilihan Jawaban -->
                                                     <?php foreach ($row['answer'] as $option) : ?>
@@ -103,8 +101,8 @@
                                                         </tr>
                                                     <?php endforeach; ?>
                                                     <tr>
-                                                        <th class="fs-sm">Jawaban Anda
-                                                        </th>
+                                                        <td class="fw-bold">Jawaban Anda
+                                                        </td>
                                                     </tr>
                                                     <tr>
                                                         <td scope="row" class="text-success"><span class="<?= ($option['answer_isright'] == 0) ? 'text-danger' : ''; ?>"><?= $option['answer'] ?></td>
@@ -121,41 +119,38 @@
                                         $no = 1;
                                         ?>
                                         <?php foreach ($data['data']['grouped_pilihan'] as $row) : ?>
-                                            <table class="table table-borderles mb-5"">
+                                            <table class="table table-borderles mb-5">
                                                 <tbody>
                                                     <!-- Soal -->
                                                     <tr class=" bg-body-light">
-                                                <th class="fs-sm">Soal . <?= $no ?>
-                                                </th>
-                                                <th></th>
-                                                </tr>
-                                                <tr>
-                                                    <td><?= $row['question'] ?></td>
-                                                </tr>
-                                                <tr bgcolor="">
-                                                    <th class="fs-sm">Jawaban
-                                                    </th>
-                                                    <th></th>
-                                                </tr>
-                                                <?php foreach ($row['answer'] as $option) : ?>
-                                                    <?php
-                                                    if ($option['answer_isright'] == 1) { ?>
-                                                        <tr>
-                                                            <td><?= $option['answer'] ?>
-                                                                </span></td>
-                                                        </tr>
-                                                    <?php
-                                                    }
-                                                    ?>
-                                                <?php endforeach; ?>
-                                                <tr>
-                                                    <th class="fs-sm">Pembahasan
-                                                    </th>
-                                                    <th></th>
-                                                </tr>
-                                                <tr>
-                                                    <td><?= $row['discussion'] ?></td>
-                                                </tr>
+                                                        <td class="fw-bold">Soal . <?= $no ?>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><?= $row['question'] ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="fw-bold">Jawaban
+                                                        </td>
+                                                    </tr>
+                                                    <?php foreach ($row['answer'] as $option) : ?>
+                                                        <?php
+                                                        if ($option['answer_isright'] == 1) { ?>
+                                                            <tr>
+                                                                <td><?= $option['answer'] ?>
+                                                                    </span></td>
+                                                            </tr>
+                                                        <?php
+                                                        }
+                                                        ?>
+                                                    <?php endforeach; ?>
+                                                    <tr>
+                                                        <td class="fw-bold">Pembahasan
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><?= $row['discussion'] ?></td>
+                                                    </tr>
                                                 </tbody>
                                             </table>
                                         <?php $no++;
