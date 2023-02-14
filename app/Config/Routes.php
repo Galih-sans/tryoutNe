@@ -88,6 +88,7 @@ $routes->group("", ["filter" => "isuser", "namespace" => "App\Controllers\user"]
         // URL - /user
         $routes->get("/", "performancecontroller::index", ['as' => 'user.performance.index']);
         $routes->match(["get", "post"], "index", "performancecontroller::index");
+        $routes->match(["get", "post"], "dt_riwayat", "performancecontroller::dt_riwayat", ['as' => 'user.performance.dt_riwayat']);
     });
     $routes->group("transaksi", function ($routes) {
         // URL - /user
