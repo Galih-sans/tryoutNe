@@ -36,10 +36,8 @@
                                 <tr>
                                     <th width="5%" class="fs-sm">#</th>
                                     <th width="30%" class="fs-sm fw-normal">Ujian</th>
-                                    <th width="10%" class="fs-sm fw-normal">Nilai</th>
+                                    <th width="10%" class=" text-center fs-sm fw-normal">Nilai</th>
                                     <th width="30%" class="fs-sm fw-normal">Kelas</th>
-                                    <!-- <th width="30%" class="fs-sm fw-normal">Student ID</th> -->
-                                    <!-- <th width="30%" class="fs-sm fw-normal">Test ID</th> -->
                                     <th width="10%" class="fs-sm fw-normal">Tanggal Ujian</th>
                                     <th width="10%" class="fs-sm fw-normal">Detail</th>
                                 </tr>
@@ -50,8 +48,50 @@
             </div>
         </div>
     </div>
-    <!-- MODAL DETAIL -->
     <!-- end of riwayat test -->
+    <!-- MODAL TEST TERUPDATE -->
+    <div class="modal fade" id="detailModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+            <div class="modal-content">
+                <div class="block block-rounded block-transparent mb-0">
+                    <div class="block-header block-header-ne">
+                        <h3 class="block-title text-white">Hasil Test : </h3>
+                        <div class="block-options">
+                            <button type="button" class="btn-block-option-white" data-bs-dismiss="modal" aria-label="Close">
+                                <i class="fa fa-fw fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="block-content fs-sm">
+                        <form id="detail_siswa_form">
+                            <table>
+                                <tr>
+                                    <th>Nama Test</th>
+                                    <td><input type="text" class="form-control" id="test_name" disabled></td>
+                                </tr>
+                                <tr>
+                                    <th>Nilai</th>
+                                    <td><input type="text" class="form-control" id="score" disabled></td>
+                                </tr>
+                                <tr>
+                                    <th>Tanggal Ujian</th>
+                                    <td><input type="text" class="form-control" id="begin_time" disabled></td>
+                                </tr>
+                                <tr>
+                                    <th>Kelas</th>
+                                    <td><input type="text" class="form-control" id="test_class" disabled></td>
+                                </tr>
+                            </table>
+                        </form>
+                    </div>
+                    <div class="block-content block-content-full text-end bg-body">
+                        <button type="button" class="btn btn-sm btn-secondary me-1" data-bs-dismiss="modal">Tutup</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END OF MODAL -->
 
     <!-- Ujian Mendatang -->
     <div class="row">
@@ -62,226 +102,101 @@
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
                     <div class="table-responsive p-0">
-                        <table class="table align-items-center justify-content-center mb-0">
+                        <table class="table table-bordered table-vcenter js-dataTable-full no-footer dtr-inline collapsed">
                             <thead>
                                 <tr>
+                                    <th width="5%" class="fs-sm">#</th>
+                                    <th width="30%" class="fs-sm fw-normal">Ujian</th>
+                                    <th width="10%" class=" text-center fs-sm fw-normal">Nilai</th>
+                                    <th width="30%" class="fs-sm fw-normal">Kelas</th>
+                                    <th width="10%" class="fs-sm fw-normal">Tanggal Ujian</th>
+                                    <th width="10%" class="fs-sm fw-normal">Detail</th>
+                                </tr>
+                                <!-- <tr>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Ujian</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                        Class</th>
+                                        Kelas</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                         Status</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">
-                                        Completion</th>
+                                        Pengerjaan</th>
                                     <th></th>
-                                </tr>
+                                </tr> -->
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex px-2">
-                                            <div>
-                                                <img src="../assets/img/small-logos/logo-spotify.svg" class="avatar avatar-sm rounded-circle me-2" alt="spotify">
-                                            </div>
-                                            <div class="my-auto">
-                                                <h6 class="mb-0 text-sm">SIMAK UI</h6>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <span class="badge badge-sm bg-gradient-success">Nasional</span>
-                                    </td>
-                                    <td>
-                                        <span class="text-xs font-weight-bold">working</span>
-                                    </td>
-                                    <td class="align-middle text-center">
-                                        <div class="d-flex align-items-center justify-content-center">
-                                            <span class="me-2 text-xs font-weight-bold">60%</span>
-                                            <div>
-                                                <div class="progress">
-                                                    <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="align-middle">
-                                        <button class="btn btn-link text-primary mb-0">
-                                            <i class="fa fa-ellipsis-v text-xs"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex px-2">
-                                            <div>
-                                                <img src="../assets/img/small-logos/logo-invision.svg" class="avatar avatar-sm rounded-circle me-2" alt="invision">
-                                            </div>
-                                            <div class="my-auto">
-                                                <h6 class="mb-0 text-sm">TRYOUT MATEMATIKA</h6>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <span class="badge badge-sm bg-gradient-success">Nasional</span>
-                                    </td>
-                                    <td>
-                                        <span class="text-xs font-weight-bold">done</span>
-                                    </td>
-                                    <td class="align-middle text-center">
-                                        <div class="d-flex align-items-center justify-content-center">
-                                            <span class="me-2 text-xs font-weight-bold">100%</span>
-                                            <div>
-                                                <div class="progress">
-                                                    <div class="progress-bar bg-gradient-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="align-middle">
-                                        <button class="btn btn-link text-secondary mb-0" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fa fa-ellipsis-v text-xs"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex px-2">
-                                            <div>
-                                                <img src="../assets/img/small-logos/logo-jira.svg" class="avatar avatar-sm rounded-circle me-2" alt="jira">
-                                            </div>
-                                            <div class="my-auto">
-                                                <h6 class="mb-0 text-sm">TRYOUT BIOLOGY</h6>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <span class="badge badge-sm bg-gradient-success">Nasional</span>
-                                    </td>
-                                    <td>
-                                        <span class="text-xs font-weight-bold">Expired</span>
-                                    </td>
-                                    <td class="align-middle text-center">
-                                        <div class="d-flex align-items-center justify-content-center">
-                                            <span class="me-2 text-xs font-weight-bold">30%</span>
-                                            <div>
-                                                <div class="progress">
-                                                    <div class="progress-bar bg-gradient-danger" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="30" style="width: 30%;"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="align-middle">
-                                        <button class="btn btn-link text-secondary mb-0" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fa fa-ellipsis-v text-xs"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex px-2">
-                                            <div>
-                                                <img src="../assets/img/small-logos/logo-slack.svg" class="avatar avatar-sm rounded-circle me-2" alt="slack">
-                                            </div>
-                                            <div class="my-auto">
-                                                <h6 class="mb-0 text-sm">TRYOUT KIMIA</h6>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <span class="badge badge-sm bg-gradient-success">Nasional</span>
-                                    </td>
-                                    <td>
-                                        <span class="text-xs font-weight-bold">Expired</span>
-                                    </td>
-                                    <td class="align-middle text-center">
-                                        <div class="d-flex align-items-center justify-content-center">
-                                            <span class="me-2 text-xs font-weight-bold">10%</span>
-                                            <div>
-                                                <div class="progress">
-                                                    <div class="progress-bar bg-gradient-success" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="0" style="width: 0%;"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="align-middle">
-                                        <button class="btn btn-link text-secondary mb-0" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fa fa-ellipsis-v text-xs"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex px-2">
-                                            <div>
-                                                <img src="../assets/img/small-logos/logo-webdev.svg" class="avatar avatar-sm rounded-circle me-2" alt="webdev">
-                                            </div>
-                                            <div class="my-auto">
-                                                <h6 class="mb-0 text-sm">UJIAN NASIONAL</h6>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <span class="badge badge-sm bg-gradient-success">Nasional</span>
-                                    </td>
-                                    <td>
-                                        <span class="text-xs font-weight-bold">working</span>
-                                    </td>
-                                    <td class="align-middle text-center">
-                                        <div class="d-flex align-items-center justify-content-center">
-                                            <span class="me-2 text-xs font-weight-bold">80%</span>
-                                            <div>
-                                                <div class="progress">
-                                                    <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="80" style="width: 80%;"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="align-middle">
-                                        <button class="btn btn-link text-secondary mb-0" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fa fa-ellipsis-v text-xs"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex px-2">
-                                            <div>
-                                                <img src="../assets/img/small-logos/logo-xd.svg" class="avatar avatar-sm rounded-circle me-2" alt="xd">
-                                            </div>
-                                            <div class="my-auto">
-                                                <h6 class="mb-0 text-sm">UTBK UI</h6>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <span class="badge badge-sm bg-gradient-success">Nasional</span>
-                                    </td>
-                                    <td>
-                                        <span class="text-xs font-weight-bold">done</span>
-                                    </td>
-                                    <td class="align-middle text-center">
-                                        <div class="d-flex align-items-center justify-content-center">
-                                            <span class="me-2 text-xs font-weight-bold">100%</span>
-                                            <div>
-                                                <div class="progress">
-                                                    <div class="progress-bar bg-gradient-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="align-middle">
-                                        <button class="btn btn-link text-secondary mb-0" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fa fa-ellipsis-v text-xs"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
                         </table>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <!-- MODAL TEST MENDATANG TERUPDATE -->
+    <!-- <div class="modal fade" id="detailModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+            <div class="modal-content">
+                <div class="block block-rounded block-transparent mb-0">
+                    <div class="block-header block-header-ne">
+                        <h3 class="block-title text-white">Detail Siswa : </h3>
+                        <div class="block-options">
+                            <button type="button" class="btn-block-option-white" data-bs-dismiss="modal" aria-label="Close">
+                                <i class="fa fa-fw fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="block-content fs-sm">
+                        <form id="detail_siswa_form">
+                            <table>
+                                <tr>
+                                    <th>Test ID</th>
+                                    <td><input type="text" class="form-control" id="test_id" disabled></td>
+                                </tr>
+                                <tr>
+                                    <th>Nama Test</th>
+                                    <td><input type="text" class="form-control" id="test_name" disabled></td>
+                                </tr>
+                                <tr>
+                                    <th>Jadwal Dimulai</th>
+                                    <td><input type="text" class="form-control" id="begin_time" disabled></td>
+                                </tr>
+                                <tr>
+                                    <th>Jadwal Selesai</th>
+                                    <td><input type="text" class="form-control" id="end_time" disabled></td>
+                                </tr>
+                                <tr>
+                                    <th>Durasi Ujian</th>
+                                    <td><input type="text" class="form-control" id="duration" disabled></td>
+                                </tr>
+                                <tr>
+                                    <th>Jumlah Soal</th>
+                                    <td><input type="text" class="form-control" id="number_of_question" disabled></td>
+                                </tr>
+                                <tr>
+                                    <th>Type</th>
+                                    <td><input type="text" class="form-control" id="type" disabled></td>
+                                </tr>
+                                <tr>
+                                    <th>Harga</th>
+                                    <td><input type="text" class="form-control" id="price" disabled></td>
+                                </tr>
+                                <tr>
+                                    <th>Kelas</th>
+                                    <td><input type="text" class="form-control" id="class" disabled></td>
+                                </tr>
+                                <tr>
+                                    <th>Subjek</th>
+                                    <td><input type="text" class="form-control" id="subhject" disabled></td>
+                                </tr>
+                            </table>
+                        </form>
+                    </div>
+                    <div class="block-content block-content-full text-end bg-body">
+                        <button type="button" class="btn btn-sm btn-secondary me-1" data-bs-dismiss="modal">Tutup</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <!-- END OF MODAL -->
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/js/bootstrap-select.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
@@ -305,7 +220,7 @@
 <!-- <script>
     $(document).ready(function() {
         dt_siswa();
-        $('#refresh').on('click', refresh_dt)
+        // $('#refresh').on('click', refresh_dt)
         // $(document).on('click', '.detail-button', function() {
         //     let data_id = $(this).attr("id");
         //     let data_full_name = $(this).attr("full_name");
@@ -440,20 +355,22 @@
 <script>
     $(document).ready(function() {
         dt_riwayat();
-        $('#refresh').on('click', refresh_dt)
-        // $(document).on('click', '.detail-button', function() {
-        //     let data_id = $(this).attr("id");
-        //     let data_full_name = $(this).attr("full_name");
-        //     let data_class = $(this).attr("class_id");
-        //     let data_level = $(this).attr("level");
-        //     let data_email = $(this).attr("email");
+        // dt_mendatang();
+        // $('#refresh').on('click', refresh_dt)
+        $(document).on('click', '.detail-button', function() {
+            let test_name = $(this).attr("test_name");
+            let begin_time = $(this).attr("begin_time");
+            let score = $(this).attr("score");
+            let test_class = $(this).attr("test_class");
 
-        //     $('#full_name').val(data_full_name);
-        //     $('#kelas').val(data_class);
-        //     $('#level').val(data_level);
+            $('#test_name').val(test_name);
+            $('#begin_time').val(begin_time);
+            $('#score').val(score);
+            $('#test_class').val(test_class);
 
-        //     $('#detailModal').modal('show');
-        // });
+
+            $('#detailModal').modal('show');
+        });
     });
 
     function dt_riwayat() {
@@ -544,8 +461,96 @@
         })
     };
 
-    function refresh_dt() {
-        dt_siswa();
-    }
+    // function dt_mendatang() {
+    //     $('#mendatang').DataTable({
+    //         oLanguage: {
+    //             sProcessing: '<div class="spinner-border neo" role="status"><span class="sr-only"></span></div>'
+    //         },
+    //         // dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center mx-0 yx-0'B><'col-sm-4'f>>" +
+    //         //     "<'row'<'col-sm-12'tr>>" +
+    //         //     "<'row'<'col-sm-6'i><'col-sm-6'p>>",
+    //         buttons: [{
+    //                 extend: 'copy',
+    //                 exportOptions: {
+    //                     columns: [0, 1, 2]
+    //                 },
+    //                 className: 'fs-sm btn btn-sm btn-outline-secondary glyphicon glyphicon-duplicate',
+    //                 text: '<i class="fa-sharp fa-solid fa-copy "></i>',
+    //                 titleAttr: 'Copy'
+    //             },
+    //             {
+    //                 extend: 'excel',
+    //                 exportOptions: {
+    //                     columns: [0, 1, 2]
+    //                 },
+    //                 className: 'fs-sm btn btn-sm btn-outline-success glyphicon glyphicon-list-alt',
+    //                 text: '<i class="fa-sharp fa-solid fa-file-excel "></i>',
+    //                 titleAttr: 'Excel'
+    //             },
+
+    //             {
+    //                 extend: 'print',
+    //                 exportOptions: {
+    //                     columns: [0, 1, 2]
+    //                 },
+    //                 className: 'fs-sm btn btn-sm btn-outline-primary glyphicon glyphicon-print',
+    //                 text: '<i class="fa-sharp fa-solid fa-print "></i>',
+    //                 titleAttr: 'PRINT'
+    //             },
+    //             {
+    //                 extend: 'pdf',
+    //                 exportOptions: {
+    //                     columns: [0, 1, 2]
+    //                 },
+    //                 className: 'fs-sm btn btn-sm btn-outline-danger glyphicon glyphicon-file',
+    //                 text: '<i class="fa-sharp fa-solid fa-file-pdf "></i>',
+    //                 titleAttr: 'PDF'
+    //             },
+    //         ],
+    //         serverSide: true,
+    //         processing: true,
+    //         bDestroy: true,
+    //         bPaginate: false,
+    //         pagination: false,
+    //         searching: true,
+    //         bInfo: false,
+    //         tInfo: false,
+    //         pagingType: "full_numbers",
+    //         paging: false,
+    //         lengthMenu: [
+    //             [10, 25, 50, 100, -1],
+    //             [10, 25, 50, 100, 'All'],
+    //         ],
+    //         columnDefs: [{
+    //             targets: [0, 3],
+    //             orderable: false,
+    //             className: "text-center",
+    //         }, {
+    //             width: "15%",
+    //             targets: [3],
+    //         }, ],
+    //         ajax: {
+    //             url: "<?= route_to('user.performance.dt_mendatang') ?>",
+    //             type: "POST",
+    //             data: {},
+    //             error: function() {
+    //                 $(".tabel_serverside-error").html("");
+    //                 $("#tabel_serverside").append(
+    //                     '<tbody class="tabel_serverside-error"><tr><th colspan="3">Data Tidak Ditemukan di Server</th></tr></tbody>'
+    //                 );
+    //                 $("#tabel_serverside_processing").css("display", "none");
+    //             }
+    //         },
+    //         initComplete: function(settings, json) {
+    //             $('div.dataTables_length select').addClass('selectpicker border');
+    //             $('.selectpicker').selectpicker();
+    //         }
+
+    //     })
+    // };
+
+    // function refresh_dt() {
+    //     dt_siswa();
+    // }
 </script>
 <?= $this->endSection() ?>
