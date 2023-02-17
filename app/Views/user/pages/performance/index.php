@@ -110,7 +110,7 @@
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
                     <div class="table-responsive p-0">
-                        <table class="table table-bordered table-vcenter js-dataTable-full no-footer dtr-inline collapsed">
+                        <table id="mendatang" class="table table-bordered table-vcenter js-dataTable-full no-footer dtr-inline collapsed" style="width:100%">
                             <thead>
                                 <tr>
                                     <th width="5%" class="fs-sm">#</th>
@@ -140,7 +140,7 @@
         </div>
     </div>
     <!-- MODAL TEST MENDATANG TERUPDATE -->
-    <!-- <div class="modal fade" id="detailModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="detailMendatang" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-md" role="document">
             <div class="modal-content">
                 <div class="block block-rounded block-transparent mb-0">
@@ -204,7 +204,7 @@
                 </div>
             </div>
         </div>
-    </div> -->
+    </div>
     <!-- END OF MODAL -->
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/js/bootstrap-select.min.js"></script>
@@ -364,7 +364,7 @@
 <script>
     $(document).ready(function() {
         dt_riwayat();
-        // dt_mendatang();
+        dt_mendatang();
         // $('#refresh').on('click', refresh_dt)
         $(document).on('click', '.detail-button', function() {
             let test_name = $(this).attr("test_name");
@@ -477,7 +477,7 @@
     function dt_mendatang() {
         $('#mendatang').DataTable({
             oLanguage: {
-                sProcessing: '<div class="spinner-border neo" role="status"><span class="sr-only"></span></div>'
+                sProcessing: '<div class="spinner-border neo" role="status"><span class="sr-only"></span></div>',
             },
             // dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center mx-0 yx-0'B><'col-sm-4'f>>" +
             //     "<'row'<'col-sm-12'tr>>" +
