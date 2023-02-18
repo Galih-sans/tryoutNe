@@ -9,6 +9,8 @@ class performancecontroller extends BaseController
     public $pagedata;
     public $test_result_model;
     public $test_model;
+    public $student_model;
+    public $answer_model;
     public $encrypter;
     public function __construct()
     {
@@ -16,6 +18,8 @@ class performancecontroller extends BaseController
         $this->pagedata['title'] = "Performa Saya - Neo Edukasi";
         $this->test_result_model = new \App\Models\TestResultModel();
         $this->test_model = new \App\Models\TestModel();
+        $this->student_model = new \App\Models\StudentModel();
+        $this->answer_model = new \App\Models\TestAnswerModel();
         $this->encrypter = \Config\Services::encrypter();
     }
     public function index()
@@ -29,10 +33,9 @@ class performancecontroller extends BaseController
         if ($this->request->isAJAX()) {
             $request = \Config\Services::request();
             $list_data = $this->test_result_model;
+            $test_answer_model = $this->answer_model;
             $where = ['to_test_result.id !=' => 0];
             $student_id = $this->encrypter->decrypt(base64_decode(session()->get('id')));
-            //Column Order Harus Sesuai Urutan Kolom Pada Header Tabel di bagian View
-            //Awali nama kolom tabel dengan nama tabel->tanda titik->nama kolom seperti pengguna.nama
             $column_order = array('to_test_result.id', 'to_tests.test_name', 'to_test_result.score', 'to_class.class', 'to_tests.begin_time');
             $column_search = array('to_tests.test_name');
             $order = array('to_test_result.id' => 'asc');
@@ -42,6 +45,9 @@ class performancecontroller extends BaseController
             foreach ($list as $lists) {
                 if ($lists->student_id == $student_id) {
                     $newDate = date("d-m-Y", substr($lists->begin_time, 0, 10)); // convert epoch
+                    $id_test = $lists->test_id;
+                    $right_answer = $test_answer_model->count_right($id_test, $student_id);
+                    $wrong_answer = $test_answer_model->count_wrong($id_test, $student_id);
                     $no++;
                     $row    = array();
                     $row[] = $no;
@@ -54,6 +60,8 @@ class performancecontroller extends BaseController
                             <button type="button" class="btn btn-sm btn-warning detail-button"
                             test_id="' . $lists->test_id . '"
                             score="' . $lists->score . '"
+                            right_answer="' . $right_answer . '"
+                            wrong_answer="' . $wrong_answer . '"
                             test_class="' . $lists->class . '"
                             begin_time="' . $newDate . '"
                             test_name="' . $lists->test_name . '"
@@ -80,34 +88,36 @@ class performancecontroller extends BaseController
         if ($this->request->isAJAX()) {
             $request = \Config\Services::request();
             $list_data = $this->test_model;
-            $where = ['to_tests.id !=' => 0];
             $student_id = $this->encrypter->decrypt(base64_decode(session()->get('id')));
+            $studentModel = $this->student_model;
+            $where = ['to_tests.id !=' => 0];
+            $students_class_id = $studentModel->getClass($student_id);
             //Column Order Harus Sesuai Urutan Kolom Pada Header Tabel di bagian View
             //Awali nama kolom tabel dengan nama tabel->tanda titik->nama kolom seperti pengguna.nama
-            $column_order = array('to_tests.id', 'to_tests.test_name', 'to_test_result.score', 'to_class.class', 'to_tests.begin_time');
+            $column_order = array('to_tests.id', 'to_tests.test_name', 'to_tests.begin_time', 'to_class.class', 'to_tests.number_of_question', 'to_tests.type', 'to_tests.price');
             $column_search = array('to_tests.test_name');
             $order = array('to_tests.id' => 'asc');
             $list = $list_data->get_datatables('to_tests', $column_order, $column_search, $order);
             $data = array();
             $no = $request->getPost("start");
+            $today = date('d-m-Y');
+            $todayDate = strtotime($today);
             foreach ($list as $lists) {
-                if ($lists->student_id == $student_id) {
-                    $newDate = date("d-m-Y", substr($lists->begin_time, 0, 10)); // convert epoch
+                $newDate = date("d-m-Y", substr($lists->begin_time, 0, 10)); // convert epoch
+                $newDateTime = strtotime($newDate);
+                if ($lists->class_id == $students_class_id && $newDateTime > $todayDate) {
                     $no++;
                     $row    = array();
                     $row[] = $no;
                     $row[] = $lists->test_name;
-                    $row[] = $lists->score;
                     $row[] = $lists->class;
                     $row[] = $newDate;
+                    $row[] = $lists->number_of_question;
+                    $row[] = $lists->type;
+                    $row[] = $lists->price;
                     $row[]  = '
                             <div class="block-options">
                             <button type="button" class="btn btn-sm btn-warning detail-button"
-                            test_id="' . $lists->test_id . '"
-                            test_name="' . $lists->test_name . '"
-                            score="' . $lists->score . '"
-                            test_class="' . $lists->class . '"
-                            begin_time="' . $newDate . '"
                             >
                                 <i class="fa fa-info"></i>
                             </button>

@@ -66,12 +66,20 @@
                         <form id="detail_siswa_form">
                             <table>
                                 <tr>
-                                    <th>Nama Test</th>
+                                    <th>Nama Ujian</th>
                                     <td><input type="text" class="form-control" id="test_name" disabled></td>
                                 </tr>
                                 <tr>
                                     <th>Nilai</th>
                                     <td><input type="text" class="form-control" id="score" disabled></td>
+                                </tr>
+                                <tr>
+                                    <th>Jawaban Benar</th>
+                                    <td><input type="text" class="form-control" id="right_answer" disabled></td>
+                                </tr>
+                                <tr>
+                                    <th>Jawaban Salah</th>
+                                    <td><input type="text" class="form-control" id="wrong_answer" disabled></td>
                                 </tr>
                                 <tr>
                                     <th>Tanggal Ujian</th>
@@ -102,15 +110,16 @@
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
                     <div class="table-responsive p-0">
-                        <table class="table table-bordered table-vcenter js-dataTable-full no-footer dtr-inline collapsed">
+                        <table id="mendatang" class="table table-bordered table-vcenter js-dataTable-full no-footer dtr-inline collapsed" style="width:100%">
                             <thead>
                                 <tr>
                                     <th width="5%" class="fs-sm">#</th>
-                                    <th width="30%" class="fs-sm fw-normal">Ujian</th>
-                                    <th width="10%" class=" text-center fs-sm fw-normal">Nilai</th>
-                                    <th width="30%" class="fs-sm fw-normal">Kelas</th>
-                                    <th width="10%" class="fs-sm fw-normal">Tanggal Ujian</th>
-                                    <th width="10%" class="fs-sm fw-normal">Detail</th>
+                                    <th width="20%" class="fs-sm fw-normal">Ujian</th>
+                                    <th width="10%" class=" text-center fs-sm fw-normal">Kelas</th>
+                                    <th width="20%" class="fs-sm fw-normal">Tanggal Ujian</th>
+                                    <th width="10%" class="fs-sm fw-normal">Jumlah Pertanyaan</th>
+                                    <th width="10%" class="fs-sm fw-normal">Type</th>
+                                    <th width="20%" class="fs-sm fw-normal">Harga</th>
                                 </tr>
                                 <!-- <tr>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -131,7 +140,7 @@
         </div>
     </div>
     <!-- MODAL TEST MENDATANG TERUPDATE -->
-    <!-- <div class="modal fade" id="detailModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="detailMendatang" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-md" role="document">
             <div class="modal-content">
                 <div class="block block-rounded block-transparent mb-0">
@@ -195,7 +204,7 @@
                 </div>
             </div>
         </div>
-    </div> -->
+    </div>
     <!-- END OF MODAL -->
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/js/bootstrap-select.min.js"></script>
@@ -355,17 +364,21 @@
 <script>
     $(document).ready(function() {
         dt_riwayat();
-        // dt_mendatang();
+        dt_mendatang();
         // $('#refresh').on('click', refresh_dt)
         $(document).on('click', '.detail-button', function() {
             let test_name = $(this).attr("test_name");
             let begin_time = $(this).attr("begin_time");
             let score = $(this).attr("score");
+            let right_answer = $(this).attr("right_answer");
+            let wrong_answer = $(this).attr("wrong_answer");
             let test_class = $(this).attr("test_class");
 
             $('#test_name').val(test_name);
             $('#begin_time').val(begin_time);
             $('#score').val(score);
+            $('#right_answer').val(right_answer + " Soal");
+            $('#wrong_answer').val(wrong_answer + " Soal");
             $('#test_class').val(test_class);
 
 
@@ -461,93 +474,93 @@
         })
     };
 
-    // function dt_mendatang() {
-    //     $('#mendatang').DataTable({
-    //         oLanguage: {
-    //             sProcessing: '<div class="spinner-border neo" role="status"><span class="sr-only"></span></div>'
-    //         },
-    //         // dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center mx-0 yx-0'B><'col-sm-4'f>>" +
-    //         //     "<'row'<'col-sm-12'tr>>" +
-    //         //     "<'row'<'col-sm-6'i><'col-sm-6'p>>",
-    //         buttons: [{
-    //                 extend: 'copy',
-    //                 exportOptions: {
-    //                     columns: [0, 1, 2]
-    //                 },
-    //                 className: 'fs-sm btn btn-sm btn-outline-secondary glyphicon glyphicon-duplicate',
-    //                 text: '<i class="fa-sharp fa-solid fa-copy "></i>',
-    //                 titleAttr: 'Copy'
-    //             },
-    //             {
-    //                 extend: 'excel',
-    //                 exportOptions: {
-    //                     columns: [0, 1, 2]
-    //                 },
-    //                 className: 'fs-sm btn btn-sm btn-outline-success glyphicon glyphicon-list-alt',
-    //                 text: '<i class="fa-sharp fa-solid fa-file-excel "></i>',
-    //                 titleAttr: 'Excel'
-    //             },
+    function dt_mendatang() {
+        $('#mendatang').DataTable({
+            oLanguage: {
+                sProcessing: '<div class="spinner-border neo" role="status"><span class="sr-only"></span></div>',
+            },
+            // dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center mx-0 yx-0'B><'col-sm-4'f>>" +
+            //     "<'row'<'col-sm-12'tr>>" +
+            //     "<'row'<'col-sm-6'i><'col-sm-6'p>>",
+            buttons: [{
+                    extend: 'copy',
+                    exportOptions: {
+                        columns: [0, 1, 2]
+                    },
+                    className: 'fs-sm btn btn-sm btn-outline-secondary glyphicon glyphicon-duplicate',
+                    text: '<i class="fa-sharp fa-solid fa-copy "></i>',
+                    titleAttr: 'Copy'
+                },
+                {
+                    extend: 'excel',
+                    exportOptions: {
+                        columns: [0, 1, 2]
+                    },
+                    className: 'fs-sm btn btn-sm btn-outline-success glyphicon glyphicon-list-alt',
+                    text: '<i class="fa-sharp fa-solid fa-file-excel "></i>',
+                    titleAttr: 'Excel'
+                },
 
-    //             {
-    //                 extend: 'print',
-    //                 exportOptions: {
-    //                     columns: [0, 1, 2]
-    //                 },
-    //                 className: 'fs-sm btn btn-sm btn-outline-primary glyphicon glyphicon-print',
-    //                 text: '<i class="fa-sharp fa-solid fa-print "></i>',
-    //                 titleAttr: 'PRINT'
-    //             },
-    //             {
-    //                 extend: 'pdf',
-    //                 exportOptions: {
-    //                     columns: [0, 1, 2]
-    //                 },
-    //                 className: 'fs-sm btn btn-sm btn-outline-danger glyphicon glyphicon-file',
-    //                 text: '<i class="fa-sharp fa-solid fa-file-pdf "></i>',
-    //                 titleAttr: 'PDF'
-    //             },
-    //         ],
-    //         serverSide: true,
-    //         processing: true,
-    //         bDestroy: true,
-    //         bPaginate: false,
-    //         pagination: false,
-    //         searching: true,
-    //         bInfo: false,
-    //         tInfo: false,
-    //         pagingType: "full_numbers",
-    //         paging: false,
-    //         lengthMenu: [
-    //             [10, 25, 50, 100, -1],
-    //             [10, 25, 50, 100, 'All'],
-    //         ],
-    //         columnDefs: [{
-    //             targets: [0, 3],
-    //             orderable: false,
-    //             className: "text-center",
-    //         }, {
-    //             width: "15%",
-    //             targets: [3],
-    //         }, ],
-    //         ajax: {
-    //             url: "<?= route_to('user.performance.dt_mendatang') ?>",
-    //             type: "POST",
-    //             data: {},
-    //             error: function() {
-    //                 $(".tabel_serverside-error").html("");
-    //                 $("#tabel_serverside").append(
-    //                     '<tbody class="tabel_serverside-error"><tr><th colspan="3">Data Tidak Ditemukan di Server</th></tr></tbody>'
-    //                 );
-    //                 $("#tabel_serverside_processing").css("display", "none");
-    //             }
-    //         },
-    //         initComplete: function(settings, json) {
-    //             $('div.dataTables_length select').addClass('selectpicker border');
-    //             $('.selectpicker').selectpicker();
-    //         }
+                {
+                    extend: 'print',
+                    exportOptions: {
+                        columns: [0, 1, 2]
+                    },
+                    className: 'fs-sm btn btn-sm btn-outline-primary glyphicon glyphicon-print',
+                    text: '<i class="fa-sharp fa-solid fa-print "></i>',
+                    titleAttr: 'PRINT'
+                },
+                {
+                    extend: 'pdf',
+                    exportOptions: {
+                        columns: [0, 1, 2]
+                    },
+                    className: 'fs-sm btn btn-sm btn-outline-danger glyphicon glyphicon-file',
+                    text: '<i class="fa-sharp fa-solid fa-file-pdf "></i>',
+                    titleAttr: 'PDF'
+                },
+            ],
+            serverSide: true,
+            processing: true,
+            bDestroy: true,
+            bPaginate: false,
+            pagination: false,
+            searching: true,
+            bInfo: false,
+            tInfo: false,
+            pagingType: "full_numbers",
+            paging: false,
+            lengthMenu: [
+                [10, 25, 50, 100, -1],
+                [10, 25, 50, 100, 'All'],
+            ],
+            columnDefs: [{
+                targets: [0, 3],
+                orderable: false,
+                className: "text-center",
+            }, {
+                width: "15%",
+                targets: [3],
+            }, ],
+            ajax: {
+                url: "<?= route_to('user.performance.dt_mendatang') ?>",
+                type: "POST",
+                data: {},
+                error: function() {
+                    $(".tabel_serverside-error").html("");
+                    $("#tabel_serverside").append(
+                        '<tbody class="tabel_serverside-error"><tr><th colspan="3">Data Tidak Ditemukan di Server</th></tr></tbody>'
+                    );
+                    $("#tabel_serverside_processing").css("display", "none");
+                }
+            },
+            initComplete: function(settings, json) {
+                $('div.dataTables_length select').addClass('selectpicker border');
+                $('.selectpicker').selectpicker();
+            }
 
-    //     })
-    // };
+        })
+    };
 
     // function refresh_dt() {
     //     dt_siswa();

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use CodeIgniter\Database\Query;
 use CodeIgniter\Model;
 
 
@@ -86,6 +87,29 @@ class TestAnswerModel extends Model
             ->select('question_id')
             ->where(['to_test_answer.test_id' => $test_id, 'to_test_answer.student_id' => $student_id])->orderBy('to_test_answer.id')
             ->get()->getResultArray();
+        return $query;
+    }
+
+    // Hitung jumlah benar dan salah
+    public function count_right($id_test, $student_id)
+    {
+        $query = $this->builder->where([
+            'answer_isright' => 1,
+            'test_id' => $id_test,
+            'student_id' => $student_id,
+        ])->countAllResults();
+
+        return $query;
+    }
+
+    public function count_wrong($test_id, $student_id)
+    {
+        $query = $this->builder->where([
+            'answer_isright' => 0,
+            'test_id' => $test_id,
+            'student_id' => $student_id,
+        ])->countAllResults();
+
         return $query;
     }
 }
