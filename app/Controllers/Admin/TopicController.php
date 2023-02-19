@@ -9,6 +9,7 @@ use App\Models\Admin\TopicModel;
 class TopicController extends BaseController
 {
     public $pagedata;
+    public $response;
     public $TopicModel;
     public $SubjectModel;
     public $ClassModel;
@@ -66,14 +67,14 @@ class TopicController extends BaseController
                     ';
                 $data[] = $row;
             }
-            $output = array(
+            $response = array(
                 "draw" => $request->getPost("draw"),
                 "recordsTotal" => count($data),
                 "recordsFiltered" => count($data),
                 "data" => $data,
                 
             );
-            return json_encode($output);
+            return json_encode($response);
         }
     }
 
@@ -111,13 +112,13 @@ class TopicController extends BaseController
             ];
             $query = $this->TopicModel->insert($data);
             if($query){
-                $this->output['success'] = true;
-                $this->output['message']  = 'Data Berhasil Ditambahkan';
+                $response['success'] = true;
+                $response['message']  = 'Data Berhasil Ditambahkan';
             }else{
-                $this->output['success'] = false;
-                $this->output['message']  = 'Data Berhasil Ditambahkan';
+                $response['success'] = false;
+                $response['message']  = 'Data Berhasil Ditambahkan';
             }
-            echo json_encode($this->output);
+            echo json_encode($response);
         }
     }
     /**
@@ -136,13 +137,13 @@ class TopicController extends BaseController
             ];
             $query = $this->TopicModel->update_topic($id, $data);
             if($query){
-                $this->output['success'] = true;
-                $this->output['message']  = 'Data Berhasil Diupdate';;
+                $response['success'] = true;
+                $response['message']  = 'Data Berhasil Diupdate';;
             }else{
-                $this->output['success'] = false;
-                $this->output['message']  = 'Data Gagal Diupdate';
+                $response['success'] = false;
+                $response['message']  = 'Data Gagal Diupdate';
             }
-            echo json_encode($this->output);
+            echo json_encode($response);
         }
     }
 
@@ -157,14 +158,14 @@ class TopicController extends BaseController
             $id = $this->request->getVar('id');
             $delete = $this->TopicModel->delete_topic($id);
             if ($delete) {
-                $this->output['success'] = true;
-                $this->output['message']  = 'Data telah dihapus';
+                $response['success'] = true;
+                $response['message']  = 'Data telah dihapus';
             }else{
-                $this->output['success'] = false;
-                $this->output['message']  = 'Data gagal dihapus';
+                $response['success'] = false;
+                $response['message']  = 'Data gagal dihapus';
             }
 
-            echo json_encode($this->output);
+            echo json_encode($response);
         }
     }
     

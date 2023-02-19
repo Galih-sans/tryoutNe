@@ -15,6 +15,7 @@ use CodeIgniter\I18n\Time;
 class testcontroller extends BaseController
 {
     public $pagedata;
+    public $uri;
     public $TestModel;
     public $StudentModel;
     public $encrypter;

@@ -10,13 +10,14 @@ use App\Models\Admin\SubjectModel;
 use App\Models\Admin\TopicModel;
 
 class BankSoalController extends BaseController
-{
+{   
     public $banksoal_model;
     public $answer_model;
     public $classModel;
     public $subjectModel;
     public $TopicModel;
     public $pagedata;
+    public $response;
     public $data;
     
     public function __construct()
@@ -74,14 +75,14 @@ class BankSoalController extends BaseController
             ';
             $data1[] = $row;
         }
-        $output = array(
+        $response = array(
             "draw" => $request->getPost("draw"),
             "recordsTotal" => $this->banksoal_model->count_all('to_questions', $where),
             "recordsFiltered" => $this->banksoal_model->count_filtered('to_questions', $column_order, $column_search, $order, $where),
             "data" => $data1,
         );
 
-        echo json_encode($output);
+        echo json_encode($response);
     }
     public function get_subject()
     {
@@ -119,14 +120,14 @@ class BankSoalController extends BaseController
             $id = $this->request->getVar('id');
             $delete = $this->banksoal_model->delete_question($id);
             if ($delete) {
-                $this->output['success'] = true;
-                $this->output['message']  = 'Data telah dihapus';
+                $response['success'] = true;
+                $response['message']  = 'Data telah dihapus';
             }else{
-                $this->output['success'] = false;
-                $this->output['message']  = 'Data gagal dihapus';
+                $response['success'] = false;
+                $response['message']  = 'Data gagal dihapus';
             }
 
-            echo json_encode($this->output);
+            echo json_encode($response);
         }
     }
     public function create()
@@ -152,10 +153,10 @@ class BankSoalController extends BaseController
                     ]
                 ]
             ])) {
-                $this->output['success'] = false;
-                $this->output['message'] = "Validation Error";
-                $this->output['validation']  = $this->validator->getErrors();
-                echo json_encode($this->output);
+                $response['success'] = false;
+                $response['message'] = "Validation Error";
+                $response['validation']  = $this->validator->getErrors();
+                echo json_encode($response);
             } else {
                 $question_data = [
                     'subject' => $this->request->getVar('subject'),
@@ -168,31 +169,30 @@ class BankSoalController extends BaseController
                 ];
 
                 if($question_data['question'] == '<p><br></p>' or $question_data['discussion'] == '<p><br></p>'){
-                    $this->output['success'] = false;
-                    $this->output['message'] = "Validation Error";
-                    $this->output['validation']  = "Isian Form Tidak Boleh Kosong";
+                    $response['success'] = false;
+                    $response['message'] = "Validation Error";
+                    $response['validation']  = "Isian Form Tidak Boleh Kosong";
                     
                 }else{
-                    $this->output['success'] = true;
-                    $this->output['message']  = 'Data Berhasil Ditambahkan';
+                    $response['success'] = true;
+                    $response['message']  = 'Data Berhasil Ditambahkan';
 
                     foreach ($question_data['answer.*'] as $ui){
                         if($ui == '<p><br></p>'){
-                           $this->output['success'] = false;
-                           $this->output['message'] = "Validation Error";
-                           $this->output['validation']  = "Isian Form Tidak Boleh Kosong";
+                           $response['success'] = false;
+                           $response['message'] = "Validation Error";
+                           $response['validation']  = "Isian Form Tidak Boleh Kosong";
                         }
                     }
 
-                    if($this->output['success'] == true){
+                    if($response['success'] == true){
                         $question_data['question_id'] = $this->banksoal_model->add_question($question_data);
                         foreach ($question_data['answer.*'] as $answer){
                             $this->answer_model->add_answer($question_data,$answer);
                         }
                     }
                 }
-
-                echo json_encode($this->output);
+                echo json_encode($response);
             }           
         }
     }

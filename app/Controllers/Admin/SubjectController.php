@@ -8,6 +8,7 @@ use App\Models\Admin\SubjectModel;
 class SubjectController extends BaseController
 {
     public $pagedata;
+    public $response;
     public $SubjectModel;
     public $ClassModel;
     public $data;
@@ -63,14 +64,14 @@ class SubjectController extends BaseController
                     ';
                 $data[] = $row;
             }
-            $output = array(
+            $response = array(
                 "draw" => $request->getPost("draw"),
                 "recordsTotal" => count($data),
                 "recordsFiltered" => count($data),
                 "data" => $data,
                 
             );
-            return json_encode($output);
+            return json_encode($response);
         }
     }
 
@@ -101,12 +102,12 @@ class SubjectController extends BaseController
     //             ';
     //             $data[] = $row;
     //         }
-    //         $output = array(
+    //         $response = array(
     //             "draw" => true,
     //             "data" => $data,
     //         );
     
-    //         echo json_encode($output);
+    //         echo json_encode($response);
     //     }
     // }
 
@@ -144,15 +145,15 @@ class SubjectController extends BaseController
             ];
             $query = $this->SubjectModel->insert($data);
             if($query){
-                $this->output['success'] = true;
-                $this->output['message']  = 'Data Berhasil Ditambahkan';
+                $response['success'] = true;
+                $response['message']  = 'Data Berhasil Ditambahkan';
             }else{
-                $this->output['success'] = false;
-                $this->output['message']  = 'Data Berhasil Ditambahkan';
+                $response['success'] = false;
+                $response['message']  = 'Data Berhasil Ditambahkan';
             }
 
 
-            echo json_encode($this->output);
+            echo json_encode($response);
         }
     }
     /**
@@ -170,15 +171,15 @@ class SubjectController extends BaseController
             ];
             $query = $this->SubjectModel->update_subject($id, $data);
             if($query){
-                $this->output['success'] = true;
-                $this->output['message']  = 'Data Berhasil Diupdate';;
+                $response['success'] = true;
+                $response['message']  = 'Data Berhasil Diupdate';;
             }else{
-                $this->output['success'] = false;
-                $this->output['message']  = 'Data Gagal Diupdate';
+                $response['success'] = false;
+                $response['message']  = 'Data Gagal Diupdate';
             }
 
 
-            echo json_encode($this->output);
+            echo json_encode($response);
         }
     }
 
@@ -193,14 +194,14 @@ class SubjectController extends BaseController
             $id = $this->request->getVar('id');
             $delete = $this->SubjectModel->delete_subject($id);
             if ($delete) {
-                $this->output['success'] = true;
-                $this->output['message']  = 'Data telah dihapus';
+                $response['success'] = true;
+                $response['message']  = 'Data telah dihapus';
             }else{
-                $this->output['success'] = false;
-                $this->output['message']  = 'Data gagal dihapus';
+                $response['success'] = false;
+                $response['message']  = 'Data gagal dihapus';
             }
 
-            echo json_encode($this->output);
+            echo json_encode($response);
         }
     }
     

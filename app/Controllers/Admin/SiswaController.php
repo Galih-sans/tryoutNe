@@ -7,6 +7,7 @@ use App\Controllers\BaseController;
 class SiswaController extends BaseController
 {
     public $pagedata;
+    public $response;
     public $siswa_model;
     public function __construct()
     {
@@ -70,13 +71,13 @@ class SiswaController extends BaseController
                     ';
                 $data[] = $row;
             }
-            $output = array(
+            $response = array(
                 "draw" => $request->getPost("draw"),
                 "recordsTotal" => $list_data->count_all('to_students', $where),
                 "recordsFiltered" => $list_data->count_filtered('to_students', $column_order, $column_search, $order, $where),
                 "data" => $data,
             );
-            return json_encode($output);
+            return json_encode($response);
         }
     }
 
@@ -115,15 +116,15 @@ class SiswaController extends BaseController
             ];
             $query = $this->siswa_model->insert($data);
             if ($query) {
-                $this->output['success'] = true;
-                $this->output['message']  = 'Data Berhasil Ditambahkan';
+                $response['success'] = true;
+                $response['message']  = 'Data Berhasil Ditambahkan';
             } else {
-                $this->output['success'] = false;
-                $this->output['message']  = 'Data Berhasil Ditambahkan';
+                $response['success'] = false;
+                $response['message']  = 'Data Berhasil Ditambahkan';
             }
 
 
-            echo json_encode($this->output);
+            echo json_encode($response);
         }
     }
     /**
@@ -142,15 +143,15 @@ class SiswaController extends BaseController
             ];
             $query = $this->siswa_model->update_siswa($id, $data);
             if ($query) {
-                $this->output['success'] = true;
-                $this->output['message']  = 'Data Berhasil Diupdate';;
+                $response['success'] = true;
+                $response['message']  = 'Data Berhasil Diupdate';;
             } else {
-                $this->output['success'] = false;
-                $this->output['message']  = 'Data Gagal Diupdate';
+                $response['success'] = false;
+                $response['message']  = 'Data Gagal Diupdate';
             }
 
 
-            echo json_encode($this->output);
+            echo json_encode($response);
         }
     }
 
@@ -165,14 +166,14 @@ class SiswaController extends BaseController
     //         $id = $this->request->getVar('id');
     //         $delete = $this->siswa_model->delete_class($id);
     //         if ($delete) {
-    //             $this->output['success'] = true;
-    //             $this->output['message']  = 'Data telah dihapus';
+    //             $this->response['success'] = true;
+    //             $this->response['message']  = 'Data telah dihapus';
     //         } else {
-    //             $this->output['success'] = false;
-    //             $this->output['message']  = 'Data gagal dihapus';
+    //             $this->response['success'] = false;
+    //             $this->response['message']  = 'Data gagal dihapus';
     //         }
 
-    //         echo json_encode($this->output);
+    //         echo json_encode($this->response);
     //     }
     // }
 }

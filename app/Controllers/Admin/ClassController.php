@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 class ClassController extends BaseController
 {
     public $pagedata;
+    public $response;
     public $class_model;
     public function __construct()
     {
@@ -56,13 +57,13 @@ class ClassController extends BaseController
                     ';
                 $data[] = $row;
             }
-            $output = array(
+            $response = array(
                 "draw" => $request->getPost("draw"),
                 "recordsTotal" => $list_data->count_all('to_class', $where),
                 "recordsFiltered" => $list_data->count_filtered('to_class', $column_order, $column_search, $order, $where),
                 "data" => $data,
             );
-            return json_encode($output);
+            return json_encode($response);
         }
     }
 
@@ -100,15 +101,15 @@ class ClassController extends BaseController
             ];
             $query = $this->class_model->insert($data);
             if($query){
-                $this->output['success'] = true;
-                $this->output['message']  = 'Data Berhasil Ditambahkan';
+                $response['success'] = true;
+                $response['message']  = 'Data Berhasil Ditambahkan';
             }else{
-                $this->output['success'] = false;
-                $this->output['message']  = 'Data Berhasil Ditambahkan';
+                $response['success'] = false;
+                $response['message']  = 'Data Berhasil Ditambahkan';
             }
 
 
-            echo json_encode($this->output);
+            echo json_encode($response);
         }
     }
     /**
@@ -126,15 +127,15 @@ class ClassController extends BaseController
             ];
             $query = $this->class_model->update_class($id, $data);
             if($query){
-                $this->output['success'] = true;
-                $this->output['message']  = 'Data Berhasil Diupdate';;
+                $response['success'] = true;
+                $response['message']  = 'Data Berhasil Diupdate';;
             }else{
-                $this->output['success'] = false;
-                $this->output['message']  = 'Data Gagal Diupdate';
+                $response['success'] = false;
+                $response['message']  = 'Data Gagal Diupdate';
             }
 
 
-            echo json_encode($this->output);
+            return json_encode($response);
         }
     }
 
@@ -149,14 +150,14 @@ class ClassController extends BaseController
             $id = $this->request->getVar('id');
             $delete = $this->class_model->delete_class($id);
             if ($delete) {
-                $this->output['success'] = true;
-                $this->output['message']  = 'Data telah dihapus';
+                $response['success'] = true;
+                $response['message']  = 'Data telah dihapus';
             }else{
-                $this->output['success'] = false;
-                $this->output['message']  = 'Data gagal dihapus';
+                $response['success'] = false;
+                $response['message']  = 'Data gagal dihapus';
             }
 
-            echo json_encode($this->output);
+            echo json_encode($response);
         }
     }
 }

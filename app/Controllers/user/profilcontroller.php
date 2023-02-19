@@ -53,15 +53,15 @@ class profilcontroller extends BaseController
             ];
             $query = $this->StudentModel->update($id, $data);
             if ($query) {
-                $this->output['success'] = true;
-                $this->output['message']  = 'Data Berhasil Diupdate';
+                $response['success'] = true;
+                $response['message']  = 'Data Berhasil Diupdate';
                 session()->set('name', $data['full_name']);
             } else {
-                $this->output['success'] = false;
-                $this->output['message']  = 'Data Gagal Diupdate';
-                $this->output['detail']  = $this->StudentModel->errors();
+                $response['success'] = false;
+                $response['message']  = 'Data Gagal Diupdate';
+                $response['detail']  = $this->StudentModel->errors();
             }
-            return json_encode($this->output);
+            return json_encode($response);
         }
     }
     // get city

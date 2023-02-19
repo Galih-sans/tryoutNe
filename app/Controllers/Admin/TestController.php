@@ -3,10 +3,12 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
+use App\Models\TestResultModel;
 
 class TestController extends BaseController
 {
     public $pagedata;
+    public $response;
     public $class_model;
     public $data;
     public $TestModel;
@@ -70,13 +72,13 @@ class TestController extends BaseController
                     ';
                 $data[] = $row;
             }
-            $output = array(
+            $response = array(
                 "draw" => $request->getPost("draw"),
                 "recordsTotal" => $list_data->count_all('to_tests', $where),
                 "recordsFiltered" => $list_data->count_filtered('to_tests', $column_order, $column_search, $order, $where),
                 "data" => $data,
             );
-            return json_encode($output);
+            return json_encode($response);
         }
     }
     
@@ -87,15 +89,19 @@ class TestController extends BaseController
             
             $id =  $encrypter->decrypt(base64_decode($this->request->getVar('id')));
             $delete = $this->TestModel->where('id',$id)->delete();
+            $testResult = new TestResultModel();
+            $testAnswer = new TestResultModel();
+            $testResult->where('test_id',$id)->delete();
+            $testAnswer->where('test_id',$id)->delete();
             if ($delete) {
-                $this->output['success'] = true;
-                $this->output['message']  = 'Data Berhasil Dihapus';
+                $response['success'] = true;
+                $response['message']  = 'Data Berhasil Dihapus';
             }else{
-                $this->output['success'] = false;
-                $this->output['message']  = 'Data Gagal Dihapus';
+                $response['success'] = false;
+                $response['message']  = 'Data Gagal Dihapus';
             }
 
-            return json_encode($this->output);
+            return json_encode($response);
         }
     }
 
@@ -118,7 +124,6 @@ class TestController extends BaseController
                 'random_answer' => $this->request->getVar('random_answer'),
                 'result_to_student' => $this->request->getVar('show_result'),
                 'created_by' => session()->get('id'),
-                'result_to_student' => $this->request->getVar('show_result'),
                 'status' => 100,
             ];
             $compositionData = [
@@ -157,17 +162,17 @@ class TestController extends BaseController
                 }
                 $compositionQuery = $this->QuestionCompositionModel->insertBatch($data1);
                 if($compositionQuery){
-                    $this->output['success'] = true;
-                    $this->output['message']  = 'Data Berhasil Disimpan';
+                    $response['success'] = true;
+                    $response['message']  = 'Data Berhasil Disimpan';
                 }else{
-                    $this->output['success'] = false;
-                    $this->output['message']  = 'Data Gagal Disimpan';
+                    $response['success'] = false;
+                    $response['message']  = 'Data Gagal Disimpan';
                 }
             }else{
-                $this->output['success'] = false;
-                $this->output['message']  = 'Data Gagal Disimpan';
+                $response['success'] = false;
+                $response['message']  = 'Data Gagal Disimpan';
             }
-            echo json_encode($this->output);
+            echo json_encode($response);
         }
     }
     public function detail()
@@ -218,7 +223,6 @@ class TestController extends BaseController
                 'random_answer' => $this->request->getVar('edit_random_answer'),
                 'result_to_student' => $this->request->getVar('edit_show_result'),
                 'created_by' => session()->get('id'),
-                'result_to_student' => $this->request->getVar('edit_show_result'),
                 // 'status' => 100,
             ];
             $compositionData = $this->request->getVar('composition[][]');
@@ -257,17 +261,17 @@ class TestController extends BaseController
                 }
                 $compositionQuery = $this->QuestionCompositionModel->insertBatch($data1);
                 if($compositionQuery){
-                    $this->output['success'] = true;
-                    $this->output['message']  = 'Data Berhasil Diupdate';
+                    $response['success'] = true;
+                    $response['message']  = 'Data Berhasil Diupdate';
                 }else{
-                    $this->output['success'] = false;
-                    $this->output['message']  = 'Data Gagal Diupdate';
+                    $response['success'] = false;
+                    $response['message']  = 'Data Gagal Diupdate';
                 }
             }else{
-                $this->output['success'] = false;
-                $this->output['message']  = 'Data Gagal Diupdate';
+                $response['success'] = false;
+                $response['message']  = 'Data Gagal Diupdate';
             }
-            echo json_encode($this->output);
+            echo json_encode($response);
         }
     }
 }
