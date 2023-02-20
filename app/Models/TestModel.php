@@ -174,7 +174,16 @@ class TestModel extends Model
 
     public function get_test($class_id)
     {
-        $query = $this->builder->select('to_tests.id,to_tests.test_name, begin_time, end_time,type, price, status, duration, count(to_question_composition.test_id) as composition')->join('to_question_composition', 'to_question_composition.test_id = to_tests.id')->groupBy('to_question_composition.test_id')->where('to_tests.class_id', $class_id)->get();
+        $todayDate = strtotime(date('d-m-Y'));
+        $query = $this->builder->select('to_tests.id,to_tests.test_name, begin_time, end_time,type, price, status, duration, count(to_question_composition.test_id) as composition')
+            ->join('to_question_composition', 'to_question_composition.test_id = to_tests.id')
+            ->groupBy('to_question_composition.test_id')
+            ->where([
+                'to_tests.class_id' => $class_id,
+                'to_tests.status' => 100,
+                'to_tests.begin_time' < $todayDate,
+                $todayDate < 'to_tests.end_time',
+            ])->get();
         return $query->getResult();
     }
 

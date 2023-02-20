@@ -30,13 +30,13 @@
                     <h6>Hasi Test terupdate</h6>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
-                    <div class="table-responsive p-0">
+                    <div class="table-responsive-md">
                         <table id="riwayat" class="table table-bordered table-vcenter js-dataTable-full no-footer dtr-inline collapsed" style="width:100%">
                             <thead>
                                 <tr>
                                     <th width="5%" class="fs-sm">#</th>
                                     <th width="30%" class="fs-sm fw-normal">Ujian</th>
-                                    <th width="10%" class=" text-center fs-sm fw-normal">Nilai</th>
+                                    <th width="10%" class="fs-sm fw-normal">Nilai</th>
                                     <th width="30%" class="fs-sm fw-normal">Kelas</th>
                                     <th width="10%" class="fs-sm fw-normal">Tanggal Ujian</th>
                                     <th width="10%" class="fs-sm fw-normal">Detail</th>
@@ -100,16 +100,15 @@
         </div>
     </div>
     <!-- END OF MODAL -->
-
     <!-- Ujian Mendatang -->
     <div class="row">
         <div class="col-12">
             <div class="card mb-4">
                 <div class="card-header pb-0">
-                    <h6>Daftar Ujian Mendatang</h6>
+                    <h6>Daftar Test Mendatang</h6>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
-                    <div class="table-responsive p-0">
+                    <div class="table-responsive-md">
                         <table id="mendatang" class="table table-bordered table-vcenter js-dataTable-full no-footer dtr-inline collapsed" style="width:100%">
                             <thead>
                                 <tr>
@@ -121,17 +120,6 @@
                                     <th width="10%" class="fs-sm fw-normal">Type</th>
                                     <th width="20%" class="fs-sm fw-normal">Harga</th>
                                 </tr>
-                                <!-- <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Ujian</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                        Kelas</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                        Status</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">
-                                        Pengerjaan</th>
-                                    <th></th>
-                                </tr> -->
                             </thead>
                         </table>
                     </div>
@@ -139,73 +127,6 @@
             </div>
         </div>
     </div>
-    <!-- MODAL TEST MENDATANG TERUPDATE -->
-    <div class="modal fade" id="detailMendatang" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-md" role="document">
-            <div class="modal-content">
-                <div class="block block-rounded block-transparent mb-0">
-                    <div class="block-header block-header-ne">
-                        <h3 class="block-title text-white">Detail Siswa : </h3>
-                        <div class="block-options">
-                            <button type="button" class="btn-block-option-white" data-bs-dismiss="modal" aria-label="Close">
-                                <i class="fa fa-fw fa-times"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="block-content fs-sm">
-                        <form id="detail_siswa_form">
-                            <table>
-                                <tr>
-                                    <th>Test ID</th>
-                                    <td><input type="text" class="form-control" id="test_id" disabled></td>
-                                </tr>
-                                <tr>
-                                    <th>Nama Test</th>
-                                    <td><input type="text" class="form-control" id="test_name" disabled></td>
-                                </tr>
-                                <tr>
-                                    <th>Jadwal Dimulai</th>
-                                    <td><input type="text" class="form-control" id="begin_time" disabled></td>
-                                </tr>
-                                <tr>
-                                    <th>Jadwal Selesai</th>
-                                    <td><input type="text" class="form-control" id="end_time" disabled></td>
-                                </tr>
-                                <tr>
-                                    <th>Durasi Ujian</th>
-                                    <td><input type="text" class="form-control" id="duration" disabled></td>
-                                </tr>
-                                <tr>
-                                    <th>Jumlah Soal</th>
-                                    <td><input type="text" class="form-control" id="number_of_question" disabled></td>
-                                </tr>
-                                <tr>
-                                    <th>Type</th>
-                                    <td><input type="text" class="form-control" id="type" disabled></td>
-                                </tr>
-                                <tr>
-                                    <th>Harga</th>
-                                    <td><input type="text" class="form-control" id="price" disabled></td>
-                                </tr>
-                                <tr>
-                                    <th>Kelas</th>
-                                    <td><input type="text" class="form-control" id="class" disabled></td>
-                                </tr>
-                                <tr>
-                                    <th>Subjek</th>
-                                    <td><input type="text" class="form-control" id="subhject" disabled></td>
-                                </tr>
-                            </table>
-                        </form>
-                    </div>
-                    <div class="block-content block-content-full text-end bg-body">
-                        <button type="button" class="btn btn-sm btn-secondary me-1" data-bs-dismiss="modal">Tutup</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- END OF MODAL -->
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/js/bootstrap-select.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
@@ -224,142 +145,6 @@
 
 <!-- Page Js Code -->
 <script src="<?= base_url('js/pages/tables_datatables.js') ?>"></script>
-
-<!-- TEST DATATABLE -->
-<!-- <script>
-    $(document).ready(function() {
-        dt_siswa();
-        // $('#refresh').on('click', refresh_dt)
-        // $(document).on('click', '.detail-button', function() {
-        //     let data_id = $(this).attr("id");
-        //     let data_full_name = $(this).attr("full_name");
-        //     let data_class = $(this).attr("class_id");
-        //     let data_level = $(this).attr("level");
-        //     let data_email = $(this).attr("email");
-        //     let data_POB = $(this).attr("POB");
-        //     let data_DOB = $(this).attr("DOB");
-        //     let data_phone_number = $(this).attr("phone_number");
-        //     let data_gender = $(this).attr("gender");
-        //     let data_parent_name = $(this).attr("parent_name");
-        //     let data_parent_phone_number = $(this).attr("parent_phone_number");
-        //     let data_parent_email = $(this).attr("parent_email");
-        //     let data_school = $(this).attr("school");
-
-        //     $('#full_name').val(data_full_name);
-        //     $('#kelas').val(data_class);
-        //     $('#level').val(data_level);
-        //     $('#email').val(data_email);
-        //     $('#POB').val(data_POB);
-        //     $('#DOB').val(data_DOB);
-        //     $('#phone_number').val(data_phone_number)
-        //     if (data_gender == "L") {
-        //         $('#gender').val("Laki-Laki");
-        //     } else {
-        //         $('#gender').val("Perempuan");
-        //     }
-        //     $('#parent_name').val(data_parent_name)
-        //     $('#parent_phone_number').val(data_parent_phone_number)
-        //     $('#parent_email').val(data_parent_email)
-        //     $('#school').val(data_school)
-        //     console.log(data_DOB);
-
-        //     $('#detailModal').modal('show');
-        // });
-    });
-
-    function dt_siswa() {
-        $('#riwayat').DataTable({
-            oLanguage: {
-                sProcessing: '<div class="spinner-border neo" role="status"><span class="sr-only"></span></div>'
-            },
-            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center mx-0 yx-0'B><'col-sm-4'f>>" +
-                "<'row'<'col-sm-12'tr>>" +
-                "<'row'<'col-sm-6'i><'col-sm-6'p>>",
-            buttons: [{
-                    extend: 'copy',
-                    exportOptions: {
-                        columns: [0, 1, 2]
-                    },
-                    className: 'fs-sm btn btn-sm btn-outline-secondary glyphicon glyphicon-duplicate',
-                    text: '<i class="fa-sharp fa-solid fa-copy "></i>',
-                    titleAttr: 'Copy'
-                },
-                {
-                    extend: 'excel',
-                    exportOptions: {
-                        columns: [0, 1, 2]
-                    },
-                    className: 'fs-sm btn btn-sm btn-outline-success glyphicon glyphicon-list-alt',
-                    text: '<i class="fa-sharp fa-solid fa-file-excel "></i>',
-                    titleAttr: 'Excel'
-                },
-
-                {
-                    extend: 'print',
-                    exportOptions: {
-                        columns: [0, 1, 2]
-                    },
-                    className: 'fs-sm btn btn-sm btn-outline-primary glyphicon glyphicon-print',
-                    text: '<i class="fa-sharp fa-solid fa-print "></i>',
-                    titleAttr: 'PRINT'
-                },
-                {
-                    extend: 'pdf',
-                    exportOptions: {
-                        columns: [0, 1, 2]
-                    },
-                    className: 'fs-sm btn btn-sm btn-outline-danger glyphicon glyphicon-file',
-                    text: '<i class="fa-sharp fa-solid fa-file-pdf "></i>',
-                    titleAttr: 'PDF'
-                },
-            ],
-            serverSide: true,
-            processing: true,
-            bDestroy: true,
-            bPaginate: true,
-            pagination: true,
-            searching: true,
-            bInfo: true,
-            tInfo: true,
-            pagingType: "full_numbers",
-            paging: true,
-            lengthMenu: [
-                [10, 25, 50, 100, -1],
-                [10, 25, 50, 100, 'All'],
-            ],
-            columnDefs: [{
-                targets: [0, 3],
-                orderable: false,
-                className: "text-center",
-            }, {
-                width: "15%",
-                targets: [3],
-            }, ],
-            ajax: {
-                url: "<?= route_to('admin.siswa.dt_siswa') ?>",
-                type: "POST",
-                data: {},
-                error: function() {
-                    $(".tabel_serverside-error").html("");
-                    $("#tabel_serverside").append(
-                        '<tbody class="tabel_serverside-error"><tr><th colspan="3">Data Tidak Ditemukan di Server</th></tr></tbody>'
-                    );
-                    $("#tabel_serverside_processing").css("display", "none");
-                }
-            },
-            initComplete: function(settings, json) {
-                $('div.dataTables_length select').addClass('selectpicker border');
-                $('.selectpicker').selectpicker();
-            }
-
-        })
-    };
-
-    function refresh_dt() {
-        dt_siswa();
-    }
-</script> -->
-<!-- TEST DATATABLE -->
 
 <script>
     $(document).ready(function() {
@@ -389,6 +174,7 @@
     function dt_riwayat() {
         $('#riwayat').DataTable({
             oLanguage: {
+                sZeroRecords: '<p style="color: red">Belum ada test</p>',
                 sProcessing: '<div class="spinner-border neo" role="status"><span class="sr-only"></span></div>'
             },
             // dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center mx-0 yx-0'B><'col-sm-4'f>>" +
@@ -477,6 +263,7 @@
     function dt_mendatang() {
         $('#mendatang').DataTable({
             oLanguage: {
+                sZeroRecords: '<p style="color: red">Belum ada test</p>',
                 sProcessing: '<div class="spinner-border neo" role="status"><span class="sr-only"></span></div>',
             },
             // dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center mx-0 yx-0'B><'col-sm-4'f>>" +
