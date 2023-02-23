@@ -100,21 +100,20 @@ class performancecontroller extends BaseController
             $list = $list_data->get_datatables('to_tests', $column_order, $column_search, $order);
             $data = array();
             $no = $request->getPost("start");
-            $today = date('d-m-Y');
-            $todayDate = strtotime($today);
+            $todayDate = strtotime(date('d-m-Y'));
             foreach ($list as $lists) {
-                $newDate = date("d-m-Y", substr($lists->begin_time, 0, 10)); // convert epoch
-                $newDateTime = strtotime($newDate);
-                if ($lists->class_id == $students_class_id && $newDateTime > $todayDate) {
+                $beginDate = date("d-m-Y", substr($lists->begin_time, 0, 10));
+                $newBeginTime = strtotime($beginDate);
+                if ($lists->class_id == $students_class_id && $newBeginTime > $todayDate) {
                     $no++;
                     $row    = array();
                     $row[] = $no;
                     $row[] = $lists->test_name;
                     $row[] = $lists->class;
-                    $row[] = $newDate;
-                    $row[] = $lists->number_of_question;
+                    $row[] = $beginDate;
+                    $row[] = "$lists->number_of_question Soal";
                     $row[] = $lists->type;
-                    $row[] = $lists->price;
+                    $row[] = "Rp. $lists->price";
                     $row[]  = '
                             <div class="block-options">
                             <button type="button" class="btn btn-sm btn-warning detail-button"

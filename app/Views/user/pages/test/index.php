@@ -13,19 +13,19 @@
         </h2>
       </div>
     </div>
-    <div class="content content-boxed">
-      <div class="row items-push">
-        <?php foreach ($data['testData'] as $item) : ?>
-          <!-- Course -->
-          <?php
-          $no = 1;
-          $today = strtotime(date('d-m-Y'));
-          $batasWaktu = date("d-m-Y", substr($item->end_time, 0, 10));;
-          // $todayTime = strtotime($today);
-          $newDateTime = strtotime($batasWaktu);
-          $statusTest = $item->status;
-          if ($statusTest == 100 && $newDateTime > $today) {
-          ?>
+    <?php if ($data['testData'] == false) { ?>
+      <div class="block block-rounded shadow-sm bg-success">
+        <div class="content content-full text-center pt-5 pb-5">
+          <h2 class="h3 fw-normal text-white-75">
+            Belum ada test saat ini..
+          </h2>
+        </div>
+      </div>
+    <?php } else { ?>
+      <div class="content content-boxed">
+        <div class="row items-push">
+          <?php foreach ($data['testData'] as $item) : ?>
+            <!-- Course -->
             <div class="col-12 col-md-4 col-lg-3 col-xl-3">
               <a class="block block-rounded block-link-pop h-100 mb-0" href="<?= route_to('user.test.view', strtr(base64_encode($data['encrypter']->encrypt($item->id)), array('+' => '.', '=' => '-', '/' => '~'))) ?>">
                 <div class="block-content block-content-full ribbon ribbon-danger ribbon-left text-center bg-flat">
@@ -48,30 +48,13 @@
                 </div>
               </a>
             </div>
+            <!-- END Course -->
           <?php
-          } else {
-          ?>
-            <div class="col-12 col-md-4 col-lg-3 col-xl-3">
-              <div class="block-content block-content-full ribbon ribbon-danger ribbon-left text-center bg-flat">
-                <div class="item item-2x item-circle bg-white-10 py-3 my-3 mx-auto">
-                  <i class="fab fa- fa-2x text-white-75"></i>
-                </div>
-              </div>
-              <div class="block-content block-content-full">
-                <h4 class="h5 mb-1">
-                  Belum ada test saat ini
-                </h4>
-              </div>
-            </div>
-            <?php break; ?>
-          <?php
-          }
-          ?>
-          <!-- END Course -->
-        <?php endforeach; ?>
+          endforeach; ?>
+        <?php } ?>
+        </div>
       </div>
-    </div>
-    <!-- END Page Content -->
+      <!-- END Page Content -->
 
   </div>
 </div>
