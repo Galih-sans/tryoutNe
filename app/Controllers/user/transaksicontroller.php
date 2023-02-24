@@ -10,10 +10,10 @@ class transaksicontroller extends BaseController
     public function __construct()
     {
         $this->pagedata['activeTab'] = "transaksi";
-        $this->pagedata['title'] = "Riwayat Transaksi - Neo Edukasi";
+        $this->pagedata['title'] = "Pembelian - Neo Edukasi";
     }
     public function index()
     {
-        return view('user/pages/transaksi/index', ['data'=>$this->pagedata]);
+        return view('user/pages/transaksi/index', ['data' => $this->pagedata]);
     }
 }

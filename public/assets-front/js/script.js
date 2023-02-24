@@ -47,7 +47,7 @@ $(document).ready(function () {
         error.appendTo("#date_error");
       } else if (element.attr("name") == "parent_phone_number") {
         error.appendTo("#pno_error");
-      }else {
+      } else {
         error.insertAfter(element)
       }
     },
@@ -80,16 +80,17 @@ $(document).ready(function () {
         required: true,
         date: true
       },
+      // Data Wali Optional ( required : false )
       parent_name: {
-        required: true,
+        required: false,
         minlength: 5
       },
       parent_email: {
-        required: true,
+        required: false,
         email: true
       },
       parent_phone_number: {
-        required: true,
+        required: false,
         number: true,
         minlength: 11,
         maxlength: 13

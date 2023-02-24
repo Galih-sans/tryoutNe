@@ -61,7 +61,6 @@
                     <span class="nav-main-link-name">Daftar Test</span>
                 </a>
             </li>
-
             <li class="nav-main-item ">
                 <a class="nav-main-link <?= $pagedata['activeTab'] == "bank-soal" ? 'active' : ''; ?>" href="<?= route_to('admin.bank-soal.index') ?>">
                     <i class="nav-main-link-icon fa-solid fa-file-lines"></i>
@@ -69,9 +68,15 @@
                 </a>
             </li>
             <li class="nav-main-item">
-                <a class="nav-main-link" <?= $pagedata['activeTab'] == "siswa" ? 'active' : ''; ?>" href="<?= route_to('admin.siswa.index') ?>">
+                <a class="nav-main-link <?= $pagedata['activeTab'] == "siswa" ? 'active' : ''; ?>" href="<?= route_to('admin.siswa.index') ?>">
                     <i class="nav-main-link-icon fa-solid fa-users"></i>
                     <span class="nav-main-link-name">Siswa</span>
+                </a>
+            </li>
+            <li class="nav-main-item">
+                <a class="nav-main-link <?= $pagedata['activeTab'] == "hasil-test" ? 'active' : ''; ?>" href="<?= route_to('admin.hasil-test.index') ?>">
+                    <i class="nav-main-link-icon fa-solid fa-file-lines"></i>
+                    <span class="nav-main-link-name">Hasil Test</span>
                 </a>
             </li>
         </ul>
