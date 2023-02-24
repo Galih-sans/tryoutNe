@@ -144,8 +144,8 @@ class TestController extends BaseController
             
 
 
-            $data['begin_time'] = strtotime(date_format(date_create($data['begin_time']),"d-m-Y H:i:s"));
-            $data['end_time'] = strtotime(date_format(date_create($data['end_time']),"d-m-Y H:i:s"));
+            $data['begin_time'] = strtotime(str_replace(",", "", $data['begin_time']));
+            $data['end_time'] = strtotime(str_replace(",", "", $data['end_time']));
             
             $query = $this->TestModel->insert($data);
             if($query){
@@ -241,11 +241,8 @@ class TestController extends BaseController
                 $data['result_to_student']='0';
             }
 
-            
-
-
-            $data['begin_time'] = strtotime(date_format(date_create($data['begin_time']),"d-m-Y H:i:s"));
-            $data['end_time'] = strtotime(date_format(date_create($data['end_time']),"d-m-Y H:i:s"));
+            $data['begin_time'] = strtotime(str_replace(",", "", $data['begin_time']));
+            $data['end_time'] = strtotime(str_replace(",", "", $data['end_time']));
             
             $query = $this->TestModel->update($id, $data);
             if($query){
