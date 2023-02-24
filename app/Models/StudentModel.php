@@ -48,9 +48,9 @@ class StudentModel extends Model
         'email'        => 'required|min_length[4]',
         'password'        => 'required|min_length[4]',
         'phone_number'        => 'required|min_length[10]',
-        'parent_name'        => 'required|min_length[5]',
-        'parent_phone_number'        => 'required|min_length[10]',
-        'parent_email'        => 'required|min_length[4]',
+        // 'parent_name'        => 'required|min_length[5]',
+        // 'parent_phone_number'        => 'required|min_length[10]',
+        // 'parent_email'        => 'required|min_length[4]',
         'school'     => 'required',
     ];
     protected $validationMessages   = [
@@ -79,18 +79,18 @@ class StudentModel extends Model
             'required' => 'Nomor Telepon Harus Diisi',
             'min_length' => 'Nomor Telepon Minimal 10 Karakter',
         ],
-        'parent_name'        => [
-            'required' => 'Nama Wali Harus Diisi',
-            'min_length' => 'Nama Wali Minimal 5 Karakter',
-        ],
-        'parent_phone_number'        => [
-            'required' => 'Nomor Wali Harus Diisi',
-            'min_length' => 'Nomor Wali Minimal 10 Karakter',
-        ],
-        'parent_email'        => [
-            'required' => 'Email Wali Harus Diisi',
-            'min_length' => 'Email Wali Minimal 10 Karakter',
-        ],
+        // 'parent_name'        => [
+        //     'required' => 'Nama Wali Harus Diisi',
+        //     'min_length' => 'Nama Wali Minimal 5 Karakter',
+        // ],
+        // 'parent_phone_number'        => [
+        //     'required' => 'Nomor Wali Harus Diisi',
+        //     'min_length' => 'Nomor Wali Minimal 10 Karakter',
+        // ],
+        // 'parent_email'        => [
+        //     'required' => 'Email Wali Harus Diisi',
+        //     'min_length' => 'Email Wali Minimal 10 Karakter',
+        // ],
         'school'        => [
             'required' => 'Sekolah Harus Diisi',
         ],

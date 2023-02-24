@@ -42,8 +42,8 @@
           <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
             <li class="mb-2">
               <div class="py-3 text-center bg-body-light border-bottom rounded-top">
-                <img class="avatar avatar-sm" src="<?= base_url('assets-front/img/avatar.png') ?>" alt="">
-                <p class="mt-2 mb-0 fw-medium"><?= session('name') ?></p>
+                <!-- <img class="avatar avatar-sm" src="<?= base_url('assets-front/img/avatar.png') ?>" alt=""> -->
+                <p class="mt-2 mb-0 px-3 fw-medium"><?= session('name') ?></p>
               </div>
             </li>
             <li class="mb-2">

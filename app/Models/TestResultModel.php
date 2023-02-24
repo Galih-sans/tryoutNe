@@ -12,7 +12,7 @@ class TestResultModel extends Model
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
     protected $returnType       = 'array';
-    // protected $useSoftDeletes   = false;
+    protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
         'student_id',
@@ -75,10 +75,13 @@ class TestResultModel extends Model
         to_test_result.test_id,
         to_test_result.score,
         to_test_result.student_id,
+        to_test_result.end_time,
         to_tests.test_name,
         to_tests.class_id,
         to_tests.begin_time,
-        to_class.class')
+        to_class.class,
+        to_students.full_name')
+            ->join('to_students', 'to_students.id=to_test_result.student_id', 'left')
             ->join('to_tests', 'to_tests.id=to_test_result.test_id', 'left')
             ->join('to_class', 'to_class.id=to_tests.class_id', 'left');
         // ->where('to_test_result.student_id');

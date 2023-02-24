@@ -151,6 +151,17 @@ $routes->group("admin", ["filter" => "isadmin", "namespace" => "App\Controllers\
         $routes->get("/", "SiswaController::index", ['as' => 'admin.siswa.index']);
         $routes->match(["get", "post"], "dt_siswa", "SiswaController::dt_siswa", ['as' => 'admin.siswa.dt_siswa']);
     });
+    // index
+    $routes->group("hasil-test", function ($routes) {
+        // URL - /admin
+        $routes->get("/", "HasilTestController::index", ['as' => 'admin.hasil-test.index']);
+        $routes->match(["get", "post"], "index", "HasilTestController::index");
+        $routes->match(["get", "post"], "dt_daftar_test", "HasilTestController::dt_daftar_test", ['as' => 'admin.dt_daftar_test']);
+
+        $routes->match(["get", "post"], "detail/(:any)", "HasilTestController::detail/$1", ["filter" => "noauth"], ['as' => 'admin.hasil-test.detail']);
+        // $routes->match(["get", "post"], "dt_detail", "HasilTestController::dt_detail", ['as' => 'admin.dt_detail']);
+
+    });
 });
 
 
