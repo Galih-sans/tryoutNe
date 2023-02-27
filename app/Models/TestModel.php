@@ -169,23 +169,19 @@ class TestModel extends Model
 
         return $this->builder->countAll();
     }
-
     // end of datatable
 
     public function get_test($class_id)
     {
-        $todayDate = strtotime(time());
-        $newBeginTime = strtotime('to_tests.begin_time');
-        $newEndTime = strtotime('to_tests.end_time');
-        $query = $this->builder->select('to_tests.id,to_tests.test_name, begin_time, end_time,type, price, status, duration, count(to_question_composition.test_id) as composition')
+        $todayDate = time();
+        $query = $this->builder->select('to_tests.id,to_tests.test_name, begin_time, end_time, type, price, status, duration, count(to_question_composition.test_id) as composition')
             ->join('to_question_composition', 'to_question_composition.test_id = to_tests.id')
             ->groupBy('to_question_composition.test_id')
-            ->where([
-                'to_tests.class_id' => $class_id,
-                'to_tests.status' => 100,
-                $newBeginTime < $todayDate,
-                $todayDate < $newEndTime,
-            ])->get();
+            ->where('to_tests.class_id', $class_id)
+            ->where('to_tests.status', 100)
+            ->where('to_tests.begin_time <', $todayDate)
+            ->where('to_tests.end_time >', $todayDate)
+            ->get();
         return $query->getResult();
     }
 
