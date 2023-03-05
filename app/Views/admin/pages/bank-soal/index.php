@@ -4,7 +4,7 @@
 <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 <link rel="stylesheet" href="<?= base_url('css/datatables/dataTables.bootstrap4.css') ?>">
 <link rel="stylesheet" href="<?= base_url('css/datatables/buttons-bs4/buttons.bootstrap4.min.css') ?>">
-<link href="<?= base_url('assets-front/css/nucleo-icons.css')?>" rel="stylesheet" />
+<link href="<?= base_url('assets-front/css/nucleo-icons.css') ?>" rel="stylesheet" />
 <?= $this->endSection() ?>
 <?= $this->section('content') ?>
 <div class="content">
@@ -14,8 +14,7 @@
                 Bank Soal <small class="text-white">( Bank Soal Neo Edukasi )</small>
             </h3>
             <div class="block-options ">
-                <button type="button" class="btn-block-option-white" data-toggle="block-option"
-                    data-action="state_toggle" id="refresh" data-action-mode="demo">
+                <button type="button" class="btn-block-option-white" data-toggle="block-option" data-action="state_toggle" id="refresh" data-action-mode="demo">
                     <i class="si si-refresh"></i>
                 </button>
                 <button type="button" class="btn-block-option-white" data-toggle="block-option" data-action="close">
@@ -25,47 +24,39 @@
         </div>
         <div class="block-content fs-sm">
             <div class="input-group mb-3">
-                <label class="input-group-text bg-neo text-white" for="inputGroupSelect01"
-                    style="width:80px;">Kelas</label>
-                <select name="level" id="level" title="Please select..." class="form-control selectpicker border"
-                    data-live-search="true" data-style="customSelect" data-dropup-auto="false" data-size="4">
-                    <?php if($data['class']): ?>
-                    <?php foreach($data['class'] as $class): ?>
-                    <tr>
-                        <option value="<?= $class->id ?>"><?= '( '.$class->level.' ) '.$class->class ?>
-                        </option>
-                    </tr>
-                    <?php 
-                    endforeach;
+                <label class="input-group-text bg-neo text-white" for="inputGroupSelect01" style="width:80px;">Kelas</label>
+                <select name="level" id="level" title="Please select..." class="form-control selectpicker border" data-live-search="true" data-style="customSelect" data-dropup-auto="false" data-size="4">
+                    <?php if ($data['class']) : ?>
+                        <?php foreach ($data['class'] as $class) : ?>
+                            <tr>
+                                <option value="<?= $class->id ?>"><?= '( ' . $class->level . ' ) ' . $class->class ?>
+                                </option>
+                            </tr>
+                    <?php
+                        endforeach;
                     endif; ?>
                 </select>
             </div>
             <div class="input-group mb-3">
-                <label class="input-group-text bg-neo text-white" for="inputGroupSelect01"
-                    style="width:80px;">Mapel</label>
-                <select name="subject" id="subject" class="form-control selectpicker border" data-live-search="true"
-                    data-style="customSelect" disabled>
+                <label class="input-group-text bg-neo text-white" for="inputGroupSelect01" style="width:80px;">Mapel</label>
+                <select name="subject" id="subject" class="form-control selectpicker border" data-live-search="true" data-style="customSelect" disabled>
                 </select>
             </div>
             <div class="input-group mb-3">
-                <label class="input-group-text bg-neo text-white" for="inputGroupSelect01"
-                    style="width:80px;">Topik</label>
-                <select name="topic" id="topic" class="form-control selectpicker border" data-live-search="true"
-                    data-style="customSelect" disabled>
+                <label class="input-group-text bg-neo text-white" for="inputGroupSelect01" style="width:80px;">Topik</label>
+                <select name="topic" id="topic" class="form-control selectpicker border" data-live-search="true" data-style="customSelect" disabled>
                 </select>
             </div>
         </div>
     </div>
     <div class="block block-rounded pb-2 shadow-sm d-none" id="question-datatables">
         <div class="block-content">
-        <div class="col-12 col-md-12 text-right">
-                    <button type="button" class="btn btn-primary btn-sm" onclick="tambah()">
-                        <i class="si si-plus"></i> Tambah Soal
-                    </button>
-                </div>
-            <table id="example"
-                class="table table-bordered table-vcenter js-dataTable-full no-footer dtr-inline collapsed"
-                style="width:100%">
+            <div class="col-12 col-md-12 text-right">
+                <button type="button" class="btn btn-primary btn-sm" onclick="tambah()">
+                    <i class="si si-plus"></i> Tambah Soal
+                </button>
+            </div>
+            <table id="example" class="table table-bordered table-vcenter js-dataTable-full no-footer dtr-inline collapsed" style="width:100%">
                 <thead>
                     <tr>
                         <th width="10%" class="fs-sm fw-normal">#</th>
@@ -79,16 +70,14 @@
     </div>
 </div>
 <form id="question-form">
-    <div class="modal fade" id="questionModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="questionModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <div class="block block-rounded block-transparent mb-0">
                     <div class="block-header block-header-ne">
                         <h3 class="block-title text-white">Tambah Soal Untuk Mata Pelajaran : </h3>
                         <div class="block-options">
-                            <button type="button" class="btn-block-option-white" data-bs-dismiss="modal"
-                                aria-label="Close">
+                            <button type="button" class="btn-block-option-white" data-bs-dismiss="modal" aria-label="Close">
                                 <i class="fa fa-fw fa-times"></i>
                             </button>
                         </div>
@@ -98,14 +87,16 @@
                             <div class="col-12 col-md-12">
                                 <div class="col-12 col-md-12 mb-2">
                                     <span class="" style="letter-spacing: -em">
-                                        <meta charset="utf-8">⋮⋮⋮</span> &nbsp;
+                                        <meta charset="utf-8">⋮⋮⋮
+                                    </span> &nbsp;
                                     <span class="tittle-neo"> Deskripsi Soal</span>
                                     <input type="hidden" name="question" value="">
                                     <div class="form-control" id="question" style="min-height: 160px;"></div>
                                 </div>
                                 <div class="col-12 col-md-12">
                                     <span class="color-ne" style="letter-spacing: -em">
-                                        <meta charset="utf-8">⋮⋮⋮</span> &nbsp;
+                                        <meta charset="utf-8">⋮⋮⋮
+                                    </span> &nbsp;
                                     <span class="tittle-neo"> Pembahasan</span>
                                     <input type="hidden" name="discussion" value="">
                                     <input type="hidden" id="level-form" name="level" value="">
@@ -117,25 +108,21 @@
                         </div>
                     </div>
                     <div class="block-content block-content-full text-end bg-body">
-                        <button type="button" class="btn btn-sm btn-secondary me-1"
-                            data-bs-dismiss="modal">Tutup</button>
-                        <button type="button" class="btn btn-sm btn-primary" data-bs-target="#answerModal"
-                            data-bs-toggle="modal" data-bs-dismiss="modal">Lanjut</button>
+                        <button type="button" class="btn btn-sm btn-secondary me-1" data-bs-dismiss="modal">Tutup</button>
+                        <button type="button" class="btn btn-sm btn-primary" data-bs-target="#answerModal" data-bs-toggle="modal" data-bs-dismiss="modal">Lanjut</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="modal fade" id="answerModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="answerModalLabel" aria-hidden="true">
+    <div class="modal fade" id="answerModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="answerModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <div class="block block-rounded block-transparent mb-0">
                     <div class="block-header block-header-ne">
                         <h3 class="block-title text-white">Tambah Jawaban Untuk Mata Pelajaran : </h3>
                         <div class="block-options">
-                            <button type="button" class="btn-block-option-white" data-bs-dismiss="modal"
-                                aria-label="Close">
+                            <button type="button" class="btn-block-option-white" data-bs-dismiss="modal" aria-label="Close">
                                 <i class="fa fa-fw fa-times"></i>
                             </button>
                         </div>
@@ -144,33 +131,118 @@
                         <div class="row">
                             <div class="col-12 col-md-12">
                                 <span class="" style="letter-spacing: -em">
-                                    <meta charset="utf-8">⋮⋮⋮ </span> &nbsp;
+                                    <meta charset="utf-8">⋮⋮⋮
+                                </span> &nbsp;
                                 <span class="tittle-neo"> Jawaban Soal</span>
-                                <button type="button" name="add" id="dynamic-ar" class="btn btn-primary"
-                                    type="button">+</button>
-                            </div>
-                            <div class="col-12 col-md-12 mb-1">
-                                <div class="row" id="dynamicAddRemove">
+                                <button type="button" name="add" id="dynamic-ar" class="btn btn-primary" type="button">+</button>
+                                <div class="col-12 col-md-12">
+                                    <div class="row" id="dynamicAddRemove">
 
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="modal-footer block-content block-content-full text-end bg-body">
-                        <button type="button" class="btn btn-sm btn-secondary me-1" data-bs-target="#questionModal"
-                            data-bs-toggle="modal" data-bs-dismiss="modal">Kembali</button>
-                        <button type="button" class="btn btn-sm btn-primary" data-bs-dismiss="modal"
-                            onclick="insert_data()">Simpan</button>
+                        <div class="modal-footer block-content block-content-full text-end bg-body">
+                            <button type="button" class="btn btn-sm btn-secondary me-1" data-bs-target="#questionModal" data-bs-toggle="modal" data-bs-dismiss="modal">Kembali</button>
+                            <button type="button" class="btn btn-sm btn-primary" data-bs-dismiss="modal" onclick="insert_data()">Simpan</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </form>
+<!-- // edit modal -->
+<form id="edit-form">
+    <div class="modal fade" id="questionEditModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="block block-rounded block-transparent mb-0">
+                    <div class="block-header block-header-ne">
+                        <h3 class="block-title text-white">Edit Soal: </h3>
+                        <div class="block-options">
+                            <button type="button" class="btn-block-option-white" data-bs-dismiss="modal" aria-label="Close">
+                                <i class="fa fa-fw fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="block-content fs-sm">
+                        <div class="row">
+                            <div class="col-12 col-md-12">
+                                <div class="col-12 col-md-12 mb-2">
+                                    <span class="" style="letter-spacing: -em">
+                                        <meta charset="utf-8">⋮⋮⋮
+                                    </span> &nbsp;
+                                    <span class="tittle-neo"> Deskripsi Soal</span>
+                                    <!-- <input type="text" id="id_question" name="id_question" disabled> -->
+                                    <input type="hidden" name="edit_question" value="">
+                                    <div class="form-control" id="edit_question" style="min-height: 160px;"></div>
+                                </div>
+                                <!-- <input type="hidden" name="id_question" value="">
+                                <div class="form-control" id="id_question" style="min-height: 160px;"></div> -->
+                                <div class="col-12 col-md-12">
+                                    <span class="color-ne" style="letter-spacing: -em">
+                                        <meta charset="utf-8">⋮⋮⋮
+                                    </span> &nbsp;
+                                    <span class="tittle-neo"> Pembahasan</span>
+                                    <input type="hidden" name="edit_discussion" value="">
+                                    <input type="hidden" id="level-form" name="edit_level" value="">
+                                    <input type="hidden" id="subject-form" name="edit_subject" value="">
+                                    <input type="hidden" id="topic-form" name="edit_topic" value="">
+                                    <div class="form-control" id="edit_discussion" style="min-height: 160px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="block-content block-content-full text-end bg-body">
+                        <button type="button" class="btn btn-sm btn-secondary me-1" data-bs-dismiss="modal">Tutup</button>
+                        <button type="button" class="btn btn-sm btn-primary" data-bs-target="#answerEditModal" data-bs-toggle="modal" data-bs-dismiss="modal">Lanjut</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="answerEditModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="answerModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="block block-rounded block-transparent mb-0">
+                    <div class="block-header block-header-ne">
+                        <h3 class="block-title text-white">Edit Jawaban : </h3>
+                        <div class="block-options">
+                            <button type="button" class="btn-block-option-white" data-bs-dismiss="modal" aria-label="Close">
+                                <i class="fa fa-fw fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="block-content fs-sm">
+                        <div class="row">
+                            <div class="col-12 col-md-12">
+                                <span class="" style="letter-spacing: -em">
+                                    <meta charset="utf-8">⋮⋮⋮
+                                </span> &nbsp;
+                                <span class="tittle-neo"> Jawaban Soal</span>
+                                <button type="button" name="add" id="edit-dynamic-ar" class="btn btn-primary" type="button">+</button>
+                                <div class="col-12 col-md-12">
+                                    <div class="row" id="dynamicEditAddRemove">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer block-content block-content-full text-end bg-body">
+                            <button type="button" class="btn btn-sm btn-secondary me-1" data-bs-target="#questionEditModal" data-bs-toggle="modal" data-bs-dismiss="modal">Kembali</button>
+                            <button type="button" class="btn btn-sm btn-primary" data-bs-dismiss="modal" onclick="update_data()">Update</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
 <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/js/bootstrap-select.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
 </script>
 <script src="<?= base_url('css/datatables/jquery.dataTables.min.js') ?>"></script>
 <script src="<?= base_url('css/datatables/dataTables.bootstrap4.min.js') ?>"></script>
@@ -186,14 +258,14 @@
 
 
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
 
-        $(function () {
+        $(function() {
             // show_dt_question();
             $('#question-datatables').addClass('d-none').removeClass('d-block');
             $('.selectpicker').selectpicker();
         });
-        $('#topic').on('change', function () {
+        $('#topic').on('change', function() {
             $('#question-datatables').addClass('d-block').removeClass('d-none');
             $('#level-form').val($('#level').val());
             $('#subject-form').val($('#subject').val());
@@ -202,6 +274,8 @@
         });
         create_quilljs('question');
         create_quilljs('discussion');
+        create_quilljs('edit_question');
+        create_quilljs('edit_discussion');
         // create_quilljs_simple('answer2');
 
         $('#refresh').on('click', refresh_dt)
@@ -213,7 +287,7 @@
 
     function tambah() {
         $('#dynamicAddRemove').html(
-            '<div class="col-12 col-md-6 "><span class="" style="letter-spacing: -em"><meta charset="utf-8">⋮⋮ A</span> &nbsp;<input type="hidden" name="answer[0]" value=""><div class="form-control" id="answer0" style="min-height: 80px;"></div></div>'
+            '<div class="col-12 col-md-6 mb-4"><span class="" style="letter-spacing: -em"><meta charset="utf-8">⋮⋮ A</span> &nbsp;<input type="radio" value="1" id="answer_isright0" name="answer_isright[0]"> <input type="hidden" name="answer[0]" value=""><div class="form-control" id="answer0" style="min-height: 80px;"></div></div>'
         );
         create_quilljs_simple('answer0', 0);
         i = 0;
@@ -269,7 +343,7 @@
                 ]
             },
         });
-        quill[id].on('text-change', function (delta, oldDelta, source) {
+        quill[id].on('text-change', function(delta, oldDelta, source) {
             quill[id].root.innerHTML.replace("<p><br></p>", "");
             document.querySelector('input[name=' + id + ']').value = quill[id].root.innerHTML;
 
@@ -305,7 +379,7 @@
         simple_quill[id].setContents([{
             insert: ''
         }]);
-        simple_quill[id].on('text-change', function (delta, oldDelta, source) {
+        simple_quill[id].on('text-change', function(delta, oldDelta, source) {
             document.querySelector("input[name='" + name + "']").value = simple_quill[id].root.innerHTML;
             // console.log(document.querySelector("input[name='" + name + "']").value + " Idnya dallah " + id);
         });
@@ -313,7 +387,9 @@
 
     function show_dt_question() {
         $('#example').DataTable({
-            oLanguage: {sProcessing: '<div class="spinner-border neo" role="status"><span class="sr-only"></span></div>'},
+            oLanguage: {
+                sProcessing: '<div class="spinner-border neo" role="status"><span class="sr-only"></span></div>'
+            },
             dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center mx-0 yx-0'B>>" +
                 "<'row'<'col-sm-12'tr>>" +
                 "<'row'<'col-sm-6'i><'col-sm-6'p>>",
@@ -377,8 +453,8 @@
                     subject: $('#subject').val(),
                     topic: $('#topic').val()
                 },
-                
-                error: function () { // error handling
+
+                error: function() { // error handling
                     $(".tabel_serverside-error").html("");
                     $("#tabel_serverside").append(
                         '<tbody class="tabel_serverside-error"><tr><th colspan="3">Data Tidak Ditemukan di Server</th></tr></tbody>'
@@ -429,7 +505,55 @@
             url: "<?= route_to('admin.bank-soal.insert-question') ?>",
             type: "POST",
             data: $('#question-form').serialize(),
-            success: function (d) {
+            success: function(d) {
+                var d = JSON.parse(d);
+                if (d.success == true) {
+                    Swal.fire({
+                        title: 'Status :',
+                        text: d.message +
+                            '<br>' + JSON.stringify(d.validation),
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 3000
+                    });
+                } else {
+                    Swal.fire({
+                        title: 'Status :',
+                        html: d.message +
+                            '<br>' + JSON.stringify(d.validation),
+                        icon: 'error',
+                        showConfirmButton: false,
+                        timer: 3000
+                    });
+                }
+                Swal.close();
+                refresh_dt();
+            },
+            error: function(error) {
+                console.log(error);
+                Swal.close();
+            }
+        });
+    }
+
+    function update_data() {
+        let question_id = window.value;
+        console.log(question_id);
+
+        Swal.fire({
+            showCloseButton: false,
+            showCancelButton: false,
+            showConfirmButton: false,
+            allowOutsideClick: false,
+            customClass: 'col-5 col-md-3',
+            imageUrl: 'https://udindym.site/loader-c.gif',
+            text: 'Silahkan Tunggu...',
+        })
+        $.ajax({
+            url: "<?= route_to('admin.bank-soal.edit_soal') ?>",
+            type: "POST",
+            data: $('#edit-form').serialize() + "&id_question=" + question_id,
+            success: function(d) {
                 var d = JSON.parse(d);
                 if (d.success == true) {
                     Swal.fire({
@@ -445,13 +569,14 @@
                         html: d.message +
                             '<br>' + JSON.stringify(d.validation),
                         icon: 'error',
-                        showConfirmButton: false
+                        showConfirmButton: false,
+                        timer: 3000
                     });
                 }
                 Swal.close();
                 refresh_dt();
             },
-            error: function (error) {
+            error: function(error) {
                 console.log(error);
                 Swal.close();
             }
@@ -485,7 +610,7 @@
                     data: {
                         id: id,
                     },
-                    success: function (d) {
+                    success: function(d) {
                         Swal.close();
                         var d = JSON.parse(d);
                         Swal.fire({
@@ -497,7 +622,7 @@
                         });
                         refresh_dt();
                     },
-                    error: function (error) {
+                    error: function(error) {
                         Swal.close();
                         console.log(error);
                     }
@@ -507,16 +632,35 @@
         });
     }
 
-    $(document).on('click', '.edit-button', function () {
-        let data = $(this).data("id");
-        console.log(data);
+    $(document).on('click', '.edit-button', function() {
+        var data_id = $(this).data("id");
+        window.value = data_id;
+        let data_question = $(this).data("question");
+        let data_discussion = $(this).data("discussion");
+
+        $('#dynamicEditAddRemove').html(
+            '<div class="col-12 col-md-6 mb-4"><span class="" style="letter-spacing: -em"><meta charset="utf-8">⋮⋮ A</span> &nbsp;<input type="radio" value="1" id="edit_answer_isright0" name="edit_answer_isright[0]"> <input type="hidden" name="answer[0]" value=""><div class="form-control" id="answer0" style="min-height: 80px;"></div></div>'
+        );
+        create_quilljs_simple('answer0', 0);
+        i = 0;
+        $("#edit-dynamic-ar").prop("disabled", false);
+        $('#dynamicEditAddRemove').prev().remove('div');
+
+        quill['edit_question'].clipboard.dangerouslyPasteHTML(data_question);
+        quill['edit_discussion'].clipboard.dangerouslyPasteHTML(data_discussion);
+        $('#questionEditModal').modal('show');
+        $('#edit-form').trigger("reset");
+        // console.log(window.value);
+        // console.log(data_question);
+        // console.log(data_discussion);
     });
-    $(document).on('click', '.delete-button', function () {
+
+    $(document).on('click', '.delete-button', function() {
         let id = $(this).data("id");
         delete_data(id);
     });
 
-    $('#level').on('change', function () {
+    $('#level').on('change', function() {
         $("#subject").val('default');
         $("#subject").selectpicker("refresh")
         $('#question-datatables').addClass('d-none').removeClass('d-block');
@@ -537,7 +681,7 @@
             data: {
                 class_id: selected,
             },
-            success: function (response) {
+            success: function(response) {
 
                 response = JSON.parse(response);
                 select.selectpicker('destroy');
@@ -562,12 +706,12 @@
                 console.log(response);
                 Swal.close();
             },
-            error: function (error) {
+            error: function(error) {
                 console.log(error);
             }
         });
     });
-    $('#subject').on('change', function () {
+    $('#subject').on('change', function() {
         $("#topic").val('default');
         $("#topic").selectpicker("refresh")
         $('#question-datatables').addClass('d-none').removeClass('d-block');
@@ -588,7 +732,7 @@
             data: {
                 subject_id: selected,
             },
-            success: function (response) {
+            success: function(response) {
                 response = JSON.parse(response);
                 select.selectpicker('destroy');
                 select.empty();
@@ -609,31 +753,33 @@
                 select.selectpicker('refresh');
                 Swal.close();
             },
-            error: function (error) {
+            error: function(error) {
                 console.log(error);
                 Swal.close();
             }
         });
     });
 
-    $("#dynamic-ar").click(function () {
+    $("#dynamic-ar").click(function() {
         ++i;
         if (i <= 4) {
             $("#dynamicAddRemove").append(
-                '<div class="col-12 col-md-6 "><span class="" style="letter-spacing: -em"><meta charset="utf-8">⋮⋮ ' +
+                '<div class="col-12 col-md-6" id="removeJawaban"><span class="" style="letter-spacing: -em"><meta charset="utf-8">⋮⋮ ' +
                 String.fromCharCode('B'.charCodeAt() + (i - 1)) +
-                '</span> &nbsp;<input type="hidden" name="answer[' +
-                i + ']" value=""><div class="form-control" id="answer' + i +
+                '</span> &nbsp; <button type="button" class="btn btn-danger remove-input-field">-</button> <input type="radio" value="1" id="answer_isright' + i +
+                '" name="answer_isright[' +
+                i + ']"><input type="hidden" name="answer[' +
+                i + ']" value=""><div class="form-control mb-4" id="answer' + i +
                 '" style="min-height: 80px;"></div></div>'
             );
             create_quilljs_simple('answer' + i, i);
         } else {
             $("#dynamic-ar").prop("disabled", true);
         }
-
     });
-    $(document).on('click', '.remove-input-field', function () {
-        $(this).parents('#removeit').remove();
+    $(document).on('click', '.remove-input-field', function() {
+        $(this).parents('#removeJawaban').remove();
+        i--;
     });
 </script>
 <?= $this->endSection() ?>
