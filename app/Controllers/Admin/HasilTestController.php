@@ -51,7 +51,6 @@ class HasilTestController extends BaseController
             $request = \Config\Services::request();
             $detail_test_id = $test_id;
             $list_data = $this->result_model;
-            $test_answer_model = $this->answer_model;
             $where = ['to_test_result.id !=' => 0];
             //Column Order Harus Sesuai Urutan Kolom Pada Header Tabel di bagian View
             //Awali nama kolom tabel dengan nama tabel->tanda titik->nama kolom seperti pengguna.nama
@@ -63,10 +62,13 @@ class HasilTestController extends BaseController
             $no = $request->getPost("start");
             foreach ($list as $lists) {
                 if ($lists->test_id == $detail_test_id) {
-                    $beginTime = date("Y-m-d H:i:s", substr($lists->begin_time, 0, 10));
+                    // $beginTime = date("Y-m-d H:i:s", substr($lists->begin_time, 0, 10));
+                    $resultBeginTime = date("Y-m-d H:i:s", strtotime($lists->result_begin));
+                    $endTime = date("Y-m-d H:i:s", strtotime($lists->end_time));
 
-                    $d1 = new DateTime($beginTime);
-                    $d2 = new DateTime($lists->end_time);
+                    $d1 = new DateTime($resultBeginTime);
+                    // $d1 = new DateTime($beginTime);
+                    $d2 = new DateTime($endTime);
                     $interval = $d2->diff($d1);
 
                     $no++;
@@ -76,10 +78,6 @@ class HasilTestController extends BaseController
                     $row[] = $lists->full_name; // nama siswa
                     $row[] = $interval->format('%h Jam, %I Menit'); //  waktu pengerjaan ( end time - begin time)
                     $row[] = $lists->score; // score
-                    // foreach ($data_result as $item) {
-                    //     $row[] = $item['Rank']; // ranking ( masih belum bisa )
-                    //     break;
-                    // }
                     $row[]  = '
                         <div class="block-options">
                         <button type="button" class="btn btn-sm btn-success kembali-button"

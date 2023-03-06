@@ -76,6 +76,7 @@ class TestResultModel extends Model
         to_test_result.score,
         to_test_result.student_id,
         to_test_result.end_time,
+        to_test_result.begin_time as result_begin,
         to_tests.test_name,
         to_tests.class_id,
         to_tests.begin_time,
