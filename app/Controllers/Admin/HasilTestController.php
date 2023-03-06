@@ -62,12 +62,11 @@ class HasilTestController extends BaseController
             $no = $request->getPost("start");
             foreach ($list as $lists) {
                 if ($lists->test_id == $detail_test_id) {
-                    // $beginTime = date("Y-m-d H:i:s", substr($lists->begin_time, 0, 10));
-                    $resultBeginTime = date("Y-m-d H:i:s", strtotime($lists->result_begin));
-                    $endTime = date("Y-m-d H:i:s", strtotime($lists->end_time));
+                    $beginTime = date("Y-m-d H:i:s", substr($lists->result_begin, 0, 10));
+                    $endTime = date("Y-m-d H:i:s", substr($lists->end_time, 0, 10));
+                    // $endTime = date("Y-m-d H:i:s", strtotime($lists->end_time));
 
-                    $d1 = new DateTime($resultBeginTime);
-                    // $d1 = new DateTime($beginTime);
+                    $d1 = new DateTime($beginTime);
                     $d2 = new DateTime($endTime);
                     $interval = $d2->diff($d1);
 
@@ -76,7 +75,7 @@ class HasilTestController extends BaseController
                     $row[] = $no; // no
                     $row[] = $lists->test_name; // nama test
                     $row[] = $lists->full_name; // nama siswa
-                    $row[] = $interval->format('%h Jam, %I Menit'); //  waktu pengerjaan ( end time - begin time)
+                    $row[] = $interval->format('%h jam, %i menit, %s detik'); //  waktu pengerjaan ( end time - begin time)
                     $row[] = $lists->score; // score
                     $row[]  = '
                         <div class="block-options">
