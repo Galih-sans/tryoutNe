@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Models\Admin;
+
 use CodeIgniter\Model;
 use CodeIgniter\I18n\Time;
+
 class BankSoalModel extends Model
 {
     protected $DBGroup          = 'default';
@@ -12,7 +14,7 @@ class BankSoalModel extends Model
     protected $insertID         = 0;
     protected $returnType       = 'object';
     protected $protectFields    = true;
-    protected $allowedFields    = ['question','class_id','subject_id','topic_id','discussion','difficulty','created_at','updated_at','created_by'];
+    protected $allowedFields    = ['question', 'class_id', 'subject_id', 'topic_id', 'discussion', 'difficulty', 'created_at', 'updated_at', 'created_by'];
     protected $useSoftDeletes = true;
     // Dates
     protected $dateFormat    = 'datetime';
@@ -23,9 +25,9 @@ class BankSoalModel extends Model
 
     // Validation
     protected $validationRules =
-        [
-            'question'     => 'required',
-            'discussion'        => 'required',
+    [
+        'question'     => 'required',
+        'discussion'        => 'required',
     ];
     protected $validationMessages   = [
         'question'        => [
@@ -95,35 +97,34 @@ class BankSoalModel extends Model
     // }
 
     protected function _get_datatables_query($table, $column_order, $column_search, $order)
- {
-     $this->builder = $this->db->table($table);
+    {
+        $this->builder = $this->db->table($table);
         $i = 0;
-    
+
         foreach ($column_search as $item) {
             if ($_POST['search']['value']) {
-    
+
                 if ($i === 0) {
                     $this->builder->groupStart();
                     $this->builder->like($item, $_POST['search']['value']);
                 } else {
                     $this->builder->orLike($item, $_POST['search']['value']);
                 }
-    
+
                 if (count($column_search) - 1 == $i)
                     $this->builder->groupEnd();
             }
             $i++;
         }
-    
+
         if (isset($_POST['order'])) {
             $this->builder->orderBy($column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
         } else if (isset($order)) {
             $order = $order;
             $this->builder->orderBy(key($order), $order[key($order)]);
         }
-    
     }
-    
+
     public function get_datatables($table, $column_order, $column_search, $order, $data = '')
     {
         $this->_get_datatables_query($table, $column_order, $column_search, $order);
@@ -132,30 +133,30 @@ class BankSoalModel extends Model
         if ($data) {
             $this->builder->where($data);
         }
-    
+
         $query = $this->builder->get();
         return $query->getResult();
     }
-    
+
     public function count_filtered($table, $column_order, $column_search, $order, $data = '')
     {
         $this->_get_datatables_query($table, $column_order, $column_search, $order);
         if ($data) {
             $this->builder->where($data);
-        }else{
-        $this->builder->from($table);
+        } else {
+            $this->builder->from($table);
         }
         return $this->builder->countAllResults();
     }
-    
+
     public function count_all($table, $data = '')
     {
         if ($data) {
             $this->builder->where($data);
-        }else{
+        } else {
             $this->builder->from($table);
         }
-    
+
         return $this->builder->countAllResults();
     }
 
@@ -183,13 +184,23 @@ class BankSoalModel extends Model
         // return $this->builder->delete();
     }
 
-    protected function now(){
+    protected function now()
+    {
         return Time::now()->getTimestamp();
     }
 
     public function get_test_question($data)
-    {   
-        $query = $this->builder->select('id,question')->orderBy('rand()')->limit($data['number_of_question'])->getWhere(['to_questions.subject_id' => $data['subject_id'],'to_questions.topic_id' => $data['topic_id']]);
+    {
+        $query = $this->builder->select('id,question')->orderBy('rand()')->limit($data['number_of_question'])->getWhere(['to_questions.subject_id' => $data['subject_id'], 'to_questions.topic_id' => $data['topic_id']]);
         return $query->getResult();
+    }
+
+    public function get_edit_soal($id)
+    {
+        $query = $this->builder->select(
+            'question,
+            discussion'
+        )->where('id', $id)->get();
+        return $query->getRow();
     }
 }

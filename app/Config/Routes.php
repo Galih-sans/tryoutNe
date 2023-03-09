@@ -145,6 +145,7 @@ $routes->group("admin", ["filter" => "isadmin", "namespace" => "App\Controllers\
         $routes->match(["get", "post"], "get_topic", "BankSoalController::get_topic", ['as' => 'admin.bank-soal.get_topic']);
         $routes->match(["get", "post"], "delete_question", "BankSoalController::delete", ['as' => 'admin.bank-soal.delete-question']);
         $routes->match(["get", "post"], "insert_question", "BankSoalController::create", ['as' => 'admin.bank-soal.insert-question']);
+        $routes->match(["get", "post"], "get_edit_soal", "BankSoalController::get_soal_detail", ['as' => 'admin.bank-soal.get_edit_soal']);
         // edit soal
         $routes->match(["get", "post"], "update_soal", "BankSoalController::update", ['as' => 'admin.bank-soal.edit_soal']);
     });

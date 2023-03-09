@@ -287,7 +287,7 @@
 
     function tambah() {
         $('#dynamicAddRemove').html(
-            '<div class="col-12 col-md-6 mb-4"><span class="" style="letter-spacing: -em"><meta charset="utf-8">⋮⋮ A</span> &nbsp;<input type="radio" value="1" id="answer_isright0" name="answer_isright[0]"> <input type="hidden" name="answer[0]" value=""><div class="form-control" id="answer0" style="min-height: 80px;"></div></div>'
+            '<div class="col-12 col-md-6 mb-4"><span class="" style="letter-spacing: -em"><meta charset="utf-8">⋮⋮ A</span> &nbsp;<input type="radio" value="1" name="answer[0][isright]"> <input type="hidden" name="answer[0][answer]" value=""><div class="form-control" id="answer0" style="min-height: 80px;"></div></div>'
         );
         create_quilljs_simple('answer0', 0);
         i = 0;
@@ -351,7 +351,7 @@
     }
 
     function create_quilljs_simple(id, number) {
-        var name = "answer[" + number + "]";
+        var name = "answer[" + number + "][answer]";
         simple_quill[id] = new Quill('#' + id, {
             theme: 'snow',
             modules: {
@@ -516,6 +516,8 @@
                         showConfirmButton: false,
                         timer: 3000
                     });
+                    let data_kirim = $('#question-form').serialize();
+                    console.log(data_kirim);
                 } else {
                     Swal.fire({
                         title: 'Status :',
@@ -525,6 +527,8 @@
                         showConfirmButton: false,
                         timer: 3000
                     });
+                    let data_kirim = $('#question-form').serialize();
+                    console.log(data_kirim);
                 }
                 Swal.close();
                 refresh_dt();
@@ -538,7 +542,7 @@
 
     function update_data() {
         let question_id = window.value;
-        console.log(question_id);
+        // console.log(question_id);
 
         Swal.fire({
             showCloseButton: false,
@@ -633,27 +637,55 @@
     }
 
     $(document).on('click', '.edit-button', function() {
-        var data_id = $(this).data("id");
-        window.value = data_id;
-        let data_question = $(this).data("question");
-        let data_discussion = $(this).data("discussion");
+        var question_id = $(this).attr("id");
+        window.value = question_id;
+        get_edit_soal(question_id);
 
         $('#dynamicEditAddRemove').html(
-            '<div class="col-12 col-md-6 mb-4"><span class="" style="letter-spacing: -em"><meta charset="utf-8">⋮⋮ A</span> &nbsp;<input type="radio" value="1" id="edit_answer_isright0" name="edit_answer_isright[0]"> <input type="hidden" name="answer[0]" value=""><div class="form-control" id="answer0" style="min-height: 80px;"></div></div>'
+            '<div class="col-12 col-md-6 mb-4"><span class="" style="letter-spacing: -em"><meta charset="utf-8">⋮⋮ A</span> &nbsp; <input type="radio" value="1" name="answer[0]"> <input type="hidden" name="edit_answer[0]" value=""><div class="form-control" id="edit_answer0" style="min-height: 80px;"></div></div>'
         );
-        create_quilljs_simple('answer0', 0);
+        create_quilljs_simple('edit_answer0');
         i = 0;
         $("#edit-dynamic-ar").prop("disabled", false);
         $('#dynamicEditAddRemove').prev().remove('div');
 
-        quill['edit_question'].clipboard.dangerouslyPasteHTML(data_question);
-        quill['edit_discussion'].clipboard.dangerouslyPasteHTML(data_discussion);
         $('#questionEditModal').modal('show');
         $('#edit-form').trigger("reset");
-        // console.log(window.value);
-        // console.log(data_question);
-        // console.log(data_discussion);
     });
+
+    function get_edit_soal(id) {
+        Swal.fire({
+            showCloseButton: false,
+            showCancelButton: false,
+            showConfirmButton: false,
+            allowOutsideClick: false,
+            customClass: 'col-5 col-md-3',
+            imageUrl: 'https://udindym.site/loader-c.gif',
+            text: 'Silahkan Tunggu...',
+        })
+        $.ajax({
+            url: "<?= route_to('admin.bank-soal.get_edit_soal') ?>",
+            type: "POST",
+            data: {
+                id: id,
+            },
+            success: function(d) {
+                var d = JSON.parse(d);
+                quill['edit_question'].clipboard.dangerouslyPasteHTML(d.soalData.question);
+                quill['edit_discussion'].clipboard.dangerouslyPasteHTML(d.soalData.discussion);
+                console.log(d.jawabanData);
+                // foreach d.jawbanData buat quilljs, isi quilljs
+
+                Swal.close();
+            },
+            error: function(error) {
+                console.log(id);
+                alert(error);
+                Swal.close();
+            }
+        });
+
+    }
 
     $(document).on('click', '.delete-button', function() {
         let id = $(this).data("id");
@@ -766,10 +798,9 @@
             $("#dynamicAddRemove").append(
                 '<div class="col-12 col-md-6" id="removeJawaban"><span class="" style="letter-spacing: -em"><meta charset="utf-8">⋮⋮ ' +
                 String.fromCharCode('B'.charCodeAt() + (i - 1)) +
-                '</span> &nbsp; <button type="button" class="btn btn-danger remove-input-field">-</button> <input type="radio" value="1" id="answer_isright' + i +
-                '" name="answer_isright[' +
-                i + ']"><input type="hidden" name="answer[' +
-                i + ']" value=""><div class="form-control mb-4" id="answer' + i +
+                '</span> &nbsp; <button type="button" class="btn btn-danger remove-input-field">-</button> <input type="radio" value="1" name="answer[' +
+                i + '][isright]"> <input type="hidden" name="answer[' +
+                i + '][answer]" value=""><div class="form-control mb-4" id="answer' + i +
                 '" style="min-height: 80px;"></div></div>'
             );
             create_quilljs_simple('answer' + i, i);

@@ -66,9 +66,7 @@ class BankSoalController extends BaseController
             $row['action']  = '
             <div class="block-options">
             <button type="button" class="btn-block-option btn btn-light text-primary edit-button"
-            data-id= "' . $lists->id . '"
-            data-question= "' . $lists->question . '"
-            data-discussion= "' . $lists->discussion . '"
+            id= "' . $lists->id . '"
             >
                 <i class="fa-solid fa-pen-to-square"></i>
             </button>
@@ -166,7 +164,7 @@ class BankSoalController extends BaseController
                     'question' => $this->request->getVar('question'),
                     'discussion'    => $this->request->getVar('discussion'),
                     'answer.*'    => $this->request->getVar('answer'),
-                    // 'answer_isright.*'    => $this->request->getVar('answer_isright'),
+                    // 'answer_isright.*'    => $this->request->getVar('isright'),
                     'created_by'    => session()->get('id')
                 ];
 
@@ -251,6 +249,19 @@ class BankSoalController extends BaseController
             }
             echo json_encode($response);
             // }
+        }
+    }
+
+    public function get_soal_detail()
+    {
+        if ($this->request->isAJAX()) {
+            $id =  $this->request->getVar('id'); // id question
+            $questionData = $this->banksoal_model->get_edit_soal($id);
+            $answerData = $this->answer_model->get_answer1($id);
+
+            $data['soalData'] = $questionData;
+            $data['jawabanData'] = $answerData;
+            return json_encode($data);
         }
     }
 }
