@@ -42,8 +42,8 @@ class BankSoalController extends BaseController
         $subject = $this->request->getVar('subject');
         $topic = $this->request->getVar('topic');
         $where = ['class_id' => $level, 'subject_id' => $subject, 'topic_id=' => $topic];
-        $column_order   = array('', 'question', 'discussion');
-        $column_search  = array('question', 'discussion');
+        $column_order = array('', 'question', 'discussion');
+        $column_search = array('question', 'discussion');
         $order = array('id' => 'ASC');
         $list = $this->banksoal_model->get_datatables('to_questions', $column_order, $column_search, $order, $where);
         $data1 = array();
@@ -56,14 +56,18 @@ class BankSoalController extends BaseController
             foreach ($answers as $answer) {
                 $answer->answer = preg_replace('/<span[^>]+\>/i', '', $answer->answer);
                 $answer->answer = str_replace(['<p>', '</p>'], ['', ''], $answer->answer);
-                $answerlist .= '<label><span>' . $alpha++ . '. ' . $answer->answer . '</span></label><br>';
+                $isright ="";
+                if ($answer->answer_isright == 1){
+                    $isright ="text-success";
+                }
+                $answerlist .= '<label><span class="'.$isright.'">' . $alpha++ . '. ' . $answer->answer . '</span></label><br>';
             }
             $row = array();
-            $row['number']  = $no;
-            $row['question']  = '<fieldset><div class="h6"><span>Soal :</span>' . $lists->question . '</div>
+            $row['number'] = $no;
+            $row['question'] = '<fieldset><div class="h6"><span>Soal :</span>' . $lists->question . '</div>
             <div class="clearfix"><span>Jawaban : </span></br>' . $answerlist . '</div></fieldset>';
-            $row['discussion']  = $lists->discussion;
-            $row['action']  = '
+            $row['discussion'] = $lists->discussion;
+            $row['action'] = '
             <div class="block-options">
             <button type="button" class="btn-block-option btn btn-light text-primary edit-button"
             id= "' . $lists->id . '"
@@ -84,7 +88,7 @@ class BankSoalController extends BaseController
             "data" => $data1,
         );
 
-        echo json_encode($response);
+        return json_encode($response);
     }
     public function get_subject()
     {
@@ -94,10 +98,11 @@ class BankSoalController extends BaseController
         foreach ($data as $data) {
             $response[] = array(
                 "id" => $data->id,
-                "text" => $data->subject, PHP_EOL
+                "text" => $data->subject,
+                PHP_EOL
             );
         }
-        echo json_encode($response);
+        return json_encode($response);
     }
     public function get_topic()
     {
@@ -107,10 +112,11 @@ class BankSoalController extends BaseController
         foreach ($data as $data) {
             $response[] = array(
                 "id" => $data->id,
-                "text" => $data->topic, PHP_EOL
+                "text" => $data->topic,
+                PHP_EOL
             );
         }
-        echo json_encode($response);
+        return json_encode($response);
     }
 
     public function delete()
@@ -120,70 +126,75 @@ class BankSoalController extends BaseController
             $delete = $this->banksoal_model->delete_question($id);
             if ($delete) {
                 $response['success'] = true;
-                $response['message']  = 'Data telah dihapus';
+                $response['message'] = 'Data telah dihapus';
             } else {
                 $response['success'] = false;
-                $response['message']  = 'Data gagal dihapus';
+                $response['message'] = 'Data gagal dihapus';
             }
 
-            echo json_encode($response);
+            return json_encode($response);
         }
     }
     public function create()
     {
         if ($this->request->isAJAX()) {
-            if (!$this->validate([
-                'question' => [
-                    'rules' => 'required',
-                    'errors' => [
-                        'required' => '{field} harus diisi'
+            $rules = [
+                'question' => 'required',
+                'answer.*' => 'required',
+                'discussion' => 'required'
+            ];
+            $errors =
+                [
+                    'question' => [
+                        'required' => 'Pertanyaan harus diisi'
+                    ],
+                    'answer.*' => [
+                        'required' => 'Jawaban Harus harus diisi'
+                    ],
+                    'discussion' => [
+                        'required' => 'Pembahasan harus diisi'
                     ]
-                ],
-                'answer.*' => [
-                    'rules' => 'required',
-                    'errors' => [
-                        'required' => '{field} harus diisi'
-                    ]
-                ],
-                'discussion' => [
-                    'rules' => 'required',
-                    'errors' => [
-                        'required' => '{field} harus diisi'
-                    ]
-                ]
-            ])) {
+                ];
+            if (!$this->validate($rules, $errors)) {
                 $response['success'] = false;
                 $response['message'] = "Validation Error";
-                $response['validation']  = $this->validator->getErrors();
-                echo json_encode($response);
+                $response['validation'] = "Isian Form Tidak Boleh Kosong";
+                return json_encode($response);
             } else {
                 $question_data = [
                     'subject' => $this->request->getVar('subject'),
                     'topic' => $this->request->getVar('topic'),
                     'level' => $this->request->getVar('level'),
                     'question' => $this->request->getVar('question'),
-                    'discussion'    => $this->request->getVar('discussion'),
-                    'answer.*'    => $this->request->getVar('answer'),
-                    // 'answer_isright.*'    => $this->request->getVar('isright'),
-                    'created_by'    => session()->get('id')
+                    'discussion' => $this->request->getVar('discussion'),
+                    'answer.*' => array_values($this->request->getVar('answer')),
+                    'created_by' => session()->get('id')
                 ];
-
+                $isrightData = array();
+                foreach ($question_data['answer.*'] as $answer) {
+                    $isrightData []= $answer['isright'];
+                }
+                if(!in_array('1',$isrightData)){
+                    $response['success'] = false;
+                    $response['message'] = "Validation Error";
+                    $response['validation'] = "Silahkan pilih jawaban yang benar";
+                    return json_encode($response);
+                }
                 if ($question_data['question'] == '<p><br></p>' or $question_data['discussion'] == '<p><br></p>') {
                     $response['success'] = false;
                     $response['message'] = "Validation Error";
-                    $response['validation']  = "Isian Form Tidak Boleh Kosong";
+                    $response['validation'] = "Isian Form Tidak Boleh Kosong";
                 } else {
                     $response['success'] = true;
-                    $response['message']  = 'Data Berhasil Ditambahkan';
+                    $response['message'] = 'Data Berhasil Ditambahkan';
 
                     foreach ($question_data['answer.*'] as $ui) {
                         if ($ui == '<p><br></p>') {
                             $response['success'] = false;
                             $response['message'] = "Validation Error";
-                            $response['validation']  = "Isian Form Tidak Boleh Kosong";
+                            $response['validation'] = "Isian Form Tidak Boleh Kosong";
                         }
                     }
-
                     if ($response['success'] == true) {
                         $question_data['question_id'] = $this->banksoal_model->add_question($question_data);
                         foreach ($question_data['answer.*'] as $answer) {
@@ -191,7 +202,7 @@ class BankSoalController extends BaseController
                         }
                     }
                 }
-                echo json_encode($response);
+                return json_encode($response);
             }
         }
     }
@@ -226,28 +237,28 @@ class BankSoalController extends BaseController
             //     $response['success'] = false;
             //     $response['message'] = "Validation Error";
             //     $response['validation']  = $this->validator->getErrors();
-            //     echo json_encode($response);
+            //     return json_encode($response);
             // } else {
             $question_data = [
                 'subject' => $this->request->getVar('edit_subject'),
                 'topic' => $this->request->getVar('edit_topic'),
                 'level' => $this->request->getVar('edit_level'),
                 'question' => $this->request->getVar('edit_question'),
-                'discussion'    => $this->request->getVar('edit_discussion'),
+                'discussion' => $this->request->getVar('edit_discussion'),
                 // 'answer.*'    => $this->request->getVar('answer'),
                 // 'answer_isright.*'    => $this->request->getVar('answer_isright'),
-                'created_by'    => session()->get('id')
+                'created_by' => session()->get('id')
             ];
 
             $query = $this->banksoal_model->update($id_question, $question_data);
             if ($query) {
                 $response['success'] = true;
-                $response['message']  = 'Data Berhasil Diupdate';
+                $response['message'] = 'Data Berhasil Diupdate';
             } else {
                 $response['success'] = false;
-                $response['message']  = 'Data Gagal Diupdate';
+                $response['message'] = 'Data Gagal Diupdate';
             }
-            echo json_encode($response);
+            return json_encode($response);
             // }
         }
     }
@@ -255,7 +266,7 @@ class BankSoalController extends BaseController
     public function get_soal_detail()
     {
         if ($this->request->isAJAX()) {
-            $id =  $this->request->getVar('id'); // id question
+            $id = $this->request->getVar('id'); // id question
             $questionData = $this->banksoal_model->get_edit_soal($id);
             $answerData = $this->answer_model->get_answer1($id);
 

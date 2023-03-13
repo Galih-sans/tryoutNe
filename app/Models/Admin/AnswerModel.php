@@ -65,8 +65,8 @@ class AnswerModel extends Model
     {
         $answer_data = [
             'question_id' => $data['question_id'],
-            'answer' => $answer,
-            'answer_isright' => 0,
+            'answer' => $answer['answer'],
+            'answer_isright' => $answer['isright'],
             'created_by'    => $data['created_by'],
             'created_at'    => $this->now(),
             'updated_at'    => $this->now()
