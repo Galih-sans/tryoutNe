@@ -56,17 +56,17 @@ class BankSoalController extends BaseController
             foreach ($answers as $answer) {
                 $answer->answer = preg_replace('/<span[^>]+\>/i', '', $answer->answer);
                 $answer->answer = str_replace(['<p>', '</p>'], ['', ''], $answer->answer);
-                $isright ="";
-                if ($answer->answer_isright == 1){
-                    $isright ="text-success";
+                $isright = "";
+                if ($answer->answer_isright == 1) {
+                    $isright = "text-success";
                 }
-                $answerlist .= '<label><span class="'.$isright.'">' . $alpha++ . '. ' . $answer->answer . '</span></label><br>';
+                $answerlist .= '<label><span class="' . $isright . '">' . $alpha++ . '. ' . $answer->answer . '</span></label><br>';
             }
             $row = array();
             $row['number'] = $no;
             $row['question'] = '<fieldset><div class="h6"><span>Soal :</span>' . $lists->question . '</div>
             <div class="clearfix"><span>Jawaban : </span></br>' . $answerlist . '</div></fieldset>';
-            $row['discussion'] = $lists->discussion;
+            $row['discussion'] = '<fieldset><div class="h6"><span>Pembahasan :</span>' . $lists->discussion  . '</div></fieldset>';
             $row['action'] = '
             <div class="block-options">
             <button type="button" class="btn-block-option btn btn-light text-primary edit-button"
@@ -172,9 +172,9 @@ class BankSoalController extends BaseController
                 ];
                 $isrightData = array();
                 foreach ($question_data['answer.*'] as $answer) {
-                    $isrightData []= $answer['isright'];
+                    $isrightData[] = $answer['isright'];
                 }
-                if(!in_array('1',$isrightData)){
+                if (!in_array('1', $isrightData)) {
                     $response['success'] = false;
                     $response['message'] = "Validation Error";
                     $response['validation'] = "Silahkan pilih jawaban yang benar";
@@ -210,46 +210,35 @@ class BankSoalController extends BaseController
     public function update()
     {
         if ($this->request->isAJAX()) {
+
             $id_question = $this->request->getVar('id_question');
-            // $id_question = 447;
-            // $id = $this->request->getVar('id'); // test_id
-            // if (!$this->validate([
-            //     'question' => [
-            //         'rules' => 'required',
-            //         'errors' => [
-            //             'required' => '{field} harus diisi'
-            //         ]
-            //     ],
-            //     'answer.*' => [
-            //         'rules' => 'required',
-            //         'errors' => [
-            //             'required' => '{field} harus diisi'
-            //         ]
-            //     ],
-            //     'discussion' => [
-            //         'rules' => 'required',
-            //         'errors' => [
-            //             'required' => '{field} harus diisi'
-            //         ]
-            //     ]
-            // ])) 
-            // {
-            //     $response['success'] = false;
-            //     $response['message'] = "Validation Error";
-            //     $response['validation']  = $this->validator->getErrors();
-            //     return json_encode($response);
-            // } else {
             $question_data = [
-                'subject' => $this->request->getVar('edit_subject'),
-                'topic' => $this->request->getVar('edit_topic'),
-                'level' => $this->request->getVar('edit_level'),
                 'question' => $this->request->getVar('edit_question'),
                 'discussion' => $this->request->getVar('edit_discussion'),
-                // 'answer.*'    => $this->request->getVar('answer'),
-                // 'answer_isright.*'    => $this->request->getVar('answer_isright'),
-                'created_by' => session()->get('id')
+                'answer.*'    => array_values($this->request->getVar('edit_answer')),
+                'created_by' => session()->get('id'),
             ];
+            $editIsrightData = array();
+            foreach ($question_data['answer.*'] as $answer) {
+                $editIsrightData[] = $answer['isright'];
+            }
+            if (!in_array('1', $editIsrightData)) {
+                $response['success'] = false;
+                $response['message'] = "Validation Error";
+                $response['validation'] = "Silahkan pilih jawaban yang benar";
+                return json_encode($response);
+            }
 
+            // update jawaban
+            $i = 0;
+            $id_answer[] = $this->request->getVar('id_answer');
+            foreach ($question_data['answer.*'] as $answer) {
+                $answerId = $this->request->getVar('id_answer[' . $i . ']');
+                $this->answer_model->update_answer($id_question, $answerId, $answer); // where id question, where id answer, $data
+                $i++;
+            }
+
+            // update soal
             $query = $this->banksoal_model->update($id_question, $question_data);
             if ($query) {
                 $response['success'] = true;
