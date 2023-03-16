@@ -75,6 +75,18 @@ class AnswerModel extends Model
         // return $this->builder->delete();
     }
 
+    public function update_answer($id_question, $id_answer, $answer)
+    {
+        $answer_data = [
+            'answer' => $answer['answer'],
+            'answer_isright' => $answer['isright'],
+            'updated_at'    => $this->now()
+        ];
+        $this->builder->where('id', $id_answer);
+        $this->builder->where('question_id', $id_question);
+        return $this->builder->update($answer_data);
+    }
+
     public function get_answer($id)
     {
         $query = $this->builder->where('question_id', $id)->get();
@@ -82,13 +94,14 @@ class AnswerModel extends Model
     }
     public function get_answer1($id)
     {
-        $query = $this->builder->select('id,answer')->where('question_id', $id)->get()->getResult();
+        $query = $this->builder->select('id, answer, answer_isright')->where('question_id', $id)->get()->getResult();
 
         $data = array();
         foreach ($query as $item) {
             $data[] = array(
                 "id" => $item->id,
                 "answer" => $item->answer,
+                "answer_isright" => $item->answer_isright,
             );
         }
         return $data;
