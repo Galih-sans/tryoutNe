@@ -124,7 +124,8 @@ class BankSoalController extends BaseController
         if ($this->request->isAJAX()) {
             $id = $this->request->getVar('id');
             $delete = $this->banksoal_model->delete_question($id);
-            if ($delete) {
+            $hapus_jawaban = $this->answer_model->delete_answer($id);
+            if ($delete && $hapus_jawaban) {
                 $response['success'] = true;
                 $response['message'] = 'Data telah dihapus';
             } else {
@@ -212,14 +213,14 @@ class BankSoalController extends BaseController
         if ($this->request->isAJAX()) {
 
             $id_question = $this->request->getVar('id_question');
-            $question_data = [
+            $edit_question_data = [
                 'question' => $this->request->getVar('edit_question'),
                 'discussion' => $this->request->getVar('edit_discussion'),
                 'answer.*'    => array_values($this->request->getVar('edit_answer')),
                 'created_by' => session()->get('id'),
             ];
             $editIsrightData = array();
-            foreach ($question_data['answer.*'] as $answer) {
+            foreach ($edit_question_data['answer.*'] as $answer) {
                 $editIsrightData[] = $answer['isright'];
             }
             if (!in_array('1', $editIsrightData)) {
@@ -230,16 +231,19 @@ class BankSoalController extends BaseController
             }
 
             // update jawaban
-            $i = 0;
+            // hapus jawaban lama lalu insert dgn jawaban baru
+            // $i = 0;
             $id_answer[] = $this->request->getVar('id_answer');
-            foreach ($question_data['answer.*'] as $answer) {
-                $answerId = $this->request->getVar('id_answer[' . $i . ']');
-                $this->answer_model->update_answer($id_question, $answerId, $answer); // where id question, where id answer, $data
-                $i++;
+            $this->answer_model->delete_answer($id_question);
+            foreach ($edit_question_data['answer.*'] as $answer) {
+                $edit_question_data['question_id'] = $id_question;
+                // $answerId = $this->request->getVar('id_answer[' . $i . ']');
+                $this->answer_model->add_answer($edit_question_data, $answer);
+                // $i++;
             }
 
             // update soal
-            $query = $this->banksoal_model->update($id_question, $question_data);
+            $query = $this->banksoal_model->update($id_question, $edit_question_data);
             if ($query) {
                 $response['success'] = true;
                 $response['message'] = 'Data Berhasil Diupdate';

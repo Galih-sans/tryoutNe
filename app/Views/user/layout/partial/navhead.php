@@ -13,12 +13,15 @@
         </div>
       </div>
       <ul class="navbar-nav  justify-content-end">
-        <li class="nav-item dropdown pe-2 px-2 d-flex align-items-center">
-          <a href="javascript:;" class="nav-link text-light font-weight-bold px-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-            <span class="d-none px-2 d-sm-inline-block ms-2">Neo Diamond</span>
+        <li class="nav-item pe-2 px-2 d-flex align-items-center">
+          <div class="nav-link text-light font-weight-bold px-0" id="" data-bs-toggle="" aria-expanded="false">
+            <span class="d-none px-3 d-sm-inline-block ms-2">20000 Diamond</span>
+          </div>
+          <a href="<?= route_to('user.transaksi.index') ?>" class="nav-link text-light font-weight-bold px-0" id="" data-bs-toggle="" aria-expanded="false">
             <i class="fa-regular fa-gem"></i>
+            <i class="fa-regular fa-plus"></i>
           </a>
-          <ul class="dropdown-menu  dropdown-menu-end  px-2 py-2 me-sm-n4" aria-labelledby="dropdownMenuButton">
+          <!-- <ul class="dropdown-menu  dropdown-menu-end  px-2 py-2 me-sm-n4" aria-labelledby="dropdownMenuButton">
             <li class="mb-2">
               <div class="py-3 text-center bg-body-light border-bottom rounded-top">
                 <span class="mt-2 mb-0">Neo Diamond Jumlah</span>
@@ -32,7 +35,7 @@
                 </a>
               </div>
             </li>
-          </ul>
+          </ul> -->
         </li>
         <li class="nav-item dropdown pe-2 px-2 d-flex align-items-center">
           <a href="javascript:;" class="nav-link text-light font-weight-bold px-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">

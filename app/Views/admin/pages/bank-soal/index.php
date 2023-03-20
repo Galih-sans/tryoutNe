@@ -215,7 +215,7 @@
                                     <meta charset="utf-8">⋮⋮⋮
                                 </span> &nbsp;
                                 <span class="tittle-neo"> Jawaban Soal</span>
-                                <button type="button" name="add" onclick="tambah_edit()" class="btn btn-primary" type="button">+</button>
+                                <button type="button" name="add" onclick="tambah_edit()" id="tombol-tambah-edit" class="btn btn-primary" type="button">+</button>
                                 <div class="col-12 col-md-12">
                                     <div class="row" id="dynamicEditAddRemove">
 
@@ -603,7 +603,7 @@
                 refresh_dt();
                 // $('#answerEditModal').modal('hide');
                 // console.log($('#edit-form').serialize());
-                console.log($('#edit-form').serialize() + "&id_question=" + question_id + "&id_answer[0]=" + dataAnswerId[0] + "&id_answer[1]=" + dataAnswerId[1] + "&id_answer[2]=" + dataAnswerId[2] + "&id_answer[3]=" + dataAnswerId[3] + "&id_answer[4]=" + dataAnswerId[4]);
+                // console.log($('#edit-form').serialize() + "&id_question=" + question_id + "&id_answer[0]=" + dataAnswerId[0] + "&id_answer[1]=" + dataAnswerId[1] + "&id_answer[2]=" + dataAnswerId[2] + "&id_answer[3]=" + dataAnswerId[3] + "&id_answer[4]=" + dataAnswerId[4]);
             },
             error: function(error) {
                 console.log(error);
@@ -662,6 +662,7 @@
 
     $(document).on('click', '.edit-button', function() {
         var question_id = $(this).attr("id");
+        $("#tombol-tambah-edit").prop("disabled", false);
         window.value = question_id;
         get_edit_soal(question_id);
 
@@ -728,11 +729,11 @@
                     } else {
                         $('#edit_isright' + i).prop('checked', false);
                     }
-
+                    window.lastOption = i;
                 }
 
                 // $("#edit-dynamic-ar").prop("disabled", false);
-                // $('#dynamicEditAddRemove').prev().remove('div');
+                $('#dynamicEditAddRemove').prev().remove('div');
                 Swal.close();
             },
             error: function(error) {
@@ -880,30 +881,33 @@
     });
 
     function tambah_edit() {
-        ++i;
-        console.log(i);
-        if (i <= 4) {
+        window.lastOption++;
+        let p = window.lastOption;
+        console.log(window.lastOption);
+        let content = '';
+        if (window.lastOption <= 4) {
             $("#dynamicEditAddRemove").append(
                 '<div class="col-12 col-md-6" id="removeJawaban"><span class="" style="letter-spacing: -em"><meta charset="utf-8">⋮⋮ ' +
-                String.fromCharCode('B'.charCodeAt() + (i)) +
-                ' ⋮⋮</span> &nbsp; <label for="checkbox">Jawaban Benar : </label> <input type="hidden" name="answer[' +
-                i + '][isright]" value="0" /><input type="checkbox" value="1" name="answer[' +
-                i + '][isright]">  <button type="button" class="btn btn-danger remove-input-field">-</button> <input type="hidden" name="answer[' +
-                i + '][answer]" value=""><div class="form-control mb-4" id="answer' + i +
+                String.fromCharCode('A'.charCodeAt() + (p)) +
+                ' ⋮⋮</span> &nbsp; <label for="checkbox">Jawaban Benar : </label> <input type="hidden" name="edit_answer[' +
+                p + '][isright]" value="0" /><input type="checkbox" value="1" name="edit_answer[' +
+                p + '][isright]">  <button type="button" class="btn btn-danger remove-edit-field">-</button> <input type="hidden" name="edit_answer[' +
+                p + '][answer]" value=""><div class="form-control mb-4" id="edit_answer' + p +
                 '" style="min-height: 80px;"></div></div>'
             );
-            create_quilljs_simple('answer' + i, i);
+            create_quill_edit('edit_answer' + p, p, content);
         } else {
-            $("#dynamic-ar").prop("disabled", true);
+            $("#tombol-tambah-edit").prop("disabled", true);
         }
     }
 
     $(document).on('click', '.remove-edit-field', function() {
         $(this).parents('#removeJawaban').remove();
-        if (i > 1) {
-            i--;
-            $("#dynamic-ar").prop("disabled", false);
-        }
+        // if (window.lastOption > 1) {
+        window.lastOption--;
+        $("#tombol-tambah-edit").prop("disabled", false);
+        console.log(window.lastOption);
+        // }
     });
 </script>
 <?= $this->endSection() ?>

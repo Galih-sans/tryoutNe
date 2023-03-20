@@ -61,6 +61,12 @@ class AnswerModel extends Model
         return Time::now()->getTimestamp();
     }
 
+    public function delete_answer($question_id)
+    {
+        $this->builder->where('question_id', $question_id);
+        return $this->builder->delete();
+    }
+
     public function add_answer($data, $answer)
     {
         $answer_data = [
@@ -71,11 +77,10 @@ class AnswerModel extends Model
             'created_at'    => $this->now(),
             'updated_at'    => $this->now()
         ];
-        return  $this->builder->insert($answer_data);;
-        // return $this->builder->delete();
+        return  $this->builder->insert($answer_data);
     }
 
-    public function update_answer($id_question, $id_answer, $answer)
+    public function update_answer($id_answer, $answer)
     {
         $answer_data = [
             'answer' => $answer['answer'],
@@ -83,7 +88,7 @@ class AnswerModel extends Model
             'updated_at'    => $this->now()
         ];
         $this->builder->where('id', $id_answer);
-        $this->builder->where('question_id', $id_question);
+        // $this->builder->where('question_id', $id_question);
         return $this->builder->update($answer_data);
     }
 
@@ -116,8 +121,6 @@ class AnswerModel extends Model
         return $data;
     }
 
-    // mungkin sekalian join ke to_question agar mendapatkan question
-    // dikirim ke view array question id, question, answer, dikelompokan dengan question_id
     public function get_answer_by_question($id)
     {
         $array_question = array_column($id, 'question_id');
@@ -149,6 +152,4 @@ class AnswerModel extends Model
 
         return $result;
     }
-
-    // select answer where question_id in ( $question_id )
 }
