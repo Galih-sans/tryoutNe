@@ -281,7 +281,7 @@
 
     function tambah() {
         $('#dynamicAddRemove').html(
-            '<div class="col-12 col-md-6 mb-4"><span class="" style="letter-spacing: -em"><meta charset="utf-8">⋮⋮ A</span> ⋮⋮  <label for="checkbox"> Jawaban Benar : </label>  &nbsp;<input type="hidden" name="answer[0][isright]" value="0" /><input type="checkbox" value="1" name="answer[0][isright]"> <input type="hidden" name="answer[0][answer]" value=""><div class="form-control" id="answer0" style="min-height: 80px;"></div></div>'
+            '<div class="col-12 col-md-6 mb-4"><input type="hidden" name="answer[0][isright]" value="0" /><input type="checkbox" value="1" name="answer[0][isright]"><span class="" style="letter-spacing: -em"><meta charset="utf-8"> A</span> ⋮⋮ &nbsp; <input type="hidden" name="answer[0][answer]" value=""><div class="form-control" id="answer0" style="min-height: 80px;"></div></div>'
         );
         create_quilljs_simple('answer0', 0);
         i = 0;
@@ -693,8 +693,8 @@
 
                 i = 0;
                 $('#dynamicEditAddRemove').html(
-                    '<div class="col-12 col-md-6 mb-4"><span class="" style="letter-spacing: -em"><meta charset="utf-8">⋮⋮ ' +
-                    String.fromCharCode('A'.charCodeAt() + (i)) + '  ⋮⋮</span> &nbsp; <label for="checkbox">Jawaban Benar : </label> <input type="hidden" name="edit_answer[0][isright]" value="0" /><input type="checkbox" value="1" id="edit_isright0" name="edit_answer[0][isright]"> <input type="hidden" name="edit_answer[0][answer]" value=""><div class="form-control" id="edit_answer0" style="min-height: 80px;"></div></div>'
+                    '<div class="col-12 col-md-6 mb-4"><input type="hidden" name="edit_answer[0][isright]" value="0" /><input type="checkbox" value="1" id="edit_isright0" name="edit_answer[0][isright]"><span class="" style="letter-spacing: -em"><meta charset="utf-8"> ' +
+                    String.fromCharCode('A'.charCodeAt() + (i)) + '  ⋮⋮</span> &nbsp;  <input type="hidden" name="edit_answer[0][answer]" value=""><div class="form-control" id="edit_answer0" style="min-height: 80px;"></div></div>'
                 );
                 create_quill_edit('edit_answer' + i, i, d.jawabanData[i].answer);
                 window.answerId = [];
@@ -709,12 +709,12 @@
 
                 for (let i = 1; i < d.jawabanData.length; i++) {
                     $("#dynamicEditAddRemove").append(
-                        '<div class="col-12 col-md-6" id="removeJawaban"><span class="" style="letter-spacing: -em"><meta charset="utf-8">⋮⋮ ' +
-                        String.fromCharCode('A'.charCodeAt() + (i)) +
-                        '  ⋮⋮</span> &nbsp; <label for="checkbox">Jawaban Benar : </label> <input type="hidden" name="edit_answer[' +
+                        '<div class="col-12 col-md-6" id="removeJawaban"><input type="hidden" name="edit_answer[' +
                         i + '][isright]" value="0" /><input type="checkbox" value="1" id="edit_isright' + i +
                         '" name="edit_answer[' +
-                        i + '][isright]">   ⋮⋮   <button type="button" class="btn btn-danger remove-edit-field">-</button> <input type="hidden" name="edit_answer[' +
+                        i + '][isright]"><span class="" style="letter-spacing: -em"><meta charset="utf-8"> ' +
+                        String.fromCharCode('A'.charCodeAt() + (i)) +
+                        '  ⋮⋮</span> &nbsp;<button type="button" class="btn btn-danger remove-edit-field float-right btn-sm"><i class="fa fa-minus" aria-hidden="true"></i></button> <input type="hidden" name="edit_answer[' +
                         i + '][answer]" value=""><div class="form-control mb-4" id="edit_answer' + i +
                         '" style="min-height: 80px;"></div></div>'
                     );
@@ -854,11 +854,11 @@
         ++i;
         if (i <= 4) {
             $("#dynamicAddRemove").append(
-                '<div class="col-12 col-md-6" id="removeJawaban"><span class="" style="letter-spacing: -em"><meta charset="utf-8">⋮⋮ ' +
+                '<div class="col-12 col-md-6" id="removeJawaban"><input type="hidden" name="answer[' +
+                i + '][isright]" value="0" /> <input type="checkbox" value="1" name="answer[' +
+                i + '][isright]"><span class="" style="letter-spacing: -em"><meta charset="utf-8"> ' +
                 String.fromCharCode('B'.charCodeAt() + (i - 1)) +
-                '  ⋮⋮</span> &nbsp; <input type="hidden" name="answer[' +
-                i + '][isright]" value="0" /> <label for="checkbox">Jawaban Benar : </label> <input type="checkbox" value="1" name="answer[' +
-                i + '][isright]">   ⋮⋮    <button type="button" class="btn btn-danger remove-input-field">-</button> <input type="hidden" name="answer[' +
+                '  ⋮⋮</span> &nbsp;  <button type="button" class="btn btn-danger remove-input-field float-right btn-sm"><i class="fa fa-minus" aria-hidden="true"></i></button> <input type="hidden" name="answer[' +
                 i + '][answer]" value=""><div class="form-control mb-4" id="answer' + i +
                 '" style="min-height: 80px;"></div></div>'
             );
@@ -887,11 +887,11 @@
         let content = '';
         if (window.lastOption <= 4) {
             $("#dynamicEditAddRemove").append(
-                '<div class="col-12 col-md-6" id="removeJawaban"><span class="" style="letter-spacing: -em"><meta charset="utf-8">⋮⋮ ' +
-                String.fromCharCode('A'.charCodeAt() + (p)) +
-                ' ⋮⋮</span> &nbsp; <label for="checkbox">Jawaban Benar : </label> <input type="hidden" name="edit_answer[' +
+                '<div class="col-12 col-md-6" id="removeJawaban"><input type="hidden" name="edit_answer[' +
                 p + '][isright]" value="0" /><input type="checkbox" value="1" name="edit_answer[' +
-                p + '][isright]">  <button type="button" class="btn btn-danger remove-edit-field">-</button> <input type="hidden" name="edit_answer[' +
+                p + '][isright]"><span  style="letter-spacing: -em"><meta charset="utf-8"> ' +
+                String.fromCharCode('A'.charCodeAt() + (p)) +
+                ' ⋮⋮</span> &nbsp;   <button type="button" class="btn btn-danger remove-edit-field float-right btn-sm"><i class="fa fa-minus" aria-hidden="true"></i></button> <input type="hidden" name="edit_answer[' +
                 p + '][answer]" value=""><div class="form-control mb-4" id="edit_answer' + p +
                 '" style="min-height: 80px;"></div></div>'
             );
