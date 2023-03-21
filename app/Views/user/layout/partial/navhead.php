@@ -12,15 +12,15 @@
           </a>
         </div>
       </div>
-      <ul class="navbar-nav  justify-content-end">
+      <ul class="navbar-nav justify-content-end">
         <li class="nav-item pe-2 px-2 d-flex align-items-center">
-          <div class="nav-link text-light font-weight-bold px-0" id="" data-bs-toggle="" aria-expanded="false">
-            <span class="d-none px-3 d-sm-inline-block ms-2">20000 Diamond</span>
+          <div class="nav-link text-light font-weight-bold px-0">
+            <i class="fa fa-regular fa-gem"></i>
+            <span class="d-sm-inline-block ms-2">20000</span>
+            <a href="<?= route_to('user.transaksi.index') ?>" class="d-inline nav-link inline-block text-light font-weight-bold">
+              <i class="fa-regular fa-plus"></i>
+            </a>
           </div>
-          <a href="<?= route_to('user.transaksi.index') ?>" class="nav-link text-light font-weight-bold px-0" id="" data-bs-toggle="" aria-expanded="false">
-            <i class="fa-regular fa-gem"></i>
-            <i class="fa-regular fa-plus"></i>
-          </a>
           <!-- <ul class="dropdown-menu  dropdown-menu-end  px-2 py-2 me-sm-n4" aria-labelledby="dropdownMenuButton">
             <li class="mb-2">
               <div class="py-3 text-center bg-body-light border-bottom rounded-top">
