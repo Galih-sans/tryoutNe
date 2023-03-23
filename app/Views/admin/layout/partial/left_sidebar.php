@@ -28,26 +28,26 @@
                 </a>
             </li>
             <li class="nav-main-heading">Menu</li>
-            <li class="nav-main-item <?= $pagedata['activeTab'] == "class" || $pagedata['activeTab'] == "subject" || $pagedata['activeTab'] == "topic" ? 'open' : ''; ?>">
+            <li <?= session('role') == 'superadmin' ? '' : (session('role') == 'kurikulum' ? '' : 'hidden'); ?> class="nav-main-item <?= $pagedata['activeTab'] == "class" || $pagedata['activeTab'] == "subject" || $pagedata['activeTab'] == "topic" ? 'open' : ''; ?>">
                 <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="true" href="#">
                     <i class="nav-main-link-icon fa-solid fa-book-open"></i>
                     <span class="nav-main-link-name">Kelas & Mata Pelajaran</span>
                 </a>
-                <ul class="nav-main-submenu">
+                <ul <?= session('role') == 'superadmin' ? '' : (session('role') == 'kurikulum' ? '' : 'hidden'); ?> class="nav-main-submenu">
                     <li class="nav-main-item">
                         <a class="nav-main-link <?= $pagedata['activeTab'] == "class" ? 'color-ne' : ''; ?>" href="<?= route_to('admin.class.index') ?>">
                             <span class="nav-main-link-name">Daftar Kelas</span>
                         </a>
                     </li>
                 </ul>
-                <ul class="nav-main-submenu">
+                <ul <?= session('role') == 'superadmin' ? '' : (session('role') == 'kurikulum' ? '' : 'hidden'); ?> class="nav-main-submenu">
                     <li class="nav-main-item">
                         <a class="nav-main-link " href="<?= route_to('admin.subject.index') ?>">
                             <span class="nav-main-link-name">Mata Pelajaran</span>
                         </a>
                     </li>
                 </ul>
-                <ul class="nav-main-submenu">
+                <ul <?= session('role') == 'superadmin' ? '' : 'hidden'; ?> class="nav-main-submenu">
                     <li class="nav-main-item">
                         <a class="nav-main-link" href="<?= route_to('admin.topic.index') ?>">
                             <span class="nav-main-link-name">Topik Mata Pelajaran</span>
@@ -55,25 +55,26 @@
                     </li>
                 </ul>
             </li>
-            <li class="nav-main-item">
+            <li <?= session('role') == 'superadmin' ? '' : 'hidden'; ?> class="nav-main-item">
                 <a class="nav-main-link <?= $pagedata['activeTab'] == "test" ? 'active' : ''; ?>" href="<?= route_to('admin.test.index') ?>">
                     <i class="nav-main-link-icon fa-solid fa-clipboard-list"></i>
                     <span class="nav-main-link-name">Daftar Test</span>
                 </a>
             </li>
-            <li class="nav-main-item ">
+            <!-- // semua role bisa akses bank soal-->
+            <li class=" nav-main-item ">
                 <a class="nav-main-link <?= $pagedata['activeTab'] == "bank-soal" ? 'active' : ''; ?>" href="<?= route_to('admin.bank-soal.index') ?>">
                     <i class="nav-main-link-icon fa-solid fa-file-lines"></i>
                     <span class="nav-main-link-name">Bank Soal</span>
                 </a>
             </li>
-            <li class="nav-main-item">
+            <li <?= session('role') == 'superadmin' ? '' : 'hidden'; ?> class="nav-main-item">
                 <a class="nav-main-link <?= $pagedata['activeTab'] == "siswa" ? 'active' : ''; ?>" href="<?= route_to('admin.siswa.index') ?>">
                     <i class="nav-main-link-icon fa-solid fa-users"></i>
                     <span class="nav-main-link-name">Siswa</span>
                 </a>
             </li>
-            <li class="nav-main-item">
+            <li <?= session('role') == 'superadmin' ? '' : 'hidden'; ?> class="nav-main-item">
                 <a class="nav-main-link <?= $pagedata['activeTab'] == "hasil-test" ? 'active' : ''; ?>" href="<?= route_to('admin.hasil-test.index') ?>">
                     <i class="nav-main-link-icon fa-solid fa-file-lines"></i>
                     <span class="nav-main-link-name">Hasil Test</span>
