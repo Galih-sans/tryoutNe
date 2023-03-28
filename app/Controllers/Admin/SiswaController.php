@@ -9,11 +9,16 @@ class SiswaController extends BaseController
     public $pagedata;
     public $response;
     public $siswa_model;
+    public $role_model;
+    public $data;
+    public $encrypter;
     public function __construct()
     {
         $this->pagedata['activeTab'] = "siswa";
         $this->pagedata['title'] = "Daftar Siswa";
         $this->siswa_model = new \App\Models\Admin\SiswaModel();
+        $this->role_model = new \App\Models\Admin\RoleModel();
+        $this->encrypter = \Config\Services::encrypter();
     }
     /**
      * Return an array of resource objects, themselves in array format
@@ -22,8 +27,9 @@ class SiswaController extends BaseController
      */
     public function index()
     {
-
-        return view('admin/pages/siswa/index', ['pagedata' => $this->pagedata]);
+        $id = $this->encrypter->decrypt(base64_decode(session()->get('role')));
+        $this->data['role'] = $this->role_model->where('id', $id)->findAll();
+        return view('admin/pages/siswa/index', ['pagedata' => $this->pagedata, 'data' => $this->data]);
     }
     public function dt_siswa()
     {

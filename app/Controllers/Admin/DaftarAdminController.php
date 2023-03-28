@@ -2,31 +2,32 @@
 
 namespace App\Controllers\Admin;
 
+use CodeIgniter\I18n\Time;
 use App\Controllers\BaseController;
-use App\Models\Admin\ClassModel;
-use App\Models\Admin\SubjectModel;
-use App\Models\Admin\TopicModel;
 
-class TopicController extends BaseController
+
+class DaftarAdminController extends BaseController
 {
     public $pagedata;
     public $response;
-    public $TopicModel;
-    public $SubjectModel;
-    public $ClassModel;
-    public $data;
+    public $daftar_admin_model;
     public $role_model;
+    public $data;
     public $encrypter;
+
 
     public function __construct()
     {
-        $this->pagedata['activeTab'] = "topic";
-        $this->pagedata['title'] = "Daftar Topik Mata Pelajaran";
-        $this->TopicModel = new TopicModel();
-        $this->SubjectModel = new SubjectModel();
-        $this->ClassModel = new ClassModel();
+        $this->pagedata['activeTab'] = "kelola-admin";
+        $this->pagedata['title'] = "Kelola Admin";
         $this->role_model = new \App\Models\Admin\RoleModel();
+        $this->daftar_admin_model = new \App\Models\AdminModel();
         $this->encrypter = \Config\Services::encrypter();
+    }
+
+    protected function now()
+    {
+        return Time::now()->getTimestamp();
     }
     /**
      * Return an array of resource objects, themselves in array format
@@ -37,35 +38,37 @@ class TopicController extends BaseController
     {
         $id = $this->encrypter->decrypt(base64_decode(session()->get('role')));
         $this->data['role'] = $this->role_model->where('id', $id)->findAll();
-        $this->data['class'] = $this->ClassModel->orderBy('id', 'ASC')->findAll();
-        return view('admin/pages/topic/index', ['pagedata' => $this->pagedata, 'data' => $this->data]);
+        $this->data['roleData'] = $this->role_model->orderBy('id', 'ASC')->findAll();
+        return view('admin/pages/daftar-admin/index', ['pagedata' => $this->pagedata, 'data' => $this->data]);
     }
-    public function dt_topic()
+    public function dt_daftar_admin()
     {
         if ($this->request->isAJAX()) {
             $request = \Config\Services::request();
-            $list_data = $this->TopicModel;
-            $subject = $request->getPost("subject_id");
-            $where = ['to_subjects.id !=' => 0];
+            $list_data = $this->daftar_admin_model;
+            $where = ['to_admins.id !=' => 0];
             //Column Order Harus Sesuai Urutan Kolom Pada Header Tabel di bagian View
             //Awali nama kolom tabel dengan nama tabel->tanda titik->nama kolom seperti pengguna.nama
-            $column_order = array('', 'to_class.level', 'to_class.class', 'to_subjects.subject', 'to_topics.topic');
-            $column_search = array('to_class.level', 'to_class.class', 'to_subjects.subject', 'to_topics.topic');
-            $order = array('to_topics.id' => 'asc');
-            $list = $list_data->get_datatables($subject, $column_order, $column_search, $order, $where);
+            $column_order = array('to_admins.id', 'to_admins.full_name', 'to_admins.email', 'to_admins.role', 'to_roles.role_name');
+            $column_search = array('to_admins.full_name', 'to_admins.email', 'to_admins.role', 'to_roles.role_name');
+            $order = array('to_admins.id' => 'asc');
+            $list = $list_data->get_datatables('to_admins', $column_order, $column_search, $order, $where);
             $data = array();
             $no = $request->getPost("start");
             foreach ($list as $lists) {
                 $no++;
                 $row    = array();
                 $row[] = $no;
-                $row[] = $lists->level;
-                $row[] = $lists->class;
-                $row[] = $lists->subject;
-                $row[] = $lists->topic;
+                $row[] = $lists->full_name;
+                $row[] = $lists->email;
+                $row[] = $lists->role_name;
                 $row[]  = '
-                    <div class="block-options text-center">
-                    <button type="button" class="btn btn-sm btn-warning  edit-button" data-id="' . $lists->id . '" data-level="' . $lists->level . '"' . '" data-class="' . $lists->class . '">
+                    <div class="block-options">
+                    <button type="button" class="btn btn-sm btn-warning  edit-button"
+                    data-id="' . $lists->id . '" 
+                    data-full_name="' . $lists->full_name . '"' . '" 
+                    data-email="' . $lists->email . '"
+                    data-role="' . $lists->role . '">
                         <i class="fa-solid fa-pen-to-square"></i>
                     </button>
                     <button type="button" class="btn btn-sm btn-danger  delete-button" data-id="' . $lists->id . '">
@@ -77,10 +80,9 @@ class TopicController extends BaseController
             }
             $response = array(
                 "draw" => $request->getPost("draw"),
-                "recordsTotal" => count($data),
-                "recordsFiltered" => count($data),
+                "recordsTotal" => $list_data->count_all('to_admins', $where),
+                "recordsFiltered" => $list_data->count_filtered('to_admins', $column_order, $column_search, $order, $where),
                 "data" => $data,
-
             );
             return json_encode($response);
         }
@@ -114,18 +116,24 @@ class TopicController extends BaseController
     public function create()
     {
         if ($this->request->isAJAX()) {
-            $data = [
-                'subject_id' => $this->request->getVar('subject_id'),
-                'topic' => $this->request->getVar('topic')
+            $data_create_admin = [
+                'full_name' => $this->request->getVar('full-name'),
+                'email' => $this->request->getVar('email'),
+                'role' => $this->request->getVar('role'),
+                'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
+                'created_at'    => $this->now(),
+                'updated_at'    => $this->now()
             ];
-            $query = $this->TopicModel->insert($data);
+            $query = $this->daftar_admin_model->insert($data_create_admin);
             if ($query) {
                 $response['success'] = true;
                 $response['message']  = 'Data Berhasil Ditambahkan';
             } else {
                 $response['success'] = false;
-                $response['message']  = 'Data Berhasil Ditambahkan';
+                $response['message']  = 'Data Gagal Ditambahkan';
+                $response['validation'] = "Isian Form Tidak Boleh Kosong";
             }
+
             echo json_encode($response);
         }
     }
@@ -137,21 +145,24 @@ class TopicController extends BaseController
     public function update()
     {
         if ($this->request->isAJAX()) {
-            $id = $this->request->getVar('id');
+            $id = $this->request->getVar('edit-admin_id');
             $data = [
-                'id' => $this->request->getVar('id'),
-                'subject_id' => $this->request->getVar('subject_id'),
-                'topic' => $this->request->getVar('topic')
+                'full_name' => $this->request->getVar('edit-full_name'),
+                'email' => $this->request->getVar('edit-email'),
+                'role' => $this->request->getVar('edit-role'),
+                'password' => password_hash($this->request->getVar('edit-password'), PASSWORD_DEFAULT),
             ];
-            $query = $this->TopicModel->update_topic($id, $data);
+            $query = $this->daftar_admin_model->update($id, $data);
             if ($query) {
                 $response['success'] = true;
-                $response['message']  = 'Data Berhasil Diupdate';;
+                $response['message']  = 'Data Berhasil Diupdate';
             } else {
                 $response['success'] = false;
                 $response['message']  = 'Data Gagal Diupdate';
             }
-            echo json_encode($response);
+
+
+            return json_encode($response);
         }
     }
 
@@ -164,7 +175,7 @@ class TopicController extends BaseController
     {
         if ($this->request->isAJAX()) {
             $id = $this->request->getVar('id');
-            $delete = $this->TopicModel->delete_topic($id);
+            $delete = $this->daftar_admin_model->delete($id);
             if ($delete) {
                 $response['success'] = true;
                 $response['message']  = 'Data telah dihapus';
@@ -173,21 +184,6 @@ class TopicController extends BaseController
                 $response['message']  = 'Data gagal dihapus';
             }
 
-            echo json_encode($response);
-        }
-    }
-
-    public function get_subject()
-    {
-        if ($this->request->isAJAX()) {
-            $id = $this->request->getVar('id');
-            $subjectdata = $this->SubjectModel->get_subject($id);
-            $response = array();
-            foreach ($subjectdata as $subject) {
-                $response[] = array(
-                    "subject" => $subject->subject, PHP_EOL
-                );
-            }
             echo json_encode($response);
         }
     }

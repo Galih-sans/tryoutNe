@@ -19,6 +19,7 @@ class HasilTestController extends BaseController
     public $answer_model;
     public $uri;
     public $test_id;
+    public $role_model;
 
     public function __construct()
     {
@@ -32,15 +33,20 @@ class HasilTestController extends BaseController
         $this->encrypter = \Config\Services::encrypter();
         $this->result_model = new \App\Models\TestResultModel();
         $this->answer_model = new \App\Models\TestAnswerModel();
+        $this->role_model = new \App\Models\Admin\RoleModel();
     }
 
     public function index()
     {
-        return view('admin/pages/hasil-test/index', ['pagedata' => $this->pagedata]);
+        $id = $this->encrypter->decrypt(base64_decode(session()->get('role')));
+        $this->data['role'] = $this->role_model->where('id', $id)->findAll();
+        return view('admin/pages/hasil-test/index', ['pagedata' => $this->pagedata, 'data' => $this->data]);
     }
 
     public function detail()
     {
+        $id = $this->encrypter->decrypt(base64_decode(session()->get('role')));
+        $this->data['role'] = $this->role_model->where('id', $id)->findAll();
         $this->pagedata['title'] = "Detail Test Siswa";
         $this->pagedata['encrypter'] = $this->encrypter;
         // $test_id = $this->uri->getSegment(4);
@@ -97,7 +103,7 @@ class HasilTestController extends BaseController
             return json_encode($response);
         }
 
-        return view('admin/pages/hasil-test/detail', ['pagedata' => $this->pagedata]);
+        return view('admin/pages/hasil-test/detail', ['pagedata' => $this->pagedata, 'data' => $this->data]);
     }
 
     public function dt_daftar_test()

@@ -73,12 +73,12 @@ class LoginController extends BaseController
         //                'id' => base64_encode($encrypter->encrypt($user['id'])),
         if ($isAdmin == true) {
             $data = [
-                'id' => $user['id'],
+                'id' => base64_encode($encrypter->encrypt($user['id'])), // di encrypt
                 'name' => $user['full_name'],
                 'email' => $user['email'],
                 'isLoggedIn' => true,
                 'isAdmin' => true,
-                "role" => $user['role'],
+                "role" => base64_encode($encrypter->encrypt($user['role'])),
             ];
         } else {
             $data = [

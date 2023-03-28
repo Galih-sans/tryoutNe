@@ -1,70 +1,60 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Admin;
 
 use CodeIgniter\Model;
 use CodeIgniter\I18n\Time;
 
-class AdminModel extends Model
+class RoleModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'to_admins';
+    protected $table            = 'to_roles';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
-    protected $returnType       = 'array';
-    protected $useSoftDeletes   = false;
+    protected $returnType       = 'object';
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'full_name',
-        'email',
-        'password',
-        'gender',
-        'role',
-        'token',
+        'role_name',
+        'ha_class',
+        'ha_subject',
+        'ha_topic',
+        'ha_test',
+        'ha_bank_soal',
+        'ha_siswa',
+        'ha_hasil_test',
+        'ha_kelola_admin',
+        'ha_kelola_role'
     ];
-
-    // Dates
-    protected $useTimestamps = true;
-    protected $dateFormat    = 'int';
-    protected $createdField  = 'created_at';
-    protected $updatedField  = 'updated_at';
-    protected $deletedField  = 'deleted_at';
 
     // Validation
-    protected $validationRules      = [
-        'full_name'     => 'required',
-        'email'        => 'required',
-        'password'     => 'required',
-        'role'        => 'required',
-    ];
-    protected $validationMessages   = [
-        'full_name'        => [
-            'required' => 'Nama Harus Diisi',
-        ],
-        'email'        => [
-            'required' => 'Email Harus Diisi',
-        ],
-        'password'        => [
-            'required' => 'Harus Diisi',
-        ],
-        'role'        => [
-            'required' => 'Role Harus Diisi',
-        ]
-    ];
+    // protected $validationRules =
+    // [
+    //     'full_name'     => 'required',
+    //     'email'        => 'required',
+    //     'password'        => 'required',
+    //     'role'        => 'required',
+    //     'full_name'     => 'required',
+    //     'email'        => 'required',
+    //     'password'        => 'required',
+    //     'role'        => 'required',
+    // ];
+    // protected $validationMessages   = [
+    //     'full_name'        => [
+    //         'required' => 'Harus Diisi',
+    //     ],
+    //     'email'        => [
+    //         'required' => 'Harus Diisi',
+    //     ],
+    //     'password'        => [
+    //         'required' => 'Harus Diisi',
+    //     ],
+    //     'role'        => [
+    //         'required' => 'Harus Diisi',
+    //     ]
+    // ];
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;
-
-    // Callbacks
-    protected $allowCallbacks = true;
-    protected $beforeInsert   = [];
-    protected $afterInsert    = [];
-    protected $beforeUpdate   = [];
-    protected $afterUpdate    = [];
-    protected $beforeFind     = [];
-    protected $afterFind      = [];
-    protected $beforeDelete   = [];
-    protected $afterDelete    = [];
 
     public function __construct()
     {
@@ -78,16 +68,32 @@ class AdminModel extends Model
         return Time::now()->getTimestamp();
     }
 
+    // public function get_datatables()
+    // {
+    //     $query = $this->builder->get();
+    //     return $query->getResult();
+    // }
+    // public function create($data)
+    // {
+    //     $query = $this->builder->insert($data);
+    //     return $query;
+    // }
+
+    // public function get_admin($id)
+    // {
+    //     $query = $this->builder->getWhere(['id' => $id]);
+    //     return $query->getRow();
+    // }
+    // public function get_class_by_level($id)
+    // {
+    //     $query = $this->builder->getWhere(['level' => $id]);
+    //     return $query->getResult();
+    // }
+
+
     protected function _get_datatables_query($table, $column_order, $column_search, $order)
     {
-        // $this->builder = $this->db->table($table);
-        $this->builder->select(
-            'to_admins.id,
-            to_admins.full_name,
-            to_admins.email,
-            to_admins.role,
-            to_roles.role_name'
-        )->join('to_roles', 'to_roles.id=to_admins.role', 'left');
+        $this->builder = $this->db->table($table);
         // ADMIN JOIN ROLE
         //jika ingin join formatnya adalah sebagai berikut :
         //$this->builder->join('tabel_lain','tabel_lain.kolom_yang_sama = pengguna.kolom_yang_sama','left');

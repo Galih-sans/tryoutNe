@@ -4,6 +4,7 @@ namespace Config;
 
 use App\Filters\Auth;
 use App\Filters\isAdmin;
+use App\Filters\checkRole;
 use App\Filters\isUser;
 use App\Filters\Noauth;
 use CodeIgniter\Config\BaseConfig;
@@ -30,6 +31,7 @@ class Filters extends BaseConfig
         'auth' => Auth::class,
         'noauth' => Noauth::class,
         'isadmin' => [
+            checkRole::class,
             Auth::class,
             isAdmin::class,
         ],
@@ -37,8 +39,6 @@ class Filters extends BaseConfig
             Auth::class,
             isUser::class,
         ],
-        'filterSoal' => \App\Filters\isSoal::class,
-        'filterKurikulum' => \App\Filters\isKurikulum::class,
     ];
 
     /**
@@ -54,16 +54,6 @@ class Filters extends BaseConfig
             // 'invalidchars',
         ],
         'after' => [
-            'filterSoal' => ['except' => [
-                '/login', '/logout', '/admin',
-                'admin/bank-soal', 'admin/bank-soal/*'
-            ]],
-            'filterKurikulum' => ['except' => [
-                '/login', '/logout', '/admin',
-                'admin/bank-soal', 'admin/bank-soal/*',
-                'admin/class', 'admin/class/*',
-                'admin/subject', 'admin/subject/*'
-            ]],
             'toolbar',
             // 'honeypot',
             // 'secureheaders',

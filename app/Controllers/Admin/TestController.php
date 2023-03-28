@@ -13,6 +13,8 @@ class TestController extends BaseController
     public $data;
     public $TestModel;
     public $QuestionCompositionModel;
+    public $role_model;
+    public $encrypter;
     public function __construct()
     {
         $this->pagedata['activeTab'] = "test";
@@ -20,11 +22,15 @@ class TestController extends BaseController
         $this->class_model = new \App\Models\Admin\ClassModel();
         $this->TestModel = new \App\Models\Admin\TestModel();
         $this->QuestionCompositionModel = new \App\Models\Admin\QuestionCompotionModel();
+        $this->role_model = new \App\Models\Admin\RoleModel();
+        $this->encrypter = \Config\Services::encrypter();
     }
     public function index()
     {
+        $id = $this->encrypter->decrypt(base64_decode(session()->get('role')));
+        $this->data['role'] = $this->role_model->where('id', $id)->findAll();
         $this->data['class'] = $this->class_model->orderBy('id', 'ASC')->findAll();
-        return view('admin/pages/test/index', ['pagedata'=>$this->pagedata, 'data'=>$this->data]);
+        return view('admin/pages/test/index', ['pagedata' => $this->pagedata, 'data' => $this->data]);
     }
 
     public function dt_test()
@@ -34,10 +40,10 @@ class TestController extends BaseController
             $request = \Config\Services::request();
             $list_data = $this->TestModel;
             $where = [];
-                    //Column Order Harus Sesuai Urutan Kolom Pada Header Tabel di bagian View
-                    //Awali nama kolom tabel dengan nama tabel->tanda titik->nama kolom seperti pengguna.nama
-            $column_order = array('to_tests.id','to_class.id', 'to_tests.test_name','to_tests.number_of_question', 'type', 'status');
-            $column_search = array('to_class.level', 'to_class.class','to_tests.test_name', 'begin_time', 'end_time', 'duration', 'to_tests.number_of_question', 'type', 'price', 'status');
+            //Column Order Harus Sesuai Urutan Kolom Pada Header Tabel di bagian View
+            //Awali nama kolom tabel dengan nama tabel->tanda titik->nama kolom seperti pengguna.nama
+            $column_order = array('to_tests.id', 'to_class.id', 'to_tests.test_name', 'to_tests.number_of_question', 'type', 'status');
+            $column_search = array('to_class.level', 'to_class.class', 'to_tests.test_name', 'begin_time', 'end_time', 'duration', 'to_tests.number_of_question', 'type', 'price', 'status');
             $order = array('to_tests.id' => 'asc');
             $list = $list_data->get_datatables('to_tests', $column_order, $column_search, $order, $where);
             $data = array();
@@ -46,26 +52,26 @@ class TestController extends BaseController
                 $no++;
                 $row    = array();
                 $row[] = $no;
-                $row[] = '<p class="fw-bold fs-sm font-size-sm text-center">'.$lists->class.' '.$lists->level.'</p>';
-                $row[] = '<p class="fw-bold fs-sm"><a class="fw-semibold link-fx text-neo click" href="#" data-id="'.base64_encode($encrypter->encrypt($lists->id)).'">'.$lists->test_name.'</a></p><p class="fw-lighter fs-sm font-size-sm">'.date("d-m-Y H:i:s ", $lists->begin_time).'<span class="fw-bold"> s/d </span>'.date("d-m-Y H:i:s ", $lists->end_time).'</p><p class="fw-lighter fs-sm font-size-sm"> ( '.$lists->duration.' ) Menit </p>';
-                $row[] = '<p class="fw-bold fs-sm font-size-sm">'.$lists->number_of_question.' Butir </p>';
+                $row[] = '<p class="fw-bold fs-sm font-size-sm text-center">' . $lists->class . ' ' . $lists->level . '</p>';
+                $row[] = '<p class="fw-bold fs-sm"><a class="fw-semibold link-fx text-neo click" href="#" data-id="' . base64_encode($encrypter->encrypt($lists->id)) . '">' . $lists->test_name . '</a></p><p class="fw-lighter fs-sm font-size-sm">' . date("d-m-Y H:i:s ", $lists->begin_time) . '<span class="fw-bold"> s/d </span>' . date("d-m-Y H:i:s ", $lists->end_time) . '</p><p class="fw-lighter fs-sm font-size-sm"> ( ' . $lists->duration . ' ) Menit </p>';
+                $row[] = '<p class="fw-bold fs-sm font-size-sm">' . $lists->number_of_question . ' Butir </p>';
                 if ($lists->type != 'free') {
-                    $row[] = '<p class="fw-bold fs-sm font-size-sm">'.$lists->price.'</p>';
-                }else{
-                    $row[] = '<p class="fw-bold fs-sm font-size-sm">'.ucfirst($lists->type).'</p>';
+                    $row[] = '<p class="fw-bold fs-sm font-size-sm">' . $lists->price . '</p>';
+                } else {
+                    $row[] = '<p class="fw-bold fs-sm font-size-sm">' . ucfirst($lists->type) . '</p>';
                 }
-                if($lists->status == -100){
+                if ($lists->status == -100) {
                     $row[] = '<span class="fs-xs fw-semibold d-inline-block py-1 px-3 bg-danger text-light btn-sm btn-block text-center"><small>Tidak Aktif</small></span>';
-                }elseif($lists->status == 100){
+                } elseif ($lists->status == 100) {
                     $row[] = '<span class="fs-xs fw-semibold d-inline-block py-1 px-3 bg-neo text-light btn-sm btn-block text-center"><small>Aktif</small></span>';
                 }
-                
+
                 $row[]  = '
                     <div class="block-options">
-                    <button type="button" class="btn btn-sm btn-warning  edit-button"  data-id="'.base64_encode($encrypter->encrypt($lists->id)).'">
+                    <button type="button" class="btn btn-sm btn-warning  edit-button"  data-id="' . base64_encode($encrypter->encrypt($lists->id)) . '">
                         <i class="fa-solid fa-pen-to-square"></i>
                     </button>
-                    <button type="button" class="btn btn-sm btn-danger  delete-button" data-id="'.base64_encode($encrypter->encrypt($lists->id)).'">
+                    <button type="button" class="btn btn-sm btn-danger  delete-button" data-id="' . base64_encode($encrypter->encrypt($lists->id)) . '">
                     <i class="fa-solid fa-trash"></i>
                     </button>
                     </div>
@@ -81,22 +87,22 @@ class TestController extends BaseController
             return json_encode($response);
         }
     }
-    
+
     public function delete()
     {
         $encrypter = \Config\Services::encrypter();
         if ($this->request->isAJAX()) {
-            
+
             $id =  $encrypter->decrypt(base64_decode($this->request->getVar('id')));
-            $delete = $this->TestModel->where('id',$id)->delete();
+            $delete = $this->TestModel->where('id', $id)->delete();
             $testResult = new TestResultModel();
             $testAnswer = new TestResultModel();
-            $testResult->where('test_id',$id)->delete();
-            $testAnswer->where('test_id',$id)->delete();
+            $testResult->where('test_id', $id)->delete();
+            $testAnswer->where('test_id', $id)->delete();
             if ($delete) {
                 $response['success'] = true;
                 $response['message']  = 'Data Berhasil Dihapus';
-            }else{
+            } else {
                 $response['success'] = false;
                 $response['message']  = 'Data Gagal Dihapus';
             }
@@ -131,29 +137,29 @@ class TestController extends BaseController
                 'topic' => $this->request->getVar('topic[]'),
                 'number_question' => $this->request->getVar('number_question[]'),
             ];
-            if($data['random_question'] == ''){
-                $data['random_question']='0';
+            if ($data['random_question'] == '') {
+                $data['random_question'] = '0';
             }
-            if($data['random_answer'] == ''){
-                $data['random_answer']='0';
+            if ($data['random_answer'] == '') {
+                $data['random_answer'] = '0';
             }
-            if($data['result_to_student'] == ''){
-                $data['result_to_student']='0';
+            if ($data['result_to_student'] == '') {
+                $data['result_to_student'] = '0';
             }
 
-            
+
 
 
             $data['begin_time'] = strtotime(str_replace(",", "", $data['begin_time']));
             $data['end_time'] = strtotime(str_replace(",", "", $data['end_time']));
-            
+
             $query = $this->TestModel->insert($data);
-            if($query){
+            if ($query) {
                 //menyimpan komposisi soal
                 $test_id =  $this->TestModel->getInsertID();
                 $data1 = array();
-                for($i=0;$i< count($compositionData['subject']);$i++){
-                    $data1[$i]=array(
+                for ($i = 0; $i < count($compositionData['subject']); $i++) {
+                    $data1[$i] = array(
                         'test_id' => $test_id,
                         'subject_id' => $compositionData['subject'][$i],
                         'topic_id' => $compositionData['topic'][$i],
@@ -161,14 +167,14 @@ class TestController extends BaseController
                     );
                 }
                 $compositionQuery = $this->QuestionCompositionModel->insertBatch($data1);
-                if($compositionQuery){
+                if ($compositionQuery) {
                     $response['success'] = true;
                     $response['message']  = 'Data Berhasil Disimpan';
-                }else{
+                } else {
                     $response['success'] = false;
                     $response['message']  = 'Data Gagal Disimpan';
                 }
-            }else{
+            } else {
                 $response['success'] = false;
                 $response['message']  = 'Data Gagal Disimpan';
             }
@@ -181,12 +187,12 @@ class TestController extends BaseController
         if ($this->request->isAJAX()) {
             $id =  $encrypter->decrypt(base64_decode($this->request->getVar('id')));
             $testData = $this->TestModel->get_test($id);
-            $testData->begin_time =date("d-m-Y H:i:s ",$testData->begin_time);
-            $testData->end_time =date("d-m-Y H:i:s ",$testData->end_time);
+            $testData->begin_time = date("d-m-Y H:i:s ", $testData->begin_time);
+            $testData->end_time = date("d-m-Y H:i:s ", $testData->end_time);
 
-            $data['testData']=$testData;
-            $data['compositonData']=$this->QuestionCompositionModel->get_composition($id);
-        return json_encode($data);
+            $data['testData'] = $testData;
+            $data['compositonData'] = $this->QuestionCompositionModel->get_composition($id);
+            return json_encode($data);
         }
     }
     public function get_detail()
@@ -195,11 +201,11 @@ class TestController extends BaseController
         if ($this->request->isAJAX()) {
             $id =  $encrypter->decrypt(base64_decode($this->request->getVar('id')));
             $testData = $this->TestModel->get_edit_test($id);
-            $testData->begin_time =date("m/d/Y, H:i ",$testData->begin_time);
-            $testData->end_time =date("m/d/Y, H:i ",$testData->end_time);
-            $data['testData']=$testData;
-            $data['compositonData']=$this->QuestionCompositionModel->get_composition_detail($id);
-        return json_encode($data);
+            $testData->begin_time = date("m/d/Y, H:i ", $testData->begin_time);
+            $testData->end_time = date("m/d/Y, H:i ", $testData->end_time);
+            $data['testData'] = $testData;
+            $data['compositonData'] = $this->QuestionCompositionModel->get_composition_detail($id);
+            return json_encode($data);
         }
     }
     public function update()
@@ -231,40 +237,40 @@ class TestController extends BaseController
             //     'topic' => $this->request->getVar('topic[]'),
             //     'number_question' => $this->request->getVar('number_question[]'),
             // ];
-            if($data['random_question'] == ''){
-                 $data['random_question']='0';
+            if ($data['random_question'] == '') {
+                $data['random_question'] = '0';
             }
-            if($data['random_answer'] == ''){
-                $data['random_answer']='0';
+            if ($data['random_answer'] == '') {
+                $data['random_answer'] = '0';
             }
-            if($data['result_to_student'] == ''){
-                $data['result_to_student']='0';
+            if ($data['result_to_student'] == '') {
+                $data['result_to_student'] = '0';
             }
 
             $data['begin_time'] = strtotime(str_replace(",", "", $data['begin_time']));
             $data['end_time'] = strtotime(str_replace(",", "", $data['end_time']));
-            
+
             $query = $this->TestModel->update($id, $data);
-            if($query){
+            if ($query) {
                 $this->QuestionCompositionModel->where('test_id', $id)->delete();
                 $data1 = array();
                 foreach ($compositionData as $row) {
-                    $data1[]=array(
-                                'test_id' => $id,
-                                'subject_id' => $row['subject'],
-                                'topic_id' => $row['topic'],
-                                'number_of_question' => $row['number_question'],
-                            );
+                    $data1[] = array(
+                        'test_id' => $id,
+                        'subject_id' => $row['subject'],
+                        'topic_id' => $row['topic'],
+                        'number_of_question' => $row['number_question'],
+                    );
                 }
                 $compositionQuery = $this->QuestionCompositionModel->insertBatch($data1);
-                if($compositionQuery){
+                if ($compositionQuery) {
                     $response['success'] = true;
                     $response['message']  = 'Data Berhasil Diupdate';
-                }else{
+                } else {
                     $response['success'] = false;
                     $response['message']  = 'Data Gagal Diupdate';
                 }
-            }else{
+            } else {
                 $response['success'] = false;
                 $response['message']  = 'Data Gagal Diupdate';
             }
