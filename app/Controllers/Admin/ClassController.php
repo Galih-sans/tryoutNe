@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controllers\Admin;
+
 use App\Controllers\BaseController;
 
 class ClassController extends BaseController
@@ -8,12 +9,17 @@ class ClassController extends BaseController
     public $pagedata;
     public $response;
     public $class_model;
+    public $role_model;
+    public $data;
+    public $encrypter;
     public function __construct()
     {
         $this->pagedata['activeTab'] = "class";
         $this->pagedata['title'] = "Daftar Kelas";
         $this->class_model = new \App\Models\Admin\ClassModel();
         $this->class_model = new \App\Models\Admin\ClassModel();
+        $this->role_model = new \App\Models\Admin\RoleModel();
+        $this->encrypter = \Config\Services::encrypter();
     }
     /**
      * Return an array of resource objects, themselves in array format
@@ -22,8 +28,9 @@ class ClassController extends BaseController
      */
     public function index()
     {
-
-        return view('admin/pages/class/index', ['pagedata'=> $this->pagedata]);
+        $id = $this->encrypter->decrypt(base64_decode(session()->get('role')));
+        $this->data['role'] = $this->role_model->where('id', $id)->findAll();
+        return view('admin/pages/class/index', ['pagedata' => $this->pagedata, 'data' => $this->data]);
     }
     public function dt_class()
     {
@@ -31,10 +38,10 @@ class ClassController extends BaseController
             $request = \Config\Services::request();
             $list_data = $this->class_model;
             $where = ['id !=' => 0];
-                    //Column Order Harus Sesuai Urutan Kolom Pada Header Tabel di bagian View
-                    //Awali nama kolom tabel dengan nama tabel->tanda titik->nama kolom seperti pengguna.nama
-            $column_order = array('id','to_class.level','to_class.class');
-            $column_search = array('to_class.level','to_class.class');
+            //Column Order Harus Sesuai Urutan Kolom Pada Header Tabel di bagian View
+            //Awali nama kolom tabel dengan nama tabel->tanda titik->nama kolom seperti pengguna.nama
+            $column_order = array('id', 'to_class.level', 'to_class.class');
+            $column_search = array('to_class.level', 'to_class.class');
             $order = array('to_class.id' => 'asc');
             $list = $list_data->get_datatables('to_class', $column_order, $column_search, $order, $where);
             $data = array();
@@ -47,10 +54,10 @@ class ClassController extends BaseController
                 $row[] = $lists->class;
                 $row[]  = '
                     <div class="block-options">
-                    <button type="button" class="btn btn-sm btn-warning  edit-button" data-id="'.$lists->id.'" data-level="'.$lists->level.'"'.'" data-class="'.$lists->class.'">
+                    <button type="button" class="btn btn-sm btn-warning  edit-button" data-id="' . $lists->id . '" data-level="' . $lists->level . '"' . '" data-class="' . $lists->class . '">
                         <i class="fa-solid fa-pen-to-square"></i>
                     </button>
-                    <button type="button" class="btn btn-sm btn-danger  delete-button" data-id="'.$lists->id.'">
+                    <button type="button" class="btn btn-sm btn-danger  delete-button" data-id="' . $lists->id . '">
                     <i class="fa-solid fa-trash"></i>
                     </button>
                     </div>
@@ -100,10 +107,10 @@ class ClassController extends BaseController
                 'class' => $this->request->getVar('class')
             ];
             $query = $this->class_model->insert($data);
-            if($query){
+            if ($query) {
                 $response['success'] = true;
                 $response['message']  = 'Data Berhasil Ditambahkan';
-            }else{
+            } else {
                 $response['success'] = false;
                 $response['message']  = 'Data Berhasil Ditambahkan';
             }
@@ -126,10 +133,10 @@ class ClassController extends BaseController
                 'class' => $this->request->getVar('class')
             ];
             $query = $this->class_model->update_class($id, $data);
-            if($query){
+            if ($query) {
                 $response['success'] = true;
                 $response['message']  = 'Data Berhasil Diupdate';;
-            }else{
+            } else {
                 $response['success'] = false;
                 $response['message']  = 'Data Gagal Diupdate';
             }
@@ -152,7 +159,7 @@ class ClassController extends BaseController
             if ($delete) {
                 $response['success'] = true;
                 $response['message']  = 'Data telah dihapus';
-            }else{
+            } else {
                 $response['success'] = false;
                 $response['message']  = 'Data gagal dihapus';
             }

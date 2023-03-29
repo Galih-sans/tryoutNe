@@ -6,7 +6,7 @@ use CodeIgniter\Filters\FilterInterface;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 
-class isKurikulum implements FilterInterface
+class checkRole implements FilterInterface
 {
     /**
      * Do whatever processing this filter needs to do.
@@ -23,15 +23,31 @@ class isKurikulum implements FilterInterface
      *
      * @return mixed
      */
+    public $role_model;
+    public $encrypter;
+
     public function before(RequestInterface $request, $arguments = null)
     {
+        $this->role_model = new \App\Models\Admin\RoleModel();
+        $this->encrypter = \Config\Services::encrypter();
         // if (!session()->get('isAdmin')) {
         //     return view('errors/html/error_403');
         //     // return redirect()->to(site_url('login'));
         // }
-        if (session()->get('isAdmin') != true) {
-            echo view('errors/html/error_403');
-            exit;
+        if ($request->getUri()->getSegment(2)) {
+            $nextRequest = "ha_" . str_replace('-', '_', $request->getUri()->getSegment(2));
+
+            // user role_id
+            $id_role = $this->encrypter->decrypt(base64_decode(session()->get('role')));
+            // $id_role = session()->get('role');
+            $akses = $this->role_model->where('id', $id_role)->where('id', $id_role)->findAll();
+            $check = $akses[0]->$nextRequest;
+
+            if (!$check) {
+                // print_r($akses[0]->$nextRequest);
+                echo view('errors/html/error_403');
+                exit;
+            }
         }
     }
     /**
@@ -48,9 +64,6 @@ class isKurikulum implements FilterInterface
      */
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
     {
-        if (session()->get('role') == 'kurikulum') {
-            echo view('errors/html/error_403');
-            exit;
-        }
+        //
     }
 }

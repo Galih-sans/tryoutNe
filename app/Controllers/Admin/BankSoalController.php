@@ -19,6 +19,8 @@ class BankSoalController extends BaseController
     public $pagedata;
     public $response;
     public $data;
+    public $role_model;
+    public $encrypter;
 
     public function __construct()
     {
@@ -29,9 +31,13 @@ class BankSoalController extends BaseController
         $this->classModel = new ClassModel();
         $this->subjectModel = new SubjectModel();
         $this->TopicModel = new TopicModel();
+        $this->role_model = new \App\Models\Admin\RoleModel();
+        $this->encrypter = \Config\Services::encrypter();
     }
     public function index()
     {
+        $id = $this->encrypter->decrypt(base64_decode(session()->get('role')));
+        $this->data['role'] = $this->role_model->where('id', $id)->findAll();
         $this->data['class'] = $this->classModel->orderBy('id', 'ASC')->findAll();
         return view('admin/pages/bank-soal/index', ['pagedata' => $this->pagedata, 'data' => $this->data]);
     }

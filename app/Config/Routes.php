@@ -154,7 +154,6 @@ $routes->group("admin", ["filter" => "isadmin", "namespace" => "App\Controllers\
         $routes->get("/", "SiswaController::index", ['as' => 'admin.siswa.index']);
         $routes->match(["get", "post"], "dt_siswa", "SiswaController::dt_siswa", ['as' => 'admin.siswa.dt_siswa']);
     });
-    // index
     $routes->group("hasil-test", function ($routes) {
         // URL - /admin
         $routes->get("/", "HasilTestController::index", ['as' => 'admin.hasil-test.index']);
@@ -163,7 +162,22 @@ $routes->group("admin", ["filter" => "isadmin", "namespace" => "App\Controllers\
 
         $routes->match(["get", "post"], "detail/(:any)", "HasilTestController::detail/$1", ["filter" => "noauth"], ['as' => 'admin.hasil-test.detail']);
         // $routes->match(["get", "post"], "dt_detail", "HasilTestController::dt_detail", ['as' => 'admin.dt_detail']);
-
+    });
+    $routes->group("kelola-admin", function ($routes) {
+        // URL - /admin
+        $routes->get("/", "DaftarAdminController::index", ['as' => 'admin.kelola-admin.index']);
+        $routes->match(["get", "post"], "dt_daftar_admin", "DaftarAdminController::dt_daftar_admin", ['as' => 'admin.kelola-admin.dt_daftar_admin']);
+        $routes->match(["get", "post"], "add_admin", "DaftarAdminController::create", ['as' => 'admin.kelola-admin.add_admin']);
+        $routes->match(["get", "post"], "remove_admin", "DaftarAdminController::delete", ['as' => 'admin.kelola-admin.remove_admin']);
+        $routes->match(["get", "post"], "update_admin", "DaftarAdminController::update", ['as' => 'admin.kelola-admin.edit_admin']);
+    });
+    $routes->group("kelola-role", function ($routes) {
+        // URL - /admin
+        $routes->get("/", "KelolaRoleController::index", ['as' => 'admin.kelola-role.index']);
+        $routes->match(["get", "post"], "dt_roles", "KelolaRoleController::dt_roles", ['as' => 'admin.kelola-role.dt_roles']);
+        $routes->match(["get", "post"], "add_role", "KelolaRoleController::create", ['as' => 'admin.kelola-role.add_role']);
+        $routes->match(["get", "post"], "remove_role", "KelolaRoleController::delete", ['as' => 'admin.kelola-role.remove_role']);
+        $routes->match(["get", "post"], "update_role", "KelolaRoleController::update", ['as' => 'admin.kelola-role.update_role']);
     });
 });
 

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controllers\Admin;
+
 use App\Controllers\BaseController;
 use App\Models\Admin\ClassModel;
 use App\Models\Admin\SubjectModel;
@@ -12,12 +13,16 @@ class SubjectController extends BaseController
     public $SubjectModel;
     public $ClassModel;
     public $data;
+    public $role_model;
+    public $encrypter;
     public function __construct()
     {
         $this->pagedata['activeTab'] = "subject";
         $this->pagedata['title'] = "Daftar Mata Pelajaran";
         $this->SubjectModel = new SubjectModel();
         $this->ClassModel = new ClassModel();
+        $this->role_model = new \App\Models\Admin\RoleModel();
+        $this->encrypter = \Config\Services::encrypter();
     }
     /**
      * Return an array of resource objects, themselves in array format
@@ -26,8 +31,10 @@ class SubjectController extends BaseController
      */
     public function index()
     {
+        $id = $this->encrypter->decrypt(base64_decode(session()->get('role')));
+        $this->data['role'] = $this->role_model->where('id', $id)->findAll();
         $this->data['class'] = $this->ClassModel->orderBy('id', 'ASC')->findAll();
-        return view('admin/pages/subject/index', ['pagedata'=> $this->pagedata, 'data'=> $this->data]);
+        return view('admin/pages/subject/index', ['pagedata' => $this->pagedata, 'data' => $this->data]);
     }
 
     public function dt_subject()
@@ -37,10 +44,10 @@ class SubjectController extends BaseController
             $list_data = $this->SubjectModel;
             $class = $request->getPost("class_id");
             $where = ['to_subjects.id !=' => 0];
-                    //Column Order Harus Sesuai Urutan Kolom Pada Header Tabel di bagian View
-                    //Awali nama kolom tabel dengan nama tabel->tanda titik->nama kolom seperti pengguna.nama
-            $column_order = array('to_subjects.id','to_class.level','to_class.class', 'to_subjects.subject');
-            $column_search = array('to_class.level','to_class.class', 'to_subjects.subject');
+            //Column Order Harus Sesuai Urutan Kolom Pada Header Tabel di bagian View
+            //Awali nama kolom tabel dengan nama tabel->tanda titik->nama kolom seperti pengguna.nama
+            $column_order = array('to_subjects.id', 'to_class.level', 'to_class.class', 'to_subjects.subject');
+            $column_search = array('to_class.level', 'to_class.class', 'to_subjects.subject');
             $order = array('to_subjects.id' => 'asc');
             $list = $list_data->get_datatables($class, $column_order, $column_search, $order, $where);
             $data = array();
@@ -54,10 +61,10 @@ class SubjectController extends BaseController
                 $row[] = $lists->subject;
                 $row[]  = '
                     <div class="block-options text-center">
-                    <button type="button" class="btn btn-sm btn-warning  edit-button" data-id="'.$lists->id.'" data-level="'.$lists->level.'"'.'" data-class="'.$lists->class.'">
+                    <button type="button" class="btn btn-sm btn-warning  edit-button" data-id="' . $lists->id . '" data-level="' . $lists->level . '"' . '" data-class="' . $lists->class . '">
                         <i class="fa-solid fa-pen-to-square"></i>
                     </button>
-                    <button type="button" class="btn btn-sm btn-danger  delete-button" data-id="'.$lists->id.'">
+                    <button type="button" class="btn btn-sm btn-danger  delete-button" data-id="' . $lists->id . '">
                     <i class="fa-solid fa-trash"></i>
                     </button>
                     </div>
@@ -69,7 +76,7 @@ class SubjectController extends BaseController
                 "recordsTotal" => count($data),
                 "recordsFiltered" => count($data),
                 "data" => $data,
-                
+
             );
             return json_encode($response);
         }
@@ -106,7 +113,7 @@ class SubjectController extends BaseController
     //             "draw" => true,
     //             "data" => $data,
     //         );
-    
+
     //         echo json_encode($response);
     //     }
     // }
@@ -144,10 +151,10 @@ class SubjectController extends BaseController
                 'subject' => $this->request->getVar('subject')
             ];
             $query = $this->SubjectModel->insert($data);
-            if($query){
+            if ($query) {
                 $response['success'] = true;
                 $response['message']  = 'Data Berhasil Ditambahkan';
-            }else{
+            } else {
                 $response['success'] = false;
                 $response['message']  = 'Data Berhasil Ditambahkan';
             }
@@ -170,10 +177,10 @@ class SubjectController extends BaseController
                 'subject' => $this->request->getVar('subject')
             ];
             $query = $this->SubjectModel->update_subject($id, $data);
-            if($query){
+            if ($query) {
                 $response['success'] = true;
                 $response['message']  = 'Data Berhasil Diupdate';;
-            }else{
+            } else {
                 $response['success'] = false;
                 $response['message']  = 'Data Gagal Diupdate';
             }
@@ -196,7 +203,7 @@ class SubjectController extends BaseController
             if ($delete) {
                 $response['success'] = true;
                 $response['message']  = 'Data telah dihapus';
-            }else{
+            } else {
                 $response['success'] = false;
                 $response['message']  = 'Data gagal dihapus';
             }
@@ -204,18 +211,18 @@ class SubjectController extends BaseController
             echo json_encode($response);
         }
     }
-    
+
     public function get_subject()
     {
         if ($this->request->isAJAX()) {
             $id = $this->request->getVar('id');
             $subjectdata = $this->SubjectModel->get_subject($id);
-                $response = array();
-                foreach ($subjectdata as $subject) {
-                    $response[] = array(
-                        "subject"=>$subject->subject, PHP_EOL
-                    );
-                }
+            $response = array();
+            foreach ($subjectdata as $subject) {
+                $response[] = array(
+                    "subject" => $subject->subject, PHP_EOL
+                );
+            }
             echo json_encode($response);
         }
     }
