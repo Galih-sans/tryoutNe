@@ -76,7 +76,7 @@
             </li>
             <li <?= $data['role'][0]->ha_hasil_test == 1 ? '' : 'hidden'; ?> class="nav-main-item">
                 <a class="nav-main-link <?= $pagedata['activeTab'] == "hasil-test" ? 'active' : ''; ?>" href="<?= route_to('admin.hasil-test.index') ?>">
-                    <i class="nav-main-link-icon fa-solid fa-file-lines"></i>
+                    <i class="nav-main-link-icon fa-solid fa-file"></i>
                     <span class="nav-main-link-name">Hasil Test</span>
                 </a>
             </li>
@@ -91,6 +91,47 @@
                     <i class="nav-main-link-icon fa-solid fa-universal-access"></i>
                     <span class="nav-main-link-name">Kelola Role</span>
                 </a>
+            </li>
+            <li class="nav-main-item <?= $pagedata['activeTab'] == "offers" || $pagedata['activeTab'] == "log-balance" || $pagedata['activeTab'] == "kelola-paket-diamond" || $pagedata['activeTab'] == "balance-siswa" || $pagedata['activeTab'] == "transaksi-diamond" ? 'open' : ''; ?>">
+                <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="true" href="#">
+                    <i class="nav-main-link-icon fa-solid fa-cart-shopping"></i>
+                    <span class="nav-main-link-name">Produk dan Transaksi</span>
+                </a>
+                <ul class="nav-main-submenu">
+                    <li <?= $data['role'][0]->ha_balance_siswa == 1 ? '' : 'hidden'; ?> class="nav-main-item">
+                        <a class="nav-main-link" href="<?= route_to('admin.balance-siswa.index') ?>">
+                            <span class="nav-main-link-name">Balance Siswa</span>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="nav-main-submenu">
+                    <li <?= $data['role'][0]->ha_paket_diamond == 1 ? '' : 'hidden'; ?> class="nav-main-item">
+                        <a class="nav-main-link" href="<?= route_to('admin.paket-diamond.index') ?>">
+                            <span class="nav-main-link-name">Paket Diamond</span>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="nav-main-submenu">
+                    <li <?= $data['role'][0]->ha_log_balance == 1 ? '' : 'hidden'; ?> class="nav-main-item">
+                        <a class="nav-main-link" href="<?= route_to('admin.log-balance.index') ?>">
+                            <span class="nav-main-link-name">Log Balance Siswa</span>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="nav-main-submenu">
+                    <li <?= $data['role'][0]->ha_offers == 1 ? '' : 'hidden'; ?> class="nav-main-item">
+                        <a class="nav-main-link" href="<?= route_to('admin.offers.index') ?>">
+                            <span class="nav-main-link-name">Kelola Diskon</span>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="nav-main-submenu">
+                    <li <?= $data['role'][0]->ha_transaksi_diamond == 1 ? '' : 'hidden'; ?> class="nav-main-item">
+                        <a class="nav-main-link" href="<?= route_to('admin.transaksi-diamond.index') ?>">
+                            <span class="nav-main-link-name">Transaksi Diamond</span>
+                        </a>
+                    </li>
+                </ul>
             </li>
         </ul>
     </div>

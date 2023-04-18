@@ -5,52 +5,68 @@ namespace App\Models\Admin;
 use CodeIgniter\Model;
 use CodeIgniter\I18n\Time;
 
-class RoleModel extends Model
+class OffersModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'to_roles';
+    protected $table            = 'to_offers';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
     protected $returnType       = 'object';
+    protected $useSoftDeletes   = true;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'role_name',
-        'ha_class',
-        'ha_subject',
-        'ha_topic',
-        'ha_test',
-        'ha_bank_soal',
-        'ha_siswa',
-        'ha_hasil_test',
-        'ha_kelola_admin',
-        'ha_kelola_role',
-
-        'ha_paket_diamond',
-        'ha_balance_siswa',
-        'ha_transaksi_diamond',
-        'ha_offers',
-        'ha_log_balance'
+        'name',
+        'type',
+        'start_date',
+        'end_date',
+        'description',
+        'discount_amount',
+        'discount_percentage',
+        'status',
+        'created_by',
+        'created_at',
+        'updated_at',
+        'deleted_at',
     ];
 
     // Validation
     protected $validationRules =
     [
-        'role_name'     => 'required',
+        'name'     => 'required',
+        'type'        => 'required',
+        'start_date'        => 'required',
+        'end_date'        => 'required',
+        // 'description'     => 'required',
+        'discount_amount'        => 'required',
+        'discount_percentage'     => 'required',
+        'status'     => 'required',
     ];
     protected $validationMessages   = [
-        'role_name'        => [
-            'required' => 'Nama Role Harus Diisi',
+        'name'        => [
+            'required' => 'Nama Diskon Harus Diisi',
         ],
-        //     'email'        => [
-        //         'required' => 'Harus Diisi',
-        //     ],
-        //     'password'        => [
-        //         'required' => 'Harus Diisi',
-        //     ],
-        //     'role'        => [
-        //         'required' => 'Harus Diisi',
-        //     ]
+        'type'        => [
+            'required' => 'Tipe Harus Diisi',
+        ],
+        'start_date'        => [
+            'required' => 'Waktu Mulai Harus Diisi',
+        ],
+        'end_date'        => [
+            'required' => 'Waktu Berakhir Harus Diisi',
+        ],
+        // 'description'        => [
+        //     'required' => 'Deskripsi Harus Diisi',
+        // ],
+        'discount_amount'        => [
+            'required' => 'Jumlah Diskon Harus Diisi',
+        ],
+        'discount_percentage'        => [
+            'required' => 'Persen Diskon Harus Diisi',
+        ],
+        'status'        => [
+            'required' => 'Status Harus Diisi',
+        ]
     ];
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;
@@ -67,36 +83,9 @@ class RoleModel extends Model
         return Time::now()->getTimestamp();
     }
 
-    // public function get_datatables()
-    // {
-    //     $query = $this->builder->get();
-    //     return $query->getResult();
-    // }
-    // public function create($data)
-    // {
-    //     $query = $this->builder->insert($data);
-    //     return $query;
-    // }
-
-    // public function get_admin($id)
-    // {
-    //     $query = $this->builder->getWhere(['id' => $id]);
-    //     return $query->getRow();
-    // }
-    // public function get_class_by_level($id)
-    // {
-    //     $query = $this->builder->getWhere(['level' => $id]);
-    //     return $query->getResult();
-    // }
-
-
     protected function _get_datatables_query($table, $column_order, $column_search, $order)
     {
         $this->builder = $this->db->table($table);
-        // ADMIN JOIN ROLE
-        //jika ingin join formatnya adalah sebagai berikut :
-        //$this->builder->join('tabel_lain','tabel_lain.kolom_yang_sama = pengguna.kolom_yang_sama','left');
-        //end Join
         $i = 0;
 
         foreach ($column_search as $item) {

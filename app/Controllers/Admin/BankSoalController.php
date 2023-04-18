@@ -175,7 +175,7 @@ class BankSoalController extends BaseController
                     'question' => $this->request->getVar('question'),
                     'discussion' => $this->request->getVar('discussion'),
                     'answer.*' => array_values($this->request->getVar('answer')),
-                    'created_by' => session()->get('id')
+                    'created_by' => $this->encrypter->decrypt(base64_decode(session()->get('id')))
                 ];
                 $isrightData = array();
                 foreach ($question_data['answer.*'] as $answer) {
