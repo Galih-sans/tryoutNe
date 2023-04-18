@@ -10414,6 +10414,37 @@ fieldset:disabled .btn {
   --bs-text-opacity: 1;
 }
 
+.neo-diamon {
+  /* position: relative; */
+  /* height: 25.99px; */
+  min-width: 100px;
+  background-color: #1f5f1c;
+  border: 2px solid #1f5f1c;
+  border-right-width: 0px;
+  transform: skew(-20deg);
+  /* margin-left: 50px; */
+}
+
+.fa-rotate-45 {
+  -webkit-transform: rotate(20deg);
+  -moz-transform: rotate(20deg);
+  -ms-transform: rotate(20deg);
+  -o-transform: rotate(20deg);
+  transform: rotate(20deg);
+}
+
+.neo-plus-button {
+  /* position: relative; */
+  /* height: 25.99px; */
+  /* width: 100px; */
+  /* background-color: #6fa306; */
+  border: 2px solid #1f5f1c;
+  border-left-width: 0px;
+  /* transform: skew(-20deg); */
+  /* margin-left: 50px; */
+  cursor: pointer;
+}
+
 .bg-primary {
   background-color: #e91e63 !important;
 }

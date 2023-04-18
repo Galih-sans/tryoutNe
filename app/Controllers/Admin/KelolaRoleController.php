@@ -18,11 +18,7 @@ class KelolaRoleController extends BaseController
         $this->model_roles = new \App\Models\Admin\RoleModel();
         $this->encrypter = \Config\Services::encrypter();
     }
-    /**
-     * Return an array of resource objects, themselves in array format
-     *
-     * @return mixed
-     */
+
     public function index()
     {
         $id = $this->encrypter->decrypt(base64_decode(session()->get('role')));
@@ -62,6 +58,11 @@ class KelolaRoleController extends BaseController
                     data-ha-hasil-test="' . $lists->ha_hasil_test . '"
                     data-ha-kelola-admin="' . $lists->ha_kelola_admin . '"
                     data-ha-kelola-role="' . $lists->ha_kelola_role . '"
+                    data-ha-kelola-paket-diamond="' . $lists->ha_paket_diamond . '"
+                    data-ha-balance-siswa="' . $lists->ha_balance_siswa . '"
+                    data-ha-log-balance="' . $lists->ha_log_balance . '"
+                    data-ha-offers="' . $lists->ha_offers . '"
+                    data-ha-transaksi-diamond="' . $lists->ha_transaksi_diamond . '"
                     >
                         <i class="fa-solid fa-pen-to-square"></i>
                     </button>
@@ -82,31 +83,6 @@ class KelolaRoleController extends BaseController
         }
     }
 
-    /**
-     * Return the properties of a resource object
-     *
-     * @return mixed
-     */
-    public function show($id = null)
-    {
-        //
-    }
-
-    /**
-     * Return a new resource object, with default properties
-     *
-     * @return mixed
-     */
-    public function new()
-    {
-        //
-    }
-
-    /**
-     * Create a new resource object, from "posted" parameters
-     *
-     * @return mixed
-     */
     public function create()
     {
         if ($this->request->isAJAX()) {
@@ -120,7 +96,13 @@ class KelolaRoleController extends BaseController
                 'ha_siswa' => $this->request->getVar('siswa'),
                 'ha_hasil_test' => $this->request->getVar('hasil_test'),
                 'ha_kelola_admin' => $this->request->getVar('kelola_admin'),
-                'ha_kelola_role' => $this->request->getVar('kelola_role')
+                'ha_kelola_role' => $this->request->getVar('kelola_role'),
+
+                'ha_paket_diamond' => $this->request->getVar('kelola_paket_diamond'),
+                'ha_balance_siswa' => $this->request->getVar('balance_siswa'),
+                'ha_transaksi_diamond' => $this->request->getVar('transaksi_diamond'),
+                'ha_offers' => $this->request->getVar('offers'),
+                'ha_log_balance' => $this->request->getVar('log_balance'),
             ];
             $query = $this->model_roles->insert($data);
             if ($query) {
@@ -129,17 +111,13 @@ class KelolaRoleController extends BaseController
             } else {
                 $response['success'] = false;
                 $response['message']  = 'Data Gagal Ditambahkan';
-                $response['validation'] = "Isian Form Tidak Boleh Kosong";
+                $response['validation'] = "Nama Role Tidak Boleh Kosong";
             }
 
             echo json_encode($response);
         }
     }
-    /**
-     * Add or update a model resource, from "posted" properties
-     *
-     * @return mixed
-     */
+
     public function update()
     {
         if ($this->request->isAJAX()) {
@@ -154,7 +132,13 @@ class KelolaRoleController extends BaseController
                 'ha_siswa' => $this->request->getVar('edit_siswa'),
                 'ha_hasil_test' => $this->request->getVar('edit_hasil_test'),
                 'ha_kelola_admin' => $this->request->getVar('edit_kelola_admin'),
-                'ha_kelola_role' => $this->request->getVar('edit_kelola_role')
+                'ha_kelola_role' => $this->request->getVar('edit_kelola_role'),
+
+                'ha_paket_diamond' => $this->request->getVar('edit_kelola_paket_diamond'),
+                'ha_balance_siswa' => $this->request->getVar('edit_balance_siswa'),
+                'ha_transaksi_diamond' => $this->request->getVar('edit_transaksi_diamond'),
+                'ha_offers' => $this->request->getVar('edit_offers'),
+                'ha_log_balance' => $this->request->getVar('edit_log_balance'),
             ];
             $query = $this->model_roles->update($id, $data);
             if ($query) {
@@ -170,11 +154,6 @@ class KelolaRoleController extends BaseController
         }
     }
 
-    /**
-     * Delete the designated resource object from the model
-     *
-     * @return mixed
-     */
     public function delete()
     {
         if ($this->request->isAJAX()) {

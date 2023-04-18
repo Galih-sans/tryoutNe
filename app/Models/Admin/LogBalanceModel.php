@@ -3,55 +3,42 @@
 namespace App\Models\Admin;
 
 use CodeIgniter\Model;
-use CodeIgniter\I18n\Time;
 
-class RoleModel extends Model
+class LogBalanceModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'to_roles';
+    protected $table            = 'to_balance_log';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
     protected $returnType       = 'object';
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'role_name',
-        'ha_class',
-        'ha_subject',
-        'ha_topic',
-        'ha_test',
-        'ha_bank_soal',
-        'ha_siswa',
-        'ha_hasil_test',
-        'ha_kelola_admin',
-        'ha_kelola_role',
-
-        'ha_paket_diamond',
-        'ha_balance_siswa',
-        'ha_transaksi_diamond',
-        'ha_offers',
-        'ha_log_balance'
+        'student_id',
+        'type',
+        'amount',
+        'timestamp',
+        'total',
+        'status',
+        'created_at',
+        'updated_at'
     ];
 
     // Validation
-    protected $validationRules =
-    [
-        'role_name'     => 'required',
-    ];
-    protected $validationMessages   = [
-        'role_name'        => [
-            'required' => 'Nama Role Harus Diisi',
-        ],
-        //     'email'        => [
-        //         'required' => 'Harus Diisi',
-        //     ],
-        //     'password'        => [
-        //         'required' => 'Harus Diisi',
-        //     ],
-        //     'role'        => [
-        //         'required' => 'Harus Diisi',
-        //     ]
-    ];
+    // protected $validationRules =
+    // [
+    //     'full_name'    => 'required',
+    //     'email'        => 'required',
+    //     'school' => 'required',
+    // ];
+    // protected $validationMessages   = [
+    //     'full_name'        => [
+    //         'required' => 'Nama Harus Diisi',
+    //     ],
+    //     'email'        => [
+    //         'required' => 'Email Harus Diisi',
+    //     ],
+    // ];
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;
 
@@ -60,11 +47,6 @@ class RoleModel extends Model
         parent::__construct();
         $this->db = \Config\Database::connect();
         $this->builder = $this->db->table($this->table);
-    }
-
-    protected function now()
-    {
-        return Time::now()->getTimestamp();
     }
 
     // public function get_datatables()
@@ -77,8 +59,17 @@ class RoleModel extends Model
     //     $query = $this->builder->insert($data);
     //     return $query;
     // }
-
-    // public function get_admin($id)
+    // public function delete_class($id)
+    // {
+    //     $this->builder->where('id', $id);
+    //     return $this->builder->delete();
+    // }
+    // public function update_siswa($id, $data)
+    // {
+    //     $this->builder->where('id', $id);
+    //     return $this->builder->update($data);
+    // }
+    // public function get_siswa($id)
     // {
     //     $query = $this->builder->getWhere(['id' => $id]);
     //     return $query->getRow();
@@ -92,11 +83,18 @@ class RoleModel extends Model
 
     protected function _get_datatables_query($table, $column_order, $column_search, $order)
     {
-        $this->builder = $this->db->table($table);
-        // ADMIN JOIN ROLE
-        //jika ingin join formatnya adalah sebagai berikut :
-        //$this->builder->join('tabel_lain','tabel_lain.kolom_yang_sama = pengguna.kolom_yang_sama','left');
-        //end Join
+        // $this->builder = $this->db->table($table);
+        $this->builder->select('to_balance_log.id, 
+        to_balance_log.type,
+        to_balance_log.amount,
+        to_balance_log.status,
+        to_balance_log.timestamp,
+        to_balance_log.total,
+        to_students.full_name')
+            ->join('to_students', 'to_students.id=to_balance_log.student_id');
+        // //jika ingin join formatnya adalah sebagai berikut :
+        // //$this->builder->join('tabel_lain','tabel_lain.kolom_yang_sama = pengguna.kolom_yang_sama','left');
+        // //end Join
         $i = 0;
 
         foreach ($column_search as $item) {

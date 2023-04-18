@@ -95,6 +95,7 @@ $routes->group("", ["filter" => "isuser", "namespace" => "App\Controllers\user"]
         // URL - /user
         $routes->get("/", "transaksicontroller::index", ['as' => 'user.transaksi.index']);
         $routes->match(["get", "post"], "index", "transaksicontroller::index");
+        $routes->match(["get", "post"], "beli_diamond", "transaksicontroller::topup", ['as' => 'user.transaksi.beli_diamond']);
     });
 });
 $routes->group("admin", ["filter" => "isadmin", "namespace" => "App\Controllers\Admin"], function ($routes) {
@@ -154,6 +155,19 @@ $routes->group("admin", ["filter" => "isadmin", "namespace" => "App\Controllers\
         $routes->get("/", "SiswaController::index", ['as' => 'admin.siswa.index']);
         $routes->match(["get", "post"], "dt_siswa", "SiswaController::dt_siswa", ['as' => 'admin.siswa.dt_siswa']);
     });
+    $routes->group("balance-siswa", function ($routes) {
+        // URL - /admin
+        $routes->get("/", "BalanceSiswaController::index", ['as' => 'admin.balance-siswa.index']);
+        $routes->match(["get", "post"], "dt_balance_siswa", "BalanceSiswaController::dt_balance_siswa", ['as' => 'admin.balance-siswa.dt_balance_siswa']);
+        $routes->match(["get", "post"], "add_balance", "BalanceSiswaController::create", ['as' => 'admin.balance-siswa.add_balance']);
+        $routes->match(["get", "post"], "remove_balance", "BalanceSiswaController::soft_delete", ['as' => 'admin.balance-siswa.remove_balance']);
+        $routes->match(["get", "post"], "update_balance", "BalanceSiswaController::update", ['as' => 'admin.balance-siswa.update_balance']);
+    });
+    $routes->group("log-balance", function ($routes) {
+        // URL - /admin
+        $routes->get("/", "LogBalanceController::index", ['as' => 'admin.log-balance.index']);
+        $routes->match(["get", "post"], "dt_balance_log", "LogBalanceController::dt_balance_log", ['as' => 'admin.log-balance.dt_balance_log']);
+    });
     $routes->group("hasil-test", function ($routes) {
         // URL - /admin
         $routes->get("/", "HasilTestController::index", ['as' => 'admin.hasil-test.index']);
@@ -178,6 +192,33 @@ $routes->group("admin", ["filter" => "isadmin", "namespace" => "App\Controllers\
         $routes->match(["get", "post"], "add_role", "KelolaRoleController::create", ['as' => 'admin.kelola-role.add_role']);
         $routes->match(["get", "post"], "remove_role", "KelolaRoleController::delete", ['as' => 'admin.kelola-role.remove_role']);
         $routes->match(["get", "post"], "update_role", "KelolaRoleController::update", ['as' => 'admin.kelola-role.update_role']);
+    });
+    $routes->group("paket-diamond", function ($routes) {
+        // URL - /admin
+        $routes->get("/", "KelolaDiamondController::index", ['as' => 'admin.paket-diamond.index']);
+        $routes->match(["get", "post"], "dt_paket_diamond", "KelolaDiamondController::dt_paket_diamond", ['as' => 'admin.paket-diamond.dt_paket_diamond']);
+        $routes->match(["get", "post"], "add_paket_diamond", "KelolaDiamondController::create", ['as' => 'admin.paket-diamond.add_paket_diamond']);
+        $routes->match(["get", "post"], "remove_paket_diamond", "KelolaDiamondController::soft_delete", ['as' => 'admin.paket-diamond.remove_paket_diamond']);
+        $routes->match(["get", "post"], "update_paket_diamond", "KelolaDiamondController::update", ['as' => 'admin.paket-diamond.update_paket_diamond']);
+        $routes->match(["get", "post"], "remove_permanen_paket_diamond", "KelolaDiamondController::hard_delete", ['as' => 'admin.paket-diamond.remove_permanen_paket_diamond']);
+    });
+    $routes->group("offers", function ($routes) {
+        // URL - /admin
+        $routes->get("/", "OffersController::index", ['as' => 'admin.offers.index']);
+        $routes->match(["get", "post"], "dt_offers", "OffersController::dt_offers", ['as' => 'admin.offers.dt_offers']);
+        $routes->match(["get", "post"], "add_offer", "OffersController::create", ['as' => 'admin.offers.add_offer']);
+        $routes->match(["get", "post"], "remove_offer", "OffersController::soft_delete", ['as' => 'admin.offers.remove_offer']);
+        $routes->match(["get", "post"], "update_offer", "OffersController::update", ['as' => 'admin.offers.update_offer']);
+        $routes->match(["get", "post"], "remove_permanen_paket_diamond", "OffersController::hard_delete", ['as' => 'admin.paket-diamond.remove_permanen_paket_diamond']);
+    });
+    $routes->group("transaksi-diamond", function ($routes) {
+        // URL - /admin
+        $routes->get("/", "DiamondTransController::index", ['as' => 'admin.transaksi-diamond.index']);
+        $routes->match(["get", "post"], "dt_diamond_transaction", "DiamondTransController::dt_diamond_transaction", ['as' => 'admin.transaksi-diamond.dt_diamond_transaction']);
+        $routes->match(["get", "post"], "add_diamond_transaction", "DiamondTransController::create", ['as' => 'admin.transaksi-diamond.add_diamond_transaction']);
+        $routes->match(["get", "post"], "remove_diamond_transaction", "DiamondTransController::soft_delete", ['as' => 'admin.transaksi-diamond.remove_diamond_transaction']);
+        $routes->match(["get", "post"], "update_diamond_transaction", "DiamondTransController::update", ['as' => 'admin.transaksi-diamond.update_diamond_transaction']);
+        $routes->match(["get", "post"], "reemove_permanen_diamond_transaction", "DiamondTransController::hard_delete", ['as' => 'admin.transaksi-diamond.remove_permanen_diamond_transaction']);
     });
 });
 

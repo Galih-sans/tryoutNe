@@ -116,6 +116,34 @@
                                             <label for="kelola_role">Kelola Role</label>
                                         </div>
                                     </div>
+                                    <span class="color-ne" style="letter-spacing: -em">
+                                        <meta charset="utf-8">⋮⋮⋮
+                                    </span> &nbsp;
+                                    <span class="tittle-neo"> Menu Transaksi</span>
+                                    <div class="mx-4 py-2">
+                                        <div class="form-check form-switch">
+                                            <input type="hidden" id="balance_siswa" name="balance_siswa" value="0">
+                                            <input class="form-check-input" type="checkbox" value="1" id="balance_siswa" name="balance_siswa">
+                                            <label for="balance_siswa">Balance Siswa</label>
+                                        </div>
+                                        <div class="form-check form-switch">
+                                            <input type="hidden" id="kelola_paket_diamond" name="kelola_paket_diamond" value="0">
+                                            <input class="form-check-input" type="checkbox" value="1" id="kelola_paket_diamond" name="kelola_paket_diamond">
+                                            <label for="kelola_paket_diamond">Kelola Paket Diamond</label>
+                                        </div>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" value="1" id="log_balance" name="log_balance">
+                                            <label for="log_balance">Log Balance Siswa</label>
+                                        </div>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" value="1" id="offers" name="offers">
+                                            <label for="offers">Kelola Diskon</label>
+                                        </div>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" value="1" id="transaksi_diamond" name="transaksi_diamond">
+                                            <label for="transaksi_diamond">Transaksi Diamond</label>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -199,6 +227,32 @@
                                             <label for="edit_kelola_role">Kelola Role</label>
                                         </div>
                                     </div>
+                                    <span class="color-ne" style="letter-spacing: -em">
+                                        <meta charset="utf-8">⋮⋮⋮
+                                    </span> &nbsp;
+                                    <span class="tittle-neo"> Menu Transaksi</span>
+                                    <div class="mx-4 py-2">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" value="1" id="edit_balance_siswa" name="edit_balance_siswa">
+                                            <label for="edit_balance_siswa">Balance Siswa</label>
+                                        </div>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" value="1" id="edit_kelola_paket_diamond" name="edit_kelola_paket_diamond">
+                                            <label for="edit_kelola_paket_diamond">Kelola Paket Diamond</label>
+                                        </div>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" value="1" id="edit_log_balance" name="edit_log_balance">
+                                            <label for="edit_log_balance">Log Balance Siswa</label>
+                                        </div>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" value="1" id="edit_offers" name="edit_offers">
+                                            <label for="edit_offers">Kelola Diskon</label>
+                                        </div>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" value="1" id="edit_transaksi_diamond" name="edit_transaksi_diamond">
+                                            <label for="edit_transaksi_diamond">Transaksi Diamond</label>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -252,6 +306,11 @@
             let data_ha_hasil_test = $(this).data("ha-hasil-test");
             let data_ha_kelola_admin = $(this).data("ha-kelola-admin");
             let data_ha_kelola_role = $(this).data("ha-kelola-role");
+            let data_ha_kelola_paket_diamond = $(this).data("ha-kelola-paket-diamond");
+            let data_ha_balance_siswa = $(this).data("ha-balance-siswa");
+            let data_ha_log_balance = $(this).data("ha-log-balance");
+            let data_ha_offers = $(this).data("ha-offers");
+            let data_ha_transaksi_diamond = $(this).data("ha-transaksi-diamond");
 
             $('#edit-role-id').val(data_id);
             $('#edit-role-name').val(data_role_name);
@@ -300,6 +359,31 @@
                 $('#edit_kelola_role').prop('checked', true);
             } else {
                 $('#edit_kelola_role').prop('checked', false);
+            }
+            if (data_ha_kelola_paket_diamond == 1) {
+                $('#edit_kelola_paket_diamond').prop('checked', true);
+            } else {
+                $('#edit_kelola_paket_diamond').prop('checked', false);
+            }
+            if (data_ha_balance_siswa == 1) {
+                $('#edit_balance_siswa').prop('checked', true);
+            } else {
+                $('#edit_balance_siswa').prop('checked', false);
+            }
+            if (data_ha_log_balance == 1) {
+                $('#edit_log_balance').prop('checked', true);
+            } else {
+                $('#edit_log_balance').prop('checked', false);
+            }
+            if (data_ha_offers == 1) {
+                $('#edit_offers').prop('checked', true);
+            } else {
+                $('#edit_offers').prop('checked', false);
+            }
+            if (data_ha_transaksi_diamond == 1) {
+                $('#edit_transaksi_diamond').prop('checked', true);
+            } else {
+                $('#edit_transaksi_diamond').prop('checked', false);
             }
 
             $('#editRoleModal').modal('show');
@@ -365,6 +449,7 @@
     }
 
     function insert_data() {
+        // console.log($('#tambah_role_form').serialize());
         Swal.fire({
             text: "Sedang Memproses Data",
             allowOutsideClick: false,
@@ -403,6 +488,7 @@
     }
 
     function update_data() {
+        // console.log($('#edit_role_form').serialize());
         Swal.fire({
             text: "Sedang Memproses Data",
             allowOutsideClick: false,

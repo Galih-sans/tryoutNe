@@ -3,54 +3,36 @@
 namespace App\Models\Admin;
 
 use CodeIgniter\Model;
-use CodeIgniter\I18n\Time;
 
-class RoleModel extends Model
+class BalanceSiswaModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'to_roles';
-    protected $primaryKey       = 'id';
+    protected $table            = 'users_balance';
+    protected $primaryKey       = 'user_id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
     protected $returnType       = 'object';
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'role_name',
-        'ha_class',
-        'ha_subject',
-        'ha_topic',
-        'ha_test',
-        'ha_bank_soal',
-        'ha_siswa',
-        'ha_hasil_test',
-        'ha_kelola_admin',
-        'ha_kelola_role',
-
-        'ha_paket_diamond',
-        'ha_balance_siswa',
-        'ha_transaksi_diamond',
-        'ha_offers',
-        'ha_log_balance'
+        'user_id',
+        'balance',
+        'created_at',
+        'updated_at',
     ];
 
     // Validation
     protected $validationRules =
     [
-        'role_name'     => 'required',
+        'user_id'    => 'required',
+        'balance'    => 'required',
     ];
     protected $validationMessages   = [
-        'role_name'        => [
-            'required' => 'Nama Role Harus Diisi',
+        'user_id'        => [
+            'required' => 'Siswa Harus Diisi',
         ],
-        //     'email'        => [
-        //         'required' => 'Harus Diisi',
-        //     ],
-        //     'password'        => [
-        //         'required' => 'Harus Diisi',
-        //     ],
-        //     'role'        => [
-        //         'required' => 'Harus Diisi',
-        //     ]
+        'balance'        => [
+            'required' => 'Nominal Diamond Harus Diisi',
+        ],
     ];
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;
@@ -62,41 +44,15 @@ class RoleModel extends Model
         $this->builder = $this->db->table($this->table);
     }
 
-    protected function now()
-    {
-        return Time::now()->getTimestamp();
-    }
-
-    // public function get_datatables()
-    // {
-    //     $query = $this->builder->get();
-    //     return $query->getResult();
-    // }
-    // public function create($data)
-    // {
-    //     $query = $this->builder->insert($data);
-    //     return $query;
-    // }
-
-    // public function get_admin($id)
-    // {
-    //     $query = $this->builder->getWhere(['id' => $id]);
-    //     return $query->getRow();
-    // }
-    // public function get_class_by_level($id)
-    // {
-    //     $query = $this->builder->getWhere(['level' => $id]);
-    //     return $query->getResult();
-    // }
-
-
     protected function _get_datatables_query($table, $column_order, $column_search, $order)
     {
-        $this->builder = $this->db->table($table);
-        // ADMIN JOIN ROLE
-        //jika ingin join formatnya adalah sebagai berikut :
-        //$this->builder->join('tabel_lain','tabel_lain.kolom_yang_sama = pengguna.kolom_yang_sama','left');
-        //end Join
+        // $this->builder = $this->db->table($table);
+        $this->builder->select('users_balance.user_id, 
+        users_balance.balance,
+        users_balance.created_at,
+        users_balance.updated_at,
+        to_students.full_name')
+            ->join('to_students', 'to_students.id=users_balance.user_id');
         $i = 0;
 
         foreach ($column_search as $item) {
