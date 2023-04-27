@@ -14,32 +14,39 @@
                         </div>
                     </div>
                 <?php } else {  ?>
-                    <div class="bg-warning card mb-5">
-                        <div class="card-header pb-3 px-3">
-                            <h6 class="mb-0"><i class="fa fa-diamond"></i> Paket Diamond</h6>
+                    <div class="card mb-5">
+                        <div class="bg-neo card-header pb-3 px-3">
+                            <h6 class="mb-0 text-white"><i class="fa fa-diamond"></i> Paket Diamond</h6>
                             <!-- <button class="text-right btn btn-danger">Add to cart</button> -->
                         </div>
                         <div class="content content-boxed">
                             <div class="row items-push">
+                                <?php $no1 = 1; ?>
                                 <?php foreach ($data['paketDiamond'] as $item) : ?>
-                                    <!-- product card -->
-                                    <div class="col-12 col-md-4 col-lg-3 col-xl-3">
-                                        <div class="height d-flex justify-content-center align-items-center">
-                                            <div class="card p-3 pb-0">
-                                                <h4 class=""><?= $item->amount ?> Neo Diamond</h4>
-                                                <div class="d-flex justify-content-between align-items-center ">
-                                                    <div class="image">
-                                                        <img src="https://png.pngtree.com/element_our/png/20181206/pngtree-green-diamond-png_262764.jpg" width="180">
-                                                    </div>
-                                                </div>
-                                                <h6><?= $item->description ?></h6>
-                                                <h4 class="">Rp. <?= $item->price ?> ,-</h4>
-                                                <button class="btn detail-product" style="background-color: #611BBD; color: white;">Lihat Selengkapnya</button>
+                                    <!-- new -->
+                                    <div class="col-md-3 col-sm-6">
+                                        <div class="pricingTable10">
+                                            <div class="pricingTable-header">
+                                                <h3 class="heading">Paket <?= $no1 ?></h3>
+                                                <span class="price-value">
+                                                    <?= $item->amount ?>
+                                                </span>
+                                            </div>
+                                            <div class="pricing-content">
+                                                <ul>
+                                                    <li></li>
+                                                    <li>Rp. <?= $item->price ?> ,-</li>
+                                                    <li>
+                                                        J<?= $item->description ?>
+                                                    </li>
+                                                </ul>
+                                                <a href="#" class="read">Detail</a>
+                                                <a href="#" class="read">Beli</a>
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- end of product card -->
                                 <?php
+                                    $no1++;
                                 endforeach; ?>
                             </div>
                         </div>
@@ -56,37 +63,47 @@
                         </div>
                     </div>
                 <?php } else {  ?>
-                    <div class="bg-success card">
-                        <div class="card-header pb-3 px-3">
-                            <h6 class="mb-0"><i class="fa fa-clipboard-list"></i> Paket Test</h6>
-                            <!-- <button class="text-right btn btn-danger">Add to cart</button> -->
+                    <div class="card">
+                        <div class="bg-neo card-header pb-3 px-3">
+                            <h6 class="mb-0 text-white"><i class="fa fa-clipboard-list"></i> Paket Test</h6>
                         </div>
                         <div class="content content-boxed">
                             <div class="row items-push">
+                                <?php $no = 1; ?>
                                 <?php foreach ($data['tests'] as $item) : ?>
-                                    <!-- product card -->
-                                    <div class="col-12 col-md-4 col-lg-3 col-xl-3">
-                                        <div class="height d-flex justify-content-center align-items-center">
-                                            <div class="card p-3 pb-0">
-                                                <h4 class=""><?= $item->test_name ?></h4>
-                                                <div class="d-flex justify-content-between align-items-center ">
-                                                    <div class="image">
-                                                        <img src="https://media.istockphoto.com/id/524069563/photo/optical-form-of-an-examination-with-pencil.jpg?s=612x612&w=0&k=20&c=H5wRQfjcWRS8hTRZpcLT7UVomjYKtggIsNopD1o5LEE=" width="180">
-                                                    </div>
-                                                </div>
-                                                <div class="">
-                                                    <h6>Tanggal Mulai : </h6>
-                                                    <h5><?= date("d-m-Y H:i", $item->begin_time); ?></h5>
-                                                    <h3 class="badge badge-md <?= ($item->type == 'free') ? 'bg-gradient-success' : 'bg-gradient-warning'; ?> "><?= $item->type ?></h3>
-                                                    <h4 <?= ($item->type == 'free') ? 'hidden' : ''; ?>><?= $item->price ?> Neo Diamond</h4>
-                                                    <button class="btn detail-product" style="background-color: #611BBD; color: white;">Lihat Selengkapnya</button>
-                                                </div>
-
+                                    <div class="col-md-3 col-sm-6">
+                                        <div class="pricingTable10">
+                                            <div class="pricingTable-header">
+                                                <h3 class="heading">Paket <?= $no ?></h3>
+                                                <span class="price-value">
+                                                    <?= $item->test_name ?>
+                                                </span>
+                                            </div>
+                                            <div class="pricing-content">
+                                                <ul>
+                                                    <li></li>
+                                                    <li class="badge badge-md"><?= $item->type ?></li>
+                                                    <li <?= ($item->type == 'free') ? 'hidden' : ''; ?>><?= $item->price ?> Neo Diamond</li>
+                                                    <li>
+                                                        Tanggal Mulai :<br> <?= date("d-m-Y H:i", $item->begin_time); ?>
+                                                    </li>
+                                                    <li>
+                                                        Tanggal Selesai :<br> <?= date("d-m-Y H:i", $item->end_time); ?>
+                                                    </li>
+                                                    <li>
+                                                        Durasi : <?= $item->duration ?> Menit
+                                                    </li>
+                                                    <li>
+                                                        Jumlah Pertanyaan : <?= $item->number_of_question ?>
+                                                    </li>
+                                                </ul>
+                                                <a href="#" class="read">Detail</a>
+                                                <a href="#" class="read">Beli</a>
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- end of product card -->
                                 <?php
+                                    $no++;
                                 endforeach; ?>
                             </div>
                         </div>

@@ -35,8 +35,9 @@
                 <thead>
                     <tr>
                         <th width="10%" class="fs-sm fw-normal">#</th>
-                        <th width="10%" class="fs-sm fw-normal">Nama Paket</th>
+                        <th width="10%" class="fs-sm fw-normal">Nama</th>
                         <th width="10%" class="fs-sm fw-normal">Type</th>
+                        <th width="10%" class="fs-sm fw-normal">Kode Diskon</th>
                         <th width="5%" class="fs-sm fw-normal">Jumlah Diskon</th>
                         <th width="5%" class="fs-sm fw-normal">Persen Diskon</th>
                         <th width="20%" class="fs-sm fw-normal">Tanggal Mulai</th>
@@ -84,6 +85,17 @@
                                     <span class="tittle-neo"> Tipe Paket</span>
                                     <div class="mb-4 pt-2">
                                         <input type="text" class="form-control" id="type" name="type">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-12">
+                                <div class="col-12 col-md-12 py-2">
+                                    <span class="color-ne" style="letter-spacing: -em">
+                                        <meta charset="utf-8">⋮⋮⋮
+                                    </span> &nbsp;
+                                    <span class="tittle-neo"> Kode Paket</span>
+                                    <div class="mb-4 pt-2">
+                                        <input type="text" class="form-control" id="code" name="code">
                                     </div>
                                 </div>
                             </div>
@@ -143,8 +155,13 @@
                                         <meta charset="utf-8">⋮⋮⋮
                                     </span> &nbsp;
                                     <span class="tittle-neo"> Status</span>
-                                    <div class="mb-4 pt-2">
-                                        <input type="text" class="form-control" id="status" name="status">
+                                    <div class=" mb-4 pt-2">
+                                        <select name="status" id="status" title="Please select..." class="form-control selectpicker" data-live-search="true" data-style="customSelect" data-dropup-auto="false" data-size="4">
+                                            <tr>
+                                                <option value="active">Active</option>
+                                                <option value="inactive">Inactive</option>
+                                            </tr>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -213,6 +230,17 @@
                                     <span class="color-ne" style="letter-spacing: -em">
                                         <meta charset="utf-8">⋮⋮⋮
                                     </span> &nbsp;
+                                    <span class="tittle-neo"> Edit Kode Paket</span>
+                                    <div class="mb-4 pt-2">
+                                        <input type="text" class="form-control" id="edit-code" name="edit_code">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-12">
+                                <div class="col-12 col-md-12 py-2">
+                                    <span class="color-ne" style="letter-spacing: -em">
+                                        <meta charset="utf-8">⋮⋮⋮
+                                    </span> &nbsp;
                                     <span class="tittle-neo"> Tanggal Mulai</span>
                                     <div class="mb-4 pt-2">
                                         <div class="form-group date" data-provide="datepicker">
@@ -264,8 +292,13 @@
                                         <meta charset="utf-8">⋮⋮⋮
                                     </span> &nbsp;
                                     <span class="tittle-neo"> Edit Status</span>
-                                    <div class="mb-4 pt-2">
-                                        <input type="text" class="form-control" id="edit-status" name="edit_status">
+                                    <div class=" mb-4 pt-2">
+                                        <select name="edit_status" id="edit-status" title="Please select..." class="form-control selectpicker" data-live-search="true" data-style="customSelect" data-dropup-auto="false" data-size="4">
+                                            <tr>
+                                                <option value="active">Active</option>
+                                                <option value="inactive">Inactive</option>
+                                            </tr>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -277,17 +310,6 @@
                                     <span class="tittle-neo"> Edit Deskripsi</span>
                                     <div class="mb-4 pt-2">
                                         <textarea type="text" class="form-control" id="edit-description" name="edit_description"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-12">
-                                <div class="col-12 col-md-12 py-2">
-                                    <span class="color-ne" style="letter-spacing: -em">
-                                        <meta charset="utf-8">⋮⋮⋮
-                                    </span> &nbsp;
-                                    <span class="tittle-neo"> Dihapus Pada :</span>
-                                    <div class="mb-4 pt-2">
-                                        <input type="text" class="form-control" id="deleted-at" name="deleted_at" disabled>
                                     </div>
                                 </div>
                             </div>
@@ -324,7 +346,7 @@
     $(document).ready(function() {
         $('.datepicker').flatpickr({
             enableTime: true,
-            dateFormat: "Y/m/d h:i:S",
+            dateFormat: "Y/m/d h:i",
         });
         show_dt_class();
         $('#refresh').on('click', refresh_dt)
@@ -337,24 +359,24 @@
             console.log(data_id);
             let data_name = $(this).data("name");
             let data_type = $(this).data("type");
+            let data_code = $(this).data("code");
             let data_start_date = $(this).data("start-date");
             let data_end_date = $(this).data("end-date");
             let data_discount_amount = $(this).data("discount-amount");
             let data_discount_percentage = $(this).data("discount-percentage");
             let data_description = $(this).data("description");
             let data_status = $(this).data("status");
-            let data_deleted_at = $(this).data("deleted");
 
             $('#id-offer').val(data_id);
             $('#edit-name').val(data_name);
             $('#edit-type').val(data_type);
+            $('#edit-code').val(data_code);
             $('#edit-start-date').val(data_start_date);
             $('#edit-end-date').val(data_end_date);
             $('#edit-dicount-amount').val(data_discount_amount);
             $('#edit-discount-percentage').val(data_discount_percentage);
             $('#edit-description').val(data_description);
             $('#edit-status').val(data_status);
-            $('#deleted-at').val(data_deleted_at);
 
             $('#editOfferModal').modal('show');
 
@@ -556,8 +578,8 @@
             pagingType: "full_numbers",
             paging: true,
             lengthMenu: [
-                [10, 25, 50, 100, -1],
-                [10, 25, 50, 100, 'All'],
+                [25, 50, 100, -1],
+                [25, 50, 100, 'All'],
             ],
             columnDefs: [{ // jumlah harus sesuai jumlah th
                 targets: [0, 2],

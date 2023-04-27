@@ -41,28 +41,27 @@ class KelolaDiamondController extends BaseController
             $where = ['id !=' => 0];
             //Column Order Harus Sesuai Urutan Kolom Pada Header Tabel di bagian View
             //Awali nama kolom tabel dengan nama tabel->tanda titik->nama kolom seperti pengguna.nama
-            $column_order = array('id', 'to_diamond_packages.name', 'to_diamond_packages.type', 'to_diamond_packages.price');
-            $column_search = array('to_diamond_packages.name', 'to_diamond_packages.type', 'to_diamond_packages.price');
+            $column_order = array('id', 'to_diamond_packages.name', 'to_diamond_packages.price');
+            $column_search = array('to_diamond_packages.name', 'to_diamond_packages.price');
             $order = array('to_diamond_packages.id' => 'asc');
             $list = $list_data->get_datatables('to_diamond_packages', $column_order, $column_search, $order, $where);
             $data = array();
             $no = $request->getPost("start");
             foreach ($list as $lists) {
-                $no++;
-                $row    = array();
-                $row[] = $no;
-                $row[] = $lists->name;
-                $row[] = $lists->type;
-                $row[] = "Rp" . $lists->price;
-                $row[] = $lists->amount . " Diamond";
-                $row[] = $lists->description;
-                // $row[] = $lists->price;
-                $row[]  = '
+                if ($lists->deleted_at == false) {
+                    $no++;
+                    $row    = array();
+                    $row[] = $no;
+                    $row[] = $lists->name;
+                    $row[] = "Rp" . $lists->price;
+                    $row[] = $lists->amount . " Diamond";
+                    $row[] = $lists->description;
+                    // $row[] = $lists->price;
+                    $row[]  = '
                     <div class="block-options">
                     <button type="button" class="btn-block-option btn btn-light text-primary edit-button"
                     data-id="' . $lists->id . '"
                     data-name="' . $lists->name . '"
-                    data-type="' . $lists->type . '"
                     data-price="' . $lists->price . '"
                     data-amount="' . $lists->amount . '"
                     data-description="' . $lists->description . '"
@@ -74,7 +73,8 @@ class KelolaDiamondController extends BaseController
                     </button>
                     </div>
                     ';
-                $data[] = $row;
+                    $data[] = $row;
+                }
             }
             $response = array(
                 "draw" => $request->getPost("draw"),

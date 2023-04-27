@@ -57,20 +57,16 @@ class DiamondTransController extends BaseController
             $data = array();
             $no = $request->getPost("start");
             foreach ($list as $lists) {
-                $no++;
-                $row   = array();
-                $row[] = $no;
-                if ($lists->deleted_at == true) {
-                    $red = 'red';
-                } else {
-                    $red = '';
-                }
-                $row[] = '<p style="color:' . $red . ';">' . $lists->full_name . '</p>';
-                $row[] = $lists->package_name;
-                $row[] = $lists->name;
-                $row[] = $lists->transaction_id;
-                $row[] = $lists->status;
-                $row[]  = '
+                if ($lists->deleted_at == false) {
+                    $no++;
+                    $row   = array();
+                    $row[] = $no;
+                    $row[] = $lists->full_name;
+                    $row[] = $lists->package_name;
+                    $row[] = $lists->name;
+                    $row[] = $lists->transaction_id;
+                    $row[] = $lists->status;
+                    $row[]  = '
                     <div class="block-options">
                     <button type="button" class="btn btn-sm btn-warning  edit-button" 
                     data-id="' . $lists->id  . '"
@@ -87,7 +83,8 @@ class DiamondTransController extends BaseController
                     </button>
                     </div>
                     ';
-                $data[] = $row;
+                    $data[] = $row;
+                }
             }
             $response = array(
                 "draw" => $request->getPost("draw"),

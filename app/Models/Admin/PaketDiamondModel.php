@@ -17,7 +17,6 @@ class PaketDiamondModel extends Model
     protected $protectFields    = true;
     protected $allowedFields    = [
         'name',
-        'type',
         'price',
         'amount',
         'description',
@@ -31,7 +30,6 @@ class PaketDiamondModel extends Model
     protected $validationRules =
     [
         'name'     => 'required',
-        'type'        => 'required',
         'price'        => 'required',
         'amount'        => 'required',
         'description'     => 'required',
