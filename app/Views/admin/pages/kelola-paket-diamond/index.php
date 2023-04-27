@@ -31,7 +31,6 @@
                     <tr>
                         <th width="10%" class="fs-sm fw-normal">#</th>
                         <th width="20%" class="fs-sm fw-normal">Nama Paket</th>
-                        <th width="20%" class="fs-sm fw-normal">Type</th>
                         <th width="20%" class="fs-sm fw-normal">Harga Paket</th>
                         <th width="20%" class="fs-sm fw-normal">Jumlah</th>
                         <th width="40%" class="fs-sm fw-normal">Deskripsi</th>
@@ -68,7 +67,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 col-md-12">
+                            <!-- <div class="col-12 col-md-12">
                                 <div class="col-12 col-md-12 py-2">
                                     <span class="color-ne" style="letter-spacing: -em">
                                         <meta charset="utf-8">⋮⋮⋮
@@ -78,7 +77,7 @@
                                         <input type="text" class="form-control" id="package-type" name="package_type">
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="col-12 col-md-12">
                                 <div class="col-12 col-md-12 py-2">
                                     <span class="color-ne" style="letter-spacing: -em">
@@ -150,7 +149,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 col-md-12">
+                            <!-- <div class="col-12 col-md-12">
                                 <div class="col-12 col-md-12 py-2">
                                     <span class="color-ne" style="letter-spacing: -em">
                                         <meta charset="utf-8">⋮⋮⋮
@@ -160,7 +159,7 @@
                                         <input type="text" class="form-control" id="edit-package-type" name="edit_package_type">
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="col-12 col-md-12">
                                 <div class="col-12 col-md-12 py-2">
                                     <span class="color-ne" style="letter-spacing: -em">
@@ -235,14 +234,14 @@
             let data_id = $(this).data("id");
             console.log(data_id);
             let data_package_name = $(this).data("name");
-            let data_package_type = $(this).data("type");
+            // let data_package_type = $(this).data("type");
             let data_package_price = $(this).data("price");
             let data_package_amount = $(this).data("amount");
             let data_package_description = $(this).data("description");
 
             $('#edit-package-id').val(data_id);
             $('#edit-package-name').val(data_package_name);
-            $('#edit-package-type').val(data_package_type);
+            // $('#edit-package-type').val(data_package_type);
             $('#edit-package-price').val(data_package_price);
             $('#edit-diamond-amount').val(data_package_amount);
             $('#edit-package-description').val(data_package_description);

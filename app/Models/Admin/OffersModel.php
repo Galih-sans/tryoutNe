@@ -18,6 +18,7 @@ class OffersModel extends Model
     protected $allowedFields    = [
         'name',
         'type',
+        'offer_code',
         'start_date',
         'end_date',
         'description',
@@ -35,6 +36,7 @@ class OffersModel extends Model
     [
         'name'     => 'required',
         'type'        => 'required',
+        'offer_code'        => 'required',
         'start_date'        => 'required',
         'end_date'        => 'required',
         // 'description'     => 'required',
@@ -48,6 +50,9 @@ class OffersModel extends Model
         ],
         'type'        => [
             'required' => 'Tipe Harus Diisi',
+        ],
+        'offer_code'        => [
+            'required' => 'Kode Diskon Harus Diisi',
         ],
         'start_date'        => [
             'required' => 'Waktu Mulai Harus Diisi',
