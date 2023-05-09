@@ -95,7 +95,8 @@ $routes->group("", ["filter" => "isuser", "namespace" => "App\Controllers\user"]
         // URL - /user
         $routes->get("/", "transaksicontroller::index", ['as' => 'user.transaksi.index']);
         $routes->match(["get", "post"], "index", "transaksicontroller::index");
-        $routes->match(["get", "post"], "beli_diamond", "transaksicontroller::topup", ['as' => 'user.transaksi.beli_diamond']);
+        // $routes->match(["get", "post"], "beli_diamond", "transaksicontroller::topup", ['as' => 'user.transaksi.beli_diamond']);
+        $routes->match(["get", "post"], "beli_diamond(:any)", "transaksicontroller::tes_beli/$1", ["filter" => "noauth"], ['as' => 'user.transaksi.beli_diamond']);
     });
 });
 $routes->group("admin", ["filter" => "isadmin", "namespace" => "App\Controllers\Admin"], function ($routes) {
