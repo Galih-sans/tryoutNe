@@ -32,6 +32,15 @@ class transaksicontroller extends BaseController
 
     public function tes_beli()
     {
+        // Set your Merchant Server Key
+        \Midtrans\Config::$serverKey = env('SERVER_KEY_MIDTRANS');
+        // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+        \Midtrans\Config::$isProduction = env('IS_PRODUCTION_MIDTRANS');
+        // Set sanitization on (default)
+        \Midtrans\Config::$isSanitized = env('IS_SANITIZED_MIDTRANS');
+        // Set 3DS transaction for credit card to true
+        \Midtrans\Config::$is3ds = env('IS_3DS_MIDTRANS');
+
         $paket_id = $this->uri->getSegment(3);
         $student_id = $this->encrypter->decrypt(base64_decode(session()->get('id')));
         $dataPaket =  $this->paket_diamond_model->where('id', $paket_id)->findAll();
@@ -47,28 +56,6 @@ class transaksicontroller extends BaseController
             $firstname = $name;
             $lastname = " ";
         }
-
-        // Set your Merchant Server Key
-        \Midtrans\Config::$serverKey = 'SB-Mid-server-K8J8EKP-cOq3kIJ5uCWuCRTN';
-        // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
-        \Midtrans\Config::$isProduction = false;
-        // Set sanitization on (default)
-        \Midtrans\Config::$isSanitized = true;
-        // Set 3DS transaction for credit card to true
-        \Midtrans\Config::$is3ds = true;
-
-        // $params = array(
-        //     'transaction_details' => array(
-        //         'order_id' => rand(),
-        //         'gross_amount' => 10000,
-        //     ),
-        //     'customer_details' => array(
-        //         'first_name' => $firstname,
-        //         'last_name' => $lastname,
-        //         'email' => $dataStudent[0]->email,
-        //         'phone' => $dataStudent[0]->phone_number,
-        //     ),
-        // );
 
         $transaction_details = array(
             'order_id' => rand(),
@@ -106,7 +93,6 @@ class transaksicontroller extends BaseController
         );
 
         $snapToken = \Midtrans\Snap::getSnapToken($params);
-        $data['token'] = $snapToken;
-        return view('user/pages/transaksi/pay', $data);
+        return redirect()->to('https://app.sandbox.midtrans.com/snap/v3/redirection/' . $snapToken);
     }
 }
