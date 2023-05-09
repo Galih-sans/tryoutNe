@@ -136,3 +136,13 @@ CI_ENVIRONMENT = development
 #--------------------------------------------------------------------
 
 # curlrequest.shareOptions = true
+
+# # CONFIG MIDTRANS
+#     #Set your Merchant Server Key
+    SERVER_KEY_MIDTRANS = 'SB-Mid-server-K8J8EKP-cOq3kIJ5uCWuCRTN';
+#     # Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+    IS_PRODUCTION_MIDTRANS = 'false';
+#     # Set sanitization on (default)
+    IS_SANITIZED_MIDTRANS = true;
+#     # Set 3DS transaction for credit card to true
+    IS_3DS_MIDTRANS = true;    
