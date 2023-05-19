@@ -220,6 +220,7 @@
         });
         $(document).on('click', '.edit-button', function() {
             let data_id = $(this).data("id");
+            console.log(data_id);
             let data_full_name = $(this).data("full_name");
             let data_email = $(this).data("email");
             let data_role = $(this).data("role");

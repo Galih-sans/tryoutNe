@@ -6,14 +6,14 @@ use CodeIgniter\Database\Migration;
 
 class CreateClassTable extends Migration
 {
-    public function up()
-    {
-        $this->forge->addField([
+	public function up()
+	{
+		$this->forge->addField([
 			'id'          => [
-				'type'           => 'BIGINT',
-				'constraint'     => 20,
+				'type'           => 'CHAR',
+				'constraint'     => 36,
 				'unsigned'       => true,
-				'auto_increment' => true
+				// 'auto_increment' => true
 			],
 			'level'       => [
 				'type'           => 'VARCHAR',
@@ -29,11 +29,11 @@ class CreateClassTable extends Migration
 		$this->forge->addKey('id', TRUE);
 		// Create Table
 		$this->forge->createTable('to_class', TRUE);
-    }
+	}
 
-    public function down()
-    {
-        //Drop Table
-        $this->forge->dropTable('to_class');
-    }
+	public function down()
+	{
+		//Drop Table
+		$this->forge->dropTable('to_class');
+	}
 }

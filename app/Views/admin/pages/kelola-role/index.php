@@ -132,14 +132,17 @@
                                             <label for="kelola_paket_diamond">Kelola Paket Diamond</label>
                                         </div>
                                         <div class="form-check form-switch">
+                                            <input type="hidden" id="log_balance" name="log_balance" value="0">
                                             <input class="form-check-input" type="checkbox" value="1" id="log_balance" name="log_balance">
                                             <label for="log_balance">Log Balance Siswa</label>
                                         </div>
                                         <div class="form-check form-switch">
+                                            <input type="hidden" id="offers" name="offers" value="0">
                                             <input class="form-check-input" type="checkbox" value="1" id="offers" name="offers">
                                             <label for="offers">Kelola Diskon</label>
                                         </div>
                                         <div class="form-check form-switch">
+                                            <input type="hidden" id="transaksi_diamond" name="transaksi_diamond" value="0">
                                             <input class="form-check-input" type="checkbox" value="1" id="transaksi_diamond" name="transaksi_diamond">
                                             <label for="transaksi_diamond">Transaksi Diamond</label>
                                         </div>

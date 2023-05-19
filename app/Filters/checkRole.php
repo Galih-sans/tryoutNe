@@ -38,7 +38,7 @@ class checkRole implements FilterInterface
             $nextRequest = "ha_" . str_replace('-', '_', $request->getUri()->getSegment(2));
 
             // user role_id
-            $id_role = $this->encrypter->decrypt(base64_decode(session()->get('role')));
+            $id_role = session()->get('role');
             // $id_role = session()->get('role');
             $akses = $this->role_model->where('id', $id_role)->where('id', $id_role)->findAll();
             $check = $akses[0]->$nextRequest;

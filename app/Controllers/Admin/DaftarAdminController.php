@@ -4,7 +4,7 @@ namespace App\Controllers\Admin;
 
 use CodeIgniter\I18n\Time;
 use App\Controllers\BaseController;
-
+use Ramsey\Uuid\Uuid;
 
 class DaftarAdminController extends BaseController
 {
@@ -36,7 +36,7 @@ class DaftarAdminController extends BaseController
      */
     public function index()
     {
-        $id = $this->encrypter->decrypt(base64_decode(session()->get('role')));
+        $id = session()->get('role');
         $this->data['role'] = $this->role_model->where('id', $id)->findAll();
         $this->data['roleData'] = $this->role_model->orderBy('id', 'ASC')->findAll();
         return view('admin/pages/daftar-admin/index', ['pagedata' => $this->pagedata, 'data' => $this->data]);
@@ -46,12 +46,12 @@ class DaftarAdminController extends BaseController
         if ($this->request->isAJAX()) {
             $request = \Config\Services::request();
             $list_data = $this->daftar_admin_model;
-            $where = ['to_admins.id !=' => 0];
+            $where = ['to_admins.id !=' => ''];
             //Column Order Harus Sesuai Urutan Kolom Pada Header Tabel di bagian View
             //Awali nama kolom tabel dengan nama tabel->tanda titik->nama kolom seperti pengguna.nama
             $column_order = array('to_admins.id', 'to_admins.full_name', 'to_admins.email', 'to_admins.role', 'to_roles.role_name');
             $column_search = array('to_admins.full_name', 'to_admins.email', 'to_admins.role', 'to_roles.role_name');
-            $order = array('to_admins.id' => 'asc');
+            $order = array('to_admins.name' => 'asc');
             $list = $list_data->get_datatables('to_admins', $column_order, $column_search, $order, $where);
             $data = array();
             $no = $request->getPost("start");
@@ -88,43 +88,18 @@ class DaftarAdminController extends BaseController
         }
     }
 
-    /**
-     * Return the properties of a resource object
-     *
-     * @return mixed
-     */
-    public function show($id = null)
-    {
-        //
-    }
-
-    /**
-     * Return a new resource object, with default properties
-     *
-     * @return mixed
-     */
-    public function new()
-    {
-        //
-    }
-
-    /**
-     * Create a new resource object, from "posted" parameters
-     *
-     * @return mixed
-     */
     public function create()
     {
+        $uuid = Uuid::uuid1();
         if ($this->request->isAJAX()) {
             $data_create_admin = [
+                'id' => $uuid->toString(),
                 'full_name' => $this->request->getVar('full-name'),
                 'email' => $this->request->getVar('email'),
                 'role' => $this->request->getVar('role'),
                 'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
-                'created_at'    => $this->now(),
-                'updated_at'    => $this->now()
             ];
-            $query = $this->daftar_admin_model->insert($data_create_admin);
+            $query = $this->daftar_admin_model->add_admin($data_create_admin);
             if ($query) {
                 $response['success'] = true;
                 $response['message']  = 'Data Berhasil Ditambahkan';

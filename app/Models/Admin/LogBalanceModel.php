@@ -9,11 +9,12 @@ class LogBalanceModel extends Model
     protected $DBGroup          = 'default';
     protected $table            = 'to_balance_log';
     protected $primaryKey       = 'id';
-    protected $useAutoIncrement = true;
+    // protected $useAutoIncrement = true;
     protected $insertID         = 0;
     protected $returnType       = 'object';
     protected $protectFields    = true;
     protected $allowedFields    = [
+        'id',
         'student_id',
         'type',
         'amount',

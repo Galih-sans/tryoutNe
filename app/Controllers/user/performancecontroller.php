@@ -35,7 +35,7 @@ class performancecontroller extends BaseController
             $list_data = $this->test_result_model;
             $test_answer_model = $this->answer_model;
             $where = ['to_test_result.id !=' => 0];
-            $student_id = $this->encrypter->decrypt(base64_decode(session()->get('id')));
+            $student_id = session()->get('id');
             $column_order = array('to_test_result.id', 'to_tests.test_name', 'to_test_result.score', 'to_class.class', 'to_tests.begin_time');
             $column_search = array('to_tests.test_name');
             $order = array('to_test_result.id' => 'asc');
@@ -88,7 +88,7 @@ class performancecontroller extends BaseController
         if ($this->request->isAJAX()) {
             $request = \Config\Services::request();
             $list_data = $this->test_model;
-            $student_id = $this->encrypter->decrypt(base64_decode(session()->get('id')));
+            $student_id = session()->get('id');
             $studentModel = $this->student_model;
             $where = ['to_tests.id !=' => 0];
             $students_class_id = $studentModel->getClass($student_id);

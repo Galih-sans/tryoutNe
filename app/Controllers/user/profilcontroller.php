@@ -26,7 +26,7 @@ class profilcontroller extends BaseController
     {
         $this->pagedata['province'] = $this->SchoolModel->get_province();
         $this->StudentModel = new StudentModel();
-        $data = $this->StudentModel->profile($this->encrypter->decrypt(base64_decode(session()->get('id'))));
+        $data = $this->StudentModel->profile(session()->get('id'));
         return view('user/pages/profile/index', ['data' => $this->pagedata, 'userData' => $data]); // return this data as
     }
     // update
@@ -34,7 +34,7 @@ class profilcontroller extends BaseController
     {
         $this->StudentModel = new StudentModel();
         if ($this->request->isAJAX()) {
-            $id = $this->encrypter->decrypt(base64_decode(session()->get('id')));
+            $id = session()->get('id');
             $newDateFormat = $this->request->getVar('DOB');
             $newDate = date("Y-m-d", strtotime(str_replace('/', '-', $newDateFormat)));
             $data = [

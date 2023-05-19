@@ -6,19 +6,19 @@ use CodeIgniter\Database\Migration;
 
 class CreateTopicTable extends Migration
 {
-    public function up()
-    {
-        $this->forge->addField([
+	public function up()
+	{
+		$this->forge->addField([
 			'id'          => [
-				'type'           => 'BIGINT',
-				'constraint'     => 20,
+				'type'           => 'CHAR',
+				'constraint'     => 36,
 				'unsigned'       => true,
-				'auto_increment' => true
+				// 'auto_increment' => true
 			],
 			'subject_id'       => [
-				'type'           => 'BIGINT',
-				'constraint'     => 20,
-                'unsigned'       => true
+				'type'           => 'CHAR',
+				'constraint'     => 36,
+				'unsigned'       => true
 			],
 			'topic'       => [
 				'type'           => 'TEXT',
@@ -27,13 +27,13 @@ class CreateTopicTable extends Migration
 
 		// Primary_Key
 		$this->forge->addKey('id', TRUE);
-        $this->forge->addForeignKey('subject_id', 'to_subjects', 'id','CASCADE','CASCADE');
+		$this->forge->addForeignKey('subject_id', 'to_subjects', 'id', 'CASCADE', 'CASCADE');
 		// Create Table
 		$this->forge->createTable('to_topics', TRUE);
-    }
+	}
 
-    public function down()
-    {
-        //
-    }
+	public function down()
+	{
+		//
+	}
 }

@@ -10,12 +10,13 @@ class OffersModel extends Model
     protected $DBGroup          = 'default';
     protected $table            = 'to_offers';
     protected $primaryKey       = 'id';
-    protected $useAutoIncrement = true;
+    // protected $useAutoIncrement = true;
     protected $insertID         = 0;
     protected $returnType       = 'object';
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
     protected $allowedFields    = [
+        'id',
         'name',
         'type',
         'offer_code',
@@ -148,5 +149,24 @@ class OffersModel extends Model
         $this->builder->from($table);
 
         return $this->builder->countAll();
+    }
+
+    public function add_offer($data)
+    {
+        $offer_data = [
+            'id' => $data['id'],
+            'name' => $data['name'],
+            'type' => $data['type'],
+            'offer_code' => $data['offer_code'],
+            'start_date' => $data['start_date'],
+            'end_date' => $data['end_date'],
+            'discount_amount' => $data['discount_amount'],
+            'discount_percentage' => $data['discount_percentage'],
+            'status'  => $data['status'],
+            'description' => $data['description'],
+            'created_by' => $data['created_by'],
+            'created_at' => $this->now(),
+        ];
+        return  $this->builder->insert($offer_data);
     }
 }

@@ -28,15 +28,11 @@ class BalanceSiswaController extends BaseController
     {
         return Time::now()->getTimestamp();
     }
-    /**
-     * Return an array of resource objects, themselves in array format
-     *
-     * @return mixed
-     */
+
     public function index()
     {
-        $id = $this->encrypter->decrypt(base64_decode(session()->get('role')));
-        $this->data['role'] = $this->role_model->where('id', $id)->findAll();
+        $role_id = session()->get('role');
+        $this->data['role'] = $this->role_model->where('id', $role_id)->findAll();
         $this->data['daftarSiswa'] = $this->siswa_model->findAll();
         return view('admin/pages/balance-siswa/index', ['pagedata' => $this->pagedata, 'data' => $this->data]);
     }
@@ -45,7 +41,7 @@ class BalanceSiswaController extends BaseController
         if ($this->request->isAJAX()) {
             $request = \Config\Services::request();
             $list_data = $this->balance_model;
-            $where = ['users_balance.user_id !=' => 0];
+            $where = ['users_balance.user_id !=' => ''];
             //Column Order Harus Sesuai Urutan Kolom Pada Header Tabel di bagian View
             //Awali nama kolom tabel dengan nama tabel->tanda titik->nama kolom seperti pengguna.nama
             $column_order = array('users_balance.user_id', 'to_students.full_name', 'users_balance.balance');
@@ -88,56 +84,27 @@ class BalanceSiswaController extends BaseController
         }
     }
 
-    /**
-     * Return the properties of a resource object
-     *
-     * @return mixed
-     */
-    public function show($id = null)
-    {
-        //
-    }
+    // public function create()
+    // {
+    //     if ($this->request->isAJAX()) {
+    //         $data = [
+    //             'user_id' => $this->request->getVar('siswa'),
+    //             'balance' => $this->request->getVar('balance'),
+    //             'created_at' => $this->now(),
+    //         ];
+    //         $query = $this->balance_model->insert($data);
+    //         if ($query) {
+    //             $response['success'] = true;
+    //             $response['message']  = 'Balance Berhasil Ditambahkan';
+    //         } else {
+    //             $response['success'] = false;
+    //             $response['message']  = 'Balance Gagal Ditambahkan';
+    //             $response['validation'] = "Isian Form Tidak Boleh Kosong";
+    //         }
+    //         echo json_encode($response);
+    //     }
+    // }
 
-    /**
-     * Return a new resource object, with default properties
-     *
-     * @return mixed
-     */
-    public function new()
-    {
-        //
-    }
-
-    /**
-     * Create a new resource object, from "posted" parameters
-     *
-     * @return mixed
-     */
-    public function create()
-    {
-        if ($this->request->isAJAX()) {
-            $data = [
-                'user_id' => $this->request->getVar('siswa'),
-                'balance' => $this->request->getVar('balance'),
-                'created_at' => $this->now(),
-            ];
-            $query = $this->balance_model->insert($data);
-            if ($query) {
-                $response['success'] = true;
-                $response['message']  = 'Balance Berhasil Ditambahkan';
-            } else {
-                $response['success'] = false;
-                $response['message']  = 'Balance Gagal Ditambahkan';
-                $response['validation'] = "Isian Form Tidak Boleh Kosong";
-            }
-            echo json_encode($response);
-        }
-    }
-    /**
-     * Add or update a model resource, from "posted" properties
-     *
-     * @return mixed
-     */
     public function update()
     {
         if ($this->request->isAJAX()) {
@@ -160,11 +127,6 @@ class BalanceSiswaController extends BaseController
         }
     }
 
-    /**
-     * Delete the designated resource object from the model
-     *
-     * @return mixed
-     */
     public function soft_delete()
     {
         if ($this->request->isAJAX()) {

@@ -10,12 +10,13 @@ class AdminModel extends Model
     protected $DBGroup          = 'default';
     protected $table            = 'to_admins';
     protected $primaryKey       = 'id';
-    protected $useAutoIncrement = true;
+    // protected $useAutoIncrement = true;
     protected $insertID         = 0;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
+        'id',
         'full_name',
         'email',
         'password',
@@ -76,6 +77,19 @@ class AdminModel extends Model
     protected function now()
     {
         return Time::now()->getTimestamp();
+    }
+
+    public function add_admin($data)
+    {
+        $answer_data = [
+            'id' => $data['id'],
+            'full_name' => $data['full_name'],
+            'email' => $data['email'],
+            'password' => $data['password'],
+            'role' => $data['role'],
+            'created_at'    => $this->now(),
+        ];
+        return  $this->builder->insert($answer_data);
     }
 
     protected function _get_datatables_query($table, $column_order, $column_search, $order)

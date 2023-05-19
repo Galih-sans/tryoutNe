@@ -6,7 +6,8 @@ $(document).ready(function () {
   });
 
   $('.datepicker').datepicker({
-    format: 'mm/dd/yyyy',
+    // format: 'mm/dd/yyyy',
+    format: 'yyyy-mm-dd',
     maxDate: -0,
     changeMonth: true,
     changeYear: true,

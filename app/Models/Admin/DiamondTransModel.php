@@ -4,18 +4,20 @@ namespace App\Models\Admin;
 
 use CodeIgniter\Model;
 use CodeIgniter\I18n\Time;
+use Ramsey\Uuid\Uuid;
 
 class DiamondTransModel extends Model
 {
     protected $DBGroup          = 'default';
     protected $table            = 'to_diamond_transaction';
     protected $primaryKey       = 'id';
-    protected $useAutoIncrement = true;
+    // protected $useAutoIncrement = true;
     protected $insertID         = 0;
     protected $returnType       = 'object';
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
     protected $allowedFields    = [
+        'id',
         'student_id',
         'package_id',
         'offer_id',
@@ -140,5 +142,19 @@ class DiamondTransModel extends Model
         $this->builder->from($table);
 
         return $this->builder->countAll();
+    }
+
+    public function add_transaction($transaction_data)
+    {
+        $data = [
+            'id' => $transaction_data['id'],
+            'student_id' => $transaction_data['student_id'],
+            'package_id' => $transaction_data['package_id'],
+            // 'offer_id' => 0,
+            'transaction_id' => $transaction_data['transaction_id'],
+            'status' => 'submit',
+            'created_at' => $this->now(),
+        ];
+        return  $this->builder->insert($data);
     }
 }

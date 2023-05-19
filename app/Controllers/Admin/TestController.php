@@ -4,6 +4,8 @@ namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
 use App\Models\TestResultModel;
+use Ramsey\Uuid\Uuid;
+use CodeIgniter\I18n\Time;
 
 class TestController extends BaseController
 {
@@ -25,10 +27,14 @@ class TestController extends BaseController
         $this->role_model = new \App\Models\Admin\RoleModel();
         $this->encrypter = \Config\Services::encrypter();
     }
+    protected function now()
+    {
+        return Time::now()->getTimestamp();
+    }
     public function index()
     {
-        $id = $this->encrypter->decrypt(base64_decode(session()->get('role')));
-        $this->data['role'] = $this->role_model->where('id', $id)->findAll();
+        $id_role = session()->get('role');
+        $this->data['role'] = $this->role_model->where('id', $id_role)->findAll();
         $this->data['class'] = $this->class_model->orderBy('id', 'ASC')->findAll();
         return view('admin/pages/test/index', ['pagedata' => $this->pagedata, 'data' => $this->data]);
     }
@@ -53,7 +59,7 @@ class TestController extends BaseController
                 $row    = array();
                 $row[] = $no;
                 $row[] = '<p class="fw-bold fs-sm font-size-sm text-center">' . $lists->class . ' ' . $lists->level . '</p>';
-                $row[] = '<p class="fw-bold fs-sm"><a class="fw-semibold link-fx text-neo click" href="#" data-id="' . base64_encode($encrypter->encrypt($lists->id)) . '">' . $lists->test_name . '</a></p><p class="fw-lighter fs-sm font-size-sm">' . date("d-m-Y H:i:s ", $lists->begin_time) . '<span class="fw-bold"> s/d </span>' . date("d-m-Y H:i:s ", $lists->end_time) . '</p><p class="fw-lighter fs-sm font-size-sm"> ( ' . $lists->duration . ' ) Menit </p>';
+                $row[] = '<p class="fw-bold fs-sm"><a class="fw-semibold link-fx text-neo click" href="#" data-id="' . $lists->id . '">' . $lists->test_name . '</a></p><p class="fw-lighter fs-sm font-size-sm">' . date("d-m-Y H:i:s ", $lists->begin_time) . '<span class="fw-bold"> s/d </span>' . date("d-m-Y H:i:s ", $lists->end_time) . '</p><p class="fw-lighter fs-sm font-size-sm"> ( ' . $lists->duration . ' ) Menit </p>';
                 $row[] = '<p class="fw-bold fs-sm font-size-sm">' . $lists->number_of_question . ' Butir </p>';
                 if ($lists->type != 'free') {
                     $row[] = '<p class="fw-bold fs-sm font-size-sm">' . $lists->price . '</p>';
@@ -68,10 +74,10 @@ class TestController extends BaseController
 
                 $row[]  = '
                     <div class="block-options">
-                    <button type="button" class="btn btn-sm btn-warning  edit-button"  data-id="' . base64_encode($encrypter->encrypt($lists->id)) . '">
+                    <button type="button" class="btn btn-sm btn-warning  edit-button"  data-id="' . $lists->id . '">
                         <i class="fa-solid fa-pen-to-square"></i>
                     </button>
-                    <button type="button" class="btn btn-sm btn-danger  delete-button" data-id="' . base64_encode($encrypter->encrypt($lists->id)) . '">
+                    <button type="button" class="btn btn-sm btn-danger  delete-button" data-id="' . $lists->id . '">
                     <i class="fa-solid fa-trash"></i>
                     </button>
                     </div>
@@ -93,7 +99,7 @@ class TestController extends BaseController
         $encrypter = \Config\Services::encrypter();
         if ($this->request->isAJAX()) {
 
-            $id =  $encrypter->decrypt(base64_decode($this->request->getVar('id')));
+            $id =  $this->request->getVar('id');
             $delete = $this->TestModel->where('id', $id)->delete();
             $testResult = new TestResultModel();
             $testAnswer = new TestResultModel();
@@ -114,7 +120,9 @@ class TestController extends BaseController
     public function create()
     {
         if ($this->request->isAJAX()) {
+            $uuid = Uuid::uuid1();
             $data = [
+                'id' => $uuid->toString(),
                 'test_name' => $this->request->getVar('test_name'),
                 'begin_time' => $this->request->getVar('start_date'),
                 'end_time' => $this->request->getVar('end_date'),
@@ -130,6 +138,7 @@ class TestController extends BaseController
                 'random_answer' => $this->request->getVar('random_answer'),
                 'result_to_student' => $this->request->getVar('show_result'),
                 'created_by' => session()->get('id'),
+                'created_at'    => $this->now(),
                 'status' => 100,
             ];
             $compositionData = [
@@ -147,19 +156,30 @@ class TestController extends BaseController
                 $data['result_to_student'] = '0';
             }
 
+            // $beginTime = strtotime(str_replace(",", "", $data['begin_time']));
+            // $endTime = strtotime(str_replace(",", "", $data['end_time']));
 
+            // string replace
+            $replaceBegin = str_replace('/', '-', $data['begin_time']);
+            $replaceEnd = str_replace('/', '-', $data['end_time']);
 
+            // reformat
+            $newBeginDate = date('m/d/Y H:i', strtotime($replaceBegin));
+            $newEndDate = date('m/d/Y H:i', strtotime($replaceEnd));
 
-            $data['begin_time'] = strtotime(str_replace(",", "", $data['begin_time']));
-            $data['end_time'] = strtotime(str_replace(",", "", $data['end_time']));
+            $data['begin_time'] = strtotime($newBeginDate);
+            $data['end_time'] = strtotime($newEndDate);
 
-            $query = $this->TestModel->insert($data);
+            $query = $this->TestModel->add_test($data);
+            // $query = $this->TestModel->insert($data);
             if ($query) {
+                $uuid2 = Uuid::uuid1();
                 //menyimpan komposisi soal
-                $test_id =  $this->TestModel->getInsertID();
+                $test_id = $data['id'];
                 $data1 = array();
                 for ($i = 0; $i < count($compositionData['subject']); $i++) {
                     $data1[$i] = array(
+                        'id' => $uuid2->toString(),
                         'test_id' => $test_id,
                         'subject_id' => $compositionData['subject'][$i],
                         'topic_id' => $compositionData['topic'][$i],
@@ -169,14 +189,17 @@ class TestController extends BaseController
                 $compositionQuery = $this->QuestionCompositionModel->insertBatch($data1);
                 if ($compositionQuery) {
                     $response['success'] = true;
-                    $response['message']  = 'Data Berhasil Disimpan';
+                    // $response['message']  = 'Data Berhasil Disimpan';
+                    $response['message']  = $data;
                 } else {
                     $response['success'] = false;
-                    $response['message']  = 'Data Gagal Disimpan';
+                    // $response['message']  = 'Data Gagal Disimpan';
+                    $response['message']  = $data;
                 }
             } else {
                 $response['success'] = false;
-                $response['message']  = 'Data Gagal Disimpan';
+                // $response['message']  = 'Data Gagal Disimpan';
+                $response['message']  = $data;
             }
             echo json_encode($response);
         }
@@ -185,7 +208,7 @@ class TestController extends BaseController
     {
         $encrypter = \Config\Services::encrypter();
         if ($this->request->isAJAX()) {
-            $id =  $encrypter->decrypt(base64_decode($this->request->getVar('id')));
+            $id =  $this->request->getVar('id');
             $testData = $this->TestModel->get_test($id);
             $testData->begin_time = date("d-m-Y H:i:s ", $testData->begin_time);
             $testData->end_time = date("d-m-Y H:i:s ", $testData->end_time);
@@ -199,7 +222,7 @@ class TestController extends BaseController
     {
         $encrypter = \Config\Services::encrypter();
         if ($this->request->isAJAX()) {
-            $id =  $encrypter->decrypt(base64_decode($this->request->getVar('id')));
+            $id =  $this->request->getVar('id');
             $testData = $this->TestModel->get_edit_test($id);
             $testData->begin_time = date("m/d/Y, H:i ", $testData->begin_time);
             $testData->end_time = date("m/d/Y, H:i ", $testData->end_time);
@@ -212,7 +235,7 @@ class TestController extends BaseController
     {
         $encrypter = \Config\Services::encrypter();
         if ($this->request->isAJAX()) {
-            $id = $encrypter->decrypt(base64_decode($this->request->getVar('test_id')));
+            $id = $this->request->getVar('test_id');
             $data = [
                 'test_name' => $this->request->getVar('edit_test_name'),
                 'begin_time' => $this->request->getVar('edit_start_date'),
@@ -229,6 +252,7 @@ class TestController extends BaseController
                 'random_answer' => $this->request->getVar('edit_random_answer'),
                 'result_to_student' => $this->request->getVar('edit_show_result'),
                 'created_by' => session()->get('id'),
+                'updated_at'    => $this->now()
                 // 'status' => 100,
             ];
             $compositionData = $this->request->getVar('composition[][]');
@@ -247,8 +271,19 @@ class TestController extends BaseController
                 $data['result_to_student'] = '0';
             }
 
-            $data['begin_time'] = strtotime(str_replace(",", "", $data['begin_time']));
-            $data['end_time'] = strtotime(str_replace(",", "", $data['end_time']));
+            // $data['begin_time'] = strtotime(str_replace(",", "", $data['begin_time']));
+            // $data['end_time'] = strtotime(str_replace(",", "", $data['end_time']));
+
+            // string replace
+            $replaceBegin = str_replace('/', '-', $data['begin_time']);
+            $replaceEnd = str_replace('/', '-', $data['end_time']);
+
+            // reformat
+            $newBeginDate = date('m/d/Y H:i', strtotime($replaceBegin));
+            $newEndDate = date('m/d/Y H:i', strtotime($replaceEnd));
+
+            $data['begin_time'] = strtotime($newBeginDate);
+            $data['end_time'] = strtotime($newEndDate);
 
             $query = $this->TestModel->update($id, $data);
             if ($query) {

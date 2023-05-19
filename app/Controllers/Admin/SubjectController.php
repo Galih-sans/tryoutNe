@@ -5,6 +5,8 @@ namespace App\Controllers\Admin;
 use App\Controllers\BaseController;
 use App\Models\Admin\ClassModel;
 use App\Models\Admin\SubjectModel;
+use Ramsey\Uuid\Uuid;
+
 
 class SubjectController extends BaseController
 {
@@ -31,7 +33,7 @@ class SubjectController extends BaseController
      */
     public function index()
     {
-        $id = $this->encrypter->decrypt(base64_decode(session()->get('role')));
+        $id = session()->get('role');
         $this->data['role'] = $this->role_model->where('id', $id)->findAll();
         $this->data['class'] = $this->ClassModel->orderBy('id', 'ASC')->findAll();
         return view('admin/pages/subject/index', ['pagedata' => $this->pagedata, 'data' => $this->data]);
@@ -43,7 +45,7 @@ class SubjectController extends BaseController
             $request = \Config\Services::request();
             $list_data = $this->SubjectModel;
             $class = $request->getPost("class_id");
-            $where = ['to_subjects.id !=' => 0];
+            $where = ['to_subjects.id !=' => ''];
             //Column Order Harus Sesuai Urutan Kolom Pada Header Tabel di bagian View
             //Awali nama kolom tabel dengan nama tabel->tanda titik->nama kolom seperti pengguna.nama
             $column_order = array('to_subjects.id', 'to_class.level', 'to_class.class', 'to_subjects.subject');
@@ -145,12 +147,14 @@ class SubjectController extends BaseController
      */
     public function create()
     {
+        $uuid = Uuid::uuid1();
         if ($this->request->isAJAX()) {
             $data = [
+                'id' => $uuid->toString(),
                 'class_id' => $this->request->getVar('class'),
                 'subject' => $this->request->getVar('subject')
             ];
-            $query = $this->SubjectModel->insert($data);
+            $query = $this->SubjectModel->create($data);
             if ($query) {
                 $response['success'] = true;
                 $response['message']  = 'Data Berhasil Ditambahkan';

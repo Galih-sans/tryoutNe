@@ -10,11 +10,12 @@ class RoleModel extends Model
     protected $DBGroup          = 'default';
     protected $table            = 'to_roles';
     protected $primaryKey       = 'id';
-    protected $useAutoIncrement = true;
+    // protected $useAutoIncrement = true;
     protected $insertID         = 0;
     protected $returnType       = 'object';
     protected $protectFields    = true;
     protected $allowedFields    = [
+        'id',
         'role_name',
         'ha_class',
         'ha_subject',
@@ -42,15 +43,6 @@ class RoleModel extends Model
         'role_name'        => [
             'required' => 'Nama Role Harus Diisi',
         ],
-        //     'email'        => [
-        //         'required' => 'Harus Diisi',
-        //     ],
-        //     'password'        => [
-        //         'required' => 'Harus Diisi',
-        //     ],
-        //     'role'        => [
-        //         'required' => 'Harus Diisi',
-        //     ]
     ];
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;
@@ -67,33 +59,33 @@ class RoleModel extends Model
         return Time::now()->getTimestamp();
     }
 
-    // public function get_datatables()
-    // {
-    //     $query = $this->builder->get();
-    //     return $query->getResult();
-    // }
-    // public function create($data)
-    // {
-    //     $query = $this->builder->insert($data);
-    //     return $query;
-    // }
+    public function add_role($data)
+    {
+        $role_data = [
+            'id' => $data['id'],
+            'role_name' => $data['role_name'],
 
-    // public function get_admin($id)
-    // {
-    //     $query = $this->builder->getWhere(['id' => $id]);
-    //     return $query->getRow();
-    // }
-    // public function get_class_by_level($id)
-    // {
-    //     $query = $this->builder->getWhere(['level' => $id]);
-    //     return $query->getResult();
-    // }
-
+            'ha_class' => $data['ha_class'],
+            'ha_subject' => $data['ha_subject'],
+            'ha_topic' => $data['ha_topic'],
+            'ha_test' => $data['ha_test'],
+            'ha_bank_soal' => $data['ha_bank_soal'],
+            'ha_siswa' => $data['ha_siswa'],
+            'ha_hasil_test' => $data['ha_hasil_test'],
+            'ha_kelola_admin' => $data['ha_kelola_admin'],
+            'ha_kelola_role' => $data['ha_kelola_role'],
+            'ha_paket_diamond' => $data['ha_paket_diamond'],
+            'ha_balance_siswa' => $data['ha_balance_siswa'],
+            'ha_transaksi_diamond' => $data['ha_transaksi_diamond'],
+            'ha_offers' => $data['ha_offers'],
+            'ha_log_balance' => $data['ha_log_balance'],
+        ];
+        return  $this->builder->insert($role_data);
+    }
 
     protected function _get_datatables_query($table, $column_order, $column_search, $order)
     {
         $this->builder = $this->db->table($table);
-        // ADMIN JOIN ROLE
         //jika ingin join formatnya adalah sebagai berikut :
         //$this->builder->join('tabel_lain','tabel_lain.kolom_yang_sama = pengguna.kolom_yang_sama','left');
         //end Join

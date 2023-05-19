@@ -6,48 +6,52 @@ use CodeIgniter\Database\Migration;
 
 class CreateTestAnswerTable extends Migration
 {
-    public function up()
-    {
-        $this->forge->addField([
+	public function up()
+	{
+		$this->forge->addField([
 			'id'          => [
-				'type'           => 'BIGINT',
-				'constraint'     => 20,
+				'type'           => 'CHAR',
+				'constraint'     => 36,
 				'unsigned'       => true,
-				'auto_increment' => true
+				// 'auto_increment' => true
 			],
-            'test_id' => [
-                'type'           => 'BIGINT',
-                'constraint'     => 20,
-            ],
+			'test_id' => [
+				'type'           => 'CHAR',
+				'constraint'     => 36,
+			],
 			'student_id'       => [
-				'type'           => 'BIGINT',
-				'constraint'     => 20,
+				'type'           => 'CHAR',
+				'constraint'     => 36,
 			],
 			'question_id'       => [
-				'type'           => 'BIGINT',
-				'constraint'     => 20,
+				'type'           => 'CHAR',
+				'constraint'     => 36,
 			],
 			'answer_id'       => [
-				'type'           => 'BIGINT',
-				'constraint'     => 20,
+				'type'           => 'CHAR',
+				'constraint'     => 36,
 			],
 			'answer_isright'       => [
 				'type'           => 'TINYINT',
 				'constraint'     => 1,
 			],
-            'created_at' => [
+			'created_at' => [
 				'type'           => 'INT',
-                'constraint'     => 11,
+				'constraint'     => 11,
+			],
+			'updated_at' => [
+				'type'           => 'INT',
+				'constraint'     => 11,
 			],
 		]);
 		// Primary_Key
 		$this->forge->addKey('id', TRUE);
 		// Create Table
 		$this->forge->createTable('to_test_answer', TRUE);
-    }
+	}
 
-    public function down()
-    {
-        $this->forge->dropTable('to_test_answer');
-    }
+	public function down()
+	{
+		$this->forge->dropTable('to_test_answer');
+	}
 }

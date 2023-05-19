@@ -4,6 +4,7 @@ namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
 use CodeIgniter\I18n\Time;
+use Ramsey\Uuid\Uuid;
 
 class KelolaDiamondController extends BaseController
 {
@@ -29,7 +30,7 @@ class KelolaDiamondController extends BaseController
 
     public function index()
     {
-        $id = $this->encrypter->decrypt(base64_decode(session()->get('role')));
+        $id = session()->get('role');
         $this->data['role'] = $this->model_roles->where('id', $id)->findAll();
         return view('admin/pages/kelola-paket-diamond/index', ['pagedata' => $this->pagedata, 'data' => $this->data]);
     }
@@ -38,7 +39,7 @@ class KelolaDiamondController extends BaseController
         if ($this->request->isAJAX()) {
             $request = \Config\Services::request();
             $list_data = $this->paket_diamond_model;
-            $where = ['id !=' => 0];
+            $where = ['id !=' => ''];
             //Column Order Harus Sesuai Urutan Kolom Pada Header Tabel di bagian View
             //Awali nama kolom tabel dengan nama tabel->tanda titik->nama kolom seperti pengguna.nama
             $column_order = array('id', 'to_diamond_packages.name', 'to_diamond_packages.price');
@@ -88,18 +89,19 @@ class KelolaDiamondController extends BaseController
 
     public function create()
     {
-        $user_id = $this->encrypter->decrypt(base64_decode(session()->get('id')));
+        $uuid = Uuid::uuid1();
+        $user_id = session()->get('id');
         if ($this->request->isAJAX()) {
             $data = [
+                'id' => $uuid->toString(),
                 'name' => $this->request->getVar('package_name'),
                 'type' => $this->request->getVar('package_type'),
                 'price' => $this->request->getVar('package_price'),
                 'amount' => $this->request->getVar('diamond_amount'),
                 'description' => $this->request->getVar('package_description'),
                 'created_by' => $user_id,
-                'created_at' => $this->now(),
             ];
-            $query = $this->paket_diamond_model->insert($data);
+            $query = $this->paket_diamond_model->add_package($data);
             if ($query) {
                 $response['success'] = true;
                 $response['message']  = 'Paket Berhasil Ditambahkan';
