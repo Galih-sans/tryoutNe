@@ -3,6 +3,7 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
+use Ramsey\Uuid\Uuid;
 
 class KelolaRoleController extends BaseController
 {
@@ -21,7 +22,7 @@ class KelolaRoleController extends BaseController
 
     public function index()
     {
-        $id = $this->encrypter->decrypt(base64_decode(session()->get('role')));
+        $id = session()->get('role');
         $this->data['role'] = $this->model_roles->where('id', $id)->findAll();
         return view('admin/pages/kelola-role/index', ['pagedata' => $this->pagedata, 'data' => $this->data]);
     }
@@ -30,7 +31,7 @@ class KelolaRoleController extends BaseController
         if ($this->request->isAJAX()) {
             $request = \Config\Services::request();
             $list_data = $this->model_roles;
-            $where = ['id !=' => 0];
+            $where = ['id !=' => ''];
             //Column Order Harus Sesuai Urutan Kolom Pada Header Tabel di bagian View
             //Awali nama kolom tabel dengan nama tabel->tanda titik->nama kolom seperti pengguna.nama
             $column_order = array('id', 'to_roles.role_name');
@@ -85,8 +86,10 @@ class KelolaRoleController extends BaseController
 
     public function create()
     {
+        $uuid = Uuid::uuid1();
         if ($this->request->isAJAX()) {
             $data = [
+                'id' => $uuid->toString(),
                 'role_name' => $this->request->getVar('role_name'),
                 'ha_class' => $this->request->getVar('class'),
                 'ha_subject' => $this->request->getVar('subject'),
@@ -104,7 +107,7 @@ class KelolaRoleController extends BaseController
                 'ha_offers' => $this->request->getVar('offers'),
                 'ha_log_balance' => $this->request->getVar('log_balance'),
             ];
-            $query = $this->model_roles->insert($data);
+            $query = $this->model_roles->add_role($data);
             if ($query) {
                 $response['success'] = true;
                 $response['message']  = 'Data Berhasil Ditambahkan';

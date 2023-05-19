@@ -10,6 +10,7 @@ use App\Models\StudentModel;
 use App\Models\TestAnswerModel;
 use App\Models\TestResultModel;
 use CodeIgniter\I18n\Time;
+use Ramsey\Uuid\Uuid;
 // use App\Models\QuestionModel;
 
 class testcontroller extends BaseController
@@ -30,7 +31,7 @@ class testcontroller extends BaseController
     public function index()
     {
 
-        $id = $this->encrypter->decrypt(base64_decode(session()->get('id')));
+        $id = session()->get('id');
 
         $this->pagedata['title'] = "Daftar Test - Neo Edukasi";
         $this->pagedata['encrypter'] = $this->encrypter;
@@ -54,10 +55,10 @@ class testcontroller extends BaseController
         $this->pagedata['title'] = "Halaman Pengerjaan Test - Neo Edukasi";
         // $this->pagedata['encrypter'] = $this->encrypter;
         $id = $this->encrypter->decrypt(base64_decode(strtr($this->uri->getSegment(3), array('.' => '+', '-' => '=', '~' => '/'))));
-        $class_id = $this->StudentModel->getClass($this->encrypter->decrypt(base64_decode(session()->get('id'))));
+        $class_id = $this->StudentModel->getClass(session()->get('id'));
 
         $TestResultModel = new TestResultModel();
-        $cekdata = $TestResultModel->where(['student_id' => $this->encrypter->decrypt(base64_decode(session()->get('id'))), 'test_id' => $id])->orderBy('id', 'DESC')->first();
+        $cekdata = $TestResultModel->where(['student_id' => session()->get('id'), 'test_id' => $id])->orderBy('id', 'DESC')->first();
         if (!$cekdata) {
             //get Soal
             $this->pagedata['test'] = $this->TestModel->getDetailTest($id);
@@ -112,7 +113,7 @@ class testcontroller extends BaseController
         if ($this->request->isAJAX()) {
             // $this->pagedata['encrypter'] = $this->encrypter;
             $id = $this->request->getVar('id');
-            // $class_id = $this->StudentModel->getClass($this->encrypter->decrypt(base64_decode(session()->get('id'))));
+            // $class_id = $this->StudentModel->getClass(session()->get('id'));
             //get Soal
             $question = $this->TestModel->get_test_composition($id);
             $arr_jawab = array();
@@ -163,10 +164,12 @@ class testcontroller extends BaseController
         $perhitungan = $this->TestModel->test_answer_value($id);
         $result = 0;
         foreach ($data as $item) {
+            $uuid = Uuid::uuid1();
             if (isset($item['answer'])) {
                 $answer[] = array(
+                    "id" => $uuid->toString(),
                     "test_id" => $id,
-                    "student_id" => $this->encrypter->decrypt(base64_decode(session()->get('id'))),
+                    "student_id" => session()->get('id'),
                     "question_id" => $item['question'],
                     "answer_id" => $item['answer'],
                     "answer_isright" => $this->TestModel->checkanswer($item['answer']),
@@ -177,22 +180,24 @@ class testcontroller extends BaseController
                 } else {
                     $result -= $perhitungan->false;
                 }
-                $TestAnswerModel->where(['test_id' => $id, "student_id" => $this->encrypter->decrypt(base64_decode(session()->get('id'))), "question_id" => $item['question'], "answer_id" => $item['answer'], "answer_isright" => $this->TestModel->checkanswer($item['answer'])])->delete();
+                $TestAnswerModel->where(['test_id' => $id, "student_id" => session()->get('id'), "question_id" => $item['question'], "answer_id" => $item['answer'], "answer_isright" => $this->TestModel->checkanswer($item['answer'])])->delete();
             } else {
                 $answer[] = array(
                     "test_id" => $id,
-                    "student_id" => $this->encrypter->decrypt(base64_decode(session()->get('id'))),
+                    "student_id" => session()->get('id'),
                     "question_id" => $item['question'],
                     "answer_id" => 0,
                     "answer_isright" => 0,
                 );
                 $result += $perhitungan->null;
-                $TestAnswerModel->where(['test_id' => $id, "student_id" => $this->encrypter->decrypt(base64_decode(session()->get('id'))), "question_id" => $item['question'], "answer_id" => 0, "answer_isright" => 0])->delete();
+                $TestAnswerModel->where(['test_id' => $id, "student_id" => session()->get('id'), "question_id" => $item['question'], "answer_id" => 0, "answer_isright" => 0])->delete();
             }
         }
 
+        $uuid = Uuid::uuid1();
         $resultData = [
-            "student_id" => $this->encrypter->decrypt(base64_decode(session()->get('id'))),
+            "id" => $uuid->toString(),
+            "student_id" => session()->get('id'),
             "test_id" => $id,
             "begin_time" => $begin_time,
             "end_time" => Time::now()->getTimestamp(),
@@ -223,13 +228,13 @@ class testcontroller extends BaseController
         $AnswerModel = new AnswerModel();
         // $QuestionModel = new QuestionModel();
 
-        $question_id = $TestAnswerModel->get_question_id($id, $this->encrypter->decrypt(base64_decode(session()->get('id'))));
+        $question_id = $TestAnswerModel->get_question_id($id, session()->get('id'));
 
 
-        $data = $TestResultModel->where(['student_id' => $this->encrypter->decrypt(base64_decode(session()->get('id'))), 'test_id' => $id])->orderBy('id', 'DESC')->first();
-        $data1 = $TestResultModel->testResult($id, $this->encrypter->decrypt(base64_decode(session()->get('id'))));
+        $data = $TestResultModel->where(['student_id' => session()->get('id'), 'test_id' => $id])->orderBy('id', 'DESC')->first();
+        $data1 = $TestResultModel->testResult($id, session()->get('id'));
 
-        $soal_test = $TestAnswerModel->get_test_asnwer($id, $this->encrypter->decrypt(base64_decode(session()->get('id'))));
+        $soal_test = $TestAnswerModel->get_test_asnwer($id, session()->get('id'));
 
         $question_answer = $AnswerModel->get_answer_by_question($question_id);
 

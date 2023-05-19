@@ -20,8 +20,7 @@ class AdminController extends BaseController
     }
     public function index()
     {
-        // kirim role where id = session role id
-        $id = $this->encrypter->decrypt(base64_decode(session()->get('role')));
+        $id = session()->get('role');
         $this->data['role'] = $this->role_model->where('id', $id)->findAll();
         return view('admin/pages/dashboard/index', ['pagedata' => $this->pagedata, 'data' => $this->data]);
     }

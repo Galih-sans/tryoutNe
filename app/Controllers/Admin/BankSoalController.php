@@ -36,7 +36,7 @@ class BankSoalController extends BaseController
     }
     public function index()
     {
-        $id = $this->encrypter->decrypt(base64_decode(session()->get('role')));
+        $id = session()->get('role');
         $this->data['role'] = $this->role_model->where('id', $id)->findAll();
         $this->data['class'] = $this->classModel->orderBy('id', 'ASC')->findAll();
         return view('admin/pages/bank-soal/index', ['pagedata' => $this->pagedata, 'data' => $this->data]);
@@ -175,7 +175,7 @@ class BankSoalController extends BaseController
                     'question' => $this->request->getVar('question'),
                     'discussion' => $this->request->getVar('discussion'),
                     'answer.*' => array_values($this->request->getVar('answer')),
-                    'created_by' => $this->encrypter->decrypt(base64_decode(session()->get('id')))
+                    'created_by' => session()->get('id')
                 ];
                 $isrightData = array();
                 foreach ($question_data['answer.*'] as $answer) {

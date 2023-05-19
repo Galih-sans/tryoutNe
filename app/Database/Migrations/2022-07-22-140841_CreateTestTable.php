@@ -6,78 +6,80 @@ use CodeIgniter\Database\Migration;
 
 class CreateTestTable extends Migration
 {
-    public function up()
-    {
-        $this->forge->addField([
+	public function up()
+	{
+		$this->forge->addField([
 			'id'          => [
-				'type'           => 'BIGINT',
-				'constraint'     => 20,
+				'type'           => 'CHAR',
+				'constraint'     => 36,
 				'unsigned'       => true,
-				'auto_increment' => true
+				// 'auto_increment' => true
 			],
 			'test_name'       => [
 				'type'           => 'VARCHAR',
 				'constraint'     => 255,
 			],
 			'begin_time'      => [
-				'type'           => 'DATETIME',
+				'type'           => 'INT',
+				'constraint'     => 11,
 			],
 			'end_time'      => [
-				'type'           => 'DATETIME',
+				'type'           => 'INT',
+				'constraint'     => 11,
 			],
-            'duration' => [
+			'duration' => [
 				'type'           => 'TINYINT',
 				'constraint'     => 4,
 			],
-            'number_of_question' => [
+			'number_of_question' => [
 				'type'           => 'TINYINT',
 				'constraint'     => 4,
 			],
-            'random_question' => [
+			'random_question' => [
 				'type'           => 'TINYINT',
 				'constraint'     => 1,
 			],
-            'random_answer' => [
+			'random_answer' => [
 				'type'           => 'TINYINT',
 				'constraint'     => 1,
 			],
-            'result_to_student' => [
+			'result_to_student' => [
 				'type'           => 'TINYINT',
 				'constraint'     => 1,
 			],
-            'report_to_student' => [
+			'report_to_student' => [
 				'type'           => 'TINYINT',
 				'constraint'     => 1,
 			],
-            'type' => [
+			'type' => [
 				'type'           => 'VARCHAR',
 				'constraint'     => 255,
 			],
-            'price' => [
+			'price' => [
 				'type'           => 'DECIMAL',
 				'constraint'     => 10,
 			],
-            'class_id' => [
-				'type'           => 'BIGINT',
-				'constraint'     => 20,
+			'class_id' => [
+				'type'           => 'CHAR',
+				'constraint'     => 36,
 			],
-            'subject_id' => [
-				'type'           => 'BIGINT',
-				'constraint'     => 20,
+			'subject_id' => [
+				'type'           => 'CHAR',
+				'constraint'     => 36,
 			],
-            'status' => [
+			'status' => [
 				'type'           => 'TINYINT',
 				'constraint'     => 4,
 			],
-            'created_by' => [
+			'created_by' => [
+				'type'           => 'CHAR',
+				'constraint'     => 36,
+			],
+			'created_at' => [
 				'type'           => 'INT',
 				'constraint'     => 11,
 			],
-            'created_at' => [
-				'type'           => 'INT',
-				'constraint'     => 11,
-			],
-            'updated_at' => [
+			'updated_at' => [
 				'type'           => 'INT',
 				'constraint'     => 11,
 			],
@@ -86,10 +88,10 @@ class CreateTestTable extends Migration
 		$this->forge->addKey('id', TRUE);
 		// Create Table
 		$this->forge->createTable('to_tests', TRUE);
-    }
+	}
 
-    public function down()
-    {
-        $this->forge->dropTable('to_tests');
-    }
+	public function down()
+	{
+		$this->forge->dropTable('to_tests');
+	}
 }

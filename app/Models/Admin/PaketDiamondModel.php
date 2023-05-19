@@ -10,12 +10,13 @@ class PaketDiamondModel extends Model
     protected $DBGroup          = 'default';
     protected $table            = 'to_diamond_packages';
     protected $primaryKey       = 'id';
-    protected $useAutoIncrement = true;
+    // protected $useAutoIncrement = true;
     protected $insertID         = 0;
     protected $returnType       = 'object';
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
     protected $allowedFields    = [
+        'id',
         'name',
         'price',
         'amount',
@@ -123,5 +124,20 @@ class PaketDiamondModel extends Model
         $this->builder->from($table);
 
         return $this->builder->countAll();
+    }
+
+    public function add_package($data)
+    {
+        $package_data = [
+            'id' => $data['id'],
+            'name' => $data['name'],
+            'type' => $data['type'],
+            'price' => $data['price'],
+            'amount' => $data['amount'],
+            'description' => $data['description'],
+            'created_by' => $data['created_by'],
+            'created_at' => $this->now(),
+        ];
+        return  $this->builder->insert($package_data);
     }
 }

@@ -9,12 +9,13 @@ class TestResultModel extends Model
     protected $DBGroup          = 'default';
     protected $table            = 'to_test_result';
     protected $primaryKey       = 'id';
-    protected $useAutoIncrement = true;
+    // protected $useAutoIncrement = true;
     protected $insertID         = 0;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
+        'id',
         'student_id',
         'test_id',
         'begin_time',

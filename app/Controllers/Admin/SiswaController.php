@@ -27,7 +27,7 @@ class SiswaController extends BaseController
      */
     public function index()
     {
-        $id = $this->encrypter->decrypt(base64_decode(session()->get('role')));
+        $id = session()->get('role');
         $this->data['role'] = $this->role_model->where('id', $id)->findAll();
         return view('admin/pages/siswa/index', ['pagedata' => $this->pagedata, 'data' => $this->data]);
     }
@@ -36,7 +36,7 @@ class SiswaController extends BaseController
         if ($this->request->isAJAX()) {
             $request = \Config\Services::request();
             $list_data = $this->siswa_model;
-            $where = ['to_students.id !=' => 0];
+            $where = ['to_students.id !=' => ''];
             //Column Order Harus Sesuai Urutan Kolom Pada Header Tabel di bagian View
             //Awali nama kolom tabel dengan nama tabel->tanda titik->nama kolom seperti pengguna.nama
             $column_order = array('to_students.id', 'to_students.full_name', 'to_students.email', 'to_class.class');

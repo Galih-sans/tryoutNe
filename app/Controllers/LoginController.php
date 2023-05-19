@@ -40,7 +40,6 @@ class LoginController extends BaseController
                 $user = $adminModel->where('email', $this->request->getVar('email'))
                     ->first();
                 if (!$user) {
-
                     $isAdmin = false;
                     $model = new StudentModel();
                     $user = $model->where('email', $this->request->getVar('email'))
@@ -73,16 +72,16 @@ class LoginController extends BaseController
         //                'id' => base64_encode($encrypter->encrypt($user['id'])),
         if ($isAdmin == true) {
             $data = [
-                'id' => base64_encode($encrypter->encrypt($user['id'])), // di encrypt
+                'id' => $user['id'],
                 'name' => $user['full_name'],
                 'email' => $user['email'],
                 'isLoggedIn' => true,
                 'isAdmin' => true,
-                "role" => base64_encode($encrypter->encrypt($user['role'])),
+                "role" => $user['role'],
             ];
         } else {
             $data = [
-                'id' => base64_encode($encrypter->encrypt($user['id'])),
+                'id' => $user['id'],
                 'name' => $user['full_name'],
                 'isLoggedIn' => true,
                 'isUser' => true,

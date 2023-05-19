@@ -4,18 +4,20 @@ namespace App\Models\Admin;
 
 use CodeIgniter\I18n\Time;
 use CodeIgniter\Model;
+use Ramsey\Uuid\Uuid;
 
 class AnswerModel extends Model
 {
     protected $DBGroup          = 'default';
     protected $table            = 'to_answers';
     protected $primaryKey       = 'id';
-    protected $useAutoIncrement = true;
+    // protected $useAutoIncrement = true;
     protected $insertID         = 0;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
+        'id',
         'question_id',
         'answer',
         'answer_isright',
@@ -69,7 +71,9 @@ class AnswerModel extends Model
 
     public function add_answer($data, $answer)
     {
+        $uuid = Uuid::uuid1();
         $answer_data = [
+            'id' =>  $uuid->toString(),
             'question_id' => $data['question_id'],
             'answer' => $answer['answer'],
             'answer_isright' => $answer['isright'],

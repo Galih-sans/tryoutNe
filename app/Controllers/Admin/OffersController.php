@@ -4,6 +4,7 @@ namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
 use CodeIgniter\I18n\Time;
+use Ramsey\Uuid\Uuid;
 
 class OffersController extends BaseController
 {
@@ -29,7 +30,7 @@ class OffersController extends BaseController
 
     public function index()
     {
-        $id = $this->encrypter->decrypt(base64_decode(session()->get('role')));
+        $id = session()->get('role');
         $this->data['role'] = $this->model_roles->where('id', $id)->findAll();
         return view('admin/pages/offers/index', ['pagedata' => $this->pagedata, 'data' => $this->data]);
     }
@@ -38,7 +39,7 @@ class OffersController extends BaseController
         if ($this->request->isAJAX()) {
             $request = \Config\Services::request();
             $list_data = $this->model_offers;
-            $where = ['id !=' => 0];
+            $where = ['id !=' => ''];
             //Column Order Harus Sesuai Urutan Kolom Pada Header Tabel di bagian View
             //Awali nama kolom tabel dengan nama tabel->tanda titik->nama kolom seperti pengguna.nama
             $column_order = array('id', 'to_offers.name', 'to_offers.type');
@@ -99,9 +100,11 @@ class OffersController extends BaseController
 
     public function create()
     {
-        $user_id = $this->encrypter->decrypt(base64_decode(session()->get('id')));
+        $uuid = Uuid::uuid1();
+        $user_id = session()->get('id');
         if ($this->request->isAJAX()) {
             $data = [
+                'id' => $uuid->toString(),
                 'name' => $this->request->getVar('name'),
                 'type' => $this->request->getVar('type'),
                 'offer_code' => $this->request->getVar('code'),
@@ -112,9 +115,8 @@ class OffersController extends BaseController
                 'status'  => $this->request->getVar('status'),
                 'description' => $this->request->getVar('description'),
                 'created_by' => $user_id,
-                'created_at' => $this->now(),
             ];
-            $query = $this->model_offers->insert($data);
+            $query = $this->model_offers->add_offer($data);
             if ($query) {
                 $response['success'] = true;
                 $response['message']  = 'Offer Berhasil Ditambahkan';

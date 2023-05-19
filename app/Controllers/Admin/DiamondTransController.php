@@ -4,6 +4,7 @@ namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
 use CodeIgniter\I18n\Time;
+use Ramsey\Uuid\Uuid;
 
 class DiamondTransController extends BaseController
 {
@@ -35,8 +36,8 @@ class DiamondTransController extends BaseController
 
     public function index()
     {
-        $id = $this->encrypter->decrypt(base64_decode(session()->get('role')));
-        $this->data['role'] = $this->model_roles->where('id', $id)->findAll();
+        $role_id = session()->get('role');
+        $this->data['role'] = $this->model_roles->where('id', $role_id)->findAll();
         $this->data['daftarPaket'] = $this->paket_model->findAll();
         $this->data['daftarOffer'] = $this->offers_model->findAll();
         $this->data['daftarSiswa'] = $this->siswa_model->findAll();
@@ -47,7 +48,7 @@ class DiamondTransController extends BaseController
         if ($this->request->isAJAX()) {
             $request = \Config\Services::request();
             $list_data = $this->diamond_trans_model;
-            $where = ['to_diamond_transaction.id !=' => 0];
+            $where = ['to_diamond_transaction.id !=' => ''];
             //Column Order Harus Sesuai Urutan Kolom Pada Header Tabel di bagian View
             //Awali nama kolom tabel dengan nama tabel->tanda titik->nama kolom seperti pengguna.nama
             $column_order = array('to_diamond_transaction.id', 'to_student.full_name', 'to_diamond_transaction.status',);
@@ -98,8 +99,10 @@ class DiamondTransController extends BaseController
 
     public function create()
     {
+        $uuid = Uuid::uuid1();
         if ($this->request->isAJAX()) {
             $data = [
+                'id' => $uuid->toString(),
                 'student_id' => $this->request->getVar('siswa'),
                 'package_id' => $this->request->getVar('paket'),
                 'offer_id' => $this->request->getVar('offer'),

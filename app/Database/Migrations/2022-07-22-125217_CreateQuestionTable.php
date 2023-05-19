@@ -6,46 +6,46 @@ use CodeIgniter\Database\Migration;
 
 class CreateQuestionTable extends Migration
 {
-    public function up()
-    {
-        $this->forge->addField([
+	public function up()
+	{
+		$this->forge->addField([
 			'id'          => [
-				'type'           => 'BIGINT',
-				'constraint'     => 20,
+				'type'           => 'CHAR',
+				'constraint'     => 36,
 				'unsigned'       => true,
-				'auto_increment' => true
+				// 'auto_increment' => true
 			],
 			'question'       => [
 				'type'           => 'TEXT',
 			],
 			'class_id'      => [
-				'type'           => 'BIGINT',
-				'constraint'     => 20,
+				'type'           => 'CHAR',
+				'constraint'     => 36,
 			],
 			'subject_id'      => [
-				'type'           => 'BIGINT',
-				'constraint'     => 20,
+				'type'           => 'CHAR',
+				'constraint'     => 36,
 			],
 			'topic_id'      => [
-				'type'           => 'BIGINT',
-				'constraint'     => 20,
+				'type'           => 'CHAR',
+				'constraint'     => 36,
 			],
 			'difficulty'      => [
 				'type'           => 'VARCHAR',
-                'constraint'     => 255,
+				'constraint'     => 255,
 			],
 			'discussion'      => [
 				'type'           => 'TEXT',
 			],
-            'created_by' => [
+			'created_by' => [
+				'type'           => 'CHAR',
+				'constraint'     => 36,
+			],
+			'created_at' => [
 				'type'           => 'INT',
 				'constraint'     => 11,
 			],
-            'created_at' => [
-				'type'           => 'INT',
-				'constraint'     => 11,
-			],
-            'updated_at' => [
+			'updated_at' => [
 				'type'           => 'INT',
 				'constraint'     => 11,
 			],
@@ -54,11 +54,11 @@ class CreateQuestionTable extends Migration
 		$this->forge->addKey('id', TRUE);
 		// Create Table
 		$this->forge->createTable('to_questions', TRUE);
-    }
+	}
 
-    public function down()
-    {
-        //Drop Table
-        $this->forge->dropTable('to_questions');
-    }
+	public function down()
+	{
+		//Drop Table
+		$this->forge->dropTable('to_questions');
+	}
 }

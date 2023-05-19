@@ -27,8 +27,8 @@ class LogBalanceController extends BaseController
      */
     public function index()
     {
-        $id = $this->encrypter->decrypt(base64_decode(session()->get('role')));
-        $this->data['role'] = $this->role_model->where('id', $id)->findAll();
+        $role_id = session()->get('role');
+        $this->data['role'] = $this->role_model->where('id', $role_id)->findAll();
         return view('admin/pages/log-balance/index', ['pagedata' => $this->pagedata, 'data' => $this->data]);
     }
     public function dt_balance_log()
@@ -117,8 +117,6 @@ class LogBalanceController extends BaseController
                 $response['success'] = false;
                 $response['message']  = 'Data Berhasil Ditambahkan';
             }
-
-
             echo json_encode($response);
         }
     }

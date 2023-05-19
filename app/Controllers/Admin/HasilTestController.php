@@ -38,26 +38,26 @@ class HasilTestController extends BaseController
 
     public function index()
     {
-        $id = $this->encrypter->decrypt(base64_decode(session()->get('role')));
-        $this->data['role'] = $this->role_model->where('id', $id)->findAll();
+        $role_id = session()->get('role');
+        $this->data['role'] = $this->role_model->where('id', $role_id)->findAll();
         return view('admin/pages/hasil-test/index', ['pagedata' => $this->pagedata, 'data' => $this->data]);
     }
 
     public function detail()
     {
-        $id = $this->encrypter->decrypt(base64_decode(session()->get('role')));
-        $this->data['role'] = $this->role_model->where('id', $id)->findAll();
+        $role_id = session()->get('role');
+        $this->data['role'] = $this->role_model->where('id', $role_id)->findAll();
         $this->pagedata['title'] = "Detail Test Siswa";
         $this->pagedata['encrypter'] = $this->encrypter;
         // $test_id = $this->uri->getSegment(4);
-        $this->pagedata['test_id'] = $this->uri->getSegment(4);
-        $test_id = $this->encrypter->decrypt(base64_decode(strtr($this->pagedata['test_id'], array('.' => '+', '-' => '=', '~' => '/'))));
+        // $this->pagedata['test_id'] = $this->uri->getSegment(4);
+        $test_id = $this->encrypter->decrypt(base64_decode(strtr($this->uri->getSegment(4), array('.' => '+', '-' => '=', '~' => '/'))));
 
         if ($this->request->isAJAX()) {
             $request = \Config\Services::request();
             $detail_test_id = $test_id;
             $list_data = $this->result_model;
-            $where = ['to_test_result.id !=' => 0];
+            $where = ['to_test_result.id !=' => ''];
             //Column Order Harus Sesuai Urutan Kolom Pada Header Tabel di bagian View
             //Awali nama kolom tabel dengan nama tabel->tanda titik->nama kolom seperti pengguna.nama
             $column_order = array('to_test_result.id', 'to_tests.test_name', 'to_students.full_name', 'to_test_result.score');
@@ -123,7 +123,6 @@ class HasilTestController extends BaseController
             foreach ($list as $lists) {
                 $beginDate = date("d-M-Y H:i:s", substr($lists->begin_time, 0, 10));
                 $test_id = strtr(base64_encode($this->encrypter->encrypt($lists->id)), array('+' => '.', '=' => '-', '/' => '~'));
-                // $decrypted_id = $this->encrypter->decrypt(base64_decode(strtr($test_id, array('.' => '+', '-' => '=', '~' => '/'))));
                 $no++;
                 $row    = array();
                 $row[] = $no;

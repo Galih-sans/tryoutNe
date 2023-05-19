@@ -6,22 +6,22 @@ use CodeIgniter\Database\Migration;
 
 class CreateStudentTable extends Migration
 {
-    public function up()
-    {
-        $this->forge->addField([
+	public function up()
+	{
+		$this->forge->addField([
 			'id'          => [
-				'type'           => 'BIGINT',
-				'constraint'     => 20,
+				'type'           => 'CHAR',
+				'constraint'     => 36,
 				'unsigned'       => true,
-				'auto_increment' => true
+				// 'auto_increment' => true
 			],
 			'full_name'       => [
 				'type'           => 'VARCHAR',
 				'constraint'     => '255'
 			],
 			'class_id'      => [
-				'type'           => 'BIGINT',
-				'constraint'     => 20,
+				'type'           => 'CHAR',
+				'constraint'     => 36,
 			],
 			'POB'      => [
 				'type'           => 'VARCHAR',
@@ -30,42 +30,50 @@ class CreateStudentTable extends Migration
 			'DOB'      => [
 				'type'           => 'DATE',
 			],
-            'email'       => [
+			'email'       => [
 				'type'           => 'VARCHAR',
 				'constraint'     => 255,
 			],
-            'phone_number'       => [
+			'phone_number'       => [
 				'type'           => 'BIGINT',
 				'constraint'     => 13,
 			],
-            'school'       => [
+			'school'       => [
 				'type'           => 'TEXT',
 			],
-            'password'       => [
+			'password'       => [
 				'type'           => 'VARCHAR',
 				'constraint'     => 255,
 			],
-            'gender'       => [
+			'gender'       => [
 				'type'           => 'VARCHAR',
 				'constraint'     => 1,
 			],
-            'parent_name'       => [
+			'parent_name'       => [
 				'type'           => 'VARCHAR',
 				'constraint'     => 255,
 			],
-            'parent_phone_number' => [
+			'parent_phone_number' => [
 				'type'           => 'BIGINT',
 				'constraint'     => 13,
 			],
-            'token' => [
+			'parent_email' => [
 				'type'           => 'VARCHAR',
 				'constraint'     => 255,
 			],
-            'created_at' => [
+			'token' => [
 				'type'           => 'VARCHAR',
 				'constraint'     => 255,
 			],
-            'updated_at' => [
+			'email_verified' => [
+				'type'           => 'TINYINT',
+				'constraint'     => 4,
+			],
+			'created_at' => [
+				'type'           => 'VARCHAR',
+				'constraint'     => 255,
+			],
+			'updated_at' => [
 				'type'           => 'VARCHAR',
 				'constraint'     => 255,
 			],
@@ -73,15 +81,15 @@ class CreateStudentTable extends Migration
 
 		// Primary_Key
 		$this->forge->addKey('id', TRUE);
-        // Foreign Key
-        // $this->forge->addForeignKey('class_id', 'to_class', 'id');
+		// Foreign Key
+		// $this->forge->addForeignKey('class_id', 'to_class', 'id');
 		// Create Table
 		$this->forge->createTable('to_students', TRUE);
 	}
 
-    public function down()
-    {
-        //Drop Table
-        $this->forge->dropTable('to_students');
-    }
+	public function down()
+	{
+		//Drop Table
+		$this->forge->dropTable('to_students');
+	}
 }

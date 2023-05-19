@@ -4,17 +4,18 @@ namespace App\Models\Admin;
 
 use CodeIgniter\Model;
 use CodeIgniter\I18n\Time;
+use Ramsey\Uuid\Uuid;
 
 class BankSoalModel extends Model
 {
     protected $DBGroup          = 'default';
     protected $table            = 'to_questions';
     protected $primaryKey       = 'id';
-    protected $useAutoIncrement = true;
+    // protected $useAutoIncrement = true;
     protected $insertID         = 0;
     protected $returnType       = 'object';
     protected $protectFields    = true;
-    protected $allowedFields    = ['question', 'class_id', 'subject_id', 'topic_id', 'discussion', 'difficulty', 'created_at', 'updated_at', 'created_by'];
+    protected $allowedFields    = ['id', 'question', 'class_id', 'subject_id', 'topic_id', 'discussion', 'difficulty', 'created_at', 'updated_at', 'created_by'];
     protected $useSoftDeletes = true;
     // Dates
     protected $dateFormat    = 'datetime';
@@ -167,7 +168,9 @@ class BankSoalModel extends Model
     }
     public function add_question($data)
     {
+        $uuid = Uuid::uuid1();
         $question_data = [
+            'id' =>  $uuid->toString(),
             'subject_id' => $data['subject'],
             'topic_id' => $data['topic'],
             'class_id' => $data['level'],
@@ -179,8 +182,8 @@ class BankSoalModel extends Model
             'updated_at'    => $this->now()
         ];
         $this->builder->insert($question_data);
-        $insert_id = $this->db->insertID();
-        return  $insert_id;
+        // $insert_id = $this->db->insertID();
+        return $uuid->toString();
         // return $this->builder->delete();
     }
 

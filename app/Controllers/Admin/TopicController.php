@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 use App\Models\Admin\ClassModel;
 use App\Models\Admin\SubjectModel;
 use App\Models\Admin\TopicModel;
+use Ramsey\Uuid\Uuid;
 
 class TopicController extends BaseController
 {
@@ -35,8 +36,8 @@ class TopicController extends BaseController
      */
     public function index()
     {
-        $id = $this->encrypter->decrypt(base64_decode(session()->get('role')));
-        $this->data['role'] = $this->role_model->where('id', $id)->findAll();
+        $id_role = session()->get('role');
+        $this->data['role'] = $this->role_model->where('id', $id_role)->findAll();
         $this->data['class'] = $this->ClassModel->orderBy('id', 'ASC')->findAll();
         return view('admin/pages/topic/index', ['pagedata' => $this->pagedata, 'data' => $this->data]);
     }
@@ -46,7 +47,7 @@ class TopicController extends BaseController
             $request = \Config\Services::request();
             $list_data = $this->TopicModel;
             $subject = $request->getPost("subject_id");
-            $where = ['to_subjects.id !=' => 0];
+            $where = ['to_subjects.id !=' => ''];
             //Column Order Harus Sesuai Urutan Kolom Pada Header Tabel di bagian View
             //Awali nama kolom tabel dengan nama tabel->tanda titik->nama kolom seperti pengguna.nama
             $column_order = array('', 'to_class.level', 'to_class.class', 'to_subjects.subject', 'to_topics.topic');
@@ -113,8 +114,10 @@ class TopicController extends BaseController
      */
     public function create()
     {
+        $uuid = Uuid::uuid1();
         if ($this->request->isAJAX()) {
             $data = [
+                'id' => $uuid->toString(),
                 'subject_id' => $this->request->getVar('subject_id'),
                 'topic' => $this->request->getVar('topic')
             ];

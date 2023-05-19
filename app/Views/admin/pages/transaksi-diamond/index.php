@@ -24,13 +24,13 @@
             </div>
         </div>
         <div class="block-content fs-sm">
-            <div class="row pb-2 mb-3 shadow-sm align-center">
+            <!-- <div class="row pb-2 mb-3 shadow-sm align-center">
                 <div class="col-12 col-md-12 text-right">
                     <button type="button" class="btn btn-primary btn-sm" onclick="tambah()">
                         <i class="si si-plus"></i> Tambah Transaksi
                     </button>
                 </div>
-            </div>
+            </div> -->
             <table id="example" class="table table-bordered table-vcenter js-dataTable-full no-footer dtr-inline collapsed" style="width:100%">
                 <thead>
                     <tr>
