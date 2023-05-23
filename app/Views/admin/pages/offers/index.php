@@ -71,7 +71,7 @@
                                     <span class="color-ne" style="letter-spacing: -em">
                                         <meta charset="utf-8">⋮⋮⋮
                                     </span> &nbsp;
-                                    <span class="tittle-neo"> Nama Diskon</span>
+                                    <span class="tittle-neo"> Nama</span>
                                     <div class="mb-4 pt-2">
                                         <input type="text" class="form-control" id="name" name="name">
                                     </div>
@@ -82,18 +82,29 @@
                                     <span class="color-ne" style="letter-spacing: -em">
                                         <meta charset="utf-8">⋮⋮⋮
                                     </span> &nbsp;
-                                    <span class="tittle-neo"> Tipe Paket</span>
-                                    <div class="mb-4 pt-2">
+                                    <span class="tittle-neo"> Tipe Offer</span>
+                                    <!-- <div class="mb-4 pt-2">
                                         <input type="text" class="form-control" id="type" name="type">
+                                    </div> -->
+                                    <div class=" mb-4 pt-2">
+                                        <select name="type" id="type" title="Pilih Tipe Diskon..." class="form-control selectpicker" data-live-search="true" data-style="customSelect" data-dropup-auto="false" data-size="4">
+                                            <tr>
+                                                <option value="diamond">Diamond</option>
+                                                <!-- <option value="inactive">Inactive</option> -->
+                                            </tr>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-12 col-md-12">
                                 <div class="col-12 col-md-12 py-2">
-                                    <span class="color-ne" style="letter-spacing: -em">
-                                        <meta charset="utf-8">⋮⋮⋮
-                                    </span> &nbsp;
-                                    <span class="tittle-neo"> Kode Paket</span>
+                                    <div class="mb-2 pt-2">
+                                        <span class="color-ne" style="letter-spacing: -em">
+                                            <meta charset="utf-8">⋮⋮⋮
+                                        </span> &nbsp;
+                                        <span class="tittle-neo"> Kode Offer</span>
+                                        <button type="button" class="btn btn-sm btn-success float-right random-string">Buat Kode</button>
+                                    </div>
                                     <div class="mb-4 pt-2">
                                         <input type="text" class="form-control" id="code" name="code">
                                     </div>
@@ -207,7 +218,7 @@
                                     <span class="color-ne" style="letter-spacing: -em">
                                         <meta charset="utf-8">⋮⋮⋮
                                     </span> &nbsp;
-                                    <span class="tittle-neo"> Edit Nama Offer</span>
+                                    <span class="tittle-neo"> Edit Nama</span>
                                     <div class="mb-4 pt-2">
                                         <input type="hidden" id="id-offer" name="offer_id">
                                         <input type="text" class="form-control" id="edit-name" name="edit_name">
@@ -220,8 +231,16 @@
                                         <meta charset="utf-8">⋮⋮⋮
                                     </span> &nbsp;
                                     <span class="tittle-neo"> Edit Tipe Offer</span>
-                                    <div class="mb-4 pt-2">
+                                    <!-- <div class="mb-4 pt-2">
                                         <input type="text" class="form-control" id="edit-type" name="edit_type">
+                                    </div> -->
+                                    <div class=" mb-4 pt-2">
+                                        <select name="edit_type" id="edit-type" title="Pilih Tipe Diskon..." class="form-control selectpicker" data-live-search="true" data-style="customSelect" data-dropup-auto="false" data-size="4">
+                                            <tr>
+                                                <option value="diamond">Diamond</option>
+                                                <!-- <option value="inactive">Inactive</option> -->
+                                            </tr>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -230,7 +249,7 @@
                                     <span class="color-ne" style="letter-spacing: -em">
                                         <meta charset="utf-8">⋮⋮⋮
                                     </span> &nbsp;
-                                    <span class="tittle-neo"> Edit Kode Paket</span>
+                                    <span class="tittle-neo"> Edit Kode Offer</span>
                                     <div class="mb-4 pt-2">
                                         <input type="text" class="form-control" id="edit-code" name="edit_code">
                                     </div>
@@ -354,6 +373,12 @@
             let id = $(this).data("id");
             delete_data(id);
         });
+
+        $(document).on('click', '.random-string', function() {
+            let length = 10;
+            rand_string(length);
+        });
+
         $(document).on('click', '.edit-button', function() {
             let data_id = $(this).data("id");
             console.log(data_id);
@@ -382,6 +407,20 @@
 
         });
     });
+
+    function rand_string(length) {
+        let result = '';
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        const charactersLength = characters.length;
+        let counter = 0;
+        while (counter < length) {
+            result += characters.charAt(Math.floor(Math.random() * charactersLength));
+            counter += 1;
+        }
+        // return result;
+        $('#code').val(result);
+        // console.log(result);
+    }
 
     function delete_data(id) {
         Swal.fire({
