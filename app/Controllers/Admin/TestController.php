@@ -189,17 +189,17 @@ class TestController extends BaseController
                 $compositionQuery = $this->QuestionCompositionModel->insertBatch($data1);
                 if ($compositionQuery) {
                     $response['success'] = true;
-                    // $response['message']  = 'Data Berhasil Disimpan';
-                    $response['message']  = $data;
+                    $response['message']  = 'Data Berhasil Disimpan';
+                    // $response['message']  = $data;
                 } else {
                     $response['success'] = false;
-                    // $response['message']  = 'Data Gagal Disimpan';
-                    $response['message']  = $data;
+                    $response['message']  = 'Data Gagal Disimpan';
+                    // $response['message']  = $data;
                 }
             } else {
                 $response['success'] = false;
-                // $response['message']  = 'Data Gagal Disimpan';
-                $response['message']  = $data;
+                $response['message']  = 'Data Gagal Disimpan';
+                // $response['message']  = $data;
             }
             echo json_encode($response);
         }
@@ -224,8 +224,8 @@ class TestController extends BaseController
         if ($this->request->isAJAX()) {
             $id =  $this->request->getVar('id');
             $testData = $this->TestModel->get_edit_test($id);
-            $testData->begin_time = date("m/d/Y, H:i ", $testData->begin_time);
-            $testData->end_time = date("m/d/Y, H:i ", $testData->end_time);
+            $testData->begin_time = date("d/m/Y, H:i", $testData->begin_time);
+            $testData->end_time = date("d/m/Y, H:i", $testData->end_time);
             $data['testData'] = $testData;
             $data['compositonData'] = $this->QuestionCompositionModel->get_composition_detail($id);
             return json_encode($data);
@@ -289,8 +289,10 @@ class TestController extends BaseController
             if ($query) {
                 $this->QuestionCompositionModel->where('test_id', $id)->delete();
                 $data1 = array();
+                $uuid2 = Uuid::uuid1();
                 foreach ($compositionData as $row) {
                     $data1[] = array(
+                        'id' => $uuid2->toString(),
                         'test_id' => $id,
                         'subject_id' => $row['subject'],
                         'topic_id' => $row['topic'],
@@ -301,13 +303,16 @@ class TestController extends BaseController
                 if ($compositionQuery) {
                     $response['success'] = true;
                     $response['message']  = 'Data Berhasil Diupdate';
+                    // $response['message']  = $data;
                 } else {
                     $response['success'] = false;
                     $response['message']  = 'Data Gagal Diupdate';
+                    // $response['message']  = $data;
                 }
             } else {
                 $response['success'] = false;
                 $response['message']  = 'Data Gagal Diupdate';
+                // $response['message']  = $data;
             }
             echo json_encode($response);
         }
