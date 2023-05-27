@@ -27847,4 +27847,13 @@ a[disabled] {
   }
 }
 
+.close {
+  color: #000;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: #000;
+}
+
 /* Credit to https://bootsnipp.com/snippets/92erW */
