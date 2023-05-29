@@ -63,7 +63,7 @@ class OffersController extends BaseController
                     $row[] = $startDate;
                     $row[] = $endDate;
                     $row[] = $lists->status;
-                    $row[] = $lists->description;
+                    // $row[] = $lists->description;
                     $row[]  = '
                     <div class="block-options">
                     <button type="button" class="btn-block-option btn btn-light text-primary edit-button"

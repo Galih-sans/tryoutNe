@@ -14,15 +14,10 @@
                         </div>
                     </div>
                 <?php } else {  ?>
-                    <!-- <div class="card mb-5"> -->
-                    <!-- <div class="bg-neo card-header pb-3 px-3">
-                            <h6 class="mb-0 text-white"><i class="fa fa-diamond"></i> Paket Diamond</h6>
-                        </div> -->
                     <div class="content content-boxed">
                         <div class="row items-push">
                             <?php $no1 = 1; ?>
                             <?php foreach ($data['paketDiamond'] as $item) : ?>
-                                <!-- new -->
                                 <div class="col-md-3 col-sm-6">
                                     <div class="pricingTable10">
                                         <div class="pricingTable-header">
@@ -40,7 +35,6 @@
                                                 </li>
                                             </ul>
                                             <button type="button" class="btn detail-button read" data-id="<?= $item->id ?>" data-name="<?= $item->name ?>" data-price="<?= $item->price ?>" data-amount="<?= $item->amount ?>" data-description="<?= $item->description ?>">Detail</a>
-                                                <!-- <a href=" #" class="read">Beli</a> -->
                                         </div>
                                     </div>
                                 </div>
@@ -49,70 +43,51 @@
                             endforeach; ?>
                         </div>
                     </div>
-                    <!-- </div> -->
                 <?php } ?>
             </div>
-            <!-- <div class="col-md-12 mt-4">
-                <?php if ($data['tests'] == false) {  ?>
-                    <div class="block block-rounded shadow-sm bg-neo-dark">
-                        <div class=" content content-full text-center pt-5 pb-5">
-                            <h2 class="h3 fw-normal text-white-75">
-                                Belum ada test saat ini.. :(
-                            </h2>
-                        </div>
-                    </div>
-                <?php } else {  ?>
-                    <div class="card">
-                        <div class="bg-neo card-header pb-3 px-3">
-                            <h6 class="mb-0 text-white"><i class="fa fa-clipboard-list"></i> Paket Test</h6>
-                        </div>
-                        <div class="content content-boxed">
-                            <div class="row items-push">
-                                <?php $no = 1; ?>
-                                <?php foreach ($data['tests'] as $item) : ?>
-                                    <div class="col-md-3 col-sm-6">
-                                        <div class="pricingTable10">
-                                            <div class="pricingTable-header">
-                                                <h3 class="heading">Paket <?= $no ?></h3>
-                                                <span class="price-value">
-                                                    <?= $item->test_name ?>
-                                                </span>
-                                            </div>
-                                            <div class="pricing-content">
-                                                <ul>
-                                                    <li></li>
-                                                    <li class="badge badge-md"><?= $item->type ?></li>
-                                                    <li <?= ($item->type == 'free') ? 'hidden' : ''; ?>><?= $item->price ?> Neo Diamond</li>
-                                                    <li>
-                                                        Tanggal Mulai :<br> <?= date("d-m-Y H:i", $item->begin_time); ?>
-                                                    </li>
-                                                    <li>
-                                                        Tanggal Selesai :<br> <?= date("d-m-Y H:i", $item->end_time); ?>
-                                                    </li>
-                                                    <li>
-                                                        Durasi : <?= $item->duration ?> Menit
-                                                    </li>
-                                                    <li>
-                                                        Jumlah Pertanyaan : <?= $item->number_of_question ?>
-                                                    </li>
-                                                </ul>
-                                                <a href="#" class="read">Detail</a>
-                                                <a href="#" class="read">Beli</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                <?php
-                                    $no++;
-                                endforeach; ?>
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?>
-            </div> -->
         </div>
     </div>
 </div>
-<div class="modal fade" id="modalDetail" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalDetail" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body ">
+                <div class="text-right"> <i class="fa fa-close close" data-bs-dismiss="modal"></i> </div>
+                
+                <div class="px-4 py-5">
+                <input type="hidden" id="id-paket" name="id_paket">
+                    <h5 class="text-uppercase" id="nama-paket" name="nama">Nama Paket</h5>
+                <h4 class="mt-5 theme-color mb-5" style="color:blue" id="description" name="deskripsi">Deskripsi</h4>
+                <span class="theme-color" style="color:blue">Rincian Paket</span>
+                <div class="mb-3">
+                    <hr class="new1">
+                </div>
+                <div class="d-flex justify-content-between">
+                    <span class="font-weight-bold">Jumlah Diamond</span>
+                    <span class="text-muted" id="amount" name="jumlah"></span>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <small>Harga</small>
+                    <small id="price"></small>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <small>Diskon</small>
+                    <small>-</small>
+                </div>
+                
+                <div class="d-flex justify-content-between mt-3">
+                    <span class="font-weight-bold">Total</span>
+                    <span id="total" name="harga" class="font-weight-bold" style="color:blue"></span>
+                </div>  
+                <div class="text-center mt-5">
+                    <button class="btn btn-primary beli-diamond">Beli Sekarang</button>
+                </div>                   
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <div class="modal fade" id="modalDetail" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-md" role="document">
         <div class="modal-content">
             <div class="block block-rounded block-transparent mb-0">
@@ -140,21 +115,21 @@
                                 <div class="col-12 col-md-12 py-2">
                                     <span class="tittle-neo"> Jumlah Diamond :</span>
                                     <div class=" mb-4 pt-2">
-                                        <span id="nama-amount" name="jumlah" style="font-size: 15px; font-weight: bold;">
+                                        <span id="amount" name="jumlah" style="font-size: 15px; font-weight: bold;">
                                         </span>
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-12 py-2">
                                     <span class="tittle-neo"> Harga :</span>
                                     <div class=" mb-4 pt-2">
-                                        <span id="nama-price" name="harga" style="font-size: 15px; font-weight: bold;">
+                                        <span id="price" name="harga" style="font-size: 15px; font-weight: bold;">
                                         </span>
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-12 py-2">
                                     <span class="tittle-neo"> Deskripsi :</span>
                                     <div class=" mb-4 pt-2">
-                                        <span id="nama-description" name="deskripsi" style="font-size: 15px; font-weight: bold;">
+                                        <span id="description" name="deskripsi" style="font-size: 15px; font-weight: bold;">
                                         </span>
                                     </div>
                                 </div>
@@ -168,7 +143,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 <script>
     $(document).ready(function() {
         $(document).on('click', '.detail-button', function() {
@@ -182,9 +157,10 @@
             // console.log(data_id);
             $('#id-paket').text(data_id);
             $('#nama-paket').text(data_name);
-            $('#nama-amount').text(data_amount);
-            $('#nama-price').text(data_price);
-            $('#nama-description').text(data_description);
+            $('#amount').text(data_amount);
+            $('#price').text('Rp' + data_price);
+            $('#total').text('Rp' + data_price); // harga - diskon
+            $('#description').text(data_description);
             $('#modalDetail').modal('show');
         });
 

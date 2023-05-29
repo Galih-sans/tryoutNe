@@ -43,7 +43,7 @@
                         <th width="20%" class="fs-sm fw-normal">Tanggal Mulai</th>
                         <th width="20%" class="fs-sm fw-normal">Tanggal Selesai</th>
                         <th width="10%" class="fs-sm fw-normal">Status</th>
-                        <th width="40%" class="fs-sm fw-normal">Deskripsi</th>
+                        <!-- <th width="40%" class="fs-sm fw-normal">Deskripsi</th> -->
                         <th width="10%" class="fs-sm fw-normal">Aksi</th>
                     </tr>
                 </thead>
@@ -51,8 +51,9 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="tambahOfferModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+<div class="modal fade" id="tambahOfferModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="block block-rounded block-transparent mb-0">
                 <div class="block-header block-header-ne">
@@ -67,7 +68,6 @@
                     <form id="tambah_offer_form">
                         <div class="row">
                             <div class="col-12 col-md-12">
-                                <div class="col-12 col-md-12 py-2">
                                     <span class="color-ne" style="letter-spacing: -em">
                                         <meta charset="utf-8">⋮⋮⋮
                                     </span> &nbsp;
@@ -75,118 +75,110 @@
                                     <div class="mb-4 pt-2">
                                         <input type="text" class="form-control" id="name" name="name">
                                     </div>
-                                </div>
                             </div>
-                            <div class="col-12 col-md-12">
-                                <div class="col-12 col-md-12 py-2">
-                                    <span class="color-ne" style="letter-spacing: -em">
-                                        <meta charset="utf-8">⋮⋮⋮
-                                    </span> &nbsp;
-                                    <span class="tittle-neo"> Tipe Offer</span>
-                                    <!-- <div class="mb-4 pt-2">
-                                        <input type="text" class="form-control" id="type" name="type">
-                                    </div> -->
-                                    <div class=" mb-4 pt-2">
-                                        <select name="type" id="type" title="Pilih Tipe Diskon..." class="form-control selectpicker" data-live-search="true" data-style="customSelect" data-dropup-auto="false" data-size="4">
-                                            <tr>
-                                                <option value="diamond">Diamond</option>
-                                                <!-- <option value="inactive">Inactive</option> -->
-                                            </tr>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-12">
-                                <div class="col-12 col-md-12 py-2">
-                                    <div class="mb-2 pt-2">
+                                <div class="col-12 col-md-12">
+                                    <div class="row">
+                                        <div class="col-12 col-md-6">
                                         <span class="color-ne" style="letter-spacing: -em">
                                             <meta charset="utf-8">⋮⋮⋮
-                                        </span> &nbsp;
-                                        <span class="tittle-neo"> Kode Offer</span>
-                                        <button type="button" class="btn btn-sm btn-success float-right random-string">Buat Kode</button>
-                                    </div>
-                                    <div class="mb-4 pt-2">
-                                        <input type="text" class="form-control" id="code" name="code">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-12">
-                                <div class="col-12 col-md-12 py-2">
-                                    <span class="color-ne" style="letter-spacing: -em">
-                                        <meta charset="utf-8">⋮⋮⋮
-                                    </span> &nbsp;
-                                    <span class="tittle-neo"> Tanggal Mulai</span>
-                                    <div class="mb-4 pt-2">
-                                        <div class="form-group date" data-provide="datepicker">
-                                            <input name="start_date" id="start_date" type="text" class="form-control datepicker">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                                            </span> &nbsp;
+                                        <span class="tittle-neo"> Tipe Offer</span>
+                                            <select name="type" id="type" title="Pilih Tipe Diskon..." class="form-control selectpicker" data-live-search="true" data-style="customSelect" data-dropup-auto="false" data-size="4">
+                                                <tr>
+                                                    <option value="diamond">Diamond</option>
+                                                    <!-- <option value="inactive">Inactive</option> -->
+                                                </tr>
+                                            </select>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <span class="color-ne" style="letter-spacing: -em">
+                                                <meta charset="utf-8">⋮⋮⋮
+                                            </span> &nbsp;
+                                            <span class="tittle-neo"> Kode Offer</span>
+                                            <button type="button" class="btn btn-sm btn-success float-right random-string">Buat Kode</button>
+                                        <div class="mb-4 pt-2">
+                                            <input type="text" class="form-control" id="code" name="code">
+                                        </div>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-12 col-md-12">
+                                    <div class="row">
+                                        <div class="col-12 col-md-6">
+                                            <span class="color-ne" style="letter-spacing: -em">
+                                                <meta charset="utf-8">⋮⋮⋮
+                                            </span> &nbsp;
+                                            <span class="tittle-neo"> Tanggal Mulai</span>
+                                            <div class="mb-4 pt-2">
+                                                <div class="form-group date" data-provide="datepicker">
+                                                    <input name="start_date" id="start_date" type="text" class="form-control datepicker">
+                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <span class="color-ne" style="letter-spacing: -em">
+                                                <meta charset="utf-8">⋮⋮⋮
+                                            </span> &nbsp;
+                                            <span class="tittle-neo"> Tanggal Selesai</span>
+                                            <div class="mb-4 pt-2">
+                                                <div class="form-group date" data-provide="datepicker">
+                                                    <input name="end_date" id="end_date" type="text" class="form-control datepicker">
+                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                             </div>
-                            <div class="col-12 col-md-12">
-                                <div class="col-12 col-md-12 py-2">
-                                    <span class="color-ne" style="letter-spacing: -em">
-                                        <meta charset="utf-8">⋮⋮⋮
-                                    </span> &nbsp;
-                                    <span class="tittle-neo"> Tanggal Selesai</span>
-                                    <div class="mb-4 pt-2">
-                                        <div class="form-group date" data-provide="datepicker">
-                                            <input name="end_date" id="end_date" type="text" class="form-control datepicker">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                                <div class="col-12 col-md-12">
+                                    <div class="row">
+                                        <div class="col-12 col-md-6">
+                                            <span class="color-ne" style="letter-spacing: -em">
+                                                <meta charset="utf-8">⋮⋮⋮
+                                            </span> &nbsp;
+                                            <span class="tittle-neo"> Jumlah Diskon</span>
+                                            <div class="mb-4 pt-2">
+                                                <input type="text" class="form-control" id="discount-amount" name="discount_amount">
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <span class="color-ne" style="letter-spacing: -em">
+                                                <meta charset="utf-8">⋮⋮⋮
+                                            </span> &nbsp;
+                                            <span class="tittle-neo"> Persen Diskon</span>
+                                            <div class="mb-4 pt-2">
+                                                <input type="text" class="form-control" id="discount-percentage" name="discount_percentage">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-12 col-md-12">
-                                <div class="col-12 col-md-12 py-2">
-                                    <span class="color-ne" style="letter-spacing: -em">
-                                        <meta charset="utf-8">⋮⋮⋮
-                                    </span> &nbsp;
-                                    <span class="tittle-neo"> Jumlah Diskon</span>
-                                    <div class="mb-4 pt-2">
-                                        <input type="text" class="form-control" id="discount-amount" name="discount_amount">
+                                <div class="col-12 col-md-12">
+                                    <div class="row">
+                                        <div class="col-12 col-md-6">
+                                            <span class="color-ne" style="letter-spacing: -em">
+                                                <meta charset="utf-8">⋮⋮⋮
+                                            </span> &nbsp;
+                                            <span class="tittle-neo"> Status</span>
+                                            <div class=" mb-4 pt-2">
+                                                <select name="status" id="status" title="Please select..." class="form-control selectpicker" data-live-search="true" data-style="customSelect" data-dropup-auto="false" data-size="4">
+                                                    <tr>
+                                                        <option value="active">Active</option>
+                                                        <option value="inactive">Inactive</option>
+                                                    </tr>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <span class="color-ne" style="letter-spacing: -em">
+                                                <meta charset="utf-8">⋮⋮⋮
+                                            </span> &nbsp;
+                                            <span class="tittle-neo"> Deskripsi</span>
+                                            <div class="mb-4 pt-2">
+                                                <textarea type="text" class="form-control" id="description" name="description"></textarea>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-12 col-md-12">
-                                <div class="col-12 col-md-12 py-2">
-                                    <span class="color-ne" style="letter-spacing: -em">
-                                        <meta charset="utf-8">⋮⋮⋮
-                                    </span> &nbsp;
-                                    <span class="tittle-neo"> Persen Diskon</span>
-                                    <div class="mb-4 pt-2">
-                                        <input type="text" class="form-control" id="discount-percentage" name="discount_percentage">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-12">
-                                <div class="col-12 col-md-12 py-2">
-                                    <span class="color-ne" style="letter-spacing: -em">
-                                        <meta charset="utf-8">⋮⋮⋮
-                                    </span> &nbsp;
-                                    <span class="tittle-neo"> Status</span>
-                                    <div class=" mb-4 pt-2">
-                                        <select name="status" id="status" title="Please select..." class="form-control selectpicker" data-live-search="true" data-style="customSelect" data-dropup-auto="false" data-size="4">
-                                            <tr>
-                                                <option value="active">Active</option>
-                                                <option value="inactive">Inactive</option>
-                                            </tr>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-12">
-                                <div class="col-12 col-md-12 py-2">
-                                    <span class="color-ne" style="letter-spacing: -em">
-                                        <meta charset="utf-8">⋮⋮⋮
-                                    </span> &nbsp;
-                                    <span class="tittle-neo"> Deskripsi</span>
-                                    <div class="mb-4 pt-2">
-                                        <textarea type="text" class="form-control" id="description" name="description"></textarea>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </form>
                 </div>
@@ -198,12 +190,13 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="editOfferModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+<div class="modal fade" id="editOfferModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="block block-rounded block-transparent mb-0">
                 <div class="block-header block-header-ne">
-                    <h3 class="block-title text-white">Edit Offer : </h3>
+                    <h3 class="block-title text-white">Tambah Diskon : </h3>
                     <div class="block-options">
                         <button type="button" class="btn-block-option-white" data-bs-dismiss="modal" aria-label="Close">
                             <i class="fa fa-fw fa-times"></i>
@@ -211,133 +204,126 @@
                     </div>
                 </div>
                 <div class="block-content fs-sm">
-                    <form id="edit_role_form">
+                    <form id="tambah_offer_form">
                         <div class="row">
                             <div class="col-12 col-md-12">
-                                <div class="col-12 col-md-12 py-2">
                                     <span class="color-ne" style="letter-spacing: -em">
                                         <meta charset="utf-8">⋮⋮⋮
                                     </span> &nbsp;
-                                    <span class="tittle-neo"> Edit Nama</span>
+                                    <span class="tittle-neo"> Nama</span>
                                     <div class="mb-4 pt-2">
                                         <input type="hidden" id="id-offer" name="offer_id">
-                                        <input type="text" class="form-control" id="edit-name" name="edit_name">
+                                        <input type="text" class="form-control" id="edit-name" name="name">
                                     </div>
-                                </div>
                             </div>
-                            <div class="col-12 col-md-12">
-                                <div class="col-12 col-md-12 py-2">
-                                    <span class="color-ne" style="letter-spacing: -em">
-                                        <meta charset="utf-8">⋮⋮⋮
-                                    </span> &nbsp;
-                                    <span class="tittle-neo"> Edit Tipe Offer</span>
-                                    <!-- <div class="mb-4 pt-2">
-                                        <input type="text" class="form-control" id="edit-type" name="edit_type">
-                                    </div> -->
-                                    <div class=" mb-4 pt-2">
-                                        <select name="edit_type" id="edit-type" title="Pilih Tipe Diskon..." class="form-control selectpicker" data-live-search="true" data-style="customSelect" data-dropup-auto="false" data-size="4">
-                                            <tr>
-                                                <option value="diamond">Diamond</option>
-                                                <!-- <option value="inactive">Inactive</option> -->
-                                            </tr>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-12">
-                                <div class="col-12 col-md-12 py-2">
-                                    <span class="color-ne" style="letter-spacing: -em">
-                                        <meta charset="utf-8">⋮⋮⋮
-                                    </span> &nbsp;
-                                    <span class="tittle-neo"> Edit Kode Offer</span>
-                                    <div class="mb-4 pt-2">
-                                        <input type="text" class="form-control" id="edit-code" name="edit_code">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-12">
-                                <div class="col-12 col-md-12 py-2">
-                                    <span class="color-ne" style="letter-spacing: -em">
-                                        <meta charset="utf-8">⋮⋮⋮
-                                    </span> &nbsp;
-                                    <span class="tittle-neo"> Tanggal Mulai</span>
-                                    <div class="mb-4 pt-2">
-                                        <div class="form-group date" data-provide="datepicker">
-                                            <input name="edit_start_date" id="edit-start-date" type="text" class="form-control datepicker">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                                <div class="col-12 col-md-12">
+                                    <div class="row">
+                                        <div class="col-12 col-md-6">
+                                        <span class="color-ne" style="letter-spacing: -em">
+                                            <meta charset="utf-8">⋮⋮⋮
+                                            </span> &nbsp;
+                                        <span class="tittle-neo"> Tipe Offer</span>
+                                            <select name="type" id="edit-type" title="Pilih Tipe Diskon..." class="form-control selectpicker" data-live-search="true" data-style="customSelect" data-dropup-auto="false" data-size="4">
+                                                <tr>
+                                                    <option value="diamond">Diamond</option>
+                                                </tr>
+                                            </select>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <span class="color-ne" style="letter-spacing: -em">
+                                                <meta charset="utf-8">⋮⋮⋮
+                                            </span> &nbsp;
+                                            <span class="tittle-neo"> Kode Offer</span>
+                                            <!-- <button type="button" class="btn btn-sm btn-success float-right random-string">Buat Kode</button> -->
+                                        <div class="mb-4 pt-2">
+                                            <input type="text" class="form-control" id="edit-code" name="code">
+                                        </div>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-12 col-md-12">
+                                    <div class="row">
+                                        <div class="col-12 col-md-6">
+                                            <span class="color-ne" style="letter-spacing: -em">
+                                                <meta charset="utf-8">⋮⋮⋮
+                                            </span> &nbsp;
+                                            <span class="tittle-neo"> Tanggal Mulai</span>
+                                            <div class="mb-4 pt-2">
+                                                <div class="form-group date" data-provide="datepicker">
+                                                    <input name="start_date" id="edit-start-date" type="text" class="form-control datepicker">
+                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <span class="color-ne" style="letter-spacing: -em">
+                                                <meta charset="utf-8">⋮⋮⋮
+                                            </span> &nbsp;
+                                            <span class="tittle-neo"> Tanggal Selesai</span>
+                                            <div class="mb-4 pt-2">
+                                                <div class="form-group date" data-provide="datepicker">
+                                                    <input name="end_date" id="edit-end-date" type="text" class="form-control datepicker">
+                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                             </div>
-                            <div class="col-12 col-md-12">
-                                <div class="col-12 col-md-12 py-2">
-                                    <span class="color-ne" style="letter-spacing: -em">
-                                        <meta charset="utf-8">⋮⋮⋮
-                                    </span> &nbsp;
-                                    <span class="tittle-neo"> Tanggal Selesai</span>
-                                    <div class="mb-4 pt-2">
-                                        <div class="form-group date" data-provide="datepicker">
-                                            <input name="edit_end_date" id="edit-end-date" type="text" class="form-control datepicker">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                                <div class="col-12 col-md-12">
+                                    <div class="row">
+                                        <div class="col-12 col-md-6">
+                                            <span class="color-ne" style="letter-spacing: -em">
+                                                <meta charset="utf-8">⋮⋮⋮
+                                            </span> &nbsp;
+                                            <span class="tittle-neo"> Jumlah Diskon</span>
+                                            <div class="mb-4 pt-2">
+                                                <input type="text" class="form-control" id="edit-discount-amount" name="discount_amount">
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <span class="color-ne" style="letter-spacing: -em">
+                                                <meta charset="utf-8">⋮⋮⋮
+                                            </span> &nbsp;
+                                            <span class="tittle-neo"> Persen Diskon</span>
+                                            <div class="mb-4 pt-2">
+                                                <input type="text" class="form-control" id="edit-discount-percentage" name="discount_percentage">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-12 col-md-12">
-                                <div class="col-12 col-md-12 py-2">
-                                    <span class="color-ne" style="letter-spacing: -em">
-                                        <meta charset="utf-8">⋮⋮⋮
-                                    </span> &nbsp;
-                                    <span class="tittle-neo"> Edit Jumlah Diskon</span>
-                                    <div class="mb-4 pt-2">
-                                        <input type="text" class="form-control" id="edit-dicount-amount" name="edit_discount_amount">
+                                <div class="col-12 col-md-12">
+                                    <div class="row">
+                                        <div class="col-12 col-md-6">
+                                            <span class="color-ne" style="letter-spacing: -em">
+                                                <meta charset="utf-8">⋮⋮⋮
+                                            </span> &nbsp;
+                                            <span class="tittle-neo"> Status</span>
+                                            <div class=" mb-4 pt-2">
+                                                <select name="status" id="edit-status" title="Please select..." class="form-control selectpicker" data-live-search="true" data-style="customSelect" data-dropup-auto="false" data-size="4">
+                                                    <tr>
+                                                        <option value="active">Active</option>
+                                                        <option value="inactive">Inactive</option>
+                                                    </tr>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <span class="color-ne" style="letter-spacing: -em">
+                                                <meta charset="utf-8">⋮⋮⋮
+                                            </span> &nbsp;
+                                            <span class="tittle-neo"> Deskripsi</span>
+                                            <div class="mb-4 pt-2">
+                                                <textarea type="text" class="form-control" id="edit-description" name="description"></textarea>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-12 col-md-12">
-                                <div class="col-12 col-md-12 py-2">
-                                    <span class="color-ne" style="letter-spacing: -em">
-                                        <meta charset="utf-8">⋮⋮⋮
-                                    </span> &nbsp;
-                                    <span class="tittle-neo"> Edit Persen Diskon</span>
-                                    <div class="mb-4 pt-2">
-                                        <input type="text" class="form-control" id="edit-discount-percentage" name="edit_discount_percentage">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-12">
-                                <div class="col-12 col-md-12 py-2">
-                                    <span class="color-ne" style="letter-spacing: -em">
-                                        <meta charset="utf-8">⋮⋮⋮
-                                    </span> &nbsp;
-                                    <span class="tittle-neo"> Edit Status</span>
-                                    <div class=" mb-4 pt-2">
-                                        <select name="edit_status" id="edit-status" title="Please select..." class="form-control selectpicker" data-live-search="true" data-style="customSelect" data-dropup-auto="false" data-size="4">
-                                            <tr>
-                                                <option value="active">Active</option>
-                                                <option value="inactive">Inactive</option>
-                                            </tr>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-12">
-                                <div class="col-12 col-md-12 py-2">
-                                    <span class="color-ne" style="letter-spacing: -em">
-                                        <meta charset="utf-8">⋮⋮⋮
-                                    </span> &nbsp;
-                                    <span class="tittle-neo"> Edit Deskripsi</span>
-                                    <div class="mb-4 pt-2">
-                                        <textarea type="text" class="form-control" id="edit-description" name="edit_description"></textarea>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </form>
                 </div>
                 <div class="block-content block-content-full text-end bg-body">
                     <button type="button" class="btn btn-sm btn-secondary me-1" data-bs-dismiss="modal">Tutup</button>
-                    <button type="button" class="btn btn-sm btn-primary" data-bs-dismiss="modal" onclick="update_data()">Simpan</button>
+                    <button type="button" class="btn btn-sm btn-primary" data-bs-dismiss="modal" onclick="insert_data()">Simpan</button>
                 </div>
             </div>
         </div>
@@ -398,7 +384,7 @@
             $('#edit-code').val(data_code);
             $('#edit-start-date').val(data_start_date);
             $('#edit-end-date').val(data_end_date);
-            $('#edit-dicount-amount').val(data_discount_amount);
+            $('#edit-discount-amount').val(data_discount_amount);
             $('#edit-discount-percentage').val(data_discount_percentage);
             $('#edit-description').val(data_description);
             $('#edit-status').val(data_status);

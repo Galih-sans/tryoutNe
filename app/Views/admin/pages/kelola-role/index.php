@@ -39,7 +39,7 @@
     </div>
 </div>
 <div class="modal fade" id="tambahRoleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="block block-rounded block-transparent mb-0">
                 <div class="block-header block-header-ne">
@@ -63,88 +63,93 @@
                                         <input type="text" class="form-control" id="role_name" name="role_name">
                                     </div>
                                 </div>
-                                <!-- role -->
                                 <div class="col-12 col-md-12 py-2">
-                                    <span class="color-ne" style="letter-spacing: -em">
-                                        <meta charset="utf-8">⋮⋮⋮
-                                    </span> &nbsp;
-                                    <span class="tittle-neo"> Hak Akses Menu</span>
-                                    <div class="mx-4 py-2">
-                                        <div class="form-check form-switch">
-                                            <input type="hidden" id="class" name="class" value="0">
-                                            <input class="form-check-input" type="checkbox" value="1" id="class" name="class">
-                                            <label for="class">Daftar Kelas</label>
+                                    <div class="row">
+                                        <div class="col-12 col-md-6">
+                                            <span class="color-ne" style="letter-spacing: -em">
+                                                <meta charset="utf-8">⋮⋮⋮
+                                            </span> &nbsp;
+                                            <span class="tittle-neo"> Hak Akses Menu</span>
+                                            <div class="mx-4 py-2">
+                                                <div class="form-check form-switch">
+                                                    <input type="hidden" id="class" name="class" value="0">
+                                                    <input class="form-check-input" type="checkbox" value="1" id="class" name="class">
+                                                    <label for="class">Daftar Kelas</label>
+                                                </div>
+                                                <div class="form-check form-switch">
+                                                    <input type="hidden" id="subject" name="subject" value="0">
+                                                    <input class="form-check-input" type="checkbox" value="1" id="subject" name="subject">
+                                                    <label for="subject">Mata Pelajaran</label>
+                                                </div>
+                                                <div class="form-check form-switch">
+                                                    <input type="hidden" id="topic" name="topic" value="0">
+                                                    <input class="form-check-input" type="checkbox" value="1" id="topic" name="topic">
+                                                    <label for="topic">Topik Mata Pelajaran</label>
+                                                </div>
+                                                <div class="form-check form-switch">
+                                                    <input type="hidden" id="test" name="test" value="0">
+                                                    <input class="form-check-input" type="checkbox" value="1" id="test" name="test">
+                                                    <label for="test">Daftar Test</label>
+                                                </div>
+                                                <div class="form-check form-switch">
+                                                    <input type="hidden" id="bank_soal" name="bank_soal" value="0">
+                                                    <input class="form-check-input" type="checkbox" value="1" id="bank_soal" name="bank_soal">
+                                                    <label for="bank_soal">Bank Soal</label>
+                                                </div>
+                                                <div class="form-check form-switch">
+                                                    <input type="hidden" id="siswa" name="siswa" value="0">
+                                                    <input class="form-check-input" type="checkbox" value="1" id="siswa" name="siswa">
+                                                    <label for="siswa">Daftar Siswa</label>
+                                                </div>
+                                                <div class="form-check form-switch">
+                                                    <input type="hidden" id="hasil_test" name="hasil_test" value="0">
+                                                    <input class="form-check-input" type="checkbox" value="1" id="hasil_test" name="hasil_test">
+                                                    <label for="hasil_test">Hasil Test</label>
+                                                </div>
+                                                <div class="form-check form-switch">
+                                                    <input type="hidden" id="kelola_admin" name="kelola_admin" value="0">
+                                                    <input class="form-check-input" type="checkbox" value="1" id="kelola_admin" name="kelola_admin">
+                                                    <label for="kelola_admin">Kelola Admin</label>
+                                                </div>
+                                                <div class="form-check form-switch">
+                                                    <input type="hidden" id="kelola_role" name="kelola_role" value="0">
+                                                    <input class="form-check-input" type="checkbox" value="1" id="kelola_role" name="kelola_role">
+                                                    <label for="kelola_role">Kelola Role</label>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="form-check form-switch">
-                                            <input type="hidden" id="subject" name="subject" value="0">
-                                            <input class="form-check-input" type="checkbox" value="1" id="subject" name="subject">
-                                            <label for="subject">Mata Pelajaran</label>
-                                        </div>
-                                        <div class="form-check form-switch">
-                                            <input type="hidden" id="topic" name="topic" value="0">
-                                            <input class="form-check-input" type="checkbox" value="1" id="topic" name="topic">
-                                            <label for="topic">Topik Mata Pelajaran</label>
-                                        </div>
-                                        <div class="form-check form-switch">
-                                            <input type="hidden" id="test" name="test" value="0">
-                                            <input class="form-check-input" type="checkbox" value="1" id="test" name="test">
-                                            <label for="test">Daftar Test</label>
-                                        </div>
-                                        <div class="form-check form-switch">
-                                            <input type="hidden" id="bank_soal" name="bank_soal" value="0">
-                                            <input class="form-check-input" type="checkbox" value="1" id="bank_soal" name="bank_soal">
-                                            <label for="bank_soal">Bank Soal</label>
-                                        </div>
-                                        <div class="form-check form-switch">
-                                            <input type="hidden" id="siswa" name="siswa" value="0">
-                                            <input class="form-check-input" type="checkbox" value="1" id="siswa" name="siswa">
-                                            <label for="siswa">Daftar Siswa</label>
-                                        </div>
-                                        <div class="form-check form-switch">
-                                            <input type="hidden" id="hasil_test" name="hasil_test" value="0">
-                                            <input class="form-check-input" type="checkbox" value="1" id="hasil_test" name="hasil_test">
-                                            <label for="hasil_test">Hasil Test</label>
-                                        </div>
-                                        <div class="form-check form-switch">
-                                            <input type="hidden" id="kelola_admin" name="kelola_admin" value="0">
-                                            <input class="form-check-input" type="checkbox" value="1" id="kelola_admin" name="kelola_admin">
-                                            <label for="kelola_admin">Kelola Admin</label>
-                                        </div>
-                                        <div class="form-check form-switch">
-                                            <input type="hidden" id="kelola_role" name="kelola_role" value="0">
-                                            <input class="form-check-input" type="checkbox" value="1" id="kelola_role" name="kelola_role">
-                                            <label for="kelola_role">Kelola Role</label>
-                                        </div>
-                                    </div>
-                                    <span class="color-ne" style="letter-spacing: -em">
-                                        <meta charset="utf-8">⋮⋮⋮
-                                    </span> &nbsp;
-                                    <span class="tittle-neo"> Menu Transaksi</span>
-                                    <div class="mx-4 py-2">
-                                        <div class="form-check form-switch">
-                                            <input type="hidden" id="balance_siswa" name="balance_siswa" value="0">
-                                            <input class="form-check-input" type="checkbox" value="1" id="balance_siswa" name="balance_siswa">
-                                            <label for="balance_siswa">Balance Siswa</label>
-                                        </div>
-                                        <div class="form-check form-switch">
-                                            <input type="hidden" id="kelola_paket_diamond" name="kelola_paket_diamond" value="0">
-                                            <input class="form-check-input" type="checkbox" value="1" id="kelola_paket_diamond" name="kelola_paket_diamond">
-                                            <label for="kelola_paket_diamond">Kelola Paket Diamond</label>
-                                        </div>
-                                        <div class="form-check form-switch">
-                                            <input type="hidden" id="log_balance" name="log_balance" value="0">
-                                            <input class="form-check-input" type="checkbox" value="1" id="log_balance" name="log_balance">
-                                            <label for="log_balance">Log Balance Siswa</label>
-                                        </div>
-                                        <div class="form-check form-switch">
-                                            <input type="hidden" id="offers" name="offers" value="0">
-                                            <input class="form-check-input" type="checkbox" value="1" id="offers" name="offers">
-                                            <label for="offers">Kelola Diskon</label>
-                                        </div>
-                                        <div class="form-check form-switch">
-                                            <input type="hidden" id="transaksi_diamond" name="transaksi_diamond" value="0">
-                                            <input class="form-check-input" type="checkbox" value="1" id="transaksi_diamond" name="transaksi_diamond">
-                                            <label for="transaksi_diamond">Transaksi Diamond</label>
+                                        <div class="col-12 col-md-6">
+                                            <span class="color-ne" style="letter-spacing: -em">
+                                                <meta charset="utf-8">⋮⋮⋮
+                                            </span> &nbsp;
+                                            <span class="tittle-neo"> Menu Transaksi</span>
+                                            <div class="mx-4 py-2">
+                                                <div class="form-check form-switch">
+                                                    <input type="hidden" id="balance_siswa" name="balance_siswa" value="0">
+                                                    <input class="form-check-input" type="checkbox" value="1" id="balance_siswa" name="balance_siswa">
+                                                    <label for="balance_siswa">Balance Siswa</label>
+                                                </div>
+                                                <div class="form-check form-switch">
+                                                    <input type="hidden" id="kelola_paket_diamond" name="kelola_paket_diamond" value="0">
+                                                    <input class="form-check-input" type="checkbox" value="1" id="kelola_paket_diamond" name="kelola_paket_diamond">
+                                                    <label for="kelola_paket_diamond">Kelola Paket Diamond</label>
+                                                </div>
+                                                <div class="form-check form-switch">
+                                                    <input type="hidden" id="log_balance" name="log_balance" value="0">
+                                                    <input class="form-check-input" type="checkbox" value="1" id="log_balance" name="log_balance">
+                                                    <label for="log_balance">Log Balance Siswa</label>
+                                                </div>
+                                                <div class="form-check form-switch">
+                                                    <input type="hidden" id="offers" name="offers" value="0">
+                                                    <input class="form-check-input" type="checkbox" value="1" id="offers" name="offers">
+                                                    <label for="offers">Kelola Diskon</label>
+                                                </div>
+                                                <div class="form-check form-switch">
+                                                    <input type="hidden" id="transaksi_diamond" name="transaksi_diamond" value="0">
+                                                    <input class="form-check-input" type="checkbox" value="1" id="transaksi_diamond" name="transaksi_diamond">
+                                                    <label for="transaksi_diamond">Transaksi Diamond</label>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -161,7 +166,7 @@
     </div>
 </div>
 <div class="modal fade" id="editRoleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="block block-rounded block-transparent mb-0">
                 <div class="block-header block-header-ne">
@@ -186,76 +191,81 @@
                                         <input type="text" class="form-control" id="edit-role-name" name="edit_role_name">
                                     </div>
                                 </div>
-                                <!-- // checkbox hak akses -->
                                 <div class="col-12 col-md-12 py-2">
-                                    <span class="color-ne" style="letter-spacing: -em">
-                                        <meta charset="utf-8">⋮⋮⋮
-                                    </span> &nbsp;
-                                    <span class="tittle-neo"> Edit Hak Akses Menu</span>
-                                    <div class="mx-4 py-2">
-                                        <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" value="1" id="edit_class" name="edit_class">
-                                            <label for="edit_class">Daftar Kelas</label>
+                                    <div class="row">
+                                        <div class="col-12 col-md-6">
+                                            <span class="color-ne" style="letter-spacing: -em">
+                                                <meta charset="utf-8">⋮⋮⋮
+                                            </span> &nbsp;
+                                            <span class="tittle-neo"> Edit Hak Akses Menu</span>
+                                            <div class="mx-4 py-2">
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" value="1" id="edit_class" name="edit_class">
+                                                    <label for="edit_class">Daftar Kelas</label>
+                                                </div>
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" value="1" id="edit_subject" name="edit_subject">
+                                                    <label for="edit_subject">Mata Pelajaran</label>
+                                                </div>
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" value="1" id="edit_topic" name="edit_topic">
+                                                    <label for="edit_topic">Topik Mata Pelajaran</label>
+                                                </div>
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" value="1" id="edit_test" name="edit_test">
+                                                    <label for="edit_test">Daftar Test</label>
+                                                </div>
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" value="1" id="edit_bank_soal" name="edit_bank_soal">
+                                                    <label for="edit_bank_soal">Bank Soal</label>
+                                                </div>
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" value="1" id="edit_siswa" name="edit_siswa">
+                                                    <label for="edit_siswa">Daftar Siswa</label>
+                                                </div>
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" value="1" id="edit_hasil_test" name="edit_hasil_test">
+                                                    <label for="edit_hasil_test">Hasil Test</label>
+                                                </div>
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" value="1" id="edit_kelola_admin" name="edit_kelola_admin">
+                                                    <label for="edit_kelola_admin">Kelola Admin</label>
+                                                </div>
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" value="1" id="edit_kelola_role" name="edit_kelola_role">
+                                                    <label for="edit_kelola_role">Kelola Role</label>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" value="1" id="edit_subject" name="edit_subject">
-                                            <label for="edit_subject">Mata Pelajaran</label>
+                                        <div class="col-12 col-md-6">    
+                                            <span class="color-ne" style="letter-spacing: -em">
+                                                <meta charset="utf-8">⋮⋮⋮
+                                            </span> &nbsp;
+                                            <span class="tittle-neo"> Menu Transaksi</span>
+                                            <div class="mx-4 py-2">
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" value="1" id="edit_balance_siswa" name="edit_balance_siswa">
+                                                    <label for="edit_balance_siswa">Balance Siswa</label>
+                                                </div>
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" value="1" id="edit_kelola_paket_diamond" name="edit_kelola_paket_diamond">
+                                                    <label for="edit_kelola_paket_diamond">Kelola Paket Diamond</label>
+                                                </div>
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" value="1" id="edit_log_balance" name="edit_log_balance">
+                                                    <label for="edit_log_balance">Log Balance Siswa</label>
+                                                </div>
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" value="1" id="edit_offers" name="edit_offers">
+                                                    <label for="edit_offers">Kelola Diskon</label>
+                                                </div>
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" value="1" id="edit_transaksi_diamond" name="edit_transaksi_diamond">
+                                                    <label for="edit_transaksi_diamond">Transaksi Diamond</label>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" value="1" id="edit_topic" name="edit_topic">
-                                            <label for="edit_topic">Topik Mata Pelajaran</label>
-                                        </div>
-                                        <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" value="1" id="edit_test" name="edit_test">
-                                            <label for="edit_test">Daftar Test</label>
-                                        </div>
-                                        <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" value="1" id="edit_bank_soal" name="edit_bank_soal">
-                                            <label for="edit_bank_soal">Bank Soal</label>
-                                        </div>
-                                        <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" value="1" id="edit_siswa" name="edit_siswa">
-                                            <label for="edit_siswa">Daftar Siswa</label>
-                                        </div>
-                                        <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" value="1" id="edit_hasil_test" name="edit_hasil_test">
-                                            <label for="edit_hasil_test">Hasil Test</label>
-                                        </div>
-                                        <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" value="1" id="edit_kelola_admin" name="edit_kelola_admin">
-                                            <label for="edit_kelola_admin">Kelola Admin</label>
-                                        </div>
-                                        <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" value="1" id="edit_kelola_role" name="edit_kelola_role">
-                                            <label for="edit_kelola_role">Kelola Role</label>
-                                        </div>
-                                    </div>
-                                    <span class="color-ne" style="letter-spacing: -em">
-                                        <meta charset="utf-8">⋮⋮⋮
-                                    </span> &nbsp;
-                                    <span class="tittle-neo"> Menu Transaksi</span>
-                                    <div class="mx-4 py-2">
-                                        <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" value="1" id="edit_balance_siswa" name="edit_balance_siswa">
-                                            <label for="edit_balance_siswa">Balance Siswa</label>
-                                        </div>
-                                        <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" value="1" id="edit_kelola_paket_diamond" name="edit_kelola_paket_diamond">
-                                            <label for="edit_kelola_paket_diamond">Kelola Paket Diamond</label>
-                                        </div>
-                                        <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" value="1" id="edit_log_balance" name="edit_log_balance">
-                                            <label for="edit_log_balance">Log Balance Siswa</label>
-                                        </div>
-                                        <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" value="1" id="edit_offers" name="edit_offers">
-                                            <label for="edit_offers">Kelola Diskon</label>
-                                        </div>
-                                        <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" value="1" id="edit_transaksi_diamond" name="edit_transaksi_diamond">
-                                            <label for="edit_transaksi_diamond">Transaksi Diamond</label>
-                                        </div>
-                                    </div>
+                                    </div>    
                                 </div>
                             </div>
                         </div>
