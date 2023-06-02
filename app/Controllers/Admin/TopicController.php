@@ -114,6 +114,7 @@ class TopicController extends BaseController
      */
     public function create()
     {
+        $this->_validation();
         $uuid = Uuid::uuid1();
         if ($this->request->isAJAX()) {
             $data = [
@@ -121,14 +122,9 @@ class TopicController extends BaseController
                 'subject_id' => $this->request->getVar('subject_id'),
                 'topic' => $this->request->getVar('topic')
             ];
-            $query = $this->TopicModel->insert($data);
-            if ($query) {
-                $response['success'] = true;
-                $response['message']  = 'Data Berhasil Ditambahkan';
-            } else {
-                $response['success'] = false;
-                $response['message']  = 'Data Berhasil Ditambahkan';
-            }
+            $this->TopicModel->insert($data);
+            $response['success'] = true;
+            $response['message']  = 'Data Berhasil Ditambahkan';
             echo json_encode($response);
         }
     }
@@ -146,13 +142,14 @@ class TopicController extends BaseController
                 'subject_id' => $this->request->getVar('subject_id'),
                 'topic' => $this->request->getVar('topic')
             ];
-            $query = $this->TopicModel->update_topic($id, $data);
+            $query = $this->TopicModel->update($id, $data);
             if ($query) {
                 $response['success'] = true;
                 $response['message']  = 'Data Berhasil Diupdate';;
             } else {
                 $response['success'] = false;
                 $response['message']  = 'Data Gagal Diupdate';
+                $response['message']  = 'Topik Mata Pelajaran Tidak Boleh Kosong';
             }
             echo json_encode($response);
         }
@@ -192,6 +189,25 @@ class TopicController extends BaseController
                 );
             }
             echo json_encode($response);
+        }
+    }
+
+    public function _validation()
+    {
+        $data = array();
+        $data['input_error'] = array();
+        $data['error_string'] = array();
+        $data['status'] = true;
+
+        if($this->request->getVar('topic') == ''){
+            $data['input_error'][] = 'topic';
+            $data['error_string'][] = 'Topik Mata Pelajaran Wajib Diisi';
+            $data['status'] = false;
+        }
+
+        if($data['status'] == false){
+            echo json_encode($data);
+            exit();
         }
     }
 }

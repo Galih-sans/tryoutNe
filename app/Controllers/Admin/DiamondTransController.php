@@ -69,16 +69,6 @@ class DiamondTransController extends BaseController
                     $row[] = $lists->status;
                     $row[]  = '
                     <div class="block-options">
-                    <button type="button" class="btn btn-sm btn-warning  edit-button" 
-                    data-id="' . $lists->id  . '"
-                    data-full_name="' . $lists->full_name  . '"
-                    data-package_name="' . $lists->package_name  . '"
-                    data-offer_name="' . $lists->name  . '"
-                    data-transaction_id="' . $lists->transaction_id  . '"
-                    data-status="' . $lists->status  . '"
-                    >
-                    <i class="fa-solid fa-pen-to-square"></i>
-                    </button>
                     <button type="button" class="btn btn-sm btn-danger delete-button" data-id="' . $lists->id . '">
                     <i class="fa-solid fa-trash"></i>
                     </button>

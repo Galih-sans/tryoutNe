@@ -66,7 +66,7 @@
                                     <span class="tittle-neo"> Jenjang</span>
                                     <select name="level" id="level" title="Please select..."
                                         class="form-control selectpicker border" data-live-search="true"
-                                        data-style="customSelect" data-dropup-auto="false" data-size="4">
+                                        data-style="customSelect" data-dropup-auto="false" data-size="4" required>
                                         <tr>
                                             <option value="SD">SD</option>
                                             <option value="SMP">SMP</option>
@@ -81,10 +81,14 @@
                                         <meta charset="utf-8">⋮⋮⋮</span> &nbsp;
                                     <span class="tittle-neo"> Kelas</span>
                                     <div class="form-floating mb-4 pt-2">
-                                        <input type="text" class="form-control" id="class" name="class"
-                                            placeholder="John Doe">
-                                        <label for="class">Kelas</label>
+                                        <input type="text" class="form-control" id="class" name="class">
+                                            <!-- <label for="class">Kelas</label> -->
+                                            <!-- <div id="error-string" class="invalid-feedback"></div> -->
+                                        </ul>
                                     </div>
+                                </div>
+                                <div class="col-12 col-md-12 mb-2 text-danger">
+                                    <ul id="error-string">
                                 </div>
                             </div>
                         </div>
@@ -92,7 +96,7 @@
                 </div>
                 <div class="block-content block-content-full text-end bg-body">
                     <button type="button" class="btn btn-sm btn-secondary me-1" data-bs-dismiss="modal">Tutup</button>
-                    <button type="button" class="btn btn-sm btn-primary" data-bs-dismiss="modal"
+                    <button type="button" class="btn btn-sm btn-primary"
                         onclick="insert_data()">Simpan</button>
                 </div>
             </div>
@@ -143,19 +147,25 @@
                                         <label for="class">Kelas</label>
                                     </div>
                                 </div>
+                                <div class="col-12 col-md-12 mb-2 text-danger">
+                                    <ul id="error-string-edit">
+                                </div>
                             </div>
                         </div>
                     </form>
                 </div>
                 <div class="block-content block-content-full text-end bg-body" >
                     <button type="button" class="btn btn-sm btn-secondary me-1" data-bs-dismiss="modal">Tutup</button>
-                    <button type="button" class="btn btn-sm btn-primary" data-bs-dismiss="modal"
+                    <button type="button" class="btn btn-sm btn-primary" 
                         onclick="update_data()">Simpan</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/js/bootstrap-select.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
@@ -269,11 +279,11 @@
     }
 
     function insert_data() {
-        Swal.fire({
-            text: "Sedang Memproses Data",
-            allowOutsideClick: false,
-        });
-        Swal.showLoading();
+        // Swal.fire({
+        //     text: "Sedang Memproses Data",
+        //     allowOutsideClick: false,
+        // });
+        // Swal.showLoading();
         $.ajax({
             url: "<?= route_to('admin.class.add_class') ?>",
             type: "POST",
@@ -288,16 +298,24 @@
                         showConfirmButton: false,
                         timer: 3000
                     });
+                    window.location.reload();
                 } else {
-                    Swal.fire({
-                        title: 'Status :',
-                        html: d.message +
-                            '<br>' + JSON.stringify(d.validation),
-                        icon: 'error',
-                        showConfirmButton: false
-                    });
+                    const list = document.getElementById("error-string");
+                    while (list.hasChildNodes()) {
+                        list.removeChild(list.firstChild);
+                    }
+                    for (var i = 0; i < d.input_error.length; i++) {
+                        // $('#' + d.input_error[i]).addClass('is-invalid');
+                        const node = document.createElement("li");
+                        // Create a text node:
+                        const textnode = document.createTextNode(d.error_string[i]);
+                        // Append the text node to the "li" node:
+                        node.appendChild(textnode);
+                        // Append the "li" node to the list:
+                        document.getElementById("error-string").appendChild(node);
+                        // $('#error-string').append().text(d.error_string[i]);
+                    }
                 }
-
                 console.log(d);
                 refresh_dt();
             },
@@ -308,11 +326,11 @@
     }
 
     function update_data() {
-        Swal.fire({
-            text: "Sedang Memproses Data",
-            allowOutsideClick: false,
-        });
-        Swal.showLoading();
+        // Swal.fire({
+        //     text: "Sedang Memproses Data",
+        //     allowOutsideClick: false,
+        // });
+        // Swal.showLoading();
         $.ajax({
             url: "<?= route_to('admin.class.edit_class') ?>",
             type: "POST",
@@ -327,14 +345,23 @@
                         showConfirmButton: false,
                         timer: 3000
                     });
+                    window.location.reload();
                 } else {
-                    Swal.fire({
-                        title: 'Status :',
-                        html: d.message +
-                            '<br>' + JSON.stringify(d.message),
-                        icon: 'error',
-                        showConfirmButton: false
-                    });
+                    const list = document.getElementById("error-string-edit");
+                    while (list.hasChildNodes()) {
+                        list.removeChild(list.firstChild);
+                    }
+                    for (var i = 0; i < d.input_error.length; i++) {
+                        // $('#' + d.input_error[i]).addClass('is-invalid');
+                        const node = document.createElement("li");
+                        // Create a text node:
+                        const textnode = document.createTextNode(d.error_string[i]);
+                        // Append the text node to the "li" node:
+                        node.appendChild(textnode);
+                        // Append the "li" node to the list:
+                        document.getElementById("error-string-edit").appendChild(node);
+                        // $('#error-string').append().text(d.error_string[i]);
+                    }
                 }
 
                 console.log(d);

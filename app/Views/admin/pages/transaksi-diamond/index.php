@@ -47,7 +47,7 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="tambahOfferModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="tambahOfferModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-md" role="document">
         <div class="modal-content">
             <div class="block block-rounded block-transparent mb-0">
@@ -157,9 +157,9 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 <div class="modal fade" id="editTransaksiDiamondModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="block block-rounded block-transparent mb-0">
                 <div class="block-header block-header-ne">
@@ -195,6 +195,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="col-12 col-md-12">
                                 <div class="col-12 col-md-12 py-2">
                                     <span class="color-ne" style="letter-spacing: -em">
@@ -238,24 +239,24 @@
                                 </div>
                             </div>
                             <div class="col-12 col-md-12">
-                                <div class="col-12 col-md-12 py-2">
-                                    <span class="color-ne" style="letter-spacing: -em">
-                                        <meta charset="utf-8">⋮⋮⋮
-                                    </span> &nbsp;
-                                    <span class="tittle-neo"> Edit ID Transaksi</span>
-                                    <div class=" mb-4 pt-2">
-                                        <input type="text" class="form-control" id="edit-id-transaksi" name="edit_id_transaksi">
-                                    </div>
+                            <div class="row">
+                                <div class="col-12 col-md-6">
+                                        <span class="color-ne" style="letter-spacing: -em">
+                                            <meta charset="utf-8">⋮⋮⋮
+                                        </span> &nbsp;
+                                        <span class="tittle-neo"> Edit ID Transaksi</span>
+                                        <div class=" mb-4 pt-2">
+                                            <input type="text" class="form-control" id="edit-id-transaksi" name="edit_id_transaksi">
+                                        </div>
                                 </div>
-                            </div>
-                            <div class="col-12 col-md-12">
-                                <div class="col-12 col-md-12 py-2">
-                                    <span class="color-ne" style="letter-spacing: -em">
-                                        <meta charset="utf-8">⋮⋮⋮
-                                    </span> &nbsp;
-                                    <span class="tittle-neo"> Edit Status</span>
-                                    <div class="mb-4 pt-2">
-                                        <input type="text" class="form-control" id="edit-status" name="edit_status">
+                                <div class="col-12 col-md-6">
+                                        <span class="color-ne" style="letter-spacing: -em">
+                                            <meta charset="utf-8">⋮⋮⋮
+                                        </span> &nbsp;
+                                        <span class="tittle-neo"> Edit Status</span>
+                                        <div class="mb-4 pt-2">
+                                            <input type="text" class="form-control" id="edit-status" name="edit_status">
+                                        </div>
                                     </div>
                                 </div>
                             </div>

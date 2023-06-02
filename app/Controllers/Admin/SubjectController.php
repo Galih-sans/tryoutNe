@@ -147,6 +147,7 @@ class SubjectController extends BaseController
      */
     public function create()
     {
+        $this->_validation();
         $uuid = Uuid::uuid1();
         if ($this->request->isAJAX()) {
             $data = [
@@ -154,15 +155,9 @@ class SubjectController extends BaseController
                 'class_id' => $this->request->getVar('class'),
                 'subject' => $this->request->getVar('subject')
             ];
-            $query = $this->SubjectModel->create($data);
-            if ($query) {
+            $this->SubjectModel->create($data);
                 $response['success'] = true;
                 $response['message']  = 'Data Berhasil Ditambahkan';
-            } else {
-                $response['success'] = false;
-                $response['message']  = 'Data Berhasil Ditambahkan';
-            }
-
 
             echo json_encode($response);
         }
@@ -174,6 +169,7 @@ class SubjectController extends BaseController
      */
     public function update()
     {
+        $this->_validation_edit();
         if ($this->request->isAJAX()) {
             $id = $this->request->getVar('subject_id');
             $data = [
@@ -188,7 +184,6 @@ class SubjectController extends BaseController
                 $response['success'] = false;
                 $response['message']  = 'Data Gagal Diupdate';
             }
-
 
             echo json_encode($response);
         }
@@ -228,6 +223,44 @@ class SubjectController extends BaseController
                 );
             }
             echo json_encode($response);
+        }
+    }
+
+    public function _validation()
+    {
+        $data = array();
+        $data['input_error'] = array();
+        $data['error_string'] = array();
+        $data['status'] = true;
+
+        if($this->request->getVar('subject') == ''){
+            $data['input_error'][] = 'subject';
+            $data['error_string'][] = 'Mata pelajaran wajib diisi';
+            $data['status'] = false;
+        }
+
+        if($data['status'] == false){
+            echo json_encode($data);
+            exit();
+        }
+    }
+
+    public function _validation_edit()
+    {
+        $data = array();
+        $data['input_error'] = array();
+        $data['error_string'] = array();
+        $data['status'] = true;
+
+        if($this->request->getVar('subject') == ''){
+            $data['input_error'][] = 'subject';
+            $data['error_string'][] = 'Mata pelajaran Tidak Boleh Kosong';
+            $data['status'] = false;
+        }
+
+        if($data['status'] == false){
+            echo json_encode($data);
+            exit();
         }
     }
 }

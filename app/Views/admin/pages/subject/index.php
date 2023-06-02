@@ -90,12 +90,15 @@
                                     <label for="class">Mata Pelajaran</label>
                                 </div>
                             </div>
+                            <div class="col-12 col-md-12 mb-2 text-danger">
+                                <ul id="error-string">
+                            </div>
                         </div>
                     </form>
                 </div>
                 <div class="block-content block-content-full text-end bg-body text-center">
                     <button type="button" class="btn btn-sm btn-secondary me-1" data-bs-dismiss="modal">Tutup</button>
-                    <button type="button" class="btn btn-sm btn-primary" data-bs-dismiss="modal"
+                    <button type="button" class="btn btn-sm btn-primary"
                         onclick="insert_data()">Simpan</button>
                 </div>
             </div>
@@ -150,13 +153,16 @@
                                         <input type="hidden" id="subject_id" name="subject_id">
                                     </div>
                                 </div>
+                            <div class="col-12 col-md-12 mb-2 text-danger">
+                                <ul id="error-string-edit">
+                            </div>
                             </div>
                         </div>
                     </form>
                 </div>
                 <div class="block-content block-content-full text-end bg-body">
                     <button type="button" class="btn btn-sm btn-secondary me-1" data-bs-dismiss="modal">Tutup</button>
-                    <button type="button" class="btn btn-sm btn-primary" data-bs-dismiss="modal"
+                    <button type="button" class="btn btn-sm btn-primary"
                         onclick="update_data()">Simpan</button>
                 </div>
             </div>
@@ -285,15 +291,15 @@
     }
 
     function insert_data() {
-        Swal.fire({
-            showCloseButton: false,
-            showCancelButton: false,
-            showConfirmButton: false,
-            allowOutsideClick: false,
-            customClass: 'col-5 col-md-3',
-            imageUrl: 'https://udindym.site/loader-c.gif',
-            text: 'Silahkan Tunggu...',
-        })
+        // Swal.fire({
+        //     showCloseButton: false,
+        //     showCancelButton: false,
+        //     showConfirmButton: false,
+        //     allowOutsideClick: false,
+        //     customClass: 'col-5 col-md-3',
+        //     imageUrl: 'https://udindym.site/loader-c.gif',
+        //     text: 'Silahkan Tunggu...',
+        // })
         $.ajax({
             url: "<?= route_to('admin.subject.add_subject') ?>",
             type: "POST",
@@ -308,35 +314,45 @@
                         showConfirmButton: false,
                         timer: 3000
                     });
+                    window.location.reload();
                 } else {
-                    Swal.fire({
-                        title: 'Status :',
-                        html: d.message +
-                            '<br>' + JSON.stringify(d.validation),
-                        icon: 'error',
-                        showConfirmButton: false
-                    });
+                    const list = document.getElementById("error-string");
+                    while (list.hasChildNodes()) {
+                        list.removeChild(list.firstChild);
+                    }
+                    for (var i = 0; i < d.input_error.length; i++) {
+                        // $('#' + d.input_error[i]).addClass('is-invalid');
+                        const node = document.createElement("li");
+                        // Create a text node:
+                        const textnode = document.createTextNode(d.error_string[i]);
+                        // Append the text node to the "li" node:
+                        node.appendChild(textnode);
+                        // Append the "li" node to the list:
+                        document.getElementById("error-string").appendChild(node);
+                        // $('#error-string').append().text(d.error_string[i]);
+                    }
                 }
-                Swal.close();
+                console.log(d);
+                // Swal.close();
                 refresh_dt();
             },
             error: function (error) {
                 console.log(error);
-                Swal.close();
+                // Swal.close();
             }
         });
     }
 
     function update_data() {
-        Swal.fire({
-            showCloseButton: false,
-            showCancelButton: false,
-            showConfirmButton: false,
-            allowOutsideClick: false,
-            customClass: 'col-5 col-md-3',
-            imageUrl: 'https://udindym.site/loader-c.gif',
-            text: 'Silahkan Tunggu...',
-        })
+        // Swal.fire({
+        //     showCloseButton: false,
+        //     showCancelButton: false,
+        //     showConfirmButton: false,
+        //     allowOutsideClick: false,
+        //     customClass: 'col-5 col-md-3',
+        //     imageUrl: 'https://udindym.site/loader-c.gif',
+        //     text: 'Silahkan Tunggu...',
+        // })
         $.ajax({
             url: "<?= route_to('admin.subject.edit_subject') ?>",
             type: "POST",
@@ -351,21 +367,31 @@
                         showConfirmButton: false,
                         timer: 3000
                     });
+                    window.location.reload();
                 } else {
-                    Swal.fire({
-                        title: 'Status :',
-                        html: d.message +
-                            '<br>' + JSON.stringify(d.message),
-                        icon: 'error',
-                        showConfirmButton: false
-                    });
+                    const list = document.getElementById("error-string-edit");
+                    while (list.hasChildNodes()) {
+                        list.removeChild(list.firstChild);
+                    }
+                    for (var i = 0; i < d.input_error.length; i++) {
+                        // $('#' + d.input_error[i]).addClass('is-invalid');
+                        const node = document.createElement("li");
+                        // Create a text node:
+                        const textnode = document.createTextNode(d.error_string[i]);
+                        // Append the text node to the "li" node:
+                        node.appendChild(textnode);
+                        // Append the "li" node to the list:
+                        document.getElementById("error-string-edit").appendChild(node);
+                        // $('#error-string').append().text(d.error_string[i]);
+                    }
                 }
-                Swal.close();
+                // Swal.close();
                 refresh_dt();
+                console.log(d);
             },
             error: function (error) {
                 console.log(error);
-                Swal.close();
+                // Swal.close();
             }
         });
     }

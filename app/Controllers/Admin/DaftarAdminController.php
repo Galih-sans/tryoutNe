@@ -90,6 +90,7 @@ class DaftarAdminController extends BaseController
 
     public function create()
     {
+        $this->_validation();
         $uuid = Uuid::uuid1();
         if ($this->request->isAJAX()) {
             $data_create_admin = [
@@ -99,16 +100,9 @@ class DaftarAdminController extends BaseController
                 'role' => $this->request->getVar('role'),
                 'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
             ];
-            $query = $this->daftar_admin_model->add_admin($data_create_admin);
-            if ($query) {
-                $response['success'] = true;
-                $response['message']  = 'Data Berhasil Ditambahkan';
-            } else {
-                $response['success'] = false;
-                $response['message']  = 'Data Gagal Ditambahkan';
-                $response['validation'] = "Isian Form Tidak Boleh Kosong";
-            }
-
+            $this->daftar_admin_model->add_admin($data_create_admin);
+            $response['success'] = true;
+            $response['message']  = 'Data Berhasil Ditambahkan';
             echo json_encode($response);
         }
     }
@@ -119,6 +113,7 @@ class DaftarAdminController extends BaseController
      */
     public function update()
     {
+        $this->_validation_edit();
         if ($this->request->isAJAX()) {
             $id = $this->request->getVar('edit-admin_id');
             $data = [
@@ -127,15 +122,9 @@ class DaftarAdminController extends BaseController
                 'role' => $this->request->getVar('edit-role'),
                 'password' => password_hash($this->request->getVar('edit-password'), PASSWORD_DEFAULT),
             ];
-            $query = $this->daftar_admin_model->update($id, $data);
-            if ($query) {
+            $this->daftar_admin_model->update($id, $data);
                 $response['success'] = true;
                 $response['message']  = 'Data Berhasil Diupdate';
-            } else {
-                $response['success'] = false;
-                $response['message']  = 'Data Gagal Diupdate';
-            }
-
 
             return json_encode($response);
         }
@@ -160,6 +149,74 @@ class DaftarAdminController extends BaseController
             }
 
             echo json_encode($response);
+        }
+    }
+
+    public function _validation()
+    {
+        $data = array();
+        $data['input_error'] = array();
+        $data['error_string'] = array();
+        $data['status'] = true;
+
+        if($this->request->getVar('full-name') == ''){
+            $data['input_error'][] = 'full-name';
+            $data['error_string'][] = 'Nama admin tidak boleh kosong';
+            $data['status'] = false;
+        }
+        if($this->request->getVar('role') == ''){
+            $data['input_error'][] = 'role';
+            $data['error_string'][] = 'Role admin tidak boleh kosong';
+            $data['status'] = false;
+        }
+        if($this->request->getVar('email') == ''){
+            $data['input_error'][] = 'email';
+            $data['error_string'][] = 'Email admin tidak boleh kosong';
+            $data['status'] = false;
+        }
+        if($this->request->getVar('password') == ''){
+            $data['input_error'][] = 'password';
+            $data['error_string'][] = 'Password admin tidak boleh kosong';
+            $data['status'] = false;
+        }
+
+        if($data['status'] == false){
+            echo json_encode($data);
+            exit();
+        }
+    }
+
+    public function _validation_edit()
+    {
+        $data = array();
+        $data['input_error'] = array();
+        $data['error_string'] = array();
+        $data['status'] = true;
+
+        if($this->request->getVar('edit-full_name') == ''){
+            $data['input_error'][] = 'edit-full_name';
+            $data['error_string'][] = 'Nama admin tidak boleh kosong';
+            $data['status'] = false;
+        }
+        // if($this->request->getVar('edit-role') == ''){
+        //     $data['input_error'][] = 'edit-role';
+        //     $data['error_string'][] = 'Role admin wajib diisi';
+        //     $data['status'] = false;
+        // }
+        if($this->request->getVar('edit-email') == ''){
+            $data['input_error'][] = 'edit-email';
+            $data['error_string'][] = 'Email admin wajib diisi';
+            $data['status'] = false;
+        }
+        // if($this->request->getVar('edit-password') == ''){
+        //     $data['input_error'][] = 'edit-password';
+        //     $data['error_string'][] = 'Password admin wajib diisi';
+        //     $data['status'] = false;
+        // }
+
+        if($data['status'] == false){
+            echo json_encode($data);
+            exit();
         }
     }
 }
