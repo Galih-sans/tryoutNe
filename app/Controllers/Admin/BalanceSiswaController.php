@@ -108,7 +108,7 @@ class BalanceSiswaController extends BaseController
     public function update()
     {
         if ($this->request->isAJAX()) {
-            $id = $this->request->getVar('edit_siswa');
+            $id = $this->request->getVar('id_user');
             $data = [
                 'balance' => $this->request->getVar('edit_balance'),
                 'updated_at' => $this->now(),

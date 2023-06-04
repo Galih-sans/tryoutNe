@@ -31,7 +31,7 @@
                                                 <li></li>
                                                 <li>Rp. <?= $item->price ?> ,-</li>
                                                 <li>
-                                                    J<?= $item->description ?>
+                                                    <?= $item->description ?>
                                                 </li>
                                             </ul>
                                             <button type="button" class="btn detail-button read" data-id="<?= $item->id ?>" data-name="<?= $item->name ?>" data-price="<?= $item->price ?>" data-amount="<?= $item->amount ?>" data-description="<?= $item->description ?>">Detail</a>

@@ -89,6 +89,7 @@ class KelolaDiamondController extends BaseController
 
     public function create()
     {
+        $this->_validation();
         $uuid = Uuid::uuid1();
         $user_id = session()->get('id');
         if ($this->request->isAJAX()) {
@@ -117,11 +118,12 @@ class KelolaDiamondController extends BaseController
 
     public function update()
     {
+        $this->_validation_edit();
         if ($this->request->isAJAX()) {
             $id = $this->request->getVar('package_id');
             $data = [
                 'name' => $this->request->getVar('edit_package_name'),
-                'type' => $this->request->getVar('edit_package_type'),
+                // 'type' => $this->request->getVar('edit_package_type'),
                 'price' => $this->request->getVar('edit_package_price'),
                 'amount' => $this->request->getVar('edit_diamond_amount'),
                 'description' => $this->request->getVar('edit_package_description'),
@@ -134,6 +136,7 @@ class KelolaDiamondController extends BaseController
             } else {
                 $response['success'] = false;
                 $response['message']  = 'Paket Gagal Diupdate';
+                $response['validation'] = 'Data tidak boleh kosong';
             }
 
             return json_encode($response);
@@ -172,6 +175,64 @@ class KelolaDiamondController extends BaseController
             }
 
             echo json_encode($response);
+        }
+    }
+
+    public function _validation()
+    {
+        $data = array();
+        $data['input_error'] = array();
+        $data['error_string'] = array();
+        $data['status'] = true;
+
+        if($this->request->getVar('package_name') == ''){
+            $data['input_error'][] = 'name';
+            $data['error_string'][] = 'Nama Paket Wajib Diisi';
+            $data['status'] = false;
+        }
+        if($this->request->getVar('package_price') == ''){
+            $data['input_error'][] = 'price';
+            $data['error_string'][] = 'Harga Paket Wajib Diisi';
+            $data['status'] = false;
+        }
+        if($this->request->getVar('diamond_amount') == ''){
+            $data['input_error'][] = 'amount';
+            $data['error_string'][] = 'Jumlah Diamond Wajib Diisi';
+            $data['status'] = false;
+        }
+
+        if($data['status'] == false){
+            echo json_encode($data);
+            exit();
+        }
+    }
+
+    public function _validation_edit()
+    {
+        $data = array();
+        $data['input_error'] = array();
+        $data['error_string'] = array();
+        $data['status'] = true;
+
+        if($this->request->getVar('edit_package_name') == ''){
+            $data['input_error'][] = 'name';
+            $data['error_string'][] = 'Nama Paket Wajib Diisi';
+            $data['status'] = false;
+        }
+        if($this->request->getVar('edit_package_price') == ''){
+            $data['input_error'][] = 'price';
+            $data['error_string'][] = 'Harga Paket Wajib Diisi';
+            $data['status'] = false;
+        }
+        if($this->request->getVar('edit_diamond_amount') == ''){
+            $data['input_error'][] = 'amount';
+            $data['error_string'][] = 'Jumlah Diamond Wajib Diisi';
+            $data['status'] = false;
+        }
+
+        if($data['status'] == false){
+            echo json_encode($data);
+            exit();
         }
     }
 }

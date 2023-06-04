@@ -54,7 +54,7 @@
                     <form id="tambah_role_form">
                         <div class="row">
                             <div class="col-12 col-md-12">
-                                <div class="col-12 col-md-12 py-2">
+                                <div class="col-12 col-md-12 ">
                                     <span class="color-ne" style="letter-spacing: -em">
                                         <meta charset="utf-8">⋮⋮⋮
                                     </span> &nbsp;
@@ -62,6 +62,9 @@
                                     <div class="mb-4 pt-2">
                                         <input type="text" class="form-control" id="role_name" name="role_name">
                                     </div>
+                                </div>
+                                <div class="col-12 col-md-12 mb-2 text-danger">
+                                    <ul id="error-string">
                                 </div>
                                 <div class="col-12 col-md-12 py-2">
                                     <div class="row">
@@ -159,7 +162,7 @@
                 </div>
                 <div class="block-content block-content-full text-end bg-body">
                     <button type="button" class="btn btn-sm btn-secondary me-1" data-bs-dismiss="modal">Tutup</button>
-                    <button type="button" class="btn btn-sm btn-primary" data-bs-dismiss="modal" onclick="insert_data()">Simpan</button>
+                    <button type="button" class="btn btn-sm btn-primary" onclick="insert_data()">Simpan</button>
                 </div>
             </div>
         </div>
@@ -463,11 +466,11 @@
 
     function insert_data() {
         // console.log($('#tambah_role_form').serialize());
-        Swal.fire({
-            text: "Sedang Memproses Data",
-            allowOutsideClick: false,
-        });
-        Swal.showLoading();
+        // Swal.fire({
+        //     text: "Sedang Memproses Data",
+        //     allowOutsideClick: false,
+        // });
+        // Swal.showLoading();
         $.ajax({
             url: "<?= route_to('admin.kelola-role.add_role') ?>",
             type: "POST",
@@ -482,14 +485,23 @@
                         showConfirmButton: false,
                         timer: 3000
                     });
+                    window.location.reload();
                 } else {
-                    Swal.fire({
-                        title: 'Status :',
-                        html: d.message +
-                            '<br>' + JSON.stringify(d.validation),
-                        icon: 'error',
-                        showConfirmButton: false
-                    });
+                    const list = document.getElementById("error-string");
+                    while (list.hasChildNodes()) {
+                        list.removeChild(list.firstChild);
+                    }
+                    for (var i = 0; i < d.input_error.length; i++) {
+                        // $('#' + d.input_error[i]).addClass('is-invalid');
+                        const node = document.createElement("li");
+                        // Create a text node:
+                        const textnode = document.createTextNode(d.error_string[i]);
+                        // Append the text node to the "li" node:
+                        node.appendChild(textnode);
+                        // Append the "li" node to the list:
+                        document.getElementById("error-string").appendChild(node);
+                        // $('#error-string').append().text(d.error_string[i]);
+                    }
                 }
                 console.log(d);
                 refresh_dt();
@@ -525,12 +537,12 @@
                     Swal.fire({
                         title: 'Status :',
                         html: d.message +
-                            '<br>' + JSON.stringify(d.message),
+                            '<br>' + JSON.stringify(d.validation),
                         icon: 'error',
                         showConfirmButton: false
                     });
                 }
-                window.location.reload();
+                // window.location.reload();
                 console.log(d);
                 refresh_dt();
             },

@@ -102,6 +102,7 @@ class ClassController extends BaseController
      */
     public function create()
     {
+        $this->_validation();
         $uuid = Uuid::uuid1();
         if ($this->request->isAJAX()) {
             $data = [
@@ -109,15 +110,9 @@ class ClassController extends BaseController
                 'level' => $this->request->getVar('level'),
                 'class' => $this->request->getVar('class')
             ];
-            $query = $this->class_model->add_class($data);
-            if ($query) {
+            $this->class_model->insert($data);
                 $response['success'] = true;
                 $response['message']  = 'Data Berhasil Ditambahkan';
-            } else {
-                $response['success'] = false;
-                $response['message']  = 'Data Berhasil Ditambahkan';
-            }
-
 
             echo json_encode($response);
         }
@@ -129,6 +124,7 @@ class ClassController extends BaseController
      */
     public function update()
     {
+        $this->_validation_edit();
         if ($this->request->isAJAX()) {
             $id = $this->request->getVar('class_id');
             $data = [
@@ -168,6 +164,49 @@ class ClassController extends BaseController
             }
 
             echo json_encode($response);
+        }
+    }
+
+    public function _validation()
+    {
+        $data = array();
+        $data['input_error'] = array();
+        $data['error_string'] = array();
+        $data['status'] = true;
+
+        if($this->request->getVar('level') == ''){
+            $data['input_error'][] = 'level';
+            $data['error_string'][] = 'Jenjang wajib diisi';
+            $data['status'] = false;
+        }
+        if($this->request->getVar('class') == ''){
+            $data['input_error'][] = 'class';
+            $data['error_string'][] = 'Kelas wajib diisi';
+            $data['status'] = false;
+        }
+
+        if($data['status'] == false){
+            echo json_encode($data);
+            exit();
+        }
+    }
+
+    public function _validation_edit()
+    {
+        $data = array();
+        $data['input_error'] = array();
+        $data['error_string'] = array();
+        $data['status'] = true;
+
+        if($this->request->getVar('class') == ''){
+            $data['input_error'][] = 'class';
+            $data['error_string'][] = 'Kelas Tidak Boleh Kosong';
+            $data['status'] = false;
+        }
+
+        if($data['status'] == false){
+            echo json_encode($data);
+            exit();
         }
     }
 }

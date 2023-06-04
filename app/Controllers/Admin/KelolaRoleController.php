@@ -86,6 +86,7 @@ class KelolaRoleController extends BaseController
 
     public function create()
     {
+        $this->_validation();
         $uuid = Uuid::uuid1();
         if ($this->request->isAJAX()) {
             $data = [
@@ -107,15 +108,9 @@ class KelolaRoleController extends BaseController
                 'ha_offers' => $this->request->getVar('offers'),
                 'ha_log_balance' => $this->request->getVar('log_balance'),
             ];
-            $query = $this->model_roles->add_role($data);
-            if ($query) {
-                $response['success'] = true;
-                $response['message']  = 'Data Berhasil Ditambahkan';
-            } else {
-                $response['success'] = false;
-                $response['message']  = 'Data Gagal Ditambahkan';
-                $response['validation'] = "Nama Role Tidak Boleh Kosong";
-            }
+            $this->model_roles->add_role($data);
+            $response['success'] = true;
+            $response['message']  = 'Data Berhasil Ditambahkan';
 
             echo json_encode($response);
         }
@@ -150,6 +145,7 @@ class KelolaRoleController extends BaseController
             } else {
                 $response['success'] = false;
                 $response['message']  = 'Data Gagal Diupdate';
+                $response['validation'] = "Nama Role Tidak Boleh Kosong";
             }
 
 
@@ -171,6 +167,25 @@ class KelolaRoleController extends BaseController
             }
 
             echo json_encode($response);
+        }
+    }
+
+    public function _validation()
+    {
+        $data = array();
+        $data['input_error'] = array();
+        $data['error_string'] = array();
+        $data['status'] = true;
+
+        if($this->request->getVar('role_name') == ''){
+            $data['input_error'][] = 'role_name';
+            $data['error_string'][] = 'Nama role wajib diisi';
+            $data['status'] = false;
+        }
+
+        if($data['status'] == false){
+            echo json_encode($data);
+            exit();
         }
     }
 }

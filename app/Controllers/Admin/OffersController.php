@@ -100,6 +100,7 @@ class OffersController extends BaseController
 
     public function create()
     {
+        $this->_validation();
         $uuid = Uuid::uuid1();
         $user_id = session()->get('id');
         if ($this->request->isAJAX()) {
@@ -116,15 +117,9 @@ class OffersController extends BaseController
                 'description' => $this->request->getVar('description'),
                 'created_by' => $user_id,
             ];
-            $query = $this->model_offers->add_offer($data);
-            if ($query) {
+            $this->model_offers->add_offer($data);
                 $response['success'] = true;
                 $response['message']  = 'Offer Berhasil Ditambahkan';
-            } else {
-                $response['success'] = false;
-                $response['message']  = 'Offer Gagal Ditambahkan';
-                $response['validation'] = "Isian Form Tidak Boleh Kosong";
-            }
 
             echo json_encode($response);
         }
@@ -132,6 +127,7 @@ class OffersController extends BaseController
 
     public function update()
     {
+        $this->_validation_edit();
         if ($this->request->isAJAX()) {
             $id = $this->request->getVar('offer_id');
             $data = [
@@ -153,6 +149,7 @@ class OffersController extends BaseController
             } else {
                 $response['success'] = false;
                 $response['message']  = 'Offer Gagal Diupdate';
+                $response['validation'] = "Isian Form Tidak Boleh Kosong";
             }
 
             return json_encode($response);
@@ -191,6 +188,114 @@ class OffersController extends BaseController
             }
 
             echo json_encode($response);
+        }
+    }
+
+    public function _validation()
+    {
+        $data = array();
+        $data['input_error'] = array();
+        $data['error_string'] = array();
+        $data['status'] = true;
+
+        if($this->request->getVar('name') == ''){
+            $data['input_error'][] = 'name';
+            $data['error_string'][] = 'Nama Offer Wajib Diisi';
+            $data['status'] = false;
+        }
+        if($this->request->getVar('type') == ''){
+            $data['input_error'][] = 'type';
+            $data['error_string'][] = 'Tipe Offer Wajib Diisi';
+            $data['status'] = false;
+        }
+        if($this->request->getVar('code') == ''){
+            $data['input_error'][] = 'code';
+            $data['error_string'][] = 'Kode Offer Wajib Diisi';
+            $data['status'] = false;
+        }
+        if($this->request->getVar('start_date') == ''){
+            $data['input_error'][] = 'start_date';
+            $data['error_string'][] = 'Tanggal Mulai Wajib Diisi';
+            $data['status'] = false;
+        }
+        if($this->request->getVar('end_date') == ''){
+            $data['input_error'][] = 'end_date';
+            $data['error_string'][] = 'Tanggal Selesai Wajib Diisi';
+            $data['status'] = false;
+        }
+        if($this->request->getVar('discount_amount') == ''){
+            $data['input_error'][] = 'discount_amount';
+            $data['error_string'][] = 'Jumlah Diskon Wajib Diisi';
+            $data['status'] = false;
+        }
+        if($this->request->getVar('discount_percentage') == ''){
+            $data['input_error'][] = 'discount_percentage';
+            $data['error_string'][] = 'Persen Diskon Wajib Diisi';
+            $data['status'] = false;
+        }
+        if($this->request->getVar('status') == ''){
+            $data['input_error'][] = 'status';
+            $data['error_string'][] = 'Status Wajib Diisi';
+            $data['status'] = false;
+        }
+
+        if($data['status'] == false){
+            echo json_encode($data);
+            exit();
+        }
+    }
+
+    public function _validation_edit()
+    {
+        $data = array();
+        $data['input_error'] = array();
+        $data['error_string'] = array();
+        $data['status'] = true;
+
+        if($this->request->getVar('edit_name') == ''){
+            $data['input_error'][] = 'edit_name';
+            $data['error_string'][] = 'Nama Offer Tidak Boleh Kosong';
+            $data['status'] = false;
+        }
+        // if($this->request->getVar('edit_type') == ''){
+        //     $data['input_error'][] = 'edit_type';
+        //     $data['error_string'][] = 'Tipe Offer Tidak Boleh Kosong';
+        //     $data['status'] = false;
+        // }
+        if($this->request->getVar('edit_code') == ''){
+            $data['input_error'][] = 'edit_code';
+            $data['error_string'][] = 'Kode Offer Tidak Boleh Kosong';
+            $data['status'] = false;
+        }
+        if($this->request->getVar('edit_start_date') == ''){
+            $data['input_error'][] = 'edit_start_date';
+            $data['error_string'][] = 'Tanggal Mulai Tidak Boleh Kosong';
+            $data['status'] = false;
+        }
+        if($this->request->getVar('edit_end_date') == ''){
+            $data['input_error'][] = 'edit_end_date';
+            $data['error_string'][] = 'Tanggal Selesai Tidak Boleh Kosong';
+            $data['status'] = false;
+        }
+        if($this->request->getVar('edit_discount_amount') == ''){
+            $data['input_error'][] = 'edit_discount_amount';
+            $data['error_string'][] = 'Jumlah Diskon Tidak Boleh Kosong';
+            $data['status'] = false;
+        }
+        if($this->request->getVar('edit_discount_percentage') == ''){
+            $data['input_error'][] = 'edit_discount_percentage';
+            $data['error_string'][] = 'Persen Diskon Tidak Boleh Kosong';
+            $data['status'] = false;
+        }
+        if($this->request->getVar('edit_status') == ''){
+            $data['input_error'][] = 'edit_status';
+            $data['error_string'][] = 'Status Tidak Boleh Kosong';
+            $data['status'] = false;
+        }
+
+        if($data['status'] == false){
+            echo json_encode($data);
+            exit();
         }
     }
 }

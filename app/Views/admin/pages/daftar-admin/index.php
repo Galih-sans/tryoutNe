@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="modal fade" id="tambahAdminModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="block block-rounded block-transparent mb-0">
                 <div class="block-header block-header-ne">
@@ -57,7 +57,6 @@
                     <form id="tambah_admin_form">
                         <div class="row">
                             <div class="col-12 col-md-12">
-                                <!-- nama -->
                                 <div class="col-12 col-md-12 py-2">
                                     <span class="color-ne" style="letter-spacing: -em">
                                         <meta charset="utf-8">⋮⋮⋮
@@ -65,35 +64,41 @@
                                     <span class="tittle-neo"> Nama Lengkap</span>
                                     <div class=" mb-4 pt-2">
                                         <input type="text" class="form-control" id="full-name" name="full-name">
-                                    </div>
-                                </div>
-                                <!-- email -->
-                                <div class="col-12 col-md-12 py-2">
-                                    <span class="color-ne" style="letter-spacing: -em">
-                                        <meta charset="utf-8">⋮⋮⋮
-                                    </span> &nbsp;
-                                    <span class="tittle-neo"> Email Admin</span>
-                                    <div class=" mb-4 pt-2">
-                                        <input type="text" class="form-control" id="email" name="email">
+                                        <div class="invalid-feedback"></div>
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-12 py-2">
-                                    <span class="color-ne" style="letter-spacing: -em">
-                                        <meta charset="utf-8">⋮⋮⋮
-                                    </span> &nbsp;
-                                    <span class="tittle-neo"> Role Admin</span>
-                                    <div class=" mb-4 pt-2">
-                                        <select name="role" id="role" title="Please select..." class="form-control selectpicker border" data-live-search="true" data-style="customSelect" data-dropup-auto="false" data-size="4">
-                                            <?php if ($data['roleData']) : ?>
-                                                <?php foreach ($data['roleData'] as $role) : ?>
-                                                    <tr>
-                                                        <option value="<?= $role->id ?>"><?= $role->role_name ?>
-                                                        </option>
-                                                    </tr>
-                                            <?php
-                                                endforeach;
-                                            endif; ?>
-                                        </select>
+                                    <div class="row">
+                                        <div class="col-12 col-md-6">
+                                            <span class="color-ne" style="letter-spacing: -em">
+                                                <meta charset="utf-8">⋮⋮⋮
+                                            </span> &nbsp;
+                                            <span class="tittle-neo"> Email Admin</span>
+                                            <div class=" mb-4 pt-2">
+                                                <input type="text" class="form-control" id="email" name="email">
+                                                <div class="invalid-feedback"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <span class="color-ne" style="letter-spacing: -em">
+                                                <meta charset="utf-8">⋮⋮⋮
+                                            </span> &nbsp;
+                                            <span class="tittle-neo"> Role Admin</span>
+                                            <div class=" mb-4 pt-2">
+                                                <select name="role" id="role" title="Please select..." class="form-control selectpicker border" data-live-search="true" data-style="customSelect" data-dropup-auto="false" data-size="4">
+                                                    <?php if ($data['roleData']) : ?>
+                                                        <?php foreach ($data['roleData'] as $role) : ?>
+                                                            <tr>
+                                                                <option value="<?= $role->id ?>"><?= $role->role_name ?>
+                                                                </option>
+                                                            </tr>
+                                                    <?php
+                                                        endforeach;
+                                                    endif; ?>
+                                                </select>
+                                            </div>
+                                            <div class="invalid-feedback"></div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-12 py-2">
@@ -103,7 +108,11 @@
                                     <span class="tittle-neo"> Password</span>
                                     <div class=" mb-4 pt-2">
                                         <input type="password" class="form-control" id="password" name="password">
+                                        <div class="invalid-feedback"></div>
                                     </div>
+                                </div>
+                                <div class="col-12 col-md-12 mb-2 text-danger">
+                                    <ul id="error-string">
                                 </div>
                             </div>
                         </div>
@@ -111,7 +120,7 @@
                 </div>
                 <div class="block-content block-content-full text-end bg-body">
                     <button type="button" class="btn btn-sm btn-secondary me-1" data-bs-dismiss="modal">Tutup</button>
-                    <button type="button" class="btn btn-sm btn-primary" data-bs-dismiss="modal" onclick="insert_data()">Simpan</button>
+                    <button type="button" class="btn btn-sm btn-primary" onclick="insert_data()">Simpan</button>
                 </div>
             </div>
         </div>
@@ -180,13 +189,16 @@
                                         <input type="password" class="form-control" id="edit-password" name="edit-password">
                                     </div>
                                 </div>
+                                <div class="col-12 col-md-12 mb-2 text-danger">
+                                    <ul id="error-string-edit">
+                                </div>
                             </div>
                         </div>
                     </form>
                 </div>
                 <div class="block-content block-content-full text-end bg-body">
                     <button type="button" class="btn btn-sm btn-secondary me-1" data-bs-dismiss="modal">Tutup</button>
-                    <button type="button" class="btn btn-sm btn-primary" data-bs-dismiss="modal" onclick="update_data()">Simpan</button>
+                    <button type="button" class="btn btn-sm btn-primary" onclick="update_data()">Simpan</button>
                 </div>
             </div>
         </div>
@@ -296,11 +308,11 @@
     }
 
     function insert_data() {
-        Swal.fire({
-            text: "Sedang Memproses Data",
-            allowOutsideClick: false,
-        });
-        Swal.showLoading();
+        // Swal.fire({
+        //     text: "Sedang Memproses Data",
+        //     allowOutsideClick: false,
+        // });
+        // Swal.showLoading();
         $.ajax({
             url: "<?= route_to('admin.kelola-admin.add_admin') ?>",
             type: "POST",
@@ -315,16 +327,26 @@
                         showConfirmButton: false,
                         timer: 3000
                     });
+                    window.location.reload();
                 } else {
-                    Swal.fire({
-                        title: 'Status :',
-                        html: d.message +
-                            '<br>' + JSON.stringify(d.validation),
-                        icon: 'error',
-                        showConfirmButton: false
-                    });
+                    const list = document.getElementById("error-string");
+                    while (list.hasChildNodes()) {
+                        list.removeChild(list.firstChild);
+                    }
+                    for (var i = 0; i < d.input_error.length; i++) {
+                        // $('#' + d.input_error[i]).addClass('is-invalid');
+                        const node = document.createElement("li");
+                        // Create a text node:
+                        const textnode = document.createTextNode(d.error_string[i]);
+                        // Append the text node to the "li" node:
+                        node.appendChild(textnode);
+                        // Append the "li" node to the list:
+                        document.getElementById("error-string").appendChild(node);
+                        // $('#error-string').append().text(d.error_string[i]);
+                    }
                 }
-                window.location.reload();
+                
+                // $('#tambahAdminModal').modal('hide');
                 console.log(d);
                 refresh_dt();
             },
@@ -335,11 +357,11 @@
     }
 
     function update_data() {
-        Swal.fire({
-            text: "Sedang Memproses Data",
-            allowOutsideClick: false,
-        });
-        Swal.showLoading();
+        // Swal.fire({
+        //     text: "Sedang Memproses Data",
+        //     allowOutsideClick: false,
+        // });
+        // Swal.showLoading();
         $.ajax({
             url: "<?= route_to('admin.kelola-admin.edit_admin') ?>",
             type: "POST",
@@ -354,16 +376,25 @@
                         showConfirmButton: false,
                         timer: 3000
                     });
+                    window.location.reload();
                 } else {
-                    Swal.fire({
-                        title: 'Status :',
-                        html: d.message +
-                            '<br>' + JSON.stringify(d.message),
-                        icon: 'error',
-                        showConfirmButton: false
-                    });
+                    const list = document.getElementById("error-string-edit");
+                    while (list.hasChildNodes()) {
+                        list.removeChild(list.firstChild);
+                    }
+                    for (var i = 0; i < d.input_error.length; i++) {
+                        // $('#' + d.input_error[i]).addClass('is-invalid');
+                        const node = document.createElement("li");
+                        // Create a text node:
+                        const textnode = document.createTextNode(d.error_string[i]);
+                        // Append the text node to the "li" node:
+                        node.appendChild(textnode);
+                        // Append the "li" node to the list:
+                        document.getElementById("error-string-edit").appendChild(node);
+                        // $('#error-string').append().text(d.error_string[i]);
+                    }
                 }
-                window.location.reload();
+                // window.location.reload();
                 console.log(d);
                 refresh_dt();
                 // console.log($('#edit_admin_form').serialize());

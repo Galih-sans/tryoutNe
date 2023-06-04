@@ -33,15 +33,15 @@ class PaketDiamondModel extends Model
         'name'     => 'required',
         'price'        => 'required',
         'amount'        => 'required',
-        'description'     => 'required',
+        // 'description'     => 'required',
     ];
     protected $validationMessages   = [
         'name'        => [
             'required' => 'Nama Paket Harus Diisi',
         ],
-        'type'        => [
-            'required' => 'Tipe Harus Diisi',
-        ],
+        // 'type'        => [
+        //     'required' => 'Tipe Harus Diisi',
+        // ],
         'price'        => [
             'required' => 'Harga Paket Harus Diisi',
         ],

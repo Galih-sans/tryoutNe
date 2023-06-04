@@ -134,8 +134,8 @@
                                     </span> &nbsp;
                                     <span class="tittle-neo"> Balance ( Nominal )</span>
                                     <div class="mb-4 pt-2">
-                                        <input type="hidden" id="id-user" name="user_id">
-                                        <input type="text" class="form-control" id="edit-balance" name="edit_balance">
+                                        <input type="hidden" id="id-user" name="id_user">
+                                        <input type="number" class="form-control" id="edit-balance" name="edit_balance">
                                     </div>
                                 </div>
                             </div>
@@ -179,7 +179,7 @@
         });
         $(document).on('click', '.edit-button', function() {
             let data_id = $(this).data("user_id");
-            $('#id_user').val(data_id);
+            $('#id-user').val(data_id);
             console.log(data_id);
             $('#editBalanceModal').modal('show');
 
@@ -274,7 +274,7 @@
                         showConfirmButton: false
                     });
                 }
-                window.location.reload();
+                $('#product_table').DataTable().ajax.reload();
                 console.log(d);
                 refresh_dt();
             },
@@ -285,7 +285,7 @@
     }
 
     function update_data() {
-        // console.log($('#edit_transaksi_form').serialize());
+        console.log($('#edit_transaksi_form').serialize());
         Swal.fire({
             text: "Sedang Memproses Data",
             allowOutsideClick: false,
@@ -314,7 +314,7 @@
                         showConfirmButton: false
                     });
                 }
-                window.location.reload();
+                // window.location.reload();
                 console.log(d);
                 refresh_dt();
             },
