@@ -318,7 +318,7 @@
                         font: []
                     }],
                     ["bold", "italic"],
-                    ["link", "blockquote", "code-block", "image"],
+                    ["link", "blockquote", "code-block", "image", "video"],
                     [{
                         list: "ordered"
                     }, {
@@ -351,7 +351,7 @@
             modules: {
                 toolbar: [
                     ["bold", "italic"],
-                    ["link", "blockquote", "code-block", "image"],
+                    ["link", "blockquote", "code-block", "image", "video"],
                     [{
                         list: "ordered"
                     }, {
@@ -386,7 +386,7 @@
             modules: {
                 toolbar: [
                     ["bold", "italic"],
-                    ["link", "blockquote", "code-block", "image"],
+                    ["link", "blockquote", "code-block", "image", "video"],
                     [{
                         list: "ordered"
                     }, {
@@ -543,6 +543,7 @@
                         icon: 'success',
                         showConfirmButton: true,
                     });
+                    $('#answerModal').modal('hide');
                 } else {
                     Swal.fire({
                         title: 'Status :',
@@ -553,8 +554,8 @@
                     });
                 }
                 refresh_dt();
-                $('#answerModal').modal('hide');
-                console.log($('#question-form').serialize());
+                // $('#answerModal').modal('hide');
+                console.log(d.validation);
             },
             error: function(error) {
                 console.log(error);
@@ -565,7 +566,6 @@
 
     function update_data() {
         let question_id = window.value;
-        let dataAnswerId = window.answerId;
 
         Swal.fire({
             showCloseButton: false,
@@ -579,7 +579,7 @@
         $.ajax({
             url: "<?= route_to('admin.bank-soal.edit_soal') ?>",
             type: "POST",
-            data: $('#edit-form').serialize() + "&id_question=" + question_id + "&id_answer[0]=" + dataAnswerId[0] + "&id_answer[1]=" + dataAnswerId[1] + "&id_answer[2]=" + dataAnswerId[2] + "&id_answer[3]=" + dataAnswerId[3] + "&id_answer[4]=" + dataAnswerId[4],
+            data: $('#edit-form').serialize() + "&id_question=" + question_id,
             success: function(d) {
                 var d = JSON.parse(d);
                 if (d.success == true) {

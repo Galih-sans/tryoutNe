@@ -42,7 +42,7 @@
                                         }
                                         ?>
                                     <?php if (isset($validation)) : ?>
-                                    <div class="col-12">
+                                    <div class="col-12 text-danger">
                                         <div class="warning" role="alert">
                                             <?= $validation->listErrors() ?>
                                         </div>
