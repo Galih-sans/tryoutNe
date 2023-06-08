@@ -152,20 +152,20 @@ class BankSoalController extends BaseController
             ];
             $errors =
                 [
-                    'question' => [
-                        'required' => 'Pertanyaan harus diisi'
-                    ],
-                    'answer.*' => [
-                        'required' => 'Jawaban Harus harus diisi'
-                    ],
-                    'discussion' => [
-                        'required' => 'Pembahasan harus diisi'
-                    ]
+                    'question' => 
+                        'Pertanyaan harus diisi'
+                    ,
+                    'answer.*' => 
+                        'Jawaban Harus harus diisi'
+                    ,
+                    'discussion' => 
+                        'Pembahasan harus diisi'
+                    
                 ];
             if (!$this->validate($rules, $errors)) {
                 $response['success'] = false;
-                $response['message'] = "Validation Error";
-                $response['validation'] = "Isian Form Tidak Boleh Kosong";
+                $response['message'] = "Gagal membuat soal";
+                $response['validation'] = $errors;
                 return json_encode($response);
             } else {
                 $question_data = [
@@ -272,6 +272,74 @@ class BankSoalController extends BaseController
             $data['soalData'] = $questionData;
             $data['jawabanData'] = $answerData;
             return json_encode($data);
+        }
+    }
+
+    public function _validation()
+    {
+        $data = array();
+        $data['input_error'] = array();
+        $data['error_string'] = array();
+        $data['status'] = true;
+
+        if($this->request->getVar('full-name') == ''){
+            $data['input_error'][] = 'full-name';
+            $data['error_string'][] = 'Nama admin tidak boleh kosong';
+            $data['status'] = false;
+        }
+        if($this->request->getVar('role') == ''){
+            $data['input_error'][] = 'role';
+            $data['error_string'][] = 'Role admin tidak boleh kosong';
+            $data['status'] = false;
+        }
+        if($this->request->getVar('email') == ''){
+            $data['input_error'][] = 'email';
+            $data['error_string'][] = 'Email admin tidak boleh kosong';
+            $data['status'] = false;
+        }
+        if($this->request->getVar('password') == ''){
+            $data['input_error'][] = 'password';
+            $data['error_string'][] = 'Password admin tidak boleh kosong';
+            $data['status'] = false;
+        }
+
+        if($data['status'] == false){
+            echo json_encode($data);
+            exit();
+        }
+    }
+
+    public function _validation_edit()
+    {
+        $data = array();
+        $data['input_error'] = array();
+        $data['error_string'] = array();
+        $data['status'] = true;
+
+        if($this->request->getVar('edit-full_name') == ''){
+            $data['input_error'][] = 'edit-full_name';
+            $data['error_string'][] = 'Nama admin tidak boleh kosong';
+            $data['status'] = false;
+        }
+        // if($this->request->getVar('edit-role') == ''){
+        //     $data['input_error'][] = 'edit-role';
+        //     $data['error_string'][] = 'Role admin wajib diisi';
+        //     $data['status'] = false;
+        // }
+        if($this->request->getVar('edit-email') == ''){
+            $data['input_error'][] = 'edit-email';
+            $data['error_string'][] = 'Email admin wajib diisi';
+            $data['status'] = false;
+        }
+        // if($this->request->getVar('edit-password') == ''){
+        //     $data['input_error'][] = 'edit-password';
+        //     $data['error_string'][] = 'Password admin wajib diisi';
+        //     $data['status'] = false;
+        // }
+
+        if($data['status'] == false){
+            echo json_encode($data);
+            exit();
         }
     }
 }
