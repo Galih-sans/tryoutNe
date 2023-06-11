@@ -160,8 +160,8 @@ class TestController extends BaseController
             // $endTime = strtotime(str_replace(",", "", $data['end_time']));
 
             // string replace
-            $replaceBegin = str_replace('/', '-', $data['begin_time']);
-            $replaceEnd = str_replace('/', '-', $data['end_time']);
+            $replaceBegin = str_replace('.', '-', $data['begin_time']);
+            $replaceEnd = str_replace('.', '-', $data['end_time']);
 
             // reformat
             $newBeginDate = date('m/d/Y H:i', strtotime($replaceBegin));
