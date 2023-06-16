@@ -111,7 +111,7 @@
         <div class="modal-content">
             <div class="block block-rounded block-transparent mb-0">
                 <div class="block-header block-header-ne">
-                    <h3 class="block-title text-white">Edit Kelas : </h3>
+                    <h3 class="block-title text-white">Edit Mata Pelajaran : </h3>
                     <div class="block-options">
                         <button type="button" class="btn-block-option-white" data-bs-dismiss="modal" aria-label="Close">
                             <i class="fa fa-fw fa-times"></i>
