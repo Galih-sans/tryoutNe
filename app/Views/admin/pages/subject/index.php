@@ -43,7 +43,7 @@
                 <div class="row pb-2 mb-3 shadow-sm align-center">
                     <div class="col-12 col-md-12 text-right">
                         <button type="button" class="btn btn-primary btn-sm" onclick="tambah()">
-                            <i class="si si-plus"></i> Tambah Mata Pelajaran Baru
+                        <i class="fa-solid fa-plus"></i>
                         </button>
                     </div>
                 </div>
@@ -64,7 +64,7 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="questionModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+<div class="modal fade" id="subjectModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -145,7 +145,7 @@
                                 <div class="col-12 col-md-12 py-2">
                                     <span class="color-ne" style="letter-spacing: -em">
                                         <meta charset="utf-8">⋮⋮⋮</span> &nbsp;
-                                    <span class="tittle-neo"> Kelas</span>
+                                    <span class="tittle-neo"> Mata Pelajaran</span>
                                     <div class="form-floating mb-4 pt-2">
                                         <input type="text" class="form-control" id="edit_subject" name="subject"
                                             placeholder="John Doe">
@@ -189,12 +189,12 @@
 <script src="<?= base_url('js/pages/tables_datatables.js') ?>"></script>
 <script>
     $(document).ready(function () {
-        $("#questionModal").keyup(function (event) {
+        $("#subjectModal").keyup(function (event) {
             if (event.keyCode == 13) {
                 insert_data();
-                $("#questionModal").modal('hide');
+                $("#subjectModal").modal('hide');
             } else if (event.keyCode == 27) {
-                $("#questionModal").modal('hide');
+                $("#subjectModal").modal('hide');
             }
         });
         $(function () {
@@ -214,14 +214,21 @@
         $(document).on('click', '.edit-button', function () {
             let data_id = $(this).data("id");
             let data_class = $(this).data("class");
+            let class_id = $(this).data("class_id");
             let data_subject = $(this).data("subject");
-            console.log(data_id);
-            console.log(data_class);
-            console.log(data_subject);
-            $('#edit_class_id option[value=' + data_class + ']').prop('selected', true);
+            // console.log(data_id);
+            // console.log(data_class);
+            // console.log(data_subject);
+            // console.log(class_id);
+            // $('select[name=class_id]').val(data_class);
+            $('#edit_class_id option[value="' + class_id +'"]').prop("selected", true);
             $('#edit_subject').val(data_subject);
             $('#subject_id').val(data_id);
             $('#editModal').modal('show');
+            const list = document.getElementById("error-string-edit");
+            while (list.hasChildNodes()) {
+                list.removeChild(list.firstChild);
+            }
         });
     });
 
@@ -261,8 +268,7 @@
                             showConfirmButton: false,
                             timer: 3000
                         });
-
-                        Swal.close();
+                        // Swal.close();
                         refresh_dt();
                     },
                     error: function (error) {
@@ -285,21 +291,22 @@
     }
 
     function tambah() {
-        $('#questionModal').modal('show');
+        $('#subjectModal').modal('show');
         // $('.selectpicker').selectpicker('refresh');
         $('#subject_form')[0].reset();
+        const list = document.getElementById("error-string");
+        while (list.hasChildNodes()) {
+            list.removeChild(list.firstChild);
+        }
     }
 
     function insert_data() {
-        // Swal.fire({
-        //     showCloseButton: false,
-        //     showCancelButton: false,
-        //     showConfirmButton: false,
-        //     allowOutsideClick: false,
-        //     customClass: 'col-5 col-md-3',
-        //     imageUrl: 'https://udindym.site/loader-c.gif',
-        //     text: 'Silahkan Tunggu...',
-        // })
+        Swal.fire({
+            text: "Sedang Memproses Data",
+            allowOutsideClick: false,
+            timer: 2000
+        });
+        Swal.showLoading();
         $.ajax({
             url: "<?= route_to('admin.subject.add_subject') ?>",
             type: "POST",
@@ -314,7 +321,7 @@
                         showConfirmButton: false,
                         timer: 3000
                     });
-                    window.location.reload();
+                    $('#subjectModal').modal('hide');
                 } else {
                     const list = document.getElementById("error-string");
                     while (list.hasChildNodes()) {
@@ -344,15 +351,12 @@
     }
 
     function update_data() {
-        // Swal.fire({
-        //     showCloseButton: false,
-        //     showCancelButton: false,
-        //     showConfirmButton: false,
-        //     allowOutsideClick: false,
-        //     customClass: 'col-5 col-md-3',
-        //     imageUrl: 'https://udindym.site/loader-c.gif',
-        //     text: 'Silahkan Tunggu...',
-        // })
+        Swal.fire({
+            text: "Sedang Memproses Data",
+            allowOutsideClick: false,
+            timer: 2000
+        });
+        Swal.showLoading();
         $.ajax({
             url: "<?= route_to('admin.subject.edit_subject') ?>",
             type: "POST",
@@ -367,7 +371,7 @@
                         showConfirmButton: false,
                         timer: 3000
                     });
-                    window.location.reload();
+                    $('#editModal').modal('hide');
                 } else {
                     const list = document.getElementById("error-string-edit");
                     while (list.hasChildNodes()) {

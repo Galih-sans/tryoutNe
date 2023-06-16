@@ -56,7 +56,7 @@ class SiswaController extends BaseController
                 $row[] = $lists->class;
                 $row[]  = '
                     <div class="block-options">
-                    <button type="button" class="btn btn-sm btn-warning detail-button"
+                    <button type="button" class="btn btn-sm btn-info detail-button"
                     id="' . $lists->id . '"
                     POB="' . $lists->POB . '"
                     DOB="' . $newDate . '"
@@ -71,7 +71,7 @@ class SiswaController extends BaseController
                     parent_email="' . $lists->parent_email . '"
                     school="' . $lists->sekolah . '"
                     >
-                        <i class="fa fa-info"></i>
+                        Detail
                     </button>
                     </div>
                     ';

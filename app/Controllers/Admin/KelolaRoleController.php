@@ -118,6 +118,7 @@ class KelolaRoleController extends BaseController
 
     public function update()
     {
+        $this->_validation_edit();
         if ($this->request->isAJAX()) {
             $id = $this->request->getVar('role_id');
             $data = [
@@ -180,6 +181,25 @@ class KelolaRoleController extends BaseController
         if($this->request->getVar('role_name') == ''){
             $data['input_error'][] = 'role_name';
             $data['error_string'][] = 'Nama role wajib diisi';
+            $data['status'] = false;
+        }
+
+        if($data['status'] == false){
+            echo json_encode($data);
+            exit();
+        }
+    }
+
+    public function _validation_edit()
+    {
+        $data = array();
+        $data['input_error'] = array();
+        $data['error_string'] = array();
+        $data['status'] = true;
+
+        if($this->request->getVar('edit_role_name') == ''){
+            $data['input_error'][] = 'edit_role_name';
+            $data['error_string'][] = 'Nama Role Tidak Boleh kosong';
             $data['status'] = false;
         }
 

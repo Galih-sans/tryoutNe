@@ -27856,4 +27856,8 @@ a[disabled] {
   color: #000;
 }
 
+.neodark-header {
+  z-index: 5;
+}
+
 /* Credit to https://bootsnipp.com/snippets/92erW */

@@ -66,7 +66,12 @@ class TopicController extends BaseController
                 $row[] = $lists->topic;
                 $row[]  = '
                     <div class="block-options text-center">
-                    <button type="button" class="btn btn-sm btn-warning  edit-button" data-id="' . $lists->id . '" data-level="' . $lists->level . '"' . '" data-class="' . $lists->class . '">
+                    <button type="button" class="btn btn-sm btn-warning  edit-button"
+                    data-id="' . $lists->id . '"
+                    data-topic="' . $lists->topic . '"
+                    data-level="' . $lists->level . '"' . '"
+                    data-class="' . $lists->class . '"
+                    >
                         <i class="fa-solid fa-pen-to-square"></i>
                     </button>
                     <button type="button" class="btn btn-sm btn-danger  delete-button" data-id="' . $lists->id . '">
@@ -135,6 +140,7 @@ class TopicController extends BaseController
      */
     public function update()
     {
+        $this->_validation_edit();
         if ($this->request->isAJAX()) {
             $id = $this->request->getVar('id');
             $data = [
@@ -202,6 +208,25 @@ class TopicController extends BaseController
         if($this->request->getVar('topic') == ''){
             $data['input_error'][] = 'topic';
             $data['error_string'][] = 'Topik Mata Pelajaran Wajib Diisi';
+            $data['status'] = false;
+        }
+
+        if($data['status'] == false){
+            echo json_encode($data);
+            exit();
+        }
+    }
+
+    public function _validation_edit()
+    {
+        $data = array();
+        $data['input_error'] = array();
+        $data['error_string'] = array();
+        $data['status'] = true;
+
+        if($this->request->getVar('topic') == ''){
+            $data['input_error'][] = 'topic';
+            $data['error_string'][] = 'Topik Mata Pelajaran Tidak Boleh Kosong';
             $data['status'] = false;
         }
 

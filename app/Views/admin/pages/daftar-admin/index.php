@@ -22,7 +22,7 @@
             <div class="row pb-2 mb-3 shadow-sm align-center">
                 <div class="col-12 col-md-12 text-right">
                     <button type="button" class="btn btn-primary btn-sm" onclick="tambah()">
-                        <i class="si si-plus"></i> Tambah Admin Baru
+                    <i class="fa-solid fa-plus"></i>
                     </button>
                 </div>
             </div>
@@ -243,7 +243,10 @@
             $('#edit-role').val(data_role);
             $('#edit-admin_id').val(data_id);
             $('#editModal').modal('show');
-
+            const list = document.getElementById("error-string-edit");
+                    while (list.hasChildNodes()) {
+                        list.removeChild(list.firstChild);
+                    }
         });
     });
 
@@ -256,7 +259,8 @@
             showCancelButton: true,
             cancelButtonText: 'Batal',
             confirmButtonText: 'Ya, hapus data ini',
-            confirmButtonColor: "#d26a5c"
+            confirmButtonColor: "#d26a5c",
+            timer: 3000
         }).then((result) => {
             if (result.value) {
                 Swal.fire({
@@ -305,14 +309,19 @@
         $('#tambahAdminModal').modal('show');
         // $('.selectpicker').selectpicker('refresh');
         $('#tambah_admin_form')[0].reset();
+        const list = document.getElementById("error-string");
+                    while (list.hasChildNodes()) {
+                        list.removeChild(list.firstChild);
+                    }
     }
 
     function insert_data() {
-        // Swal.fire({
-        //     text: "Sedang Memproses Data",
-        //     allowOutsideClick: false,
-        // });
-        // Swal.showLoading();
+        Swal.fire({
+            text: "Sedang Memproses Data",
+            allowOutsideClick: false,
+            timer: 2000
+        });
+        Swal.showLoading();
         $.ajax({
             url: "<?= route_to('admin.kelola-admin.add_admin') ?>",
             type: "POST",
@@ -327,7 +336,8 @@
                         showConfirmButton: false,
                         timer: 3000
                     });
-                    window.location.reload();
+                    refresh_dt();
+                    $('#tambahAdminModal').modal('hide');
                 } else {
                     const list = document.getElementById("error-string");
                     while (list.hasChildNodes()) {
@@ -357,11 +367,12 @@
     }
 
     function update_data() {
-        // Swal.fire({
-        //     text: "Sedang Memproses Data",
-        //     allowOutsideClick: false,
-        // });
-        // Swal.showLoading();
+        Swal.fire({
+            text: "Sedang Memproses Data",
+            allowOutsideClick: false,
+            timer: 2000
+        });
+        Swal.showLoading();
         $.ajax({
             url: "<?= route_to('admin.kelola-admin.edit_admin') ?>",
             type: "POST",
@@ -376,7 +387,8 @@
                         showConfirmButton: false,
                         timer: 3000
                     });
-                    window.location.reload();
+                    refresh_dt();
+                    $('#editModal').modal('hide');
                 } else {
                     const list = document.getElementById("error-string-edit");
                     while (list.hasChildNodes()) {

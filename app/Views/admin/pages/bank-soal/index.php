@@ -53,7 +53,7 @@
         <div class="block-content">
             <div class="col-12 col-md-12 text-right">
                 <button type="button" class="btn btn-primary btn-sm" onclick="tambah()">
-                    <i class="si si-plus"></i> Tambah Soal
+                <i class="fa-solid fa-plus"></i>
                 </button>
             </div>
             <table id="example" class="table table-bordered table-vcenter js-dataTable-full no-footer dtr-inline collapsed" style="width:100%">

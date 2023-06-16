@@ -50,7 +50,7 @@
                 <div class="row pb-2 mb-3 shadow-sm align-center">
                     <div class="col-12 col-md-12 text-right">
                         <button type="button" class="btn btn-primary btn-sm" onclick="tambah()">
-                            <i class="si si-plus"></i> Tambah Topik Mata Pelajaran Baru
+                        <i class="fa-solid fa-plus"></i>
                         </button>
                     </div>
                 </div>
@@ -119,7 +119,7 @@
         <div class="modal-content">
             <div class="block block-rounded block-transparent mb-0">
                 <div class="block-header block-header-ne">
-                    <h3 class="block-title text-white">Edit Kelas : </h3>
+                    <h3 class="block-title text-white">Edit Topik Mata Pelajaran : </h3>
                     <div class="block-options">
                         <button type="button" class="btn-block-option-white" data-bs-dismiss="modal" aria-label="Close">
                             <i class="fa fa-fw fa-times"></i>
@@ -135,19 +135,22 @@
                                         <meta charset="utf-8">⋮⋮⋮</span> &nbsp;
                                     <span class="tittle-neo">Topik Mata Pelajaran</span>
                                     <div class="form-floating mb-4 pt-2">
-                                        <input type="text" class="form-control" id="edit_subject" name="topic"
+                                        <input type="text" class="form-control" id="edit_topic" name="topic"
                                             placeholder="Topik Mata Pelajaran">
                                         <label for="class">Topik Mata Pelajaran</label>
                                         <input type="hidden" id="topic_id" name="id">
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-12 col-md-12 mb-2 text-danger">
+                                    <ul id="error-string-edit">
+                            </div>
                         </div>
                     </form>
                 </div>
                 <div class="block-content block-content-full text-end bg-body">
                     <button type="button" class="btn btn-sm btn-secondary me-1" data-bs-dismiss="modal">Tutup</button>
-                    <button type="button" class="btn btn-sm btn-primary" data-bs-dismiss="modal"
+                    <button type="button" class="btn btn-sm btn-primary"
                         onclick="update_data()">Simpan</button>
                 </div>
             </div>
@@ -194,10 +197,14 @@
         });
         $(document).on('click', '.edit-button', function () {
             let data_id = $(this).data("id");
-            let data_topic = $(this).data("subject");
-            $('#edit_subject').val(data_topic);
+            let data_topic = $(this).data("topic");
+            $('#edit_topic').val(data_topic);
             $('#topic_id').val(data_id);
             $('#editModal').modal('show');
+            const list = document.getElementById("error-string-edit");
+                    while (list.hasChildNodes()) {
+                        list.removeChild(list.firstChild);
+                    }
         });
     });
 
@@ -237,7 +244,7 @@
                             showConfirmButton: false,
                             timer: 3000
                         });
-                        Swal.close();
+                        // Swal.close();
                         refresh_dt();
                     },
                     error: function (error) {
@@ -257,18 +264,19 @@
         $('#topicModal').modal('show');
         $('#topic').focus();
         $('#topic_form')[0].reset();
+        const list = document.getElementById("error-string");
+            while (list.hasChildNodes()) {
+            list.removeChild(list.firstChild);
+        }
     }
 
     function insert_data() {
-        // Swal.fire({
-        //     showCloseButton: false,
-        //     showCancelButton: false,
-        //     showConfirmButton: false,
-        //     allowOutsideClick: false,
-        //     customClass: 'col-5 col-md-3',
-        //     imageUrl: 'https://udindym.site/loader-c.gif',
-        //     text: 'Silahkan Tunggu...',
-        // })
+        Swal.fire({
+            text: "Sedang Memproses Data",
+            allowOutsideClick: false,
+            timer: 2000
+        });
+        Swal.showLoading();
         var data = $('#topic_form').serializeArray();
         data.push({
             name: 'subject_id',
@@ -288,11 +296,7 @@
                         showConfirmButton: false,
                         timer: 3000
                     });
-                    const list = document.getElementById("error-string");
-                    while (list.hasChildNodes()) {
-                        list.removeChild(list.firstChild);
-                    }
-                    // window.location.reload();
+                    $('#topicModal').modal('hide');
                 } else {
                     const list = document.getElementById("error-string");
                     while (list.hasChildNodes()) {
@@ -323,14 +327,11 @@
 
     function update_data() {
         Swal.fire({
-            showCloseButton: false,
-            showCancelButton: false,
-            showConfirmButton: false,
+            text: "Sedang Memproses Data",
             allowOutsideClick: false,
-            customClass: 'col-5 col-md-3',
-            imageUrl: 'https://udindym.site/loader-c.gif',
-            text: 'Silahkan Tunggu...',
-        })
+            timer: 2000
+        });
+        Swal.showLoading();
         var data = $('#edit_topic_form').serializeArray();
         data.push({
             name: 'subject_id',
@@ -350,14 +351,23 @@
                         showConfirmButton: false,
                         timer: 3000
                     });
+                    $('#editModal').modal('hide');
                 } else {
-                    Swal.fire({
-                        title: 'Status :',
-                        html: d.message +
-                            '<br>' + JSON.stringify(d.validation),
-                        icon: 'error',
-                        showConfirmButton: false
-                    });
+                    const list = document.getElementById("error-string-edit");
+                    while (list.hasChildNodes()) {
+                        list.removeChild(list.firstChild);
+                    }
+                    for (var i = 0; i < d.input_error.length; i++) {
+                        // $('#' + d.input_error[i]).addClass('is-invalid');
+                        const node = document.createElement("li");
+                        // Create a text node:
+                        const textnode = document.createTextNode(d.error_string[i]);
+                        // Append the text node to the "li" node:
+                        node.appendChild(textnode);
+                        // Append the "li" node to the list:
+                        document.getElementById("error-string-edit").appendChild(node);
+                        // $('#error-string').append().text(d.error_string[i]);
+                    }
                 }
                 // Swal.close();
                 refresh_dt();

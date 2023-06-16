@@ -30,7 +30,7 @@
 </head>
 
 <body class="g-sidenav-show fixed-top bg-gray-200">
-    <div class="min-height-60 bg-neo-dark position-absolute w-100"></div>
+    <div class="min-height-60 bg-neo-dark position-absolute w-100 neodark-header"></div>
     <div id="page-container" class="sidebar-light enable-page-overlay side-scroll page-header-fixed main-content-narrow">
         <?= $this->include('user/layout/partial/navbar') ?>
         <main class="main-content max-height-vh-100 border-radius-lg ">

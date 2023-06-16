@@ -21,7 +21,7 @@
                                 <div class="col-md-3 col-sm-6">
                                     <div class="pricingTable10">
                                         <div class="pricingTable-header">
-                                            <h3 class="heading">Paket <?= $no1 ?></h3>
+                                            <h3 class="heading mx-3"><?= $item->name ?></h3>
                                             <span class="price-value">
                                                 <?= $item->amount ?>
                                             </span>
@@ -66,13 +66,26 @@
                     <span class="font-weight-bold">Jumlah Diamond</span>
                     <span class="text-muted" id="amount" name="jumlah"></span>
                 </div>
-                <div class="d-flex justify-content-between">
+                <div class="d-flex justify-content-between mb-2">
                     <small>Harga</small>
                     <small id="price"></small>
                 </div>
+                <div class="d-flex justify-content-between mb-2">
+                <span class="font-weight-bold">Kode Voucher</span>
+                </div>
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Masukan Kode Voucher" autocomplete="off" name="kode_voucher" aria-label="Masukan Kode Voucher" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                        <button class="btn btn-info" type="button" onclick="cek_voucher()">Cek</button>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between mb-2">
+                    <small class="text-danger" id="error-string"></small>
+                    <small class="text-success" id="success-string"></small>
+                </div>
                 <div class="d-flex justify-content-between">
                     <small>Diskon</small>
-                    <small>-</small>
+                    <small class="text-success" id="discount"></small>
                 </div>
                 
                 <div class="d-flex justify-content-between mt-3">
@@ -154,6 +167,7 @@
             let data_description = $(this).data("description");
 
             window.id_paketDiamond = data_id;
+            window.price = data_price;
             // console.log(data_id);
             $('#id-paket').text(data_id);
             $('#nama-paket').text(data_name);
@@ -161,18 +175,72 @@
             $('#price').text('Rp' + data_price);
             $('#total').text('Rp' + data_price); // harga - diskon
             $('#description').text(data_description);
+            $('#discount').text('-')
             $('#modalDetail').modal('show');
+
+            const list = document.getElementById("error-string");
+                while (list.hasChildNodes()) {
+                list.removeChild(list.firstChild);
+            }
+            const list2 = document.getElementById("success-string");
+                while (list2.hasChildNodes()) {
+                    list2.removeChild(list2.firstChild);
+                }
         });
 
         $(document).on('click', '.beli-diamond', function() {
             let paket_id = window.id_paketDiamond;
+            let offer_code = window.code_offer
             console.log(paket_id);
 
-            // tes_beli(paket_id);
-            document.location.href = '/transaksi/beli_diamond/' + paket_id;
-            // document.location.href = '/transaksi/beli_diamond';
-            // console.log($data_id);
+            document.location.href = '/transaksi/beli_diamond/' + paket_id + '/' + offer_code;
         });
     });
+
+    function cek_voucher() {
+        let data_price = window.price;
+        let diamond_package_id = window.id_paketDiamond;
+            // console.log('kode_voucher=' + $("input[name=kode_voucher]").val());
+            const list = document.getElementById("error-string");
+                while (list.hasChildNodes()) {
+                list.removeChild(list.firstChild);
+            };
+            const list2 = document.getElementById("success-string");
+                while (list2.hasChildNodes()) {
+                    list2.removeChild(list2.firstChild);
+                }
+            Swal.fire({
+                text: "Memeriksa Voucher...",
+                allowOutsideClick: false,
+                timer: 1000
+            });
+            Swal.showLoading();
+            $.ajax({
+                url: "<?= route_to('user.transaksi.check_voucher') ?>",
+                type: "POST",
+                data: 'kode_voucher=' + $("input[name=kode_voucher]").val()  + "&id_paket=" + diamond_package_id,
+                success: function(d) {
+                    var d = JSON.parse(d);
+                    if (d.success == true) {
+                        $('#success-string').append().text(d.string);
+                        $('#discount').text('Rp' + d.potongan);
+                        $('#total').text('Rp' + (data_price - d.potongan));
+                    } else {
+                        $('#error-string').append().text(d.string);
+                        $('#discount').text('-');
+                        $('#total').text('Rp' + data_price)
+                    }
+                    $('input[name=kode_voucher').val('');
+                    // console.log(d);
+                    window.code_offer = d.code; 
+                    // console.log(window.code_offer);
+                    // console.log(d.potongan);
+                    console.log('total=' + (data_price - d.potongan));
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        }
 </script>
 <?= $this->endSection() ?>
