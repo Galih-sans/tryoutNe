@@ -29,7 +29,7 @@
                 <div class="card-header pb-0">
                     <h6>Hasi Test terupdate</h6>
                 </div>
-                <div class="card-body px-0 pt-0 pb-2">
+                <!-- <div class="card-body"> -->
                     <div class="table-responsive-md">
                         <table id="riwayat" class="table table-bordered table-vcenter js-dataTable-full no-footer dtr-inline collapsed" style="width:100%">
                             <thead>
@@ -38,83 +38,121 @@
                                     <th width="30%" class="fs-sm fw-normal">Ujian</th>
                                     <th width="10%" class="fs-sm fw-normal">Nilai</th>
                                     <th width="30%" class="fs-sm fw-normal">Kelas</th>
-                                    <th width="10%" class="fs-sm fw-normal">Tanggal Ujian</th>
+                                    <th width="15%" class="fs-sm fw-normal">Tanggal Ujian</th>
                                     <th width="10%" class="fs-sm fw-normal">Detail</th>
                                 </tr>
                             </thead>
                         </table>
                     </div>
-                </div>
+                <!-- </div> -->
             </div>
         </div>
     </div>
-    <!-- end of riwayat test -->
-    <!-- MODAL TEST TERUPDATE -->
     <div class="modal fade" id="detailModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-md" role="document">
-            <div class="modal-content">
-                <div class="block block-rounded block-transparent mb-0">
-                    <div class="block-header block-header-ne">
-                        <h3 class="block-title text-white">Hasil Test : </h3>
-                        <div class="block-options">
-                            <button type="button" class="btn-block-option-white" data-bs-dismiss="modal" aria-label="Close">
-                                <i class="fa fa-fw fa-times"></i>
-                            </button>
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="block block-rounded block-transparent mb-0">
+                <div class="block-header block-header-ne">
+                    <h3 class="block-title text-white">Detail Hasil Test </h3>
+                    <div class="block-options">
+                        <button type="button" class="btn-block-option-white" data-bs-dismiss="modal" aria-label="Close">
+                            <i class="fa fa-fw fa-times"></i>Tutup
+                        </button>
+                    </div>
+                </div>
+                <div class="block-content fs-sm">
+                    <form id="tambah_admin_form">
+                        <div class="row">
+                            <div class="col-12 col-md-12">
+                                <div class="col-12 col-md-12 ">
+                                    <span class="color-ne" style="letter-spacing: -em">
+                                        <meta charset="utf-8">⋮⋮⋮
+                                    </span> &nbsp;
+                                    <span class="tittle-neo"> Nama Ujian</span>
+                                    <div class=" mb-4 ">
+                                        <span type="text" class="form-control" id="test_name">
+                                        <div class="invalid-feedback"></div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-12 ">
+                                    <span class="color-ne" style="letter-spacing: -em">
+                                        <meta charset="utf-8">⋮⋮⋮
+                                    </span> &nbsp;
+                                    <span class="tittle-neo"> Nilai</span>
+                                    <div class=" mb-4 ">
+                                        <span type="text" class="form-control" id="score">
+                                        <div class="invalid-feedback"></div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-12">
+                                    <div class="row">
+                                        <div class="col-12 col-md-6">
+                                            <span class="color-ne" style="letter-spacing: -em">
+                                                <meta charset="utf-8">⋮⋮⋮
+                                            </span> &nbsp;
+                                            <span class="tittle-neo"> Jawaban Benar</span>
+                                            <div class=" mb-4 ">
+                                                <span type="text" class="form-control" id="right_answer">
+                                                <div class="invalid-feedback"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <span class="color-ne" style="letter-spacing: -em">
+                                                <meta charset="utf-8">⋮⋮⋮
+                                            </span> &nbsp;
+                                            <span class="tittle-neo"> Jawaban Salah</span>
+                                            <div class=" mb-4 ">
+                                                <span type="text" class="form-control" id="wrong_answer">
+                                                <div class="invalid-feedback"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-12 ">
+                                    <span class="color-ne" style="letter-spacing: -em">
+                                        <meta charset="utf-8">⋮⋮⋮
+                                    </span> &nbsp;
+                                    <span class="tittle-neo"> Tanggal</span>
+                                    <div class=" mb-4 ">
+                                        <span type="text" class="form-control" id="begin_time"">
+                                        <div class="invalid-feedback"></div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-12 ">
+                                    <span class="color-ne" style="letter-spacing: -em">
+                                        <meta charset="utf-8">⋮⋮⋮
+                                    </span> &nbsp;
+                                    <span class="tittle-neo"> Kelas</span>
+                                    <div class=" mb-4 ">
+                                        <span type="text" class="form-control" id="test_class">
+                                        <div class="invalid-feedback"></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="block-content fs-sm">
-                        <form id="detail_siswa_form">
-                            <table>
-                                <tr>
-                                    <th>Nama Ujian</th>
-                                    <td><input type="text" class="form-control" id="test_name" disabled></td>
-                                </tr>
-                                <tr>
-                                    <th>Nilai</th>
-                                    <td><input type="text" class="form-control" id="score" disabled></td>
-                                </tr>
-                                <tr>
-                                    <th>Jawaban Benar</th>
-                                    <td><input type="text" class="form-control" id="right_answer" disabled></td>
-                                </tr>
-                                <tr>
-                                    <th>Jawaban Salah</th>
-                                    <td><input type="text" class="form-control" id="wrong_answer" disabled></td>
-                                </tr>
-                                <tr>
-                                    <th>Tanggal Ujian</th>
-                                    <td><input type="text" class="form-control" id="begin_time" disabled></td>
-                                </tr>
-                                <tr>
-                                    <th>Kelas</th>
-                                    <td><input type="text" class="form-control" id="test_class" disabled></td>
-                                </tr>
-                            </table>
-                        </form>
-                    </div>
-                    <div class="block-content block-content-full text-end bg-body">
-                        <button type="button" class="btn btn-sm btn-secondary me-1" data-bs-dismiss="modal">Tutup</button>
-                    </div>
+                    </form>
+                </div>
+                <div class="block-content block-content-full text-end bg-body">
+                    <!-- <button type="button" class="btn btn-sm btn-warning me-1" data-bs-dismiss="modal">Tutup</button> -->
                 </div>
             </div>
         </div>
     </div>
-    <!-- END OF MODAL -->
-    <!-- Ujian Mendatang -->
+</div>
     <div class="row">
         <div class="col-12">
             <div class="card mb-4">
                 <div class="card-header pb-0">
                     <h6>Daftar Test Mendatang</h6>
                 </div>
-                <div class="card-body px-0 pt-0 pb-2">
+                <div class="card-body">
                     <div class="table-responsive-md">
                         <table id="mendatang" class="table table-bordered table-vcenter js-dataTable-full no-footer dtr-inline collapsed" style="width:100%">
                             <thead>
                                 <tr>
                                     <th width="5%" class="fs-sm">#</th>
                                     <th width="20%" class="fs-sm fw-normal">Ujian</th>
-                                    <th width="10%" class=" text-center fs-sm fw-normal">Kelas</th>
+                                    <th width="10%" class="fs-sm fw-normal">Kelas</th>
                                     <th width="20%" class="fs-sm fw-normal">Tanggal Ujian</th>
                                     <th width="10%" class="fs-sm fw-normal">Jumlah Pertanyaan</th>
                                     <th width="10%" class="fs-sm fw-normal">Type</th>
@@ -150,7 +188,6 @@
     $(document).ready(function() {
         dt_riwayat();
         dt_mendatang();
-        // $('#refresh').on('click', refresh_dt)
         $(document).on('click', '.detail-button', function() {
             let test_name = $(this).attr("test_name");
             let begin_time = $(this).attr("begin_time");
@@ -159,13 +196,12 @@
             let wrong_answer = $(this).attr("wrong_answer");
             let test_class = $(this).attr("test_class");
 
-            $('#test_name').val(test_name);
-            $('#begin_time').val(begin_time);
-            $('#score').val(score);
-            $('#right_answer').val(right_answer + " Soal");
-            $('#wrong_answer').val(wrong_answer + " Soal");
-            $('#test_class').val(test_class);
-
+            $('#test_name').text(test_name);
+            $('#begin_time').text(begin_time);
+            $('#score').text(score);
+            $('#right_answer').text(right_answer + " Soal");
+            $('#wrong_answer').text(wrong_answer + " Soal");
+            $('#test_class').text(test_class);
 
             $('#detailModal').modal('show');
         });
@@ -174,16 +210,15 @@
     function dt_riwayat() {
         $('#riwayat').DataTable({
             oLanguage: {
-                sZeroRecords: '<p style="color: red">Belum ada test</p>',
                 sProcessing: '<div class="spinner-border neo" role="status"><span class="sr-only"></span></div>'
             },
-            // dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center mx-0 yx-0'B><'col-sm-4'f>>" +
-            //     "<'row'<'col-sm-12'tr>>" +
-            //     "<'row'<'col-sm-6'i><'col-sm-6'p>>",
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center mx-0 yx-0'B><'col-sm-4'f>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-6'i><'col-sm-6'p>>",
             buttons: [{
                     extend: 'copy',
                     exportOptions: {
-                        columns: [0, 1, 2]
+                        columns: [0, 1, 2, 3, 4]
                     },
                     className: 'fs-sm btn btn-sm btn-outline-secondary glyphicon glyphicon-duplicate',
                     text: '<i class="fa-sharp fa-solid fa-copy "></i>',
@@ -192,7 +227,7 @@
                 {
                     extend: 'excel',
                     exportOptions: {
-                        columns: [0, 1, 2]
+                        columns: [0, 1, 2, 3, 4]
                     },
                     className: 'fs-sm btn btn-sm btn-outline-success glyphicon glyphicon-list-alt',
                     text: '<i class="fa-sharp fa-solid fa-file-excel "></i>',
@@ -202,7 +237,7 @@
                 {
                     extend: 'print',
                     exportOptions: {
-                        columns: [0, 1, 2]
+                        columns: [0, 1, 2, 3, 4]
                     },
                     className: 'fs-sm btn btn-sm btn-outline-primary glyphicon glyphicon-print',
                     text: '<i class="fa-sharp fa-solid fa-print "></i>',
@@ -211,7 +246,7 @@
                 {
                     extend: 'pdf',
                     exportOptions: {
-                        columns: [0, 1, 2]
+                        columns: [0, 1, 2, 3, 4]
                     },
                     className: 'fs-sm btn btn-sm btn-outline-danger glyphicon glyphicon-file',
                     text: '<i class="fa-sharp fa-solid fa-file-pdf "></i>',
@@ -226,8 +261,6 @@
             searching: true,
             bInfo: false,
             tInfo: false,
-            pagingType: "full_numbers",
-            paging: false,
             lengthMenu: [
                 [10, 25, 50, 100, -1],
                 [10, 25, 50, 100, 'All'],
@@ -266,13 +299,13 @@
                 sZeroRecords: '<p style="color: red">Belum ada test</p>',
                 sProcessing: '<div class="spinner-border neo" role="status"><span class="sr-only"></span></div>',
             },
-            // dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center mx-0 yx-0'B><'col-sm-4'f>>" +
-            //     "<'row'<'col-sm-12'tr>>" +
-            //     "<'row'<'col-sm-6'i><'col-sm-6'p>>",
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center mx-0 yx-0'B><'col-sm-4'f>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-6'i><'col-sm-6'p>>",
             buttons: [{
                     extend: 'copy',
                     exportOptions: {
-                        columns: [0, 1, 2]
+                        columns: [0, 1, 2, 3, 4, 5, 6]
                     },
                     className: 'fs-sm btn btn-sm btn-outline-secondary glyphicon glyphicon-duplicate',
                     text: '<i class="fa-sharp fa-solid fa-copy "></i>',
@@ -281,7 +314,7 @@
                 {
                     extend: 'excel',
                     exportOptions: {
-                        columns: [0, 1, 2]
+                        columns: [0, 1, 2, 3, 4, 5, 6]
                     },
                     className: 'fs-sm btn btn-sm btn-outline-success glyphicon glyphicon-list-alt',
                     text: '<i class="fa-sharp fa-solid fa-file-excel "></i>',
@@ -291,7 +324,7 @@
                 {
                     extend: 'print',
                     exportOptions: {
-                        columns: [0, 1, 2]
+                        columns: [0, 1, 2, 3, 4, 5, 6]
                     },
                     className: 'fs-sm btn btn-sm btn-outline-primary glyphicon glyphicon-print',
                     text: '<i class="fa-sharp fa-solid fa-print "></i>',
@@ -300,7 +333,7 @@
                 {
                     extend: 'pdf',
                     exportOptions: {
-                        columns: [0, 1, 2]
+                        columns: [0, 1, 2, 3, 4, 5, 6]
                     },
                     className: 'fs-sm btn btn-sm btn-outline-danger glyphicon glyphicon-file',
                     text: '<i class="fa-sharp fa-solid fa-file-pdf "></i>',

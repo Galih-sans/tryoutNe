@@ -83,14 +83,6 @@ class HasilTestController extends BaseController
                     $row[] = $lists->full_name; // nama siswa
                     $row[] = $interval->format('%h jam, %i menit, %s detik'); //  waktu pengerjaan ( end time - begin time)
                     $row[] = $lists->score; // score
-                    $row[]  = '
-                        <div class="block-options">
-                        <button type="button" class="btn btn-sm btn-success kembali-button"
-                        >
-                            <i class="">Kembali</i>
-                        </button>
-                        </div>
-                        ';
                     $data[] = $row;
                 }
             }

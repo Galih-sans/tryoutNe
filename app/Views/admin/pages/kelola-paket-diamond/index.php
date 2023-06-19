@@ -22,7 +22,7 @@
             <div class="row pb-2 mb-3 shadow-sm align-center">
                 <div class="col-12 col-md-12 text-right">
                     <button type="button" class="btn btn-primary btn-sm" onclick="tambah()">
-                        <i class="si si-plus"></i> Tambah Paket Baru
+                    <i class="fa-solid fa-plus"></i>
                     </button>
                 </div>
             </div>
@@ -141,17 +141,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- <div class="col-12 col-md-12">
-                                <div class="col-12 col-md-12 py-2">
-                                    <span class="color-ne" style="letter-spacing: -em">
-                                        <meta charset="utf-8">⋮⋮⋮
-                                    </span> &nbsp;
-                                    <span class="tittle-neo"> Edit Tipe Paket</span>
-                                    <div class="mb-4 pt-2">
-                                        <input type="text" class="form-control" id="edit-package-type" name="edit_package_type">
-                                    </div>
-                                </div>
-                            </div> -->
                             <div class="col-12 col-md-12">
                                 <div class="col-12 col-md-12 py-2">
                                     <div class="row">
@@ -244,7 +233,10 @@
             $('#edit-package-description').val(data_package_description);
 
             $('#editPaketModal').modal('show');
-
+            const list = document.getElementById("error-string-edit");
+                    while (list.hasChildNodes()) {
+                        list.removeChild(list.firstChild);
+                    }
         });
     });
 
@@ -303,14 +295,19 @@
         $('#tambahPaketModal').modal('show');
         // $('.selectpicker').selectpicker('refresh');
         $('#tambah_role_form')[0].reset();
+        const list = document.getElementById("error-string");
+                    while (list.hasChildNodes()) {
+                        list.removeChild(list.firstChild);
+                    }
     }
 
     function insert_data() {
-        // Swal.fire({
-        //     text: "Sedang Memproses Data",
-        //     allowOutsideClick: false,
-        // });
-        // Swal.showLoading();
+        Swal.fire({
+            text: "Sedang Memproses Data",
+            allowOutsideClick: false,
+            timer: 2000
+        });
+        Swal.showLoading();
         $.ajax({
             url: "<?= route_to('admin.paket-diamond.add_paket_diamond') ?>",
             type: "POST",
@@ -325,7 +322,8 @@
                         showConfirmButton: false,
                         timer: 3000
                     });
-                    window.location.reload();
+                    refresh_dt();
+                    $('#tambahPaketModal').modal('hide');
                 } else {
                     const list = document.getElementById("error-string");
                     while (list.hasChildNodes()) {
@@ -353,11 +351,12 @@
     }
 
     function update_data() {
-        // Swal.fire({
-        //     text: "Sedang Memproses Data",
-        //     allowOutsideClick: false,
-        // });
-        // Swal.showLoading();
+        Swal.fire({
+            text: "Sedang Memproses Data",
+            allowOutsideClick: false,
+            timer: 2000
+        });
+        Swal.showLoading();
         $.ajax({
             url: "<?= route_to('admin.paket-diamond.update_paket_diamond') ?>",
             type: "POST",
@@ -372,7 +371,8 @@
                         showConfirmButton: false,
                         timer: 3000
                     });
-                window.location.reload();
+                    refresh_dt();
+                    $('#editPaketModal').modal('hide');
                 } else {
                     const list = document.getElementById("error-string-edit");
                     while (list.hasChildNodes()) {
@@ -390,7 +390,6 @@
                         // $('#error-string').append().text(d.error_string[i]);
                     }
                 }
-                console.log($('#edit_role_form').serialize());
                 refresh_dt();
             },
             error: function(error) {
@@ -456,8 +455,8 @@
             pagingType: "full_numbers",
             paging: true,
             lengthMenu: [
-                [10, 25, 50, 100, -1],
-                [10, 25, 50, 100, 'All'],
+                [15, 25, 50, 100, -1],
+                [15, 25, 50, 100, 'All'],
             ],
             columnDefs: [{ // jumlah harus sesuai jumlah th
                 targets: [0, 2],

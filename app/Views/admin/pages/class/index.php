@@ -24,7 +24,7 @@
             <div class="row pb-2 mb-3 shadow-sm align-center">
                 <div class="col-12 col-md-12 text-right">
                     <button type="button" class="btn btn-primary btn-sm" onclick="tambah()">
-                        <i class="si si-plus"></i> Tambah Kelas Baru
+                    <i class="fa-solid fa-plus"></i>
                     </button>
                 </div>
             </div>
@@ -43,7 +43,7 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="questionModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+<div class="modal fade" id="classModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-md" role="document">
         <div class="modal-content">
@@ -164,7 +164,6 @@
     </div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/js/bootstrap-select.min.js"></script>
@@ -202,7 +201,11 @@
             $('#edit-class').val(data_class);
             $('#class_id').val(data_id);
             $('#editModal').modal('show');
-
+            
+            const list = document.getElementById("error-string-edit");
+            while (list.hasChildNodes()) {
+            list.removeChild(list.firstChild);
+        }
         });
     });
 
@@ -273,17 +276,22 @@
     }
 
     function tambah() {
-        $('#questionModal').modal('show');
+        $('#classModal').modal('show');
         // $('.selectpicker').selectpicker('refresh');
         $('#class_form')[0].reset();
+        const list = document.getElementById("error-string");
+            while (list.hasChildNodes()) {
+            list.removeChild(list.firstChild);
+        }
     }
 
     function insert_data() {
-        // Swal.fire({
-        //     text: "Sedang Memproses Data",
-        //     allowOutsideClick: false,
-        // });
-        // Swal.showLoading();
+        Swal.fire({
+            text: "Sedang Memproses Data",
+            allowOutsideClick: false,
+            timer: 1000
+        });
+        Swal.showLoading();
         $.ajax({
             url: "<?= route_to('admin.class.add_class') ?>",
             type: "POST",
@@ -298,7 +306,7 @@
                         showConfirmButton: false,
                         timer: 3000
                     });
-                    window.location.reload();
+                    $('#classModal').modal('hide');
                 } else {
                     const list = document.getElementById("error-string");
                     while (list.hasChildNodes()) {
@@ -326,11 +334,12 @@
     }
 
     function update_data() {
-        // Swal.fire({
-        //     text: "Sedang Memproses Data",
-        //     allowOutsideClick: false,
-        // });
-        // Swal.showLoading();
+        Swal.fire({
+            text: "Sedang Memproses Data",
+            allowOutsideClick: false,
+            timer: 1000
+        });
+        Swal.showLoading();
         $.ajax({
             url: "<?= route_to('admin.class.edit_class') ?>",
             type: "POST",
@@ -345,7 +354,7 @@
                         showConfirmButton: false,
                         timer: 3000
                     });
-                    window.location.reload();
+                    $('#editModal').modal('hide');
                 } else {
                     const list = document.getElementById("error-string-edit");
                     while (list.hasChildNodes()) {
@@ -363,7 +372,6 @@
                         // $('#error-string').append().text(d.error_string[i]);
                     }
                 }
-
                 console.log(d);
                 refresh_dt();
             },

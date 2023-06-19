@@ -24,15 +24,21 @@
         </div>
         <div class="block-content fs-sm">
             <div class="block-content fs-sm">
+            <div class="row pb-2 mb-3 shadow-sm align-center">
+                    <div class="col-12 col-md-12 text-right">
+                        <button type="button" class="btn btn-primary btn-sm" onclick="kembali()">
+                        <i class='fa-solid fa-arrow-left'></i> Kembali
+                        </button>
+                    </div>
+                </div>
                 <table id="daftar-test" class="table table-bordered table-vcenter js-dataTable-full no-footer dtr-inline collapsed" style="width:100%">
                     <thead>
                         <tr>
                             <th width="5%" class="fs-sm">Rank</th>
                             <th width="20%" class="fs-sm fw-normal">Ujian</th>
-                            <th width="30%" class=" text-center fs-sm fw-normal">Nama Siswa</th>
-                            <th width="10%" class="fs-sm fw-normal">Waktu Pengerjaan</th>
+                            <th width="20%" class=" text-center fs-sm fw-normal">Nama Siswa</th>
+                            <th width="20%" class="fs-sm fw-normal">Waktu Pengerjaan</th>
                             <th width="10%" class="fs-sm fw-normal">Score</th>
-                            <th width="5%" class="fs-sm fw-normal">Aksi</th>
                         </tr>
                     </thead>
                 </table>
@@ -62,10 +68,11 @@
     $(document).ready(function() {
         dt_daftar_test();
         $('#refresh').on('click', refresh_dt);
-        $(document).on('click', '.kembali-button', function() {
-            document.location.href = '/admin/hasil-test';
-        });
     });
+
+    function kembali() {
+        document.location.href = '/admin/hasil-test';;
+    }
 
     function dt_daftar_test() {
         $('#daftar-test').DataTable({

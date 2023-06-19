@@ -39,12 +39,13 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="detailModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="block block-rounded block-transparent mb-0">
                 <div class="block-header block-header-ne">
-                    <h3 class="block-title text-white">Detail Siswa : </h3>
+                    <h3 class="block-title text-white">Detail Data Siswa : </h3>
                     <div class="block-options">
                         <button type="button" class="btn-block-option-white" data-bs-dismiss="modal" aria-label="Close">
                             <i class="fa fa-fw fa-times"></i>
@@ -52,61 +53,126 @@
                     </div>
                 </div>
                 <div class="block-content fs-sm">
-                    <form id="detail_siswa_form">
-                        <table>
-                            <tr>
-                                <th>Name</th>
-                                <td><input type="text" class="form-control" id="full_name" name="name" disabled></td>
-                            </tr>
-                            <tr>
-                                <th>Email</th>
-                                <td><input type="text" class="form-control" id="email" name="name" disabled></td>
-                            </tr>
-                            <tr>
-                                <th>Nomor Telepon</th>
-                                <td><input type="text" class="form-control" id="phone_number" name="phone_number" disabled></td>
-                            </tr>
-                            <tr>
-                                <th>Tempat Lahir</th>
-                                <td><input type="text" class="form-control" id="POB" name="POB" disabled></td>
-                            </tr>
-                            <tr>
-                                <th>Tanggal Lahir</th>
-                                <td><input type="text" class="form-control" id="DOB" name="DOB" disabled></td>
-                            </tr>
-                            <tr>
-                                <th>Jenis Kelamin</th>
-                                <td><input type="text" class="form-control" id="gender" name="gender" disabled></td>
-                            </tr>
-                            <tr>
-                                <th>Nama Wali</th>
-                                <td><input type="text" class="form-control" id="parent_name" name="parent_name" disabled></td>
-                            </tr>
-                            <tr>
-                                <th>Nomor Telepon Wali</th>
-                                <td><input type="text" class="form-control" id="parent_phone_number" name="parent_phone_number" disabled></td>
-                            </tr>
-                            <tr>
-                                <th>Email Wali</th>
-                                <td><input type="text" class="form-control" id="parent_email" name="parent_email" disabled></td>
-                            </tr>
-                            <tr>
-                                <th>Kelas</th>
-                                <td><input type="text" class="form-control" class="form-control" id="kelas" name="kelas" disabled></td>
-                            </tr>
-                            <tr>
-                                <th>Jenjang</th>
-                                <td><input type="text" class="form-control" id="level" name="level" disabled></td>
-                            </tr>
-                            <tr>
-                                <th>Sekolah</th>
-                                <td><input type="text" class="form-control" id="school" name="school" disabled></td>
-                            </tr>
-                        </table>
+                    <form id="tambah_offer_form">
+                        <div class="row">
+                            <div class="col-12 col-md-12">
+                                <span class="color-ne" style="letter-spacing: -em">
+                                    <meta charset="utf-8">⋮⋮⋮
+                                </span> &nbsp;
+                                <span class="tittle-neo"> Nama Lengkap</span>
+                                <div class="mb-4 pt-2">
+                                    <span type="text" class="form-control" id="full_name">
+                                </div>
+                            </div>
+                                <div class="col-12 col-md-12">
+                                    <div class="row">
+                                        <div class="col-12 col-md-6">
+                                        <span class="color-ne" style="letter-spacing: -em">
+                                            <meta charset="utf-8">⋮⋮⋮
+                                            </span> &nbsp;
+                                        <span class="tittle-neo"> Email</span>
+                                        <div class="mb-4 pt-2">
+                                            <span type="text" class="form-control" id="email">
+                                        </div>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <span class="color-ne" style="letter-spacing: -em">
+                                                <meta charset="utf-8">⋮⋮⋮
+                                            </span> &nbsp;
+                                            <span class="tittle-neo"> Nomer Telepon</span>
+                                        <div class="mb-4 pt-2">
+                                            <span type="text" class="form-control"  id="phone_number" >
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-12">
+                                    <div class="row">
+                                        <div class="col-12 col-md-6">
+                                            <span class="color-ne" style="letter-spacing: -em">
+                                                <meta charset="utf-8">⋮⋮⋮
+                                            </span> &nbsp;
+                                            <span class="tittle-neo"> Tempat Lahir</span>
+                                            <div class="mb-4 pt-2">
+                                            <span type="text" class="form-control" id="POB">
+                                        </div>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <span class="color-ne" style="letter-spacing: -em">
+                                                <meta charset="utf-8">⋮⋮⋮
+                                            </span> &nbsp;
+                                            <span class="tittle-neo"> Tanggal Lahir</span>
+                                            <div class="mb-4 pt-2">
+                                                <span type="text" class="form-control" id="DOB">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-12">
+                                    <span class="color-ne" style="letter-spacing: -em">
+                                        <meta charset="utf-8">⋮⋮⋮
+                                    </span> &nbsp;
+                                    <span class="tittle-neo"> Nama Wali</span>
+                                    <div class="mb-4 pt-2">
+                                        <span type="text" class="form-control" id="parent_name">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-12">
+                                    <div class="row">
+                                        <div class="col-12 col-md-6">
+                                        <span class="color-ne" style="letter-spacing: -em">
+                                            <meta charset="utf-8">⋮⋮⋮
+                                            </span> &nbsp;
+                                        <span class="tittle-neo"> Email Wali</span>
+                                        <div class="mb-4 pt-2">
+                                            <span type="text" class="form-control" id="parent_email">
+                                        </div>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <span class="color-ne" style="letter-spacing: -em">
+                                                <meta charset="utf-8">⋮⋮⋮
+                                            </span> &nbsp;
+                                            <span class="tittle-neo"> Nomer Telepon Wali</span>
+                                        <div class="mb-4 pt-2">
+                                            <span type="text" class="form-control" id="parent_phone_number">
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-12">
+                                    <div class="row">
+                                        <div class="col-12 col-md-6">
+                                        <span class="color-ne" style="letter-spacing: -em">
+                                            <meta charset="utf-8">⋮⋮⋮
+                                            </span> &nbsp;
+                                        <span class="tittle-neo"> Kelas</span>
+                                        <div class="mb-4 pt-2">
+                                            <span type="text" class="form-control" id="kelas">
+                                        </div>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <span class="color-ne" style="letter-spacing: -em">
+                                                <meta charset="utf-8">⋮⋮⋮
+                                            </span> &nbsp;
+                                            <span class="tittle-neo"> Jenjang</span>
+                                        <div class="mb-4 pt-2">
+                                            <span type="text" class="form-control" id="level">
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-12">
+                                    <span class="color-ne" style="letter-spacing: -em">
+                                        <meta charset="utf-8">⋮⋮⋮
+                                    </span> &nbsp;
+                                    <span class="tittle-neo"> Nama Sekolah</span>
+                                    <div class="mb-4 pt-2">
+                                        <span type="text" class="form-control" id="school">
+                                    </div>
+                                </div>
+                        </div>
                     </form>
-                </div>
-                <div class="block-content block-content-full text-end bg-body">
-                    <button type="button" class="btn btn-sm btn-secondary me-1" data-bs-dismiss="modal">Tutup</button>
                 </div>
             </div>
         </div>
@@ -149,23 +215,22 @@
             let data_parent_email = $(this).attr("parent_email");
             let data_school = $(this).attr("school");
 
-            $('#full_name').val(data_full_name);
-            $('#kelas').val(data_class);
-            $('#level').val(data_level);
-            $('#email').val(data_email);
-            $('#POB').val(data_POB);
-            $('#DOB').val(data_DOB);
-            $('#phone_number').val(data_phone_number)
+            $('#full_name').text(data_full_name);
+            $('#kelas').text(data_class);
+            $('#level').text(data_level);
+            $('#email').text(data_email);
+            $('#POB').text(data_POB);
+            $('#DOB').text(data_DOB);
+            $('#phone_number').text(data_phone_number)
             if (data_gender == "L") {
-                $('#gender').val("Laki-Laki");
+                $('#gender').text("Laki-Laki");
             } else {
-                $('#gender').val("Perempuan");
+                $('#gender').text("Perempuan");
             }
-            $('#parent_name').val(data_parent_name)
-            $('#parent_phone_number').val(data_parent_phone_number)
-            $('#parent_email').val(data_parent_email)
-            $('#school').val(data_school)
-            console.log(data_DOB);
+            $('#parent_name').text(data_parent_name)
+            $('#parent_phone_number').text(data_parent_phone_number)
+            $('#parent_email').text(data_parent_email)
+            $('#school').text(data_school)
 
             $('#detailModal').modal('show');
         });

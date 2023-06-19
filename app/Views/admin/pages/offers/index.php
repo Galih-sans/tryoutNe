@@ -27,7 +27,7 @@
             <div class="row pb-2 mb-3 shadow-sm align-center">
                 <div class="col-12 col-md-12 text-right">
                     <button type="button" class="btn btn-primary btn-sm" onclick="tambah()">
-                        <i class="si si-plus"></i> Tambah Diskon
+                    <i class="fa-solid fa-plus"></i>
                     </button>
                 </div>
             </div>
@@ -396,6 +396,10 @@
             $('#edit-status').val(data_status);
 
             $('#editOfferModal').modal('show');
+            const list = document.getElementById("error-string-edit");
+                    while (list.hasChildNodes()) {
+                        list.removeChild(list.firstChild);
+                    }
         });
     });
 
@@ -469,15 +473,20 @@
         $('#tambahOfferModal').modal('show');
         // $('.selectpicker').selectpicker('refresh');
         $('#tambah_offer_form')[0].reset();
+        const list = document.getElementById("error-string");
+                    while (list.hasChildNodes()) {
+                        list.removeChild(list.firstChild);
+                    }
     }
 
     function insert_data() {
         // console.log($('#tambah_offer_form').serialize());
-        // Swal.fire({
-        //     text: "Sedang Memproses Data",
-        //     allowOutsideClick: false,
-        // });
-        // Swal.showLoading();
+        Swal.fire({
+            text: "Sedang Memproses Data",
+            allowOutsideClick: false,
+            timer: 2000
+        });
+        Swal.showLoading();
         $.ajax({
             url: "<?= route_to('admin.offers.add_offer') ?>",
             type: "POST",
@@ -492,7 +501,8 @@
                         showConfirmButton: false,
                         timer: 3000
                     });
-                    window.location.reload();
+                    $('#tambahOfferModal').modal('hide');
+                    refresh_dt();
                 } else {
                     const list = document.getElementById("error-string");
                     while (list.hasChildNodes()) {
@@ -522,11 +532,12 @@
 
     function update_data() {
         // console.log($('#edit_role_form').serialize());
-        // Swal.fire({
-        //     text: "Sedang Memproses Data",
-        //     allowOutsideClick: false,
-        // });
-        // Swal.showLoading();
+        Swal.fire({
+            text: "Sedang Memproses Data",
+            allowOutsideClick: false,
+            timer: 2000
+        });
+        Swal.showLoading();
         $.ajax({
             url: "<?= route_to('admin.offers.update_offer') ?>",
             type: "POST",
@@ -541,7 +552,8 @@
                         showConfirmButton: false,
                         timer: 3000
                     });
-                    window.location.reload();
+                    $('#editOfferModal').modal('hide');
+                    refresh_dt();
                 } else {
                     const list = document.getElementById("error-string-edit");
                     while (list.hasChildNodes()) {

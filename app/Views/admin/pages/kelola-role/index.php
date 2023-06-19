@@ -22,7 +22,7 @@
             <div class="row pb-2 mb-3 shadow-sm align-center">
                 <div class="col-12 col-md-12 text-right">
                     <button type="button" class="btn btn-primary btn-sm" onclick="tambah()">
-                        <i class="si si-plus"></i> Tambah Role Baru
+                    <i class="fa-solid fa-plus"></i>
                     </button>
                 </div>
             </div>
@@ -194,6 +194,9 @@
                                         <input type="text" class="form-control" id="edit-role-name" name="edit_role_name">
                                     </div>
                                 </div>
+                                <div class="col-12 col-md-12 mb-2 text-danger">
+                                    <ul id="error-string-edit">
+                                </div>
                                 <div class="col-12 col-md-12 py-2">
                                     <div class="row">
                                         <div class="col-12 col-md-6">
@@ -276,7 +279,7 @@
                 </div>
                 <div class="block-content block-content-full text-end bg-body">
                     <button type="button" class="btn btn-sm btn-secondary me-1" data-bs-dismiss="modal">Tutup</button>
-                    <button type="button" class="btn btn-sm btn-primary" data-bs-dismiss="modal" onclick="update_data()">Simpan</button>
+                    <button type="button" class="btn btn-sm btn-primary" onclick="update_data()">Simpan</button>
                 </div>
             </div>
         </div>
@@ -311,7 +314,7 @@
         });
         $(document).on('click', '.edit-button', function() {
             let data_id = $(this).data("id");
-            console.log(data_id);
+            // console.log(data_id);
             let data_role_name = $(this).data("role-name");
             let data_ha_class = $(this).data("ha-class");
             let data_ha_subject = $(this).data("ha-subject");
@@ -403,7 +406,10 @@
             }
 
             $('#editRoleModal').modal('show');
-
+            const list = document.getElementById("error-string-edit");
+                    while (list.hasChildNodes()) {
+                        list.removeChild(list.firstChild);
+                    }
         });
     });
 
@@ -416,7 +422,8 @@
             showCancelButton: true,
             cancelButtonText: 'Batal',
             confirmButtonText: 'Ya, hapus data ini',
-            confirmButtonColor: "#d26a5c"
+            confirmButtonColor: "#d26a5c",
+            timer: 3000
         }).then((result) => {
             if (result.value) {
                 Swal.fire({
@@ -462,15 +469,20 @@
         $('#tambahRoleModal').modal('show');
         // $('.selectpicker').selectpicker('refresh');
         $('#tambah_role_form')[0].reset();
+        const list = document.getElementById("error-string");
+                    while (list.hasChildNodes()) {
+                        list.removeChild(list.firstChild);
+                    }
     }
 
     function insert_data() {
         // console.log($('#tambah_role_form').serialize());
-        // Swal.fire({
-        //     text: "Sedang Memproses Data",
-        //     allowOutsideClick: false,
-        // });
-        // Swal.showLoading();
+        Swal.fire({
+            text: "Sedang Memproses Data",
+            allowOutsideClick: false,
+            timer: 2000
+        });
+        Swal.showLoading();
         $.ajax({
             url: "<?= route_to('admin.kelola-role.add_role') ?>",
             type: "POST",
@@ -485,7 +497,8 @@
                         showConfirmButton: false,
                         timer: 3000
                     });
-                    window.location.reload();
+                    refresh_dt();
+                    $('#tambahRoleModal').modal('hide');
                 } else {
                     const list = document.getElementById("error-string");
                     while (list.hasChildNodes()) {
@@ -517,6 +530,7 @@
         Swal.fire({
             text: "Sedang Memproses Data",
             allowOutsideClick: false,
+            timer: 2000
         });
         Swal.showLoading();
         $.ajax({
@@ -533,14 +547,24 @@
                         showConfirmButton: false,
                         timer: 3000
                     });
+                    refresh_dt();
+                    $('#editRoleModal').modal('hide');
                 } else {
-                    Swal.fire({
-                        title: 'Status :',
-                        html: d.message +
-                            '<br>' + JSON.stringify(d.validation),
-                        icon: 'error',
-                        showConfirmButton: false
-                    });
+                    const list = document.getElementById("error-string-edit");
+                    while (list.hasChildNodes()) {
+                        list.removeChild(list.firstChild);
+                    }
+                    for (var i = 0; i < d.input_error.length; i++) {
+                        // $('#' + d.input_error[i]).addClass('is-invalid');
+                        const node = document.createElement("li");
+                        // Create a text node:
+                        const textnode = document.createTextNode(d.error_string[i]);
+                        // Append the text node to the "li" node:
+                        node.appendChild(textnode);
+                        // Append the "li" node to the list:
+                        document.getElementById("error-string-edit").appendChild(node);
+                        // $('#error-string').append().text(d.error_string[i]);
+                    }
                 }
                 // window.location.reload();
                 console.log(d);

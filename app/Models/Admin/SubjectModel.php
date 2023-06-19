@@ -85,7 +85,7 @@ class SubjectModel extends Model
     protected function _get_datatables_query($class, $column_order, $column_search, $order)
     {
         //jika ingin join formatnya adalah sebagai berikut :
-        $this->builder->select('to_subjects.id, subject, level, class')->join('to_class', 'to_class.id = to_subjects.class_id', 'left')->where('to_subjects.class_id', $class);
+        $this->builder->select('to_subjects.id, subject, level, class, class_id')->join('to_class', 'to_class.id = to_subjects.class_id', 'left')->where('to_subjects.class_id', $class);
         //end Join
         $i = 0;
 

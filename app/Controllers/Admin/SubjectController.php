@@ -63,7 +63,12 @@ class SubjectController extends BaseController
                 $row[] = $lists->subject;
                 $row[]  = '
                     <div class="block-options text-center">
-                    <button type="button" class="btn btn-sm btn-warning  edit-button" data-id="' . $lists->id . '" data-level="' . $lists->level . '"' . '" data-class="' . $lists->class . '">
+                    <button type="button" class="btn btn-sm btn-warning  edit-button" 
+                    data-id="' . $lists->id . '" 
+                    data-level="' . $lists->level . '" 
+                    data-subject="' . $lists->subject . '" 
+                    data-class_id="' . $lists->class_id . '"
+                    data-class="' . $lists->class . '">
                         <i class="fa-solid fa-pen-to-square"></i>
                     </button>
                     <button type="button" class="btn btn-sm btn-danger  delete-button" data-id="' . $lists->id . '">
