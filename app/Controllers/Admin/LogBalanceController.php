@@ -39,20 +39,22 @@ class LogBalanceController extends BaseController
             $where = ['to_balance_log.id !=' => 0];
             //Column Order Harus Sesuai Urutan Kolom Pada Header Tabel di bagian View
             //Awali nama kolom tabel dengan nama tabel->tanda titik->nama kolom seperti pengguna.nama
-            $column_order = array('to_balance_log.id', 'to_students.full_name', 'to_balance_log.type', 'to_balance_log.amount');
+            $column_order = array('to_balance_log.amount', 'to_students.timestamp', 'to_students.total', 'to_students.status', 'to_students.full_name', 'to_balance_log.type', 'to_balance_log.amount');
             $column_search = array('to_students.full_name');
             $order = array('to_balance_log.id' => 'asc');
             $list = $list_data->get_datatables('to_balance_log', $column_order, $column_search, $order);
             $data = array();
             $no = $request->getPost("start");
             foreach ($list as $lists) {
+                $startDate = date("l d-m-Y H:i:s", strtotime($lists->timestamp));
+                // $endDate = date("d-m-Y H:i", strtotime($lists->end_date));
                 $no++;
                 $row    = array();
                 $row[] = $no;
                 $row[] = $lists->full_name;
                 $row[] = $lists->amount;
                 $row[] = $lists->type;
-                $row[] = $lists->timestamp;
+                $row[] = $startDate;
                 $row[] = $lists->total;
                 $row[] = $lists->status;
                 // $row[]  = '

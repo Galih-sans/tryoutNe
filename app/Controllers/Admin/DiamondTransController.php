@@ -59,6 +59,12 @@ class DiamondTransController extends BaseController
             $no = $request->getPost("start");
             foreach ($list as $lists) {
                 if ($lists->deleted_at == false) {
+                    if ($lists->status == "success") {
+                        $status_badge = '<span class="badge bg-success">Sukses</span>';
+                    } else {
+                        $status_badge = '<span class="badge bg-warning">Pending</span>';
+                    }
+                    
                     $no++;
                     $row   = array();
                     $row[] = $no;
@@ -66,7 +72,7 @@ class DiamondTransController extends BaseController
                     $row[] = $lists->package_name;
                     $row[] = $lists->name;
                     $row[] = $lists->transaction_id;
-                    $row[] = $lists->status;
+                    $row[] = $status_badge;
                     $row[]  = '
                     <div class="block-options">
                     <button type="button" class="btn btn-sm btn-danger delete-button" data-id="' . $lists->id . '">

@@ -14,15 +14,19 @@ class transaksicontroller extends BaseController
     public $paket_diamond_model;
     public $student_model;
     public $diamond_transaction_model;
+    public $balance_model;
+    public $log_balance_model;
     public $uri;
     public $offer_model;
     public function __construct()
     {
         $this->uri = service('uri');
-        $this->offer_model = new \App\Models\Admin\OffersModel;
-        $this->student_model = new \App\Models\StudentModel;
+        $this->offer_model = new \App\Models\Admin\OffersModel();
+        $this->student_model = new \App\Models\StudentModel();
         $this->paket_diamond_model = new \App\Models\Admin\PaketDiamondModel();
-        $this->diamond_transaction_model = new \App\Models\Admin\DiamondTransModel;
+        $this->diamond_transaction_model = new \App\Models\Admin\DiamondTransModel();
+        $this->balance_model = new \App\Models\Admin\BalanceSiswaModel();
+        $this->log_balance_model = new \App\Models\Admin\LogBalanceModel();
         $this->tests_model = new \App\Models\TestModel();
         $this->encrypter = \Config\Services::encrypter();
         $this->pagedata['activeTab'] = "transaksi";
@@ -42,6 +46,7 @@ class transaksicontroller extends BaseController
 
     public function check_voucher()
     {
+        if ($this->request->isAJAX()) {
         $data = array();
         $data['diskon'] = 0;
         $data['string'] = array();
@@ -72,9 +77,13 @@ class transaksicontroller extends BaseController
         echo json_encode($data);
         exit();
     }
+    }
 
     public function diamond_transaction()
     {
+        if ($this->request->isAJAX()) {
+        $this->pagedata['tests'] =  $this->tests_model->findAll();
+        $this->pagedata['paketDiamond'] =  $this->paket_diamond_model->findAll();
         // Set your Merchant Server Key
         \Midtrans\Config::$serverKey = env('SERVER_KEY_MIDTRANS');
         // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
@@ -84,8 +93,11 @@ class transaksicontroller extends BaseController
         // Set 3DS transaction for credit card to true
         \Midtrans\Config::$is3ds = env('IS_3DS_MIDTRANS');
 
+        // \Midtrans\Config::$appendNotifUrl = "https://example.com/test1,https://example.com/test2";
+
         $uuid = Uuid::uuid1();
-        $paket_id = $this->uri->getSegment(3);
+        // $paket_id = $this->uri->getSegment(3);
+        $paket_id = $this->request->getVar('paket_id');
         $student_id = session()->get('id');
         $dataPaket =  $this->paket_diamond_model->where('id', $paket_id)->findAll();
         $dataStudent =  $this->student_model->where('id', $student_id)->asObject()->findAll();
@@ -120,10 +132,10 @@ class transaksicontroller extends BaseController
         );
 
         // apakah menggunakan voucher atau tidak
-        if ($this->uri->getSegment(4) == 'undefined') {
+        if ($this->request->getVar('offer_code') == 'undefined') {
             $item_details = array($item1_details);
         } else {
-            $offer_code = $this->uri->getSegment(4);
+            $offer_code = $this->request->getVar('offer_code');
             $dataOffer = $this->offer_model->where('offer_code', $offer_code)->where('status', 'active')->findAll();
             $pricexpercent = ((int)$dataPaket[0]->price * (int)$dataOffer[0]->discount_percentage)/100;
 
@@ -157,17 +169,85 @@ class transaksicontroller extends BaseController
             'item_details' => $item_details,
             'expiry' => $expiry,
         );
-
-        $transaction_data = array(
-            'id' => $uuid->toString(),
-            'student_id' => $student_id,
-            'package_id' => $paket_id,
+        
+        $snapToken = \Midtrans\Snap::getSnapToken($params);        
+        // snap redirect
+        // return redirect()->to('https://app.sandbox.midtrans.com/snap/v3/redirection/' . $snapToken);
+        
+        // snap local
+        $data = [
             'transaction_id' => $transaction_details['order_id'],
-        );
-        // create transaction data to_diamond_transaction
-        $this->diamond_transaction_model->add_transaction($transaction_data);
+            'snapToken' => $snapToken
+        ];
+        // $this->pagedata['snapToken'] = $snapToken;
+        // return view('user/pages/snap/pay'); // REDIRECT KEMBALI KE TRANSAKSI, SNAP DIATAS HTML TRANSAKSI
+        echo json_encode($data);
+        exit();
+    }
+    }
 
-        $snapToken = \Midtrans\Snap::getSnapToken($params);
-        return redirect()->to('https://app.sandbox.midtrans.com/snap/v3/redirection/' . $snapToken);
+    public function save_transaction(){
+        $uuid1 = Uuid::uuid1();
+        $student_id = session()->get('id');
+        if ($this->request->isAJAX()) {
+            $transaction_data = [
+                'id' => $uuid1->toString(),
+                'student_id' => $student_id,
+                'package_id' => $this->request->getVar('package_id'),
+                'transaction_id' => $this->request->getVar('transaction_id'),
+                'status' => $this->request->getVar('status'),
+            ];
+
+            if ($this->request->getVar('offer_id') == 'undefined') {
+                $transaction_data['offer_id'] = '';
+            } else {
+                $transaction_data['offer_id'] = $this->request->getVar('offer_id');
+            }
+
+            // if status success insert balance, create log type topup
+            if ($transaction_data['status'] == 'success') {
+                $this->topup($transaction_data);
+                $this->create_balace_log($transaction_data);
+            }
+            
+            $this->diamond_transaction_model->add_transaction($transaction_data);
+
+            $response['success'] = true;
+            $response['message'] = $transaction_data['status'];
+            $balanceSiswa = $this->balance_model->where('user_id', $transaction_data['student_id'])->findAll();
+            session()->set('balance', $balanceSiswa[0]->balance);
+            $response['balance'] = $balanceSiswa[0]->balance;
+            echo json_encode($response);
+        }
+    }
+
+    public function create_balace_log($transaction_data){
+        $dataPaket =  $this->paket_diamond_model->where('id', $transaction_data['package_id'])->findAll();
+        $balanceSiswa = $this->balance_model->where('user_id', $transaction_data['student_id'])->findAll();
+        $uuid11 = Uuid::uuid1();
+        // $total = (int)$balanceSiswa[0]->balance + (int)$dataPaket[0]->amount;
+        $log_data = [
+            'id' => $uuid11->toString(),
+            'student_id' => $transaction_data['student_id'],
+            'type' => 'topup',
+            'amount' => $dataPaket[0]->amount,
+            'total' => $balanceSiswa[0]->balance,
+            'timestamp' => date("Y/m/d H:i:s",time()),
+            'status' => '',
+            'created_at' => $this->now()
+        ];
+        $this->log_balance_model->insert($log_data);
+    }
+
+    public function topup($transaction_data){
+        $packet_id = $transaction_data['package_id'];
+        $dataPaket =  $this->paket_diamond_model->where('id', $packet_id)->findAll();
+        $balanceSiswa = $this->balance_model->where('user_id', $transaction_data['student_id'])->findAll();
+        $totalBalance = (int)$balanceSiswa[0]->balance + (int)$dataPaket[0]->amount;
+        $data_balance = [
+            'balance' => $totalBalance,
+            'updated_at' => $this->now(),
+        ];
+        $this->balance_model->update($transaction_data['student_id'] ,$data_balance);
     }
 }

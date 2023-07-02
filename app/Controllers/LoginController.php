@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\AdminModel;
 use App\Models\StudentModel;
+use App\Models\Admin\BalanceSiswaModel;
 
 class LoginController extends BaseController
 {
@@ -37,6 +38,7 @@ class LoginController extends BaseController
             } else {
                 $isAdmin = true;
                 $adminModel = new AdminModel();
+                $balanceModel = new BalanceSiswaModel();
                 $user = $adminModel->where('email', $this->request->getVar('email'))
                     ->first();
                 if (!$user) {
@@ -44,13 +46,14 @@ class LoginController extends BaseController
                     $model = new StudentModel();
                     $user = $model->where('email', $this->request->getVar('email'))
                         ->first();
-                    if ($user['email_verified'] == false) {
+                        if ($user['email_verified'] == false) {
                         session()->setFlashData("email_verification", '<div class="alert alert-warning" role="alert">Email Anda Belum Diverifikasi, Silahkan Verifikasi email anda terlebih dahulu, <a href="' . base_url('sendverification/' . $user['token']) . '">Kirim email</a></div>');
                         return redirect()->route('login');
                     }
                 }
+                $balance = $balanceModel->where('user_id', $user['id'])->first();
                 // Stroing session values
-                $this->setUserSession($user, $isAdmin);
+                $this->setUserSession($user, $isAdmin, $balance);
 
                 // Redirecting to dashboard after login
                 if ($isAdmin) {
@@ -63,7 +66,7 @@ class LoginController extends BaseController
         return view('auth/login', ['pagedata' => $this->pagedata]);
     }
 
-    private function setUserSession($user, $isAdmin)
+    private function setUserSession($user, $isAdmin, $balance)
     {
         $encrypter = \Config\Services::encrypter();
 
@@ -85,6 +88,7 @@ class LoginController extends BaseController
                 'name' => $user['full_name'],
                 'isLoggedIn' => true,
                 'isUser' => true,
+                'balance' => $balance->balance,
             ];
         }
         session()->set($data);

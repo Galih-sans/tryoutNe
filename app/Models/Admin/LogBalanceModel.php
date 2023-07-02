@@ -3,6 +3,7 @@
 namespace App\Models\Admin;
 
 use CodeIgniter\Model;
+use Ramsey\Uuid\Uuid;
 
 class LogBalanceModel extends Model
 {
@@ -154,4 +155,19 @@ class LogBalanceModel extends Model
 
         return $this->builder->countAll();
     }
+
+    // public function create_log($log_data){
+    //     $uuid = Uuid::uuid1();
+    //     $data = [
+    //         'id' => $uuid->toString(),
+    //         'student_id' => $log_data['student_id'],
+    //         'type' => $log_data['type'],
+    //         'amount' => $log_data['amount'],
+    //         'timestamp' => $log_data['timestamp'],
+    //         'status' => $log_data['status'],
+    //         'created_at' => $this->now(),
+    //     ];
+    //     $this->builder->set('total', 'total +', (int)$log_data['amount']);
+    //     return  $this->builder->insert($data);
+    // }
 }

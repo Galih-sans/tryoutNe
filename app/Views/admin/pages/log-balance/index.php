@@ -29,10 +29,10 @@
                         <tr>
                             <th width="10%" class="fs-sm fw-normal">#</th>
                             <th width="30%" class="fs-sm fw-normal">Nama Siswa</th>
-                            <th width="30%" class="fs-sm fw-normal">Balance</th>
-                            <th width="30%" class="fs-sm fw-normal">Type</th>
-                            <th width="30%" class="fs-sm fw-normal">Timestamp</th>
-                            <th width="30%" class="fs-sm fw-normal">Total</th>
+                            <th width="10%" class="fs-sm fw-normal">Jumlah</th>
+                            <th width="20%" class="fs-sm fw-normal">Type</th>
+                            <th width="40%" class="fs-sm fw-normal">Waktu</th>
+                            <th width="10%" class="fs-sm fw-normal">Total</th>
                             <th width="30%" class="fs-sm fw-normal">Status</th>
                             <!-- <th width="30%" class="fs-sm fw-normal">Aksi</th> -->
                         </tr>
@@ -186,7 +186,7 @@
                 [10, 25, 50, 100, 'All'],
             ],
             columnDefs: [{
-                targets: [0, 3],
+                targets: [0,1, 2, 3, 4, 5, 6],
                 orderable: false,
                 className: "text-center",
             }, {

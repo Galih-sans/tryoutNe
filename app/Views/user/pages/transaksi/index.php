@@ -5,7 +5,7 @@
     <div class="row items-push mt-4">
         <div class="row">
             <div class="col-md-12 mt-4">
-                <?php if ($data['paketDiamond'] == false) {  ?>
+                <?php if ($data['paketDiamond'] < 1) {  ?>
                     <div class="block block-rounded shadow-sm bg-neo-dark">
                         <div class=" content content-full text-center pt-5 pb-5">
                             <h2 class="h3 fw-normal text-white-75">
@@ -93,7 +93,8 @@
                     <span id="total" name="harga" class="font-weight-bold" style="color:blue"></span>
                 </div>  
                 <div class="text-center mt-5">
-                    <button class="btn btn-primary beli-diamond">Beli Sekarang</button>
+                    <button class="btn btn-primary" onclick="get_token()">Beli Sekarang</button>
+                    <!-- <button class="btn btn-primary beli-diamond">Beli Sekarang 2</button> -->
                 </div>                   
                 </div>
             </div>
@@ -157,6 +158,8 @@
         </div>
     </div>
 </div> -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-cLQaOuRebxfyx3Lv"></script>
 <script>
     $(document).ready(function() {
         $(document).on('click', '.detail-button', function() {
@@ -164,9 +167,9 @@
             let data_name = $(this).data("name");
             let data_amount = $(this).data("amount");
             let data_price = $(this).data("price");
-            let data_description = $(this).data("description");
+            let data_description = $(this).data("description"); 
 
-            window.id_paketDiamond = data_id;
+            window.packet_id = data_id;
             window.price = data_price;
             // console.log(data_id);
             $('#id-paket').text(data_id);
@@ -189,20 +192,19 @@
         });
 
         $(document).on('click', '.beli-diamond', function() {
-            let paket_id = window.id_paketDiamond;
+            let paket_id = window.packet_id;
             let offer_code = window.code_offer
             console.log(paket_id);
-
             document.location.href = '/transaksi/beli_diamond/' + paket_id + '/' + offer_code;
         });
     });
 
     function cek_voucher() {
         let data_price = window.price;
-        let diamond_package_id = window.id_paketDiamond;
-            // console.log('kode_voucher=' + $("input[name=kode_voucher]").val());
-            const list = document.getElementById("error-string");
-                while (list.hasChildNodes()) {
+        let diamond_package_id = window.packet_id;
+        // console.log('kode_voucher=' + $("input[name=kode_voucher]").val());
+        const list = document.getElementById("error-string");
+        while (list.hasChildNodes()) {
                 list.removeChild(list.firstChild);
             };
             const list2 = document.getElementById("success-string");
@@ -241,6 +243,79 @@
                     console.log(error);
                 }
             });
-        }
-</script>
+    }
+
+    function get_token(){
+        let paket_id = window.packet_id;
+        let offer_code = window.code_offer
+
+        console.log(paket_id, offer_code);
+        Swal.fire({
+                text: "Silahkan Tunggu....",
+                allowOutsideClick: false,
+                // timer: 1000
+            });
+            Swal.showLoading();
+            $.ajax({
+                url: "<?= route_to('user.transaksi.get_token') ?>",
+                type: "POST",
+                data: 'paket_id=' + paket_id  + "&offer_code=" + offer_code,
+                success: function(d) {
+                    var d = JSON.parse(d);
+                    // TARUH SCRIPT SNAP DISINI  
+                    // For example trigger on button clicked, or any time you need
+                    // var payButton = document.getElementById('pay-button');
+                    // payButton.addEventListener('click', function () {
+                        // Trigger snap popup. @TODO: Replace TRANSACTION_TOKEN_HERE with your transaction token
+                        window.snap.pay(d.snapToken, {
+                        onSuccess: function(result){
+                            /* You may add your own implementation here */
+                            alert("payment success!"); console.log(result);
+                            window.status = 'success';
+                            let transaction_data = 'package_id=' + paket_id  + "&offer_code=" + offer_code + "&transaction_id=" + d.transaction_id + '&status=' + window.status;
+                            save_transaction(transaction_data);
+                            $('#modalDetail').modal('hide');
+                        },
+                        onPending: function(result){
+                            /* You may add your own implementation here */
+                            alert("wating your payment!"); console.log(result);
+                            window.status = 'pending';
+                            let transaction_data = 'package_id=' + paket_id  + "&offer_code=" + offer_code + "&transaction_id=" + d.transaction_id + '&status=' + window.status;
+                            save_transaction(transaction_data);
+                            $('#modalDetail').modal('hide');
+                        },
+                        onError: function(result){
+                            /* You may add your own implementation here */
+                            alert("payment failed!"); console.log(result);
+                        },
+                        onClose: function(){
+                            /* You may add your own implementation here */
+                            alert('you closed the popup without finishing the payment');
+                        }
+                        })
+                    // });
+                    Swal.close();
+                    console.log(window.status);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+    }
+
+    function save_transaction(transaction_data){
+        console.log(transaction_data);
+        $.ajax({
+            url: "<?= route_to('user.transaksi.save_transaction') ?>",
+            type: "POST",
+            data: transaction_data,
+            success: function (d) {
+                var d = JSON.parse(d);
+                console.log(d);
+                console.log('data berhasil disimpan ke database');
+            }
+        });
+    }
+
+    </script>
 <?= $this->endSection() ?>
