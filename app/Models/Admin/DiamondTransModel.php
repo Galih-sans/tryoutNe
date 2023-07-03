@@ -4,7 +4,6 @@ namespace App\Models\Admin;
 
 use CodeIgniter\Model;
 use CodeIgniter\I18n\Time;
-use Ramsey\Uuid\Uuid;
 
 class DiamondTransModel extends Model
 {
@@ -33,7 +32,7 @@ class DiamondTransModel extends Model
     [
         'student_id'     => 'required',
         'package_id'        => 'required',
-        'offer_id'        => 'required',
+        // 'offer_id'        => 'required',
         'transaction_id'        => 'required',
         'status'     => 'required',
     ];
@@ -44,9 +43,9 @@ class DiamondTransModel extends Model
         'package_id'        => [
             'required' => 'Paket Harus Diisi',
         ],
-        'offer_id'        => [
-            'required' => 'Diskon Harus Diisi',
-        ],
+        // 'offer_id'        => [
+        //     'required' => 'Diskon Harus Diisi',
+        // ],
         'transaction_id'        => [
             'required' => 'Transaksi Harus Diisi',
         ],
@@ -150,9 +149,9 @@ class DiamondTransModel extends Model
             'id' => $transaction_data['id'],
             'student_id' => $transaction_data['student_id'],
             'package_id' => $transaction_data['package_id'],
-            // 'offer_id' => 0,
+            'offer_id' => $transaction_data['offer_id'],
             'transaction_id' => $transaction_data['transaction_id'],
-            'status' => 'submit',
+            'status' => $transaction_data['status'],
             'created_at' => $this->now(),
         ];
         return  $this->builder->insert($data);

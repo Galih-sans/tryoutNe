@@ -36,6 +36,8 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 
+$routes->match(['get', 'post'], 'NotificationHandler', 'NotificationHandler');
+
 //login
 $routes->match(['get', 'post'], 'login', 'LoginController::login', ["filter" => "noauth"], ['as' => 'login']);
 
@@ -92,11 +94,16 @@ $routes->group("", ["filter" => "isuser", "namespace" => "App\Controllers\user"]
         $routes->match(["get", "post"], "dt_mendatang", "performancecontroller::dt_mendatang", ['as' => 'user.performance.dt_mendatang']);
     });
     $routes->group("transaksi", function ($routes) {
+        // $routes->match(['get', 'post'], 'HandleNotif', 'transaksicontroller::HandleNotif');
         // URL - /user
         $routes->get("/", "transaksicontroller::index", ['as' => 'user.transaksi.index']);
         $routes->match(["get", "post"], "index", "transaksicontroller::index");
-        // $routes->match(["get", "post"], "beli_diamond", "transaksicontroller::topup", ['as' => 'user.transaksi.beli_diamond']);
-        $routes->match(["get", "post"], "beli_diamond(:any)", "transaksicontroller::diamond_transaction/$1", ["filter" => "noauth"], ['as' => 'user.transaksi.beli_diamond']);
+        // cek kode voucher
+        $routes->match(["get", "post"], "check_voucher", "transaksicontroller::check_voucher", ['as' => 'user.transaksi.check_voucher']);
+        // generate snaptoken, show snap
+        $routes->match(["get", "post"], "get_token", "transaksicontroller::diamond_transaction", ['as' => 'user.transaksi.get_token']);
+        // save transaction data when user buy
+        $routes->match(["get", "post"], "save_transaction", "transaksicontroller::save_transaction", ['as' => 'user.transaksi.save_transaction']);
     });
 });
 $routes->group("admin", ["filter" => "isadmin", "namespace" => "App\Controllers\Admin"], function ($routes) {

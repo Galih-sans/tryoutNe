@@ -16,10 +16,10 @@
         <li class="nav-item pe-2 px-2 d-flex align-items-center">
           <div class="nav-link ms-md-auto text-light font-weight-bold px-1 py-0 bg-neo-dark neo-diamon">
             <i class=" fa fa-regular fa-gem fa-rotate-45"></i>
-            <span class="d-sm-inline-block ms-2">200</span>
+            <span class="d-sm-inline-block ms-2"><?= ucwords(session('balance')) ?></span>
           </div>
           <div class="nav-link ms-md-auto text-light font-weight-bold px-0 py-0 neo-plus-button tombol-topup">
-            <a href="<?= route_to('user.transaksi.index') ?>" class="d-inline nav-link inline-block text-light font-weight-bold">
+            <a class="d-inline nav-link inline-block text-light font-weight-bold topup-diamond">
               <i class="fa fa-plus"></i>
             </a>
           </div>

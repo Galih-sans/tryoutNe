@@ -49,7 +49,7 @@
             <div class="row pb-2 mb-3 shadow-sm align-center">
                 <div class="col-12 col-md-12 text-right">
                     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#createModal">
-                        <i class=" si si-plus"></i> Tambah Test Baru
+                    <i class="fa-solid fa-plus"></i>
                     </button>
                 </div>
             </div>
@@ -108,12 +108,15 @@
             ).prop("disabled", true);;
             $('#smartwizard,#smartwizard-edit').smartWizard("reset");
             $('.removeit').remove();
+            $('#form-1,#form-2').removeClass('was-validated')
             onCancel();
+            console.log('clear');
         });
         $("#editModal").on("hidden.bs.modal", function () {
             subject = '';
             $('#smartwizard-edit').smartWizard("reset");
             $('#smartwizard').smartWizard("reset");
+            $('#form-1,#form-2').removeClass('was-validated')
         });
         $('#smartwizard').smartWizard({
             selected: 0,
