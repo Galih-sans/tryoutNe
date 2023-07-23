@@ -59,10 +59,12 @@ class DiamondTransController extends BaseController
             $no = $request->getPost("start");
             foreach ($list as $lists) {
                 if ($lists->deleted_at == false) {
-                    if ($lists->status == "success") {
+                    if ($lists->status == "settlement") {
                         $status_badge = '<span class="badge bg-success">Sukses</span>';
+                    }elseif ($lists->status == "expire") {
+                        $status_badge = '<span class="badge bg-danger">Kadaluarsa</span>';
                     } else {
-                        $status_badge = '<span class="badge bg-warning">Pending</span>';
+                        $status_badge = '<span class="badge bg-warning">Belum Dibayar</span>';
                     }
                     
                     $no++;

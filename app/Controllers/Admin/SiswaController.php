@@ -40,7 +40,11 @@ class SiswaController extends BaseController
             //Column Order Harus Sesuai Urutan Kolom Pada Header Tabel di bagian View
             //Awali nama kolom tabel dengan nama tabel->tanda titik->nama kolom seperti pengguna.nama
             $column_order = array('to_students.id', 'to_students.full_name', 'to_students.email', 'to_class.class');
-            $column_search = array('to_students.full_name', 'to_students.email', 'to_class.class', 'sekolah.sekolah');
+            $column_search = array('to_students.full_name', 'to_students.email', 
+            'to_class.class', 'sekolah.sekolah', 'to_students.phone_number'
+            ,'to_students.POB', 'to_students.phone_number', 'to_students.parent_name', 
+            'to_students.parent_phone_number', 'to_students.parent_email', 'to_students.gender');
+            
             $order = array('to_students.id' => 'asc');
             $list = $list_data->get_datatables('to_students', $column_order, $column_search, $order);
             $data = array();

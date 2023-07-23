@@ -36,7 +36,7 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 
-$routes->match(['get', 'post'], 'NotificationHandler', 'NotificationHandler');
+$routes->match(['get', 'post'], 'NotificationHandler', 'NotificationHandler::index', ["filter" => "noauth"], ['as' => 'NotificationHandler']);
 
 //login
 $routes->match(['get', 'post'], 'login', 'LoginController::login', ["filter" => "noauth"], ['as' => 'login']);
@@ -70,11 +70,11 @@ $routes->group("", ["filter" => "isuser", "namespace" => "App\Controllers\user"]
         // URL - /user
         $routes->get("/", "testcontroller::index", ['as' => 'user.test.index']);
         $routes->match(["get", "post"], "index", "testcontroller::index");
-        $routes->match(["get", "post"], "detail/(:any)", "testcontroller::detail/$1", ['as' => 'user.test.view']);;
-        $routes->match(["get", "post"], "sheet/(:any)", "testcontroller::sheet/$1", ['as' => 'user.test.sheet']);;
-        $routes->match(["get", "post"], "get_test", "testcontroller::get_test", ['as' => 'user.test.get_test']);;
-        $routes->match(["get", "post"], "submit_test", "testcontroller::submit", ['as' => 'user.test.submit']);;
-        $routes->match(["get", "post"], "result(:any)", "testcontroller::result/$1", ['as' => 'user.test.result']);;
+        $routes->match(["get", "post"], "detail/(:any)", "testcontroller::detail/$1", ['as' => 'user.test.view']);
+        $routes->match(["get", "post"], "sheet/(:any)", "testcontroller::sheet/$1", ['as' => 'user.test.sheet']);
+        $routes->match(["get", "post"], "get_test", "testcontroller::get_test", ['as' => 'user.test.get_test']);
+        $routes->match(["get", "post"], "submit_test", "testcontroller::submit", ['as' => 'user.test.submit']);
+        $routes->match(["get", "post"], "result(:any)", "testcontroller::result/$1", ['as' => 'user.test.result']);
     });
     $routes->group("profil", function ($routes) {
         // URL - /user
@@ -145,6 +145,9 @@ $routes->group("admin", ["filter" => "isadmin", "namespace" => "App\Controllers\
         $routes->match(["get", "post"], "remove_test", "TestController::delete", ['as' => 'admin.test.remove_test']);
         $routes->match(["get", "post"], "get_test", "TestController::detail", ['as' => 'admin.test.get_test']);
         $routes->match(["get", "post"], "get_edit_test", "TestController::get_detail", ['as' => 'admin.test.get_edit']);
+        // preview test
+        $routes->match(["get", "post"], "preview/(:any)", "TestController::sheet_preview/$1", ["filter" => "noauth"]);
+        $routes->match(["get", "post"], "get_test_preview", "TestController::get_test_preview", ['as' => 'admin.test.get_test_preview']);;
     });
     $routes->group("bank-soal", function ($routes) {
         // URL - /admin
@@ -182,7 +185,7 @@ $routes->group("admin", ["filter" => "isadmin", "namespace" => "App\Controllers\
         $routes->match(["get", "post"], "index", "HasilTestController::index");
         $routes->match(["get", "post"], "dt_daftar_test", "HasilTestController::dt_daftar_test", ['as' => 'admin.dt_daftar_test']);
 
-        $routes->match(["get", "post"], "detail/(:any)", "HasilTestController::detail/$1", ["filter" => "noauth"], ['as' => 'admin.hasil-test.detail']);
+        $routes->match(["get", "post"], "detail/(:any)", "HasilTestController::detail/$1", ["filter" => "noauth"]);
         // $routes->match(["get", "post"], "dt_detail", "HasilTestController::dt_detail", ['as' => 'admin.dt_detail']);
     });
     $routes->group("kelola-admin", function ($routes) {

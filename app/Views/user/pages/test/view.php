@@ -19,19 +19,19 @@
                         <div class="block-content fs-sm row py-4">
                             <div class="co-12 col-md-5">
                                 <div class="border-right">
-                                    <p class="fw-bold">Tanggal Mulai</p>
+                                    <p class="fw-bold">Tanggal Test Dimulai</p>
                                     <p class="text-neo"><?= date("d M Y H:i", $data['testData']->begin_time) ?></p>
                                 </div>
                             </div>
                             <div class="co-12 col-md-5">
                                 <div class="border-right">
-                                    <p class="fw-bold">Tanggal Tutup</p>
+                                    <p class="fw-bold">Tanggal Test Ditutup</p>
                                     <p class="text-neo"><?= date("d M Y H:i", $data['testData']->end_time) ?></p>
                                 </div>
                             </div>
                             <div class="co-12 col-md-2">
                                 <div class="border-right">
-                                    <p class="fw-bold">Durasi</p>
+                                    <p class="fw-bold">Durasi Test</p>
                                     <p class="text-neo"><?= $data['testData']->duration ?> Menit</p>
                                 </div>
                             </div>
@@ -75,6 +75,9 @@
                     <!-- Subscribe -->
                     <div class="block block-rounded">
                         <div class="block-content">
+                        <div class="block-header block-header-default text-center">
+                            <h3 class="block-title">Peserta Ujian</h3>
+                        </div>
                             <div class="row">
                                 <div class="col-12 col-md-12 py-3 border-bottom">
                                     <div class="row text-left rounded-top">
@@ -83,7 +86,7 @@
                                                 src="<?= base_url('assets-front/img/avatar.png')?>" alt="">
                                         </div>
                                         <div class="col-8 col-md-9">
-                                            <span class="mt-2 mb-0 fw-medium"><?= session('name'); ?></span>
+                                            <span class="mt-2 mb-0 fw-bold"><?= session('name'); ?></span>
                                         </div>
                                     </div>
                                 </div>

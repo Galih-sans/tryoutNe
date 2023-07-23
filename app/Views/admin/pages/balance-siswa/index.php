@@ -385,7 +385,7 @@
                 [10, 25, 50, 100, 'All'],
             ],
             columnDefs: [{ // jumlah harus sesuai jumlah th
-                targets: [0, 2],
+                targets: [0, 2, 3, 4, 5],
                 orderable: false,
                 className: "text-center",
             }, {

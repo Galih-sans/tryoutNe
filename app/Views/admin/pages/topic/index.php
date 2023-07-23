@@ -25,7 +25,7 @@
                 <div class="input-group mb-3">
                     <label class="input-group-text bg-neo text-white" for="inputGroupSelect01"
                         style="width:80px;">Kelas</label>
-                    <select name="level" id="level" title="Please select..." class="form-control selectpicker border"
+                    <select name="level" id="level" title="Silahkan Pilih kelas..." class="form-control selectpicker border"
                         data-live-search="true" data-style="customSelect" data-dropup-auto="false" data-size="4">
                         <?php if($data['class']): ?>
                         <?php foreach($data['class'] as $class): ?>
@@ -90,11 +90,14 @@
                         <div class="row">
                             <div class="col-12 col-md-12">
                                 <div class="col-12 col-md-12 py-2">
-                                    <div class="form-floating mb-4 pt-2">
+                                    <span class="color-ne" style="letter-spacing: -em">
+                                        <meta charset="utf-8">⋮⋮⋮</span> &nbsp;
+                                    <span class="tittle-neo">Topik Mata Pelajaran</span>
+                                    <div class="mb-4 pt-2">
                                         <input type="text" class="form-control" id="topic" name="topic"
-                                            placeholder="Topik Mata Pelajaran" autofocus>
+                                            autofocus>
                                         <label for="class"><span class="color-ne" style="letter-spacing: -em">
-                                                <meta charset="utf-8">⋮⋮⋮</span> &nbsp;Topik Mata Pelajaran</label>
+                                                <!-- <meta charset="utf-8">⋮⋮⋮</span> &nbsp;Topik Mata Pelajaran</label> -->
                                     </div>
                                 </div>
                             </div>
@@ -134,10 +137,9 @@
                                     <span class="color-ne" style="letter-spacing: -em">
                                         <meta charset="utf-8">⋮⋮⋮</span> &nbsp;
                                     <span class="tittle-neo">Topik Mata Pelajaran</span>
-                                    <div class="form-floating mb-4 pt-2">
-                                        <input type="text" class="form-control" id="edit_topic" name="topic"
-                                            placeholder="Topik Mata Pelajaran">
-                                        <label for="class">Topik Mata Pelajaran</label>
+                                    <div class="mb-4 pt-2">
+                                        <input type="text" class="form-control" id="edit_topic" name="topic">
+                                        <!-- <label for="class">Topik Mata Pelajaran</label> -->
                                         <input type="hidden" id="topic_id" name="id">
                                     </div>
                                 </div>
@@ -507,7 +509,7 @@
                 [10, 25, 50, 100, 'All'],
             ],
             columnDefs: [{
-                targets: [0, 1, 2],
+                targets: [0, 1, 2, 3, 5],
                 orderable: false,
                 className: "text-center",
             }],

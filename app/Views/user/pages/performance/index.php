@@ -30,15 +30,15 @@
                     <h6>Hasi Test terupdate</h6>
                 </div>
                 <!-- <div class="card-body"> -->
-                    <div class="table-responsive-md">
+                    <div class="table-responsive-md px-3">
                         <table id="riwayat" class="table table-bordered table-vcenter js-dataTable-full no-footer dtr-inline collapsed" style="width:100%">
                             <thead>
                                 <tr>
                                     <th width="5%" class="fs-sm">#</th>
-                                    <th width="30%" class="fs-sm fw-normal">Ujian</th>
+                                    <th width="35%" class="fs-sm fw-normal">Ujian</th>
                                     <th width="10%" class="fs-sm fw-normal">Nilai</th>
-                                    <th width="30%" class="fs-sm fw-normal">Kelas</th>
-                                    <th width="15%" class="fs-sm fw-normal">Tanggal Ujian</th>
+                                    <th width="10%" class="fs-sm fw-normal">Kelas</th>
+                                    <th width="20%" class="fs-sm fw-normal">Tanggal Ujian</th>
                                     <th width="10%" class="fs-sm fw-normal">Detail</th>
                                 </tr>
                             </thead>
@@ -56,7 +56,7 @@
                     <h3 class="block-title text-white">Detail Hasil Test </h3>
                     <div class="block-options">
                         <button type="button" class="btn-block-option-white" data-bs-dismiss="modal" aria-label="Close">
-                            <i class="fa fa-fw fa-times"></i>Tutup
+                            <i class="fa fa-fw fa-times"></i>
                         </button>
                     </div>
                 </div>
@@ -249,7 +249,7 @@
                         columns: [0, 1, 2, 3, 4]
                     },
                     className: 'fs-sm btn btn-sm btn-outline-danger glyphicon glyphicon-file',
-                    text: '<i class="fa-sharp fa-solid fa-file-pdf "></i>',
+                    text: '<i class="fa-sharp fa-solid fa-file-pdf"></i>',
                     titleAttr: 'PDF'
                 },
             ],
@@ -266,13 +266,14 @@
                 [10, 25, 50, 100, 'All'],
             ],
             columnDefs: [{
-                targets: [0, 3],
+                targets: [0, 3, 5],
                 orderable: false,
                 className: "text-center",
-            }, {
-                width: "15%",
-                targets: [3],
-            }, ],
+            },{
+                targets: [2, 4],
+                // orderable: false,
+                className: "text-right",
+            },],
             ajax: {
                 url: "<?= route_to('user.performance.dt_riwayat') ?>",
                 type: "POST",
@@ -355,13 +356,20 @@
                 [10, 25, 50, 100, 'All'],
             ],
             columnDefs: [{
-                targets: [0, 3],
+                targets: [0, 5],
                 orderable: false,
                 className: "text-center",
-            }, {
-                width: "15%",
-                targets: [3],
-            }, ],
+            },
+            {
+                targets: [2],
+                // orderable: false,
+                className: "text-center",
+            },
+            {
+                targets: [3, 4, 6],
+                // orderable: false,
+                className: "text-right",
+            },],
             ajax: {
                 url: "<?= route_to('user.performance.dt_mendatang') ?>",
                 type: "POST",

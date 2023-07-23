@@ -57,7 +57,7 @@ class performancecontroller extends BaseController
                     $row[] = $newDate;
                     $row[]  = '
                             <div class="block-options">
-                            <button type="button" class="btn btn-sm btn-warning detail-button"
+                            <button type="button" class="btn btn-sm btn-info detail-button"
                             test_id="' . $lists->test_id . '"
                             score="' . $lists->score . '"
                             right_answer="' . $right_answer . '"
@@ -66,7 +66,7 @@ class performancecontroller extends BaseController
                             begin_time="' . $newDate . '"
                             test_name="' . $lists->test_name . '"
                             >
-                                <i class="fa fa-info"></i>
+                                Detail
                             </button>
                             </div>
                             ';
@@ -102,6 +102,13 @@ class performancecontroller extends BaseController
             $no = $request->getPost("start");
             $todayDate = strtotime(date('d-m-Y'));
             foreach ($list as $lists) {
+
+                if ($lists->type == "free") {
+                    $status_badge = '<span class="badge bg-success">Free</span>';
+                } else {
+                    $status_badge = $lists->type;
+                }
+
                 $beginDate = date("d-m-Y", substr($lists->begin_time, 0, 10));
                 $newBeginTime = strtotime($beginDate);
                 if ($lists->class_id == $students_class_id && $newBeginTime > $todayDate) {
@@ -112,7 +119,7 @@ class performancecontroller extends BaseController
                     $row[] = $lists->class;
                     $row[] = $beginDate;
                     $row[] = "$lists->number_of_question Soal";
-                    $row[] = $lists->type;
+                    $row[] = $status_badge;
                     $row[] = "Rp. $lists->price";
                     $row[]  = '
                             <div class="block-options">

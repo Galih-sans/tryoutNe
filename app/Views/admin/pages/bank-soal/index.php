@@ -25,7 +25,7 @@
         <div class="block-content fs-sm">
             <div class="input-group mb-3">
                 <label class="input-group-text bg-neo text-white" for="inputGroupSelect01" style="width:80px;">Kelas</label>
-                <select name="level" id="level" title="Silahkan Pilih Kelas..." class="form-control selectpicker border" data-live-search="true" data-style="customSelect" data-dropup-auto="false" data-size="4">
+                <select name="level" id="level" title="Silahkan Pilih Kelas" class="form-control selectpicker border" data-live-search="true" data-style="customSelect" data-dropup-auto="false" data-size="4">
                     <?php if ($data['class']) : ?>
                         <?php foreach ($data['class'] as $class) : ?>
                             <tr>
@@ -109,7 +109,7 @@
                     </div>
                     <div class="block-content block-content-full text-end bg-body">
                         <button type="button" class="btn btn-sm btn-secondary me-1" data-bs-dismiss="modal">Tutup</button>
-                        <button type="button" class="btn btn-sm btn-primary" data-bs-target="#answerModal" data-bs-toggle="modal" data-bs-dismiss="modal">Lanjut</button>
+                        <button type="button" class="btn btn-sm btn-primary" data-bs-target="#answerModal" data-bs-toggle="modal" data-bs-dismiss="modal">Jawaban</button>
                     </div>
                 </div>
             </div>
@@ -120,7 +120,7 @@
             <div class="modal-content">
                 <div class="block block-rounded block-transparent mb-0">
                     <div class="block-header block-header-ne">
-                        <h3 class="block-title text-white">Tambah Jawaban Untuk Mata Pelajaran : </h3>
+                        <h3 class="block-title text-white">Jawaban Soal : </h3>
                         <div class="block-options">
                             <button type="button" class="btn-block-option-white" data-bs-dismiss="modal" aria-label="Close">
                                 <i class="fa fa-fw fa-times"></i>
@@ -130,11 +130,15 @@
                     <div class="block-content fs-sm">
                         <div class="row">
                             <div class="col-12 col-md-12">
+                                
                                 <span class="" style="letter-spacing: -em">
                                     <meta charset="utf-8">⋮⋮⋮
                                 </span> &nbsp;
-                                <span class="tittle-neo"> Jawaban Soal</span>
-                                <button type="button" name="add" id="dynamic-ar" class="btn btn-primary" type="button">+</button>
+                                <span class="tittle-neo"> Tambah Jawaban</span>
+                                <button type="button" name="add" id="dynamic-ar" class="btn btn-primary btn-sm mx-3" type="button"><i class="fa fa-fw fa-plus"></i></button>
+                                <div class="mb-2">
+                                    <span class="tittle-neo"><i class="fa fa-info-circle"></i> Centang untuk jawaban yang benar</span>
+                                </div>
                                 <div class="col-12 col-md-12">
                                     <div class="row" id="dynamicAddRemove">
 
@@ -214,8 +218,11 @@
                                 <span class="" style="letter-spacing: -em">
                                     <meta charset="utf-8">⋮⋮⋮
                                 </span> &nbsp;
-                                <span class="tittle-neo"> Jawaban Soal</span>
-                                <button type="button" name="add" onclick="tambah_edit()" id="tombol-tambah-edit" class="btn btn-primary" type="button">+</button>
+                                <span class="tittle-neo"> Tambah Jawaban</span>
+                                <button type="button" name="add" onclick="tambah_edit()" id="tombol-tambah-edit" class="btn btn-primary btn-sm  mx-3" type="button"><i class="fa fa-fw fa-plus"></i></button>
+                                <div class="mb-2">
+                                    <span class="tittle-neo"><i class="fa fa-info-circle"></i> Centang untuk jawaban yang benar</span>
+                                </div>
                                 <div class="col-12 col-md-12">
                                     <div class="row" id="dynamicEditAddRemove">
 
@@ -225,7 +232,7 @@
                         </div>
                         <div class="modal-footer block-content block-content-full text-end bg-body">
                             <button type="button" class="btn btn-sm btn-secondary me-1" data-bs-target="#questionEditModal" data-bs-toggle="modal" data-bs-dismiss="modal">Kembali</button>
-                            <button type="button" class="btn btn-sm btn-primary" data-bs-dismiss="modal" onclick="update_data()">Update</button>
+                            <button type="button" class="btn btn-sm btn-primary" data-bs-dismiss="modal" onclick="update_data()">Simpan</button>
                         </div>
                     </div>
                 </div>
@@ -281,7 +288,7 @@
 
     function tambah() {
         $('#dynamicAddRemove').html(
-            '<div class="col-12 col-md-6 mb-4"><input type="hidden" name="answer[0][isright]" value="0" /><input type="checkbox" value="1" name="answer[0][isright]"><span class="" style="letter-spacing: -em"><meta charset="utf-8"> A</span> ⋮⋮ &nbsp; <input type="hidden" name="answer[0][answer]" value=""><div class="form-control" id="answer0" style="min-height: 80px;"></div></div>'
+            '<div class="col-12 col-md-6 mb-4"><span class="tittle-bold" style="letter-spacing: -em"><meta charset="utf-8"> A</span> ⋮⋮ &nbsp; <input type="hidden" name="answer[0][isright]" value="0" /><input type="checkbox" value="1" name="answer[0][isright]"><input type="hidden" name="answer[0][answer]" value=""><div class="form-control" id="answer0" style="min-height: 80px;"></div></div>'
         );
         create_quilljs_simple('answer0', 0);
         i = 0;
@@ -492,7 +499,7 @@
             },
             columnDefs: [{
                     targets: [0, 1, 2, 3],
-                    orderable: true,
+                    orderable: false,
                 },
                 {
                     width: "1%",
@@ -693,8 +700,8 @@
 
                 i = 0;
                 $('#dynamicEditAddRemove').html(
-                    '<div class="col-12 col-md-6 mb-4"><input type="hidden" name="edit_answer[0][isright]" value="0" /><input type="checkbox" value="1" id="edit_isright0" name="edit_answer[0][isright]"><span class="" style="letter-spacing: -em"><meta charset="utf-8"> ' +
-                    String.fromCharCode('A'.charCodeAt() + (i)) + '  ⋮⋮</span> &nbsp;  <input type="hidden" name="edit_answer[0][answer]" value=""><div class="form-control" id="edit_answer0" style="min-height: 80px;"></div></div>'
+                    '<div class="col-12 col-md-6 mb-4"><span class="" style="letter-spacing: -em"><meta charset="utf-8"> ' +
+                    String.fromCharCode('A'.charCodeAt() + (i)) + '  ⋮⋮</span> &nbsp; <input type="hidden" name="edit_answer[0][isright]" value="0" /><input type="checkbox" value="1" id="edit_isright0" name="edit_answer[0][isright]"> <input type="hidden" name="edit_answer[0][answer]" value=""><div class="form-control" id="edit_answer0" style="min-height: 80px;"></div></div>'
                 );
                 create_quill_edit('edit_answer' + i, i, d.jawabanData[i].answer);
                 window.answerId = [];
@@ -709,12 +716,12 @@
 
                 for (let i = 1; i < d.jawabanData.length; i++) {
                     $("#dynamicEditAddRemove").append(
-                        '<div class="col-12 col-md-6" id="removeJawaban"><input type="hidden" name="edit_answer[' +
+                        '<div class="col-12 col-md-6" id="removeJawaban"><span class="" style="letter-spacing: -em"><meta charset="utf-8"> ' +
+                        String.fromCharCode('A'.charCodeAt() + (i)) +
+                        '  ⋮⋮</span> &nbsp; <input type="hidden" name="edit_answer[' +
                         i + '][isright]" value="0" /><input type="checkbox" value="1" id="edit_isright' + i +
                         '" name="edit_answer[' +
-                        i + '][isright]"><span class="" style="letter-spacing: -em"><meta charset="utf-8"> ' +
-                        String.fromCharCode('A'.charCodeAt() + (i)) +
-                        '  ⋮⋮</span> &nbsp;<button type="button" class="btn btn-danger remove-edit-field float-right btn-sm"><i class="fa fa-minus" aria-hidden="true"></i></button> <input type="hidden" name="edit_answer[' +
+                        i + '][isright]"><button type="button" class="btn btn-danger remove-edit-field float-right btn-sm"><i class="fa fa-minus" aria-hidden="true"></i></button> <input type="hidden" name="edit_answer[' +
                         i + '][answer]" value=""><div class="form-control mb-4" id="edit_answer' + i +
                         '" style="min-height: 80px;"></div></div>'
                     );
@@ -789,6 +796,9 @@
                             '</option>')
                     );
                 } else {
+                    $("#subject").empty().append(
+                        "<option disabled='disabled' SELECTED>Tidak Ada Mapel</option>"
+                    );
                     $("#subject").prop("disabled", true);
                 }
                 Swal.close();
@@ -838,6 +848,9 @@
                             '</option>')
                     );
                 } else {
+                    $("#topic").empty().append(
+                        "<option disabled='disabled' SELECTED>Tidak Ada Topik</option>"
+                    );
                     $("#topic").prop("disabled", true);
                 }
                 select.selectpicker('refresh');
@@ -854,11 +867,11 @@
         ++i;
         if (i <= 4) {
             $("#dynamicAddRemove").append(
-                '<div class="col-12 col-md-6" id="removeJawaban"><input type="hidden" name="answer[' +
-                i + '][isright]" value="0" /> <input type="checkbox" value="1" name="answer[' +
-                i + '][isright]"><span class="" style="letter-spacing: -em"><meta charset="utf-8"> ' +
+                '<div class="col-12 col-md-6" id="removeJawaban"><span class="" style="letter-spacing: -em"><meta charset="utf-8"> ' +
                 String.fromCharCode('B'.charCodeAt() + (i - 1)) +
-                '  ⋮⋮</span> &nbsp;  <button type="button" class="btn btn-danger remove-input-field float-right btn-sm"><i class="fa fa-minus" aria-hidden="true"></i></button> <input type="hidden" name="answer[' +
+                '  ⋮⋮</span> &nbsp; <input type="hidden" name="answer[' +
+                i + '][isright]" value="0" /> <input type="checkbox" value="1" name="answer[' +
+                i + '][isright]"><button type="button" class="btn btn-danger remove-input-field float-right btn-sm"><i class="fa fa-minus" aria-hidden="true"></i></button> <input type="hidden" name="answer[' +
                 i + '][answer]" value=""><div class="form-control mb-4" id="answer' + i +
                 '" style="min-height: 80px;"></div></div>'
             );

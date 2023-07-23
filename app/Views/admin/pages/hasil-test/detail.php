@@ -38,7 +38,7 @@
                             <th width="20%" class="fs-sm fw-normal">Ujian</th>
                             <th width="20%" class=" text-center fs-sm fw-normal">Nama Siswa</th>
                             <th width="20%" class="fs-sm fw-normal">Waktu Pengerjaan</th>
-                            <th width="10%" class="fs-sm fw-normal">Score</th>
+                            <th width="10%" class="fs-sm fw-normal">Nilai</th>
                         </tr>
                     </thead>
                 </table>
@@ -77,7 +77,7 @@
     function dt_daftar_test() {
         $('#daftar-test').DataTable({
             oLanguage: {
-                sZeroRecords: '<p style="color: red">Belum ada test</p>',
+                sZeroRecords: '<p style="color: red">Tidak ada hasil test</p>',
                 sProcessing: '<div class="spinner-border neo" role="status"><span class="sr-only"></span></div>',
             },
             dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center mx-0 yx-0'B><'col-sm-4'f>>" +
@@ -136,7 +136,7 @@
                 [10, 25, 50, 100, 'All'],
             ],
             columnDefs: [{
-                targets: [0, 3],
+                targets: [0, 1, 2, 3, 4],
                 orderable: false,
                 className: "text-center",
             }, {

@@ -201,7 +201,7 @@ class TestResultModel extends Model
             LEFT JOIN to_students ON to_test_result.student_id = to_students.id
             CROSS JOIN ( SELECT @rank := 0, @lastscore :=- 1, @lastduration :=- 1, @rn := 0 ) r 
         WHERE
-            to_test_result.test_id = " . $test_id . " 
+            to_test_result.test_id = '" . $test_id . "' 
         ORDER BY
             to_test_result.score DESC,
             difference ASC 
@@ -227,10 +227,10 @@ class TestResultModel extends Model
             to_test_result
             LEFT JOIN to_students ON to_test_result.student_id = to_students.id 
         WHERE
-            test_id = " . $test_id . " 
+            test_id = '" . $test_id . "' 
         ) SubQuery 
     WHERE
-        SubQuery.student_id = " . $user_id . " 
+        SubQuery.student_id = '" . $user_id . "' 
         OR NOT EXISTS (
         SELECT
             to_students.full_name,
@@ -272,7 +272,7 @@ class TestResultModel extends Model
             LEFT JOIN to_students ON to_test_result.student_id = to_students.id
             CROSS JOIN ( SELECT @rank := 0, @lastscore :=- 1, @lastduration :=- 1, @rn := 0 ) r 
         WHERE
-            to_test_result.test_id = " . $test_id . " 
+            to_test_result.test_id = '" . $test_id . "' 
         ORDER BY
             to_test_result.score DESC,
             difference ASC 

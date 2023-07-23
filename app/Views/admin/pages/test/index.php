@@ -12,8 +12,7 @@
     integrity="sha512-Fv0/MWD9fG8wmeLGmbQ5pApaS2z60/DGEJIiAVHpi66UBDJZT7UMNLgVYjAO8gryHZtBvBaVAed+LTqw2OU04g=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-<link href="
-  https://cdn.jsdelivr.net/gh/Eonasdan/tempus-dominus@master/dist/css/tempus-dominus.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/gh/Eonasdan/tempus-dominus@master/dist/css/tempus-dominus.css" rel="stylesheet" />
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
 <link rel="stylesheet" href="<?= base_url('css/datatables/dataTables.bootstrap4.css') ?>">
@@ -307,6 +306,11 @@
                 .hasClass('w-100') ? '100%' : 'style',
             placeholder: $(this).data('placeholder'),
         });
+
+        $(document).on('click', '.preview-button', function() {
+            let $test_id = $(this).attr("test_id");
+            document.location.href = '/admin/test/preview/' + $test_id;
+        });
     });
     $('#class').on('change', function () {
         subject = '';
@@ -524,7 +528,7 @@
                         text: d.message,
                         icon: 'success',
                         showConfirmButton: false,
-                        timer: 1500
+                        timer: 3000
                     });
                 } else {
                     Swal.fire({
@@ -533,11 +537,11 @@
                             '<br>',
                         icon: 'error',
                         showConfirmButton: false,
-                        timer: 300
+                        timer: 3000
                     });
                 }
                 refresh_dt();
-                Swal.close();
+                // Swal.close();
             },
             error: function (error) {
                 console.log(error);
@@ -565,7 +569,7 @@
                 console.log(d);
                 if (d.success == true) {
                     Swal.close();
-                    $('#createModal').hide();
+                    $('#editModal').hide();
                     $(document.body).removeClass('modal-open');
                     $('.modal-backdrop').remove();
                     Swal.fire({
@@ -573,10 +577,10 @@
                         text: d.message,
                         icon: 'success',
                         showConfirmButton: false,
-                        timer: 1500
+                        timer: 3000
                     });
                 } else {
-                    Swal.close();
+                    // Swal.close();
                     Swal.fire({
                         title: 'Status :',
                         html: d.message +
@@ -586,6 +590,7 @@
                         timer: 300
                     });
                 }
+                window.location.reload();
                 refresh_dt();
             },
             error: function (error) {
@@ -786,7 +791,7 @@
                             timer: 3000
                         });
                         refresh_dt();
-                        Swal.close();
+                        // Swal.close();
                     },
                     error: function (error) {
                         console.log(error);
@@ -859,26 +864,31 @@
                 [10, 25, 50, 100, -1],
                 [10, 25, 50, 100, 'All'],
             ],
-            columnDefs: [{
-                    targets: [0, 3],
+            columnDefs: [
+                {
+                    targets: [0, 5, 6],
                     orderable: false,
                     className: "text-center",
+                },
+                {
+                    targets: [3, 4],
+                    className: "text-right",
                 },
                 {
                     "width": "5%",
                     "targets": [0, 1]
                 },
                 {
-                    "width": "30%",
+                    "width": "20%",
                     "targets": 2
                 },
                 {
-                    "width": "15%",
-                    "targets": [3, 4]
+                    "width": "10%",
+                    "targets": [3, 5]
                 },
                 {
                     "width": "15%",
-                    "targets": [5, 6]
+                    "targets": [4, 6]
                 },
             ],
             ajax: {
@@ -1098,4 +1108,14 @@
         $('#smartwizard-edit').smartWizard("fixHeight");
     });
 </script>
+<!-- <script>
+    $(document).ready(function() {
+        $(document).on('click', '.detail-test', function() {
+            let $test_id = $(this).attr("test_id");
+            document.location.href = '/admin/hasil-test/detail/' + $test_id;
+            // document.location.href = '/admin/hasil-test/detail';
+            // console.log($data_id);
+        });
+    });
+</script> -->
 <?= $this->endSection() ?>

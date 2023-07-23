@@ -167,8 +167,9 @@
                                     </span> &nbsp;
                                     <span class="tittle-neo"> Edit Role</span>
                                     <div class=" mb-4 pt-2">
-                                        <select name="edit-role" id="edit-role" title="Pilih role..." class="form-control selectpicker border" data-live-search="true" data-style="customSelect" data-dropup-auto="false" data-size="4">
+                                        <select name="edit-role" id="edit-role" title="Pilih role..." class="form-control selectpicker border edit-role" data-live-search="true" data-style="customSelect" data-dropup-auto="false" data-size="4">
                                             <?php if ($data['roleData']) : ?>
+                                                <option value=""></option>
                                                 <?php foreach ($data['roleData'] as $role) : ?>
                                                     <tr>
                                                         <option value="<?= $role->id ?>"><?= $role->role_name ?>
@@ -184,7 +185,7 @@
                                     <span class="color-ne" style="letter-spacing: -em">
                                         <meta charset="utf-8">⋮⋮⋮
                                     </span> &nbsp;
-                                    <span class="tittle-neo"> Ganti Password</span>
+                                    <span class="tittle-neo"> Ganti Password ( isi kolom jika ingin mengganti )</span>
                                     <div class=" mb-4 pt-2">
                                         <input type="password" class="form-control" id="edit-password" name="edit-password">
                                     </div>
@@ -238,9 +239,9 @@
             let data_role = $(this).data("role");
             // $('select[name=level]').val(data_level);
             // $('.selectpicker').selectpicker('refresh');
+            $('.edit-role').selectpicker('val', data_role).trigger('change');
             $('#edit-full-name').val(data_full_name);
             $('#edit-email').val(data_email);
-            $('#edit-role').val(data_role);
             $('#edit-admin_id').val(data_id);
             $('#editModal').modal('show');
             const list = document.getElementById("error-string-edit");
@@ -478,7 +479,7 @@
                 [10, 25, 50, 100, 'All'],
             ],
             columnDefs: [{
-                targets: [0, 3],
+                targets: [0, 3, 4],
                 orderable: false,
                 className: "text-center",
             }, {

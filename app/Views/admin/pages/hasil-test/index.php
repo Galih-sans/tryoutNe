@@ -75,7 +75,7 @@
     function dt_daftar_test() {
         $('#daftar-test').DataTable({
             oLanguage: {
-                sZeroRecords: '<p style="color: red">Belum ada test</p>',
+                sZeroRecords: '<p style="color: red">Tidak ada data</p>',
                 sProcessing: '<div class="spinner-border neo" role="status"><span class="sr-only"></span></div>',
             },
             dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center mx-0 yx-0'B><'col-sm-4'f>>" +
@@ -134,9 +134,13 @@
                 [10, 25, 50, 100, 'All'],
             ],
             columnDefs: [{
-                targets: [0, 3],
+                targets: [0, 5, 7],
                 orderable: false,
                 className: "text-center",
+            },{
+                targets: [4, 6],
+                // orderable: false,
+                className: "text-right",
             }, {
                 width: "15%",
                 targets: [3],

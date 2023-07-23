@@ -60,7 +60,7 @@ class KelolaDiamondController extends BaseController
                     // $row[] = $lists->price;
                     $row[]  = '
                     <div class="block-options">
-                    <button type="button" class="btn-block-option btn btn-light text-primary edit-button"
+                    <button type="button" class="btn btn-sm btn-warning edit-button"
                     data-id="' . $lists->id . '"
                     data-name="' . $lists->name . '"
                     data-price="' . $lists->price . '"
@@ -69,7 +69,7 @@ class KelolaDiamondController extends BaseController
                     >
                         <i class="fa-solid fa-pen-to-square"></i>
                     </button>
-                    <button type="button" class="btn-block-option btn btn-light text-primary delete-button" data-id="' . $lists->id . '">
+                    <button type="button" class="btn btn-sm btn-danger  delete-button" data-id="' . $lists->id . '">
                     <i class="fa-solid fa-trash"></i>
                     </button>
                     </div>

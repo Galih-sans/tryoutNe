@@ -292,7 +292,8 @@
                             /* You may add your own implementation here */
                             alert('you closed the popup without finishing the payment');
                         }
-                        })
+                        }, alert('Jangan tutup halaman selama proses transaksi!, silahkan klik tombol "Kembali ke Merchant" setelah menyalin kode Virtual Account')
+                        )
                     // });
                     Swal.close();
                     console.log(window.status);

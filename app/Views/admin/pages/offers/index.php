@@ -302,7 +302,8 @@
                                             </span> &nbsp;
                                             <span class="tittle-neo"> Status</span>
                                             <div class=" mb-4 pt-2">
-                                                <select name="edit_status" id="edit-status" title="Please select..." class="form-control selectpicker" data-live-search="true" data-style="customSelect" data-dropup-auto="false" data-size="4">
+                                                <select name="edit_status" id="edit-status" title="Please select..." class="form-control selectpicker status-offer" data-live-search="true" data-style="customSelect" data-dropup-auto="false" data-size="4">
+                                                    <option value=""></option>
                                                     <tr>
                                                         <option value="active">Active</option>
                                                         <option value="inactive">Inactive</option>
@@ -384,6 +385,8 @@
             let data_description = $(this).data("description");
             let data_status = $(this).data("status");
 
+            $('.status-offer').selectpicker('val', data_status).trigger('change');
+
             $('#id-offer').val(data_id);
             $('#edit-name').val(data_name);
             $('#edit-type').val(data_type);
@@ -393,7 +396,6 @@
             $('#edit-discount-amount').val(data_discount_amount);
             $('#edit-discount-percentage').val(data_discount_percentage);
             $('#edit-description').val(data_description);
-            $('#edit-status').val(data_status);
 
             $('#editOfferModal').modal('show');
             const list = document.getElementById("error-string-edit");
@@ -592,7 +594,7 @@
             buttons: [{
                     extend: 'copy',
                     exportOptions: {
-                        columns: [0, 1, 2, 3, 4]
+                        columns: [0, 1, 2, 3, 4, 5, 6, 7, 8]
                     },
                     className: 'fs-sm btn btn-sm btn-outline-secondary glyphicon glyphicon-duplicate',
                     text: '<i class="fa-sharp fa-solid fa-copy "></i>',
@@ -601,7 +603,7 @@
                 {
                     extend: 'excel',
                     exportOptions: {
-                        columns: [0, 1, 2, 3, 4]
+                        columns: [0, 1, 2, 3, 4, 5, 6, 7, 8]
                     },
                     className: 'fs-sm btn btn-sm btn-outline-success glyphicon glyphicon-list-alt',
                     text: '<i class="fa-sharp fa-solid fa-file-excel "></i>',
@@ -611,7 +613,7 @@
                 {
                     extend: 'print',
                     exportOptions: {
-                        columns: [0, 1, 2, 3, 4]
+                        columns: [0, 1, 2, 3, 4, 5, 6, 7, 8]
                     },
                     className: 'fs-sm btn btn-sm btn-outline-primary glyphicon glyphicon-print',
                     text: '<i class="fa-sharp fa-solid fa-print "></i>',
@@ -620,7 +622,7 @@
                 {
                     extend: 'pdf',
                     exportOptions: {
-                        columns: [0, 1, 2, 3, 4]
+                        columns: [0, 1, 2, 3, 4, 5, 6, 7, 8]
                     },
                     className: 'fs-sm btn btn-sm btn-outline-danger glyphicon glyphicon-file',
                     text: '<i class="fa-sharp fa-solid fa-file-pdf "></i>',
@@ -641,10 +643,14 @@
                 [25, 50, 100, -1],
                 [25, 50, 100, 'All'],
             ],
-            columnDefs: [{ // jumlah harus sesuai jumlah th
-                targets: [0, 2],
+            columnDefs: [{
+                targets: [0, 2, 3, 4, 5, 6, 7, 8, 9],
                 orderable: false,
-                className: "text-center",
+                // className: "text-center",
+            },{
+                targets: [4, 5],
+                // orderable: false,
+                className: "text-right",
             }, {
                 width: "15%",
                 targets: [2],
