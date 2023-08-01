@@ -5,7 +5,7 @@
     <div class="row items-push">
         <div class="col-12 px-4 py-4 g-3">
             <div class="row">
-                <div class="col-xl-8">
+                <div class="col-xl-9">
                     <!-- Lessons -->
                     <div class="block block-rounded">
                         <div class="block-header block-content-full bg-neo-dark ribbon ribbon-modern ribbon-glass text-white">
@@ -13,34 +13,34 @@
                         </div>
                         <div class="block-content fs-sm row py-4">
                             <div class="block block-rounded row g-0">
-                                <ul class="nav nav-tabs nav-tabs-block flex-md-column col-md-3" role="tablist">
+                                <ul class="nav nav-tabs nav-tabs-block flex-md-column col-md-3 px-3" role="tablist">
                                     <li class="nav-item d-md-flex flex-md-column" role="presentation">
                                         <button class="nav-link text-md-start active btn-block" id="btabs-vertical-home-tab" data-bs-toggle="tab" data-bs-target="#btabs-vertical-home" role="tab" aria-controls="btabs-vertical-home" aria-selected="false" tabindex="-1">
-                                            <i class="fa-solid fa-chart-simple opacity-50 me-1 d-none d-sm-inline-block"></i>
+                                            <i class="fa-solid fa-chart-simple me-1 d-none d-sm-inline-block"></i>
                                             Peringkat
                                         </button>
                                     </li>
                                     <li class="nav-item d-md-flex flex-md-column" role="presentation">
                                         <button class="nav-link text-md-start btn-block" id="btabs-vertical-profile-tab" data-bs-toggle="tab" data-bs-target="#btabs-vertical-profile" role="tab" aria-controls="btabs-vertical-profile" aria-selected="false" tabindex="-1">
-                                            <i class="fa-solid fa-file-pen opacity-50 me-1 d-none d-sm-inline-block"></i>
+                                            <i class="fa-solid fa-file-pen  me-1 d-none d-sm-inline-block"></i>
                                             Jawaban
                                         </button>
                                     </li>
                                     <li class="nav-item d-md-flex flex-md-column" role="presentation">
                                         <button class="nav-link text-md-start btn-block" id="btabs-vertical-settings-tab" data-bs-toggle="tab" data-bs-target="#btabs-vertical-settings" role="tab" aria-controls="btabs-vertical-settings" aria-selected="true">
-                                            <i class="fa-solid fa-square-poll-vertical opacity-50 me-1 d-none d-sm-inline-block"></i>
+                                            <i class="fa-solid fa-square-poll-vertical  me-1 d-none d-sm-inline-block"></i>
                                             Pembahasan
                                         </button>
                                     </li>
                                 </ul>
-                                <div class="tab-content col-md-8">
-                                    <div class="block-content tab-pane  active show" id="btabs-vertical-home" role="tabpanel" aria-labelledby="btabs-vertical-home-tab" tabindex="0">
+                                <div class="tab-content col-md-9 px-2">
+                                    <div class="block-content tab-pane active show" id="btabs-vertical-home" role="tabpanel" aria-labelledby="btabs-vertical-home-tab" tabindex="0">
                                         <h5 class="fw-semibold text-center">Peringkat Test</h5>
                                         <table class="table table-striped   table-vcenter table-hover">
                                             <tr class="bg-neo">
                                                 <th class="text-center text-white fs-sm" style="width: 50px;">#</th>
                                                 <th class="text-center text-white fs-sm">Nama</th>
-                                                <th class="text-center text-white fs-sm" style="width: 100px;">Skor</th>
+                                                <th class="text-center text-white fs-sm" style="width: 100px;">Nilai</th>
                                             </tr>
                                             <tbody>
                                                 <?php
@@ -162,23 +162,23 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-4 ">
+                <div class="col-xl-3">
                     <!-- Subscribe -->
                     <div class="block block-rounded">
                         <div class="block-content">
                             <div class="row">
                                 <div class="col-12 col-md-12 py-3 border-bottom">
                                     <div class="row text-left  rounded-top">
-                                        <div class="col-4 col-md-3">
+                                        <!-- <div class="col-4 col-md-3">
                                             <img class="avatar avatar-xl" src="<?= base_url('assets-front/img/avatar.png') ?>" alt="">
-                                        </div>
+                                        </div> -->
                                         <div class="col-8 col-md-9">
                                             <span class="mt-2 mb-0 fw-medium"><?= ucwords(session('name')); ?></span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="py-2">
-                                    <label for="">Hasil Test Anda</label>
+                                    <label for="">Nilai Test :</label>
                                     <input type="text" class="form-control disabled text-center fw-bold h5" id="" readonly value="<?= $data['data']['test_result'] ?>">
                                 </div>
                                 <div class="row py-2">

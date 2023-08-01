@@ -34,13 +34,13 @@
             <table id="example" class="table table-bordered table-vcenter js-dataTable-full no-footer dtr-inline collapsed" style="width:100%">
                 <thead>
                     <tr>
-                        <th width="10%" class="fs-sm fw-normal">#</th>
+                        <th width="5%" class="fs-sm fw-normal">#</th>
                         <th width="20%" class="fs-sm fw-normal">Siswa</th>
                         <th width="20%" class="fs-sm fw-normal">Paket</th>
                         <th width="20%" class="fs-sm fw-normal">Diskon</th>
-                        <th width="10%" class="fs-sm fw-normal">Id Transaksi</th>
+                        <th width="20%" class="fs-sm fw-normal">Id Transaksi</th>
                         <th width="10%" class="fs-sm fw-normal">Status</th>
-                        <th width="20%" class="fs-sm fw-normal">Aksi</th>
+                        <th width="5%" class="fs-sm fw-normal">Aksi</th>
                     </tr>
                 </thead>
             </table>
@@ -158,7 +158,7 @@
         </div>
     </div>
 </div> -->
-<div class="modal fade" id="editTransaksiDiamondModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="editTransaksiDiamondModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="block block-rounded block-transparent mb-0">
@@ -270,7 +270,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/js/bootstrap-select.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
@@ -467,7 +467,7 @@
             buttons: [{
                     extend: 'copy',
                     exportOptions: {
-                        columns: [0, 1, 2, 3, 4]
+                        columns: [0, 1, 2, 3, 4, 5]
                     },
                     className: 'fs-sm btn btn-sm btn-outline-secondary glyphicon glyphicon-duplicate',
                     text: '<i class="fa-sharp fa-solid fa-copy "></i>',
@@ -476,7 +476,7 @@
                 {
                     extend: 'excel',
                     exportOptions: {
-                        columns: [0, 1, 2, 3, 4]
+                        columns:[0, 1, 2, 3, 4, 5]
                     },
                     className: 'fs-sm btn btn-sm btn-outline-success glyphicon glyphicon-list-alt',
                     text: '<i class="fa-sharp fa-solid fa-file-excel "></i>',
@@ -486,7 +486,7 @@
                 {
                     extend: 'print',
                     exportOptions: {
-                        columns: [0, 1, 2, 3, 4]
+                        columns:[0, 1, 2, 3, 4, 5]
                     },
                     className: 'fs-sm btn btn-sm btn-outline-primary glyphicon glyphicon-print',
                     text: '<i class="fa-sharp fa-solid fa-print "></i>',
@@ -495,7 +495,7 @@
                 {
                     extend: 'pdf',
                     exportOptions: {
-                        columns: [0, 1, 2, 3, 4]
+                        columns:[0, 1, 2, 3, 4, 5]
                     },
                     className: 'fs-sm btn btn-sm btn-outline-danger glyphicon glyphicon-file',
                     text: '<i class="fa-sharp fa-solid fa-file-pdf "></i>',
@@ -517,7 +517,7 @@
                 [10, 25, 50, 100, 'All'],
             ],
             columnDefs: [{ // jumlah harus sesuai jumlah th
-                targets: [0, 2],
+                targets: [0, 1, 2, 3, 4, 5, 6],
                 orderable: false,
                 className: "text-center",
             }, {

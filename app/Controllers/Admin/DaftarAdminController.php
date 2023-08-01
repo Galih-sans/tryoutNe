@@ -51,7 +51,7 @@ class DaftarAdminController extends BaseController
             //Awali nama kolom tabel dengan nama tabel->tanda titik->nama kolom seperti pengguna.nama
             $column_order = array('to_admins.id', 'to_admins.full_name', 'to_admins.email', 'to_admins.role', 'to_roles.role_name');
             $column_search = array('to_admins.full_name', 'to_admins.email', 'to_admins.role', 'to_roles.role_name');
-            $order = array('to_admins.name' => 'asc');
+            $order = array('to_admins.full_name' => 'asc');
             $list = $list_data->get_datatables('to_admins', $column_order, $column_search, $order, $where);
             $data = array();
             $no = $request->getPost("start");
@@ -198,11 +198,11 @@ class DaftarAdminController extends BaseController
             $data['error_string'][] = 'Nama admin tidak boleh kosong';
             $data['status'] = false;
         }
-        // if($this->request->getVar('edit-role') == ''){
-        //     $data['input_error'][] = 'edit-role';
-        //     $data['error_string'][] = 'Role admin wajib diisi';
-        //     $data['status'] = false;
-        // }
+        if($this->request->getVar('edit-role') == ''){
+            $data['input_error'][] = 'edit-role';
+            $data['error_string'][] = 'Role admin wajib diisi';
+            $data['status'] = false;
+        }
         if($this->request->getVar('edit-email') == ''){
             $data['input_error'][] = 'edit-email';
             $data['error_string'][] = 'Email admin wajib diisi';

@@ -64,7 +64,7 @@
                                     <span class="" style="letter-spacing: -em">
                                         <meta charset="utf-8">⋮⋮⋮</span> &nbsp;
                                     <span class="tittle-neo"> Jenjang</span>
-                                    <select name="level" id="level" title="Please select..."
+                                    <select name="level" id="level" title="Silahkan Pilih jenjang.."
                                         class="form-control selectpicker border" data-live-search="true"
                                         data-style="customSelect" data-dropup-auto="false" data-size="4" required>
                                         <tr>
@@ -80,7 +80,7 @@
                                     <span class="color-ne" style="letter-spacing: -em">
                                         <meta charset="utf-8">⋮⋮⋮</span> &nbsp;
                                     <span class="tittle-neo"> Kelas</span>
-                                    <div class="form-floating mb-4 pt-2">
+                                    <div class=" mb-4 pt-2">
                                         <input type="text" class="form-control" id="class" name="class">
                                             <!-- <label for="class">Kelas</label> -->
                                             <!-- <div id="error-string" class="invalid-feedback"></div> -->
@@ -124,7 +124,7 @@
                                     <span class="" style="letter-spacing: -em">
                                         <meta charset="utf-8">⋮⋮⋮</span> &nbsp;
                                     <span class="tittle-neo"> Jenjang</span>
-                                    <select name="level" id="edit-level" title="Please select..."
+                                    <select name="level" id="edit-level" title="Silahkan Pilih Jenjang.."
                                         class="form-control  border" data-live-search="true" data-style="customSelect"
                                         data-dropup-auto="false" data-size="4">
                                         <tr>
@@ -140,11 +140,11 @@
                                     <span class="color-ne" style="letter-spacing: -em">
                                         <meta charset="utf-8">⋮⋮⋮</span> &nbsp;
                                     <span class="tittle-neo"> Kelas</span>
-                                    <div class="form-floating mb-4 pt-2">
+                                    <div class=" mb-4 pt-2">
                                         <input type="text" class="form-control" id="edit-class" name="class"
-                                            placeholder="John Doe">
+                                            >
                                         <input type="hidden" id="class_id" name="class_id">
-                                        <label for="class">Kelas</label>
+                                        <!-- <label for="class">Kelas</label> -->
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-12 mb-2 text-danger">

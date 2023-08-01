@@ -25,7 +25,7 @@
                 <div class="input-group mb-3">
                     <label class="input-group-text bg-neo text-white" for="inputGroupSelect01"
                         style="width:80px;">Kelas</label>
-                    <select name="class" id="class" title="Please select..." class="form-control selectpicker border"
+                    <select name="class" id="class" title="Silahkan Pilih kelas.." class="form-control selectpicker border"
                         data-live-search="true" data-style="customSelect" data-dropup-auto="false" data-size="4">
                         <?php if($data['class']): ?>
                         <?php foreach($data['class'] as $class): ?>
@@ -84,10 +84,10 @@
                                 <span class="color-ne" style="letter-spacing: -em">
                                     <meta charset="utf-8">⋮⋮⋮</span> &nbsp;
                                 <span class="tittle-neo"> Mata Pelajaran</span>
-                                <div class="form-floating mb-4 pt-2">
+                                <div class="form- mb-4 pt-2">
                                     <input type="text" class="form-control" id="subject" name="subject"
-                                        placeholder="John Doe">
-                                    <label for="class">Mata Pelajaran</label>
+                                        >
+                                    <!-- <label for="class">Mata Pelajaran</label> -->
                                 </div>
                             </div>
                             <div class="col-12 col-md-12 mb-2 text-danger">
@@ -126,7 +126,7 @@
                                     <span class="" style="letter-spacing: -em">
                                         <meta charset="utf-8">⋮⋮⋮</span> &nbsp;
                                     <span class="tittle-neo"> Kelas </span>
-                                    <select name="class_id" id="edit_class_id" title="Please select..."
+                                    <select name="class_id" id="edit_class_id" title="Silahkan Pilih kelas..."
                                         class="form-control border" data-live-search="true" data-style="customSelect"
                                         data-dropup-auto="false" data-size="4" autocomplete="off">
                                         <tr>
@@ -146,10 +146,10 @@
                                     <span class="color-ne" style="letter-spacing: -em">
                                         <meta charset="utf-8">⋮⋮⋮</span> &nbsp;
                                     <span class="tittle-neo"> Mata Pelajaran</span>
-                                    <div class="form-floating mb-4 pt-2">
+                                    <div class="form- mb-4 pt-2">
                                         <input type="text" class="form-control" id="edit_subject" name="subject"
-                                            placeholder="John Doe">
-                                        <label for="class">Mata Pelajaran</label>
+                                            >
+                                        <!-- <label for="class">Mata Pelajaran</label> -->
                                         <input type="hidden" id="subject_id" name="subject_id">
                                     </div>
                                 </div>
@@ -478,7 +478,7 @@
                 [10, 25, 50, 100, 'All'],
             ],
             columnDefs: [{
-                targets: [0, 3],
+                targets: [0, 1, 2, 4],
                 orderable: false,
                 className: "text-center",
             }],

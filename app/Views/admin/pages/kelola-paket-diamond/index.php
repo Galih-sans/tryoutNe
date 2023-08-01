@@ -29,12 +29,12 @@
             <table id="example" class="table table-bordered table-vcenter js-dataTable-full no-footer dtr-inline collapsed" style="width:100%">
                 <thead>
                     <tr>
-                        <th width="10%" class="fs-sm fw-normal">#</th>
+                        <th width="5%" class="fs-sm fw-normal">#</th>
                         <th width="20%" class="fs-sm fw-normal">Nama Paket</th>
                         <th width="20%" class="fs-sm fw-normal">Harga Paket</th>
                         <th width="20%" class="fs-sm fw-normal">Jumlah</th>
-                        <th width="40%" class="fs-sm fw-normal">Deskripsi</th>
-                        <th width="10%" class="fs-sm fw-normal">Aksi</th>
+                        <th width="20%" class="fs-sm fw-normal">Deskripsi</th>
+                        <th width="20%" class="fs-sm fw-normal">Aksi</th>
                     </tr>
                 </thead>
             </table>
@@ -69,23 +69,25 @@
                             </div>
                             <div class="col-12 col-md-12">
                                 <div class="col-12 col-md-12 py-2">
-                                    <span class="color-ne" style="letter-spacing: -em">
-                                        <meta charset="utf-8">⋮⋮⋮
-                                    </span> &nbsp;
-                                    <span class="tittle-neo"> Harga Paket</span>
-                                    <div class="mb-4 pt-2">
-                                        <input type="number" class="form-control" id="package-price" name="package_price">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-12">
-                                <div class="col-12 col-md-12 py-2">
-                                    <span class="color-ne" style="letter-spacing: -em">
-                                        <meta charset="utf-8">⋮⋮⋮
-                                    </span> &nbsp;
-                                    <span class="tittle-neo"> Jumlah Diamond</span>
-                                    <div class="mb-4 pt-2">
-                                        <input type="number" class="form-control" id="diamond-amount" name="diamond_amount">
+                                    <div class="row">
+                                        <div class="col-12 col-md-6">
+                                            <span class="color-ne" style="letter-spacing: -em">
+                                                <meta charset="utf-8">⋮⋮⋮
+                                            </span> &nbsp;
+                                            <span class="tittle-neo"> Harga Paket ( Rp. )</span>
+                                            <div class="mb-4 pt-2">
+                                                <input type="number" class="form-control" id="package-price" name="package_price">
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <span class="color-ne" style="letter-spacing: -em">
+                                                <meta charset="utf-8">⋮⋮⋮
+                                            </span> &nbsp;
+                                            <span class="tittle-neo"> Jumlah Diamond</span>
+                                            <div class="mb-4 pt-2">
+                                                <input type="number" class="form-control" id="diamond-amount" name="diamond_amount">
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -148,7 +150,7 @@
                                             <span class="color-ne" style="letter-spacing: -em">
                                                 <meta charset="utf-8">⋮⋮⋮
                                             </span> &nbsp;
-                                            <span class="tittle-neo"> Edit Harga Paket</span>
+                                            <span class="tittle-neo"> Edit Harga Paket ( Rp. )</span>
                                             <div class="mb-4 pt-2">
                                                 <input type="number" class="form-control" id="edit-package-price" name="edit_package_price">
                                             </div>
@@ -409,7 +411,7 @@
             buttons: [{
                     extend: 'copy',
                     exportOptions: {
-                        columns: [0, 1, 2]
+                        columns: [0, 1, 2, 3, 4]
                     },
                     className: 'fs-sm btn btn-sm btn-outline-secondary glyphicon glyphicon-duplicate',
                     text: '<i class="fa-sharp fa-solid fa-copy "></i>',
@@ -418,7 +420,7 @@
                 {
                     extend: 'excel',
                     exportOptions: {
-                        columns: [0, 1, 2]
+                        columns: [0, 1, 2, 3, 4]
                     },
                     className: 'fs-sm btn btn-sm btn-outline-success glyphicon glyphicon-list-alt',
                     text: '<i class="fa-sharp fa-solid fa-file-excel "></i>',
@@ -428,7 +430,7 @@
                 {
                     extend: 'print',
                     exportOptions: {
-                        columns: [0, 1, 2]
+                        columns: [0, 1, 2, 3, 4]
                     },
                     className: 'fs-sm btn btn-sm btn-outline-primary glyphicon glyphicon-print',
                     text: '<i class="fa-sharp fa-solid fa-print "></i>',
@@ -437,7 +439,7 @@
                 {
                     extend: 'pdf',
                     exportOptions: {
-                        columns: [0, 1, 2]
+                        columns: [0, 1, 2, 3, 4]
                     },
                     className: 'fs-sm btn btn-sm btn-outline-danger glyphicon glyphicon-file',
                     text: '<i class="fa-sharp fa-solid fa-file-pdf "></i>',
@@ -459,13 +461,19 @@
                 [15, 25, 50, 100, 'All'],
             ],
             columnDefs: [{ // jumlah harus sesuai jumlah th
-                targets: [0, 2],
+                targets: [0, 4, 5],
                 orderable: false,
                 className: "text-center",
-            }, {
-                width: "15%",
-                targets: [2],
-            }, ],
+            },{ // jumlah harus sesuai jumlah th
+                targets: [2,],
+                // orderable: false,
+                className: "text-right",
+            },
+            { // jumlah harus sesuai jumlah th
+                targets: [3],
+                orderable: false,
+                className: "text-right",
+            },],
             ajax: {
                 url: "<?= route_to('admin.paket-diamond.dt_paket_diamond') ?>",
                 type: "POST",

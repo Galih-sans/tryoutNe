@@ -587,7 +587,7 @@
             buttons: [{
                     extend: 'copy',
                     exportOptions: {
-                        columns: [0, 1, 2]
+                        columns: [0, 1]
                     },
                     className: 'fs-sm btn btn-sm btn-outline-secondary glyphicon glyphicon-duplicate',
                     text: '<i class="fa-sharp fa-solid fa-copy "></i>',
@@ -596,7 +596,7 @@
                 {
                     extend: 'excel',
                     exportOptions: {
-                        columns: [0, 1, 2]
+                        columns: [0, 1]
                     },
                     className: 'fs-sm btn btn-sm btn-outline-success glyphicon glyphicon-list-alt',
                     text: '<i class="fa-sharp fa-solid fa-file-excel "></i>',
@@ -606,7 +606,7 @@
                 {
                     extend: 'print',
                     exportOptions: {
-                        columns: [0, 1, 2]
+                        columns: [0, 1]
                     },
                     className: 'fs-sm btn btn-sm btn-outline-primary glyphicon glyphicon-print',
                     text: '<i class="fa-sharp fa-solid fa-print "></i>',
@@ -615,7 +615,7 @@
                 {
                     extend: 'pdf',
                     exportOptions: {
-                        columns: [0, 1, 2]
+                        columns: [0, 1]
                     },
                     className: 'fs-sm btn btn-sm btn-outline-danger glyphicon glyphicon-file',
                     text: '<i class="fa-sharp fa-solid fa-file-pdf "></i>',
@@ -637,10 +637,11 @@
                 [10, 25, 50, 100, 'All'],
             ],
             columnDefs: [{ // jumlah harus sesuai jumlah th
-                targets: [0, 2],
+                targets: [0,1,2],
                 orderable: false,
                 className: "text-center",
-            }, {
+            },
+            {
                 width: "15%",
                 targets: [2],
             }, ],

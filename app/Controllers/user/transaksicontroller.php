@@ -205,49 +205,51 @@ class transaksicontroller extends BaseController
             }
 
             // if status success insert balance, create log type topup
-            if ($transaction_data['status'] == 'success') {
-                $this->topup($transaction_data);
-                $this->create_balace_log($transaction_data);
-            }
+            // if ($transaction_data['status'] == 'success') {
+            //     $this->add_balance($transaction_data);
+            //     $this->create_balace_log($transaction_data);
+            // }
             
             $this->diamond_transaction_model->add_transaction($transaction_data);
 
             $response['success'] = true;
             $response['message'] = $transaction_data['status'];
             $balanceSiswa = $this->balance_model->where('user_id', $transaction_data['student_id'])->findAll();
-            session()->set('balance', $balanceSiswa[0]->balance);
             $response['balance'] = $balanceSiswa[0]->balance;
             echo json_encode($response);
         }
     }
 
-    public function create_balace_log($transaction_data){
-        $dataPaket =  $this->paket_diamond_model->where('id', $transaction_data['package_id'])->findAll();
-        $balanceSiswa = $this->balance_model->where('user_id', $transaction_data['student_id'])->findAll();
-        $uuid11 = Uuid::uuid1();
-        // $total = (int)$balanceSiswa[0]->balance + (int)$dataPaket[0]->amount;
-        $log_data = [
-            'id' => $uuid11->toString(),
-            'student_id' => $transaction_data['student_id'],
-            'type' => 'topup',
-            'amount' => $dataPaket[0]->amount,
-            'total' => $balanceSiswa[0]->balance,
-            'timestamp' => date("Y/m/d H:i:s",time()),
-            'status' => '',
-            'created_at' => $this->now()
-        ];
-        $this->log_balance_model->insert($log_data);
-    }
+    
+    // public function add_balance($transaction_data){
+    //     $packet_id = $transaction_data['package_id'];
+    //     $dataPaket =  $this->paket_diamond_model->where('id', $packet_id)->findAll();
+    //     $balanceSiswa = $this->balance_model->where('user_id', $transaction_data['student_id'])->findAll();
+    //     $totalBalance = (int)$balanceSiswa[0]->balance + (int)$dataPaket[0]->amount;
+    //     $data_balance = [
+    //         'balance' => $totalBalance,
+    //         'updated_at' => $this->now(),
+    //     ]; 
+    //     // $this->create_balace_log($transaction_data);
+    //     $this->balance_model->update($transaction_data['student_id'] ,$data_balance);
+    // }
 
-    public function topup($transaction_data){
-        $packet_id = $transaction_data['package_id'];
-        $dataPaket =  $this->paket_diamond_model->where('id', $packet_id)->findAll();
-        $balanceSiswa = $this->balance_model->where('user_id', $transaction_data['student_id'])->findAll();
-        $totalBalance = (int)$balanceSiswa[0]->balance + (int)$dataPaket[0]->amount;
-        $data_balance = [
-            'balance' => $totalBalance,
-            'updated_at' => $this->now(),
-        ];
-        $this->balance_model->update($transaction_data['student_id'] ,$data_balance);
-    }
+    // public function create_balace_log($transaction_data){
+    //     $dataPaket =  $this->paket_diamond_model->where('id', $transaction_data['package_id'])->findAll();
+    //     $balanceSiswa = $this->balance_model->where('user_id', $transaction_data['student_id'])->findAll();
+    //     $uuid11 = Uuid::uuid1();
+    //     $total = (int)$balanceSiswa[0]->balance + (int)$dataPaket[0]->amount;
+    //     $log_data = [
+    //         'id' => $uuid11->toString(),
+    //         'student_id' => $transaction_data['student_id'],
+    //         'type' => 'topup',
+    //         'amount' => $dataPaket[0]->amount,
+    //         'total' => $total,
+    //         'timestamp' => date("Y/m/d H:i:s",time()),
+    //         'status' => '',
+    //         'created_at' => $this->now()
+    //     ];
+    //     $this->log_balance_model->insert($log_data);
+    // }
+
 }

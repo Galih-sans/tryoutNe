@@ -81,6 +81,7 @@ class LoginController extends BaseController
                 'isLoggedIn' => true,
                 'isAdmin' => true,
                 "role" => $user['role'],
+                'balance' => 0,
             ];
         } else {
             $data = [

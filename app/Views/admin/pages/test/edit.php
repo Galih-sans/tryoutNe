@@ -6,7 +6,7 @@
                 <div class="block-header block-header-ne">
                     <h3 class="block-title text-white">Ubah Test  </h3>
                     <div class="block-options">
-                        <button type="button" class="btn-block-option-white" data-dismiss="modal" aria-label="Close"> <i
+                        <button type="button" class="btn-block-option-white" data-bs-dismiss="modal" aria-label="Close"> <i
                                 class="fa fa-fw fa-times"></i></button>
                     </div>
                 </div>
