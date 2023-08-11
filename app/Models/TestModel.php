@@ -33,6 +33,7 @@ class TestModel extends Model
         'class_id',
         'subject_id',
         'status',
+        'max_result',
         'created_by',
         'created_at',
         'updated_at'
@@ -187,7 +188,7 @@ class TestModel extends Model
 
     public function getDetailTest($id)
     {
-        $query = $this->builder->select('to_tests.id,to_tests.test_name, begin_time, end_time,type, price, status, duration, count(to_question_composition.test_id) as composition')->join('to_question_composition', 'to_question_composition.test_id = to_tests.id')->groupBy('to_question_composition.test_id')->where('to_tests.id', $id)->get();
+        $query = $this->builder->select('to_tests.id,to_tests.test_name, to_tests.number_of_question, begin_time, end_time,type, price, status, max_result, duration, count(to_question_composition.test_id) as composition')->join('to_question_composition', 'to_question_composition.test_id = to_tests.id')->groupBy('to_question_composition.test_id')->where('to_tests.id', $id)->get();
         return $query->getFirstRow();
     }
 

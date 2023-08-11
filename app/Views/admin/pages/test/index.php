@@ -503,6 +503,7 @@
     })
 
     function onFinishCallback() {
+        // console.log($('#form-1,#form-2').serialize());
         Swal.fire({
             showCloseButton: false,
             showCancelButton: false,
@@ -540,6 +541,7 @@
                         timer: 3000
                     });
                 }
+                window.location.reload();
                 refresh_dt();
                 // Swal.close();
             },
@@ -944,7 +946,7 @@
                 $('#edit_true_value').val(d.testData.correct_answer_value);
                 $('#edit_false_value').val(d.testData.wrong_answer_value);
                 $('#edit_null_value').val(d.testData.empty_answer_value);
-                $('#edit_number_of_questions').val(d.testData.number_of_question);
+                $('#edit_max_result').val(d.testData.max_result);
                 $('#edit_number_of_questions').val(d.testData.number_of_question);
                 $('.edit_class').selectpicker('val', d.testData.class_id).trigger('change');
                 $('.edit_type').selectpicker('val', d.testData.type).trigger('change');

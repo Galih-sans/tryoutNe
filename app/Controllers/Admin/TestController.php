@@ -151,6 +151,7 @@ class TestController extends BaseController
                 'created_by' => session()->get('id'),
                 'created_at'    => $this->now(),
                 'status' => 100,
+                'max_result' => $this->request->getVar('max_result')
             ];
             $compositionData = [
                 'subject' => $this->request->getVar('subject[]'),
@@ -264,7 +265,8 @@ class TestController extends BaseController
                 'random_answer' => $this->request->getVar('edit_random_answer'),
                 'result_to_student' => $this->request->getVar('edit_show_result'),
                 'created_by' => session()->get('id'),
-                'updated_at'    => $this->now()
+                'updated_at'    => $this->now(),
+                'max_result' => $this->request->getVar('edit_max_result'),
                 // 'status' => 100,
             ];
             $compositionData = $this->request->getVar('composition[][]');

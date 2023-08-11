@@ -163,6 +163,20 @@
                                                 Silahkan Jenis Test
                                             </div>
                                         </div>
+                                        <div class="col-12 col-md-6 py-1">
+                                            <span class="fw-bolder text-neo">
+                                                <meta charset="utf-8">⋮⋮</span>
+                                            <label class="fw-normal text-black-50"> Maksimal Pengerjaan Test</label>
+                                            <input type="number" class="form-control form-rounded"
+                                                id="edit_max_result" name="edit_max_result"
+                                                placeholder="Minimal 1 ( sekali )" required>
+                                            <div class="valid-feedback">
+
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                Silahkan Masukkan Maksimal Pengerjaan Test
+                                            </div>
+                                        </div>
                                         <div class="col-12 col-md-12 py-1">
                                             <div id="edit-price-div" class="d-none">
                                                 <span class="fw-bolder text-neo">

@@ -10,6 +10,7 @@
                     <div class="block block-rounded">
                         <div class="block-header block-content-full bg-neo-dark ribbon ribbon-modern ribbon-glass text-white">
                             Hasil Test
+                            <span class="float-right"><?= $data['waktu'] ?></span>
                         </div>
                         <div class="block-content fs-sm row py-4">
                             <div class="block block-rounded row g-0">
@@ -35,7 +36,7 @@
                                 </ul>
                                 <div class="tab-content col-md-9 px-2">
                                     <div class="block-content tab-pane active show" id="btabs-vertical-home" role="tabpanel" aria-labelledby="btabs-vertical-home-tab" tabindex="0">
-                                        <h5 class="fw-semibold text-center">Peringkat Test</h5>
+                                        <h5 class="fw-semibold text-center">Peringkat Mingguan Test</h5>
                                         <table class="table table-striped   table-vcenter table-hover">
                                             <tr class="bg-neo">
                                                 <th class="text-center text-white fs-sm" style="width: 50px;">#</th>
@@ -44,10 +45,10 @@
                                             </tr>
                                             <tbody>
                                                 <?php
-                                                $numItems = count($data['data']['test_result1']);
+                                                $numItems = count($data['data']['data_best_score']);
                                                 $i = 0;
                                                 ?>
-                                                <?php foreach ($data['data']['test_result1'] as $item) : ?>
+                                                <?php foreach ($data['data']['data_best_score'] as $item) : ?>
                                                     <?php
                                                     if ($i++ > 2) { ?>
                                                         <tr>
@@ -105,7 +106,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td scope="row" class="text-success"><span class="<?= ($option['answer_isright'] == 0) ? 'text-danger' : ''; ?>"><?= $option['answer'] ?></td>
+                                                        <td style="color: black; background-color: <?= ($option['student_isright'] == 1) ? '#b1b5fc' : '#fcb1b1'; ?> ;" scope="row"><span><?= $option['student_answer'] ?></td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -173,13 +174,13 @@
                                             <img class="avatar avatar-xl" src="<?= base_url('assets-front/img/avatar.png') ?>" alt="">
                                         </div> -->
                                         <div class="col-8 col-md-9">
-                                            <span class="mt-2 mb-0 fw-medium"><?= ucwords(session('name')); ?></span>
+                                            <h5 class="mt-2 mb-0 fw-semibold"><?= ucwords(session('name')); ?></h5>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="py-2">
-                                    <label for="">Nilai Test :</label>
-                                    <input type="text" class="form-control disabled text-center fw-bold h5" id="" readonly value="<?= $data['data']['test_result'] ?>">
+                                    <label for="">Nilai Terbaik Anda :</label>
+                                    <input type="text" class="form-control disabled text-center fw-bold h5" id="" readonly value="<?= $data['data']['student_score'] ?>">
                                 </div>
                                 <div class="row py-2">
                                     <div class="col-12 col-md-6 text-center">

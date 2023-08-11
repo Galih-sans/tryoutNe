@@ -86,7 +86,7 @@
                                             <select name="type" id="type" title="Pilih Tipe Diskon..." class="form-control selectpicker" data-live-search="true" data-style="customSelect" data-dropup-auto="false" data-size="4">
                                                 <tr>
                                                     <option value="diamond">Diamond</option>
-                                                    <!-- <option value="inactive">Inactive</option> -->
+                                                    <option value="test">Test</option>
                                                 </tr>
                                             </select>
                                         </div>
@@ -226,9 +226,10 @@
                                             <meta charset="utf-8">⋮⋮⋮
                                             </span> &nbsp;
                                         <span class="tittle-neo"> Tipe Offer</span>
-                                            <select name="edit_type" id="edit-type" title="Pilih Tipe Diskon..." class="form-control selectpicker" data-live-search="true" data-style="customSelect" data-dropup-auto="false" data-size="4">
+                                            <select name="edit_type" id="edit-type" title="Pilih Tipe Diskon..." class="form-control selectpicker border edit-type" data-live-search="false" data-style="customSelect" data-dropup-auto="false" data-size="4">
                                                 <tr>
                                                     <option value="diamond">Diamond</option>
+                                                    <option value="test">Test</option>
                                                 </tr>
                                             </select>
                                         </div>

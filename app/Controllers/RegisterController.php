@@ -6,7 +6,9 @@ use App\Controllers\BaseController;
 use App\Models\Admin\ClassModel;
 use App\Models\ModelSekolah;
 use App\Models\StudentModel;
+use App\Models\Admin\BalanceSiswaModel;
 use Ramsey\Uuid\Uuid;
+use CodeIgniter\I18n\Time;
 
 class RegisterController extends BaseController
 {
@@ -14,6 +16,7 @@ class RegisterController extends BaseController
     public $ClassModel;
     public $SchoolModel;
     public $StudentModel;
+    public $BalanceModel;
     public $email;
     protected $emailController;
 
@@ -25,7 +28,14 @@ class RegisterController extends BaseController
         $this->StudentModel = new StudentModel();
         $this->email = \Config\Services::email();
         $this->emailController =  new EmailController();
+        $this->BalanceModel = new BalanceSiswaModel();
     }
+
+    protected function now()
+    {
+        return Time::now()->getTimestamp();
+    }
+
     public function register()
     {
         $uuid = Uuid::uuid1();
@@ -42,6 +52,7 @@ class RegisterController extends BaseController
                 'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
                 'POB'    => $this->request->getVar('POB'),
                 'DOB'    => $this->request->getVar('DOB'),
+                'gender' => $this->request->getVar('gender'),
                 'parent_name'    => $this->request->getVar('parent_name'),
                 'parent_email'    => $this->request->getVar('parent_email'),
                 'parent_phone_number'    => $this->request->getVar('parent_phone_number'),
@@ -54,6 +65,7 @@ class RegisterController extends BaseController
                 $this->data['old'] = $data;
                 return view('auth/register', ['data' => $this->data, 'validations' => $this->StudentModel->errors()]);
             } else {
+                $this->create_balace($data['id']);
                 $this->emailController->sendEmailVerification($data['email'], 'Verifikasi Akun Tryout Neo Edukasi', $data);
                 session()->setFlashData("email_verification", '<div class="alert alert-success" role="alert">Selamat Akun Anda Berhasil Dibuat, Silahkan Cek Email Anda Untuk Verifikasi Akun Anda.</div>');
                 return redirect()->to('/login');
@@ -62,6 +74,15 @@ class RegisterController extends BaseController
         return view('auth/register', ['data' => $this->data,]);
     }
 
+    public function create_balace($student_id)
+    {
+        $data = [
+            'user_id' => $student_id,
+            'balance' => 0,
+            'created_at' => $this->now(),
+        ];
+        $this->BalanceModel->insert($data);
+    }
 
     public function get_class()
     {

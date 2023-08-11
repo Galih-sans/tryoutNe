@@ -94,70 +94,12 @@
                 </div>  
                 <div class="text-center mt-5">
                     <button class="btn btn-primary" onclick="get_token()">Beli Sekarang</button>
-                    <!-- <button class="btn btn-primary beli-diamond">Beli Sekarang 2</button> -->
                 </div>                   
                 </div>
             </div>
         </div>
     </div>
 </div>
-<!-- <div class="modal fade" id="modalDetail" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
-        <div class="modal-content">
-            <div class="block block-rounded block-transparent mb-0">
-                <div class="block-header block-header-ne">
-                    <h3 class="block-title text-white">Paket Diamond : </h3>
-                    <div class="block-options">
-                        <button type="button" class="btn-block-option-white" data-bs-dismiss="modal" aria-label="Close">
-                            <i class="fa fa-fw fa-times"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="block-content fs-sm">
-                    <form id="formPaketDiamond">
-                        <div class="row">
-                            <div class="col-12 col-md-12">
-                                <div class="col-12 col-md-12 py-2">
-                                    <span class="tittle-neo"> Nama Paket :</span>
-                                    <div class=" mb-4 pt-2">
-                                        <span hidden id="id-paket" name="id_paket" style="font-size: 15px; font-weight: bold;">
-                                        </span>
-                                        <span id="nama-paket" name="nama" style="font-size: 15px; font-weight: bold;">
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-12 py-2">
-                                    <span class="tittle-neo"> Jumlah Diamond :</span>
-                                    <div class=" mb-4 pt-2">
-                                        <span id="amount" name="jumlah" style="font-size: 15px; font-weight: bold;">
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-12 py-2">
-                                    <span class="tittle-neo"> Harga :</span>
-                                    <div class=" mb-4 pt-2">
-                                        <span id="price" name="harga" style="font-size: 15px; font-weight: bold;">
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-12 py-2">
-                                    <span class="tittle-neo"> Deskripsi :</span>
-                                    <div class=" mb-4 pt-2">
-                                        <span id="description" name="deskripsi" style="font-size: 15px; font-weight: bold;">
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="block-content block-content-full text-end bg-body">
-                    <button type="button" class="btn btn-sm btn-primary beli-diamond" data-bs-dismiss="modal">Beli</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-cLQaOuRebxfyx3Lv"></script>
 <script>
@@ -178,7 +120,7 @@
             $('#price').text('Rp' + data_price);
             $('#total').text('Rp' + data_price); // harga - diskon
             $('#description').text(data_description);
-            $('#discount').text('-')
+            $('#discount').text('-');
             $('#modalDetail').modal('show');
 
             const list = document.getElementById("error-string");

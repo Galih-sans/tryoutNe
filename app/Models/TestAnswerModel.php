@@ -4,7 +4,8 @@ namespace App\Models;
 
 use CodeIgniter\Database\Query;
 use CodeIgniter\Model;
-
+use CodeIgniter\I18n\Time;
+use Ramsey\Uuid\Uuid;
 
 class TestAnswerModel extends Model
 {
@@ -54,6 +55,11 @@ class TestAnswerModel extends Model
         $this->builder = $this->db->table('to_test_answer');
     }
 
+    protected function now()
+    {
+        return Time::now()->getTimestamp();
+    }
+
     public function get_test_asnwer($test_id, $student_id)
     {
         // select to_test_answer join tabel to_questions dan to_answersselect( 'to_test_answer.test_id, to_test_answer.student_id,to_test_answer.question_id,to_test_answer.answer_id')->
@@ -91,6 +97,15 @@ class TestAnswerModel extends Model
         return $query;
     }
 
+    public function get_answer_id($question_id, $student_id)
+    {
+        $query = $this->builder
+            ->select('answer_id')
+            ->where(['to_test_answer.question_id' => $question_id, 'to_test_answer.student_id' => $student_id])->orderBy('to_test_answer.id')
+            ->get()->getResultArray();
+        return $query;
+    }
+
     // Hitung jumlah benar dan salah
     public function count_right($id_test, $student_id)
     {
@@ -113,4 +128,26 @@ class TestAnswerModel extends Model
 
         return $query;
     }
+
+    public function save_student_answer($answerNew)
+    {
+        $uuid = Uuid::uuid1();
+        $test_answer_data = [
+            'id' =>  $uuid->toString(),
+            'test_id' => $answerNew['test_id'],
+            'student_id' => $answerNew['student_id'],
+            'question_id' => $answerNew['question_id'],
+            'answer_id' => $answerNew['answer_id'],
+            'answer_isright' => $answerNew['answer_isright'],
+            'created_at'    => $this->now(),
+            'updated_at'    => $this->now()
+        ];
+        return  $this->builder->insert($test_answer_data);
+    }
+
+    // public function delete_test_answer($question_id)
+    // {
+    //     $this->builder->where('question_id', $question_id);
+    //     return $this->builder->delete();
+    // }
 }

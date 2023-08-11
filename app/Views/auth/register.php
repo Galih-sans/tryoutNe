@@ -87,6 +87,15 @@
 											placeholder="Konfirmasi Password" required>
 									</div>
 								</div>
+								<div class="form-row">
+								<div class="mb-3 col-12">
+										<select class="form-control select2" name="gender" id="gender"> value="<?= isset($data['old']['gender']) ? $data['old']['gender'] : '' ;?>"
+											<option value="jenjang" disabled selected>Jenis Kelamin</option>
+											<option value="P">Perempuan</option>
+											<option value="L">Laki-Laki</option>
+										</select>
+									</div>
+								</div>
 								<div class="form-row justify-content-between">
 									<div class="col-12 mb-3">
 										<input type="text" name="POB" id="POB" class="form-control" pattern="text" value="<?= isset($data['old']['POB']) ? $data['old']['POB'] : '' ;?>"

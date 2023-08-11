@@ -61,6 +61,10 @@ $(document).ready(function () {
         required: true,
         email: true
       },
+      gender: {
+        required: true,
+        // minlength: 5
+      },
       phone_number: {
         required: true,
         minlength: 10,

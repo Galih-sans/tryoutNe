@@ -19,7 +19,7 @@
             <span class="d-sm-inline-block ms-2"><?= ucwords(session('balance')) ?></span>
           </div>
           <div class="nav-link ms-md-auto text-light font-weight-bold px-0 py-0 neo-plus-button tombol-topup">
-            <a class="d-inline nav-link inline-block text-light font-weight-bold topup-diamond">
+            <a class="d-inline nav-link inline-block text-light font-weight-bold" href="<?= route_to('user.transaksi.index') ?>">
               <i class="fa fa-plus"></i>
             </a>
           </div>

@@ -17,13 +17,13 @@
                             </div>
                         </div>
                         <div class="block-content fs-sm row py-4">
-                            <div class="co-12 col-md-5">
+                            <div class="co-12 col-md-4">
                                 <div class="border-right">
                                     <p class="fw-bold">Tanggal Test Dimulai</p>
                                     <p class="text-neo"><?= date("d M Y H:i", $data['testData']->begin_time) ?></p>
                                 </div>
                             </div>
-                            <div class="co-12 col-md-5">
+                            <div class="co-12 col-md-4">
                                 <div class="border-right">
                                     <p class="fw-bold">Tanggal Test Ditutup</p>
                                     <p class="text-neo"><?= date("d M Y H:i", $data['testData']->end_time) ?></p>
@@ -33,6 +33,24 @@
                                 <div class="border-right">
                                     <p class="fw-bold">Durasi Test</p>
                                     <p class="text-neo"><?= $data['testData']->duration ?> Menit</p>
+                                </div>
+                            </div>
+                            <div class="co-12 col-md-2">
+                                <div class="border-right">
+                                    <p class="fw-bold">Jumlah Soal</p>
+                                    <p class="text-neo"><?= $data['testData']->number_of_question ?> Soal</p>
+                                </div>
+                            </div>
+                            <div class="co-12 col-md-4 pt-2">
+                                <div class="border-right">
+                                    <p class="fw-bold">Maksimal Pengerjaan</p>
+                                    <p class="text-neo"><?= $data['testData']->max_result ?> Kali</p>
+                                </div>
+                            </div>
+                            <div class="co-12 col-md-3 pt-2">
+                                <div class="border-right">
+                                    <p class="fw-bold">Sisa Pengerjaan Kamu</p>
+                                    <p class="text-neo"><?= $data['sisaPengerjaan'] ?> Kali</p>
                                 </div>
                             </div>
                         </div>
@@ -96,9 +114,17 @@
                                             href="<?= route_to('user.test.index') ?>">Kembali</a>
                                     </div>
                                     <div class="col-12 col-md-6 text-center">
-                                        <a class="btn btn-success btn-block w-100 mb-2"
-                                            href="<?= route_to('user.test.sheet', strtr(base64_encode($data['encrypter']->encrypt($data['testData']->id)),array('+' => '.', '=' => '-', '/' => '~')))?>">Mulai
+                                        <!-- // cek jika jumlah pengerjaan tidak melebihi batas pengerjaan, jika melebihi langsung ke result pesan : batas terpenuhi -->
+                                        <a class="btn btn-success btn-block w-100 mb-2 cek_result" data-test_id="<?= strtr(base64_encode($data['encrypter']->encrypt($data['testData']->id)), array('+' => '.', '=' => '-', '/' => '~')) ?>"
+                                            href="#">Mulai
                                             Test</a>
+                                    </div>
+                                </div>
+                                <div class="row py-2 text-center" <?= ($data['sudahMengerjakan'] == 0) ? 'hidden' : ''; ?>>
+                                    <div class="col-12 col-md-12">
+                                        <!-- // cek jika jumlah pengerjaan tidak melebihi batas pengerjaan, jika melebihi langsung ke result pesan : batas terpenuhi -->
+                                        <a class="btn btn-info btn-block w-100 mb-2 result_test" data-test_id="<?= strtr(base64_encode($data['encrypter']->encrypt($data['testData']->id)), array('+' => '.', '=' => '-', '/' => '~')) ?>"
+                                            href="#">Hasil Test</a>
                                     </div>
                                 </div>
                             </div>
@@ -155,4 +181,53 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).on('click', '.result_test', function() {
+        let test_id = $(this).data("test_id");
+        document.location.href = '/test/result/' + test_id;
+    });
+
+    $(document).on('click', '.cek_result', function() {
+        let test_id = $(this).data("test_id");
+        cek_max_result(test_id);
+    });
+
+    function cek_max_result(test_id){
+        $.ajax({
+                url: "<?= route_to('user.test.cek_max_result') ?>",
+                type: "POST",
+                data: 'test_id=' + test_id,
+                success: function(d) {
+                    var d = JSON.parse(d);
+                    if (d.success == true) {
+                        document.location.href = '/test/sheet/' + test_id;
+                    } else {
+                    // alert('melebihi batas');
+                    var data = '';
+                    data+='<div class="color-ne">Anda dapat ke halaman Hasil Test untuk melihat ranking dan pembahasan</div>';
+                    Swal.fire({
+                    title: 'Sudah Mencapai Batas Pengerjaan',
+                    icon: 'info',
+                    html: data,
+                    showCloseButton: true,
+                    showCancelButton: true,
+                    cancelButtonText: 'Tutup',
+                    confirmButtonText: 'Hasil Test',
+                    confirmButtonColor: "#198754"
+                    }).then((result) => {
+                        if (result.value) {
+                        document.location.href = '/test/result/' + test_id;
+                        }
+                    });
+                    }
+                    console.log(d);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+    }
+
+
+</script>
 <?= $this->endSection() ?>

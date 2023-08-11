@@ -71,6 +71,10 @@ class CreateTestTable extends Migration
 				'type'           => 'TINYINT',
 				'constraint'     => 4,
 			],
+			'max_result' => [
+				'type'           => 'TINYINT',
+				'constraint'     => 4,
+			],
 			'created_by' => [
 				'type'           => 'CHAR',
 				'constraint'     => 36,

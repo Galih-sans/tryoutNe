@@ -52,7 +52,7 @@ class transaksicontroller extends BaseController
         $data['string'] = array();
         $paket_id = $this->request->getVar('id_paket');
         $kode_voucher = $this->request->getVar('kode_voucher');
-        $offer_data = $this->offer_model->where('offer_code', $kode_voucher)->where('status', 'active')->findAll();
+        $offer_data = $this->offer_model->where('offer_code', $kode_voucher)->where('status', 'active')->where('type', 'diamond')->findAll();
         $dataPaket =  $this->paket_diamond_model->where('id', $paket_id)->findAll();
 
         if ($this->request->getVar('kode_voucher') == '') {

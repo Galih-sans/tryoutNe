@@ -34,6 +34,7 @@ class TestModel extends Model
         'class_id',
         'subject_id',
         'status',
+        'max_result',
         'created_by',
         'created_at',
         'updated_at'
@@ -59,6 +60,7 @@ class TestModel extends Model
         'wrong_answer_value' => 'required',
         'empty_answer_value' => 'required',
         'class_id' => 'required',
+        'max_result' => 'required'
     ];
     protected $validationMessages   =
     [
@@ -91,6 +93,9 @@ class TestModel extends Model
         ],
         'class_id' => [
             'required' => 'Kelas Test Harus Diisi',
+        ],
+        'max_result' => [
+            'required' => 'Maksimal Pengerjaan Test Harus Diisi',
         ],
     ];
     protected $skipValidation       = false;
@@ -173,7 +178,7 @@ class TestModel extends Model
     }
     public function get_edit_test($id)
     {
-        $query = $this->builder->select('to_tests.id,to_class.level, class_id,to_tests.test_name, begin_time, end_time, duration,random_question, random_answer, result_to_student, to_tests.number_of_question,correct_answer_value,wrong_answer_value,empty_answer_value, type, price, status')->join('to_class', 'to_class.id = to_tests.class_id', 'left')->where('to_tests.id', $id)->get();
+        $query = $this->builder->select('to_tests.id,to_class.level, class_id,to_tests.test_name, begin_time, end_time, duration,random_question, random_answer, result_to_student, to_tests.number_of_question,correct_answer_value,wrong_answer_value,empty_answer_value, type, price, status, to_tests.max_result')->join('to_class', 'to_class.id = to_tests.class_id', 'left')->where('to_tests.id', $id)->get();
         return $query->getRow();
     }
     public function getInsertID()
@@ -202,6 +207,7 @@ class TestModel extends Model
             'created_by' => $data['created_by'],
             'created_at' => $data['created_at'],
             'status' => $data['status'],
+            'max_result' =>$data['max_result'],
         ];
         return $this->builder->insert($test_data);
     }

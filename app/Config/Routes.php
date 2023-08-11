@@ -74,7 +74,11 @@ $routes->group("", ["filter" => "isuser", "namespace" => "App\Controllers\user"]
         $routes->match(["get", "post"], "sheet/(:any)", "testcontroller::sheet/$1", ['as' => 'user.test.sheet']);
         $routes->match(["get", "post"], "get_test", "testcontroller::get_test", ['as' => 'user.test.get_test']);
         $routes->match(["get", "post"], "submit_test", "testcontroller::submit", ['as' => 'user.test.submit']);
-        $routes->match(["get", "post"], "result(:any)", "testcontroller::result/$1", ['as' => 'user.test.result']);
+        $routes->match(["get", "post"], "result/(:any)", "testcontroller::result/$1", ['as' => 'user.test.result']);
+        $routes->match(["get", "post"], "cek_test_transaction", "testcontroller::cek_test_transaction", ['as' => 'user.test.cek_test_transaction']);
+        $routes->match(["get", "post"], "buy_test", "testcontroller::buy_test", ['as' => 'user.test.buy_test']);
+        $routes->match(["get", "post"], "cek_max_result", "testcontroller::cek_max_result", ['as' => 'user.test.cek_max_result']);
+        $routes->match(["get", "post"], "check_voucher", "testcontroller::check_voucher", ['as' => 'user.test.check_voucher']);
     });
     $routes->group("profil", function ($routes) {
         // URL - /user
